@@ -344,15 +344,17 @@
         <div class="theorem-math reveal">
           <span class="math-display" data-latex="S \leq 2"></span>
         </div>
-        <div class="theorem-proof reveal">
-          <p class="proof-label">Proof sketch</p>
-          <p class="proof-body">
-            Define X(&lambda;) = A(a,&lambda;)[B(b,&lambda;) &minus; B(b&prime;,&lambda;)] + A(a&prime;,&lambda;)[B(b,&lambda;) + B(b&prime;,&lambda;)].
-            Since B outcomes are &plusmn;1, either [B(b,&lambda;) &minus; B(b&prime;,&lambda;)] = 0
-            and [B(b,&lambda;) + B(b&prime;,&lambda;)] = &plusmn;2, or vice versa.
-            In either case |X(&lambda;)| &le; 2. Integration over &lambda; preserves the bound: S &le; 2.
-          </p>
-        </div>
+        <details class="reveal">
+          <summary>View proof sketch</summary>
+          <div class="theorem-card__proof">
+            <p class="proof-body">
+              Define X(&lambda;) = A(a,&lambda;)[B(b,&lambda;) &minus; B(b&prime;,&lambda;)] + A(a&prime;,&lambda;)[B(b,&lambda;) + B(b&prime;,&lambda;)].
+              Since B outcomes are &plusmn;1, either [B(b,&lambda;) &minus; B(b&prime;,&lambda;)] = 0
+              and [B(b,&lambda;) + B(b&prime;,&lambda;)] = &plusmn;2, or vice versa.
+              In either case |X(&lambda;)| &le; 2. Integration over &lambda; preserves the bound: S &le; 2.
+            </p>
+          </div>
+        </details>
       </article>
 
       <!-- Theorem 2 -->
@@ -367,15 +369,17 @@
         <div class="theorem-math reveal">
           <span class="math-display" data-latex="S \leq 2\sqrt{2} \approx 2.828"></span>
         </div>
-        <div class="theorem-proof reveal">
-          <p class="proof-label">Proof sketch</p>
-          <p class="proof-body">
-            The CHSH operator S&#770;<sup>2</sup> = 4I &minus; [A,A&prime;] &otimes; [B,B&prime;].
-            Since commutator norms satisfy &Vert;[A,A&prime;]&Vert; &le; 2,
-            we get S&#770;<sup>2</sup> &le; 8I, so max&#10216;S&#770;&#10217; = &radic;8 = 2&radic;2.
-            Achieved with |&Phi;<sup>+</sup>&#10217; and angles 0, &pi;/4, &pi;/2, 3&pi;/4.
-          </p>
-        </div>
+        <details class="reveal">
+          <summary>View proof sketch</summary>
+          <div class="theorem-card__proof">
+            <p class="proof-body">
+              The CHSH operator S&#770;<sup>2</sup> = 4I &minus; [A,A&prime;] &otimes; [B,B&prime;].
+              Since commutator norms satisfy &Vert;[A,A&prime;]&Vert; &le; 2,
+              we get S&#770;<sup>2</sup> &le; 8I, so max&#10216;S&#770;&#10217; = &radic;8 = 2&radic;2.
+              Achieved with |&Phi;<sup>+</sup>&#10217; and angles 0, &pi;/4, &pi;/2, 3&pi;/4.
+            </p>
+          </div>
+        </details>
       </article>
 
       <!-- Theorem 3 -->
@@ -390,14 +394,16 @@
         <div class="theorem-math reveal">
           <span class="math-display" data-latex="S_{\text{post}} \to 4 \quad \text{(from purely classical data)}"></span>
         </div>
-        <div class="theorem-proof reveal">
-          <p class="proof-label">Proof sketch</p>
-          <p class="proof-body">
-            Define selection f(A,B) = 1 when AB = +1, f = p when AB = &minus;1.
-            As p &rarr; 0, the post-selected estimator E<sub>post</sub>(a,b) &rarr; &plusmn;1.
-            The resulting CHSH value S &rarr; 4.
-          </p>
-        </div>
+        <details class="reveal">
+          <summary>View proof sketch</summary>
+          <div class="theorem-card__proof">
+            <p class="proof-body">
+              Define selection f(A,B) = 1 when AB = +1, f = p when AB = &minus;1.
+              As p &rarr; 0, the post-selected estimator E<sub>post</sub>(a,b) &rarr; &plusmn;1.
+              The resulting CHSH value S &rarr; 4.
+            </p>
+          </div>
+        </details>
       </article>
     </div>
   </section>
