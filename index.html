@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHSH Lab — Does Low-Efficiency Bell Testing Prove Nonlocality?</title>
+  <meta name="description" content="When effective detection efficiency falls below 82.8%, post-selected CHSH S > 2 no longer rules out classical explanations. Rigorous proofs, reproducible simulations, and interactive demos." />
+
+  <!-- Synchronous no-js removal -->
+  <script>document.documentElement.classList.remove('no-js');</script>
+
+  <!-- CSS: tokens → base → layout → components -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#hero">CHSH Lab</a>
+      <ul class="nav-links" role="list">
+        <li><a href="#paper">Paper</a></li>
+        <li><a href="#rebuttal">Rebuttal</a></li>
+        <li><a href="#demos">Demos</a></li>
+        <li><a href="#proofs">Proofs</a></li>
+        <li><a href="#figures">Figures</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" class="section section--hero">
+    <div class="container">
+      <p class="eyebrow reveal">Bell Inequality &middot; Post-Selection &middot; Detection Loophole</p>
+      <h1 class="hero-heading reveal">Does Low-Efficiency Bell Testing Prove Nonlocality?</h1>
+      <p class="hero-subtitle reveal">
+        When effective detection efficiency falls below 82.8%, post-selected CHSH S &gt; 2 no longer rules out classical explanations.
+        We show why &mdash; with rigorous proofs, reproducible simulations, and interactive demos.
+      </p>
+      <div class="bound-badges reveal" role="list">
+        <div class="badge badge--amber" role="listitem">
+          <span class="badge-label">Classical LHV</span>
+          <span class="badge-value">S &le; 2</span>
+        </div>
+        <div class="badge badge--blue" role="listitem">
+          <span class="badge-label">Quantum Tsirelson</span>
+          <span class="badge-value">S &le; 2&radic;2 &approx; 2.828</span>
+        </div>
+        <div class="badge badge--crimson" role="listitem">
+          <span class="badge-label">Post-Selection Artifact</span>
+          <span class="badge-value">S &rarr; 4</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAPER -->
+  <section id="paper" class="section section--paper">
+    <div class="container">
+      <p class="section-label reveal">Bell Test Schematic</p>
+      <h2 class="section-heading reveal">The Standard Setup</h2>
+      <p class="section-intro reveal">
+        A canonical Bell test pairs an entangled source with two spatially separated detectors.
+        The coincidence unit records joint outcomes across four measurement settings.
+        Loopholes arise when not all particle pairs are detected.
+      </p>
+
+      <div class="paper-preview" id="paperPreview">
+        <img
+          src="assets/figures/fig4_bell_test_schematic.png"
+          alt="Canonical Bell test schematic showing source, detectors, coincidence unit, and four measurement settings"
+          loading="lazy"
+          class="paper-schematic-img"
+        />
+        <!-- annotations.js injects hotspots here -->
+      </div>
+
+      <div class="citation-card reveal">
+        <p class="citation-card-label">Primary Source</p>
+        <p class="citation-card-title">Wang et al. (2025)</p>
+        <p class="citation-card-desc">
+          Experiment under examination. Detection efficiency and post-selection methodology
+          are the subject of this rebuttal. Full citation in source repository
+          <code>paperNotes.bib</code>.
+        </p>
+        <a class="citation-card-link" href="#references">See full reference list &darr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REBUTTAL -->
+  <section id="rebuttal" class="section section--rebuttal">
+    <div class="container">
+      <p class="section-label reveal">Critical Analysis</p>
+      <h2 class="section-heading reveal">Three Arguments &amp; Their Rebuttals</h2>
+
+      <!-- Card 1 -->
+      <article class="rebuttal-card reveal" aria-labelledby="rebuttal-1-heading">
+        <p class="rebuttal-tag">Argument 1 &mdash; Classical Bound</p>
+        <p class="rebuttal-claim"><em>"CHSH S &gt; 2 implies quantum nonlocality."</em></p>
+        <p class="rebuttal-critique">
+          This inference is only valid under loophole-free conditions &mdash; specifically, when detection efficiency
+          &eta; &ge; 82.8%. Below this threshold, local hidden variable (LHV) models can produce S &gt; 2
+          without any quantum entanglement.
+        </p>
+        <p class="rebuttal-evidence"><code>Classical baseline (full dataset): S = 2.001, 95% CI [1.998, 2.004], 100% acceptance</code></p>
+        <p class="rebuttal-implication">
+          A sub-threshold experiment with CHSH S &gt; 2 does not constitute a Bell witness.
+          The applicable bound is not S = 2 but S<sub>LHV,max</sub>(&eta;) = 4/&eta; &minus; 2.
+        </p>
+        <div class="math-block reveal">
+          <p class="math-label">Key formula</p>
+          <span class="math-display" data-latex="S_{\text{LHV,max}}(\eta) = \frac{4}{\eta} - 2 \qquad \eta_c = \frac{2}{1+\sqrt{2}} \approx 0.828"></span>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="rebuttal-card reveal" aria-labelledby="rebuttal-2-heading">
+        <p class="rebuttal-tag">Argument 2 &mdash; Post-Selection Inflation</p>
+        <p class="rebuttal-claim"><em>"Selecting on detected coincidences preserves statistical validity."</em></p>
+        <p class="rebuttal-critique">
+          Outcome-dependent post-selection biases the correlation estimator. By preferentially retaining
+          correlated event pairs, a purely classical LHV dataset can be filtered to produce S approaching 4
+          &mdash; exceeding even the quantum Tsirelson bound.
+        </p>
+        <p class="rebuttal-evidence"><code>Post-selected classical artifact: S = 3.716, 95% CI [3.714, 3.717], only 70.0% acceptance</code></p>
+        <p class="rebuttal-implication">
+          A high S value combined with a low acceptance rate is a red flag, not a confirmation.
+          The S value and the acceptance rate must both be reported for any meaningful inference.
+        </p>
+        <div class="math-block reveal">
+          <p class="math-label">Constructive bound</p>
+          <span class="math-display" data-latex="S_{\text{post}} \leq 4 \quad \text{(achievable from LHV data via outcome-dependent selection)}"></span>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="rebuttal-card reveal" aria-labelledby="rebuttal-3-heading">
+        <p class="rebuttal-tag">Argument 3 &mdash; Reporting Standards</p>
+        <p class="rebuttal-claim"><em>"Reporting CHSH S is sufficient for a Bell claim."</em></p>
+        <p class="rebuttal-critique">
+          At detection efficiency &eta; = 70%, the LHV upper bound is S<sub>LHV,max</sub> = 4/0.70 &minus; 2 &approx; 3.71.
+          A post-selected S &approx; 3.7 exactly matches the classical artifact regime &mdash; making it
+          indistinguishable from a purely classical source without additional diagnostics.
+        </p>
+        <p class="rebuttal-evidence"><code>At &eta; = 70%: S_LHV,max = 3.71 &mdash; exactly matches post-selected artifact S = 3.716</code></p>
+        <p class="rebuttal-implication">
+          Correct Bell testing requires either &eta; &gt; 82.8% or explicit diagnostics: report full-dataset S,
+          selected-dataset S, acceptance rate per setting pair, and a no-signaling check.
+        </p>
+        <div class="math-block reveal">
+          <p class="math-label">Required diagnostics</p>
+          <span class="math-display" data-latex="\text{Report: } S_{\text{full}},\ S_{\text{selected}},\ \eta_{\text{eff}},\ r_{\text{accept}}(\mathbf{a},\mathbf{b})"></span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- DEMOS -->
+  <section id="demos" class="section section--demos">
+    <div class="container">
+      <p class="section-label reveal">Interactive Simulations</p>
+      <h2 class="section-heading reveal">Explore the Physics</h2>
+      <p class="section-intro reveal">
+        Each demo runs a live simulation in your browser. Adjust the sliders to see how
+        measurement angles, detection efficiency, and post-selection bias affect CHSH S.
+      </p>
+
+      <!-- Tab buttons -->
+      <div class="demo-tabs reveal" role="tablist" aria-label="Demo panels">
+        <button
+          class="tab-btn active"
+          role="tab"
+          aria-selected="true"
+          aria-controls="demo-angle"
+          data-panel="demo-angle"
+        >Angle Sweep</button>
+        <button
+          class="tab-btn"
+          role="tab"
+          aria-selected="false"
+          aria-controls="demo-efficiency"
+          data-panel="demo-efficiency"
+        >Efficiency Landscape</button>
+        <button
+          class="tab-btn"
+          role="tab"
+          aria-selected="false"
+          aria-controls="demo-postselect"
+          data-panel="demo-postselect"
+        >Post-Selection Bias</button>
+      </div>
+
+      <!-- Demo Panel 1: Angle Sweep -->
+      <div class="demo-panel active" id="demo-angle" role="tabpanel" aria-label="Angle Sweep demo">
+        <div class="demo-panel-inner">
+          <div class="demo-controls">
+            <h3 class="demo-heading reveal">CHSH Angle Sweep</h3>
+            <p class="demo-desc reveal">
+              Adjust the four measurement angles a, a&prime;, b, b&prime; to see how CHSH S varies.
+              Classical LHV cannot exceed S = 2. The quantum optimum is at 0&deg;, 45&deg;, 22.5&deg;, 67.5&deg;.
+            </p>
+
+            <div class="slider-group reveal">
+              <label for="sliderA">Angle a (&deg;): <span id="valA">0</span></label>
+              <input type="range" id="sliderA" min="0" max="180" value="0" step="1" />
+            </div>
+            <div class="slider-group reveal">
+              <label for="sliderAp">Angle a&prime; (&deg;): <span id="valAp">45</span></label>
+              <input type="range" id="sliderAp" min="0" max="180" value="45" step="1" />
+            </div>
+            <div class="slider-group reveal">
+              <label for="sliderB">Angle b (&deg;): <span id="valB">22</span></label>
+              <input type="range" id="sliderB" min="0" max="180" value="22" step="1" />
+            </div>
+            <div class="slider-group reveal">
+              <label for="sliderBp">Angle b&prime; (&deg;): <span id="valBp">67</span></label>
+              <input type="range" id="sliderBp" min="0" max="180" value="67" step="1" />
+            </div>
+
+            <div class="demo-readouts reveal">
+              <div class="readout">
+                <span class="readout-label">Classical LHV</span>
+                <span class="readout-value" id="readoutClassical">&mdash;</span>
+              </div>
+              <div class="readout">
+                <span class="readout-label">Quantum (this setting)</span>
+                <span class="readout-value" id="readoutQuantum">&mdash;</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="demo-canvas-wrap">
+            <canvas id="chshCanvas" width="600" height="300" aria-label="CHSH angle sweep visualization"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Demo Panel 2: Efficiency Landscape -->
+      <div class="demo-panel" id="demo-efficiency" role="tabpanel" aria-label="Efficiency Landscape demo">
+        <div class="demo-panel-inner">
+          <div class="demo-controls">
+            <h3 class="demo-heading reveal">Detection Efficiency Landscape</h3>
+            <p class="demo-desc reveal">
+              Sweep detection efficiency &eta; to see the LHV maximum CHSH S<sub>LHV,max</sub>(&eta;) = 4/&eta; &minus; 2.
+              The critical threshold &eta;<sub>c</sub> &approx; 0.828 is where the LHV bound equals 2.
+            </p>
+
+            <div class="slider-group reveal">
+              <label for="sliderEta">Detection efficiency &eta;: <span id="valEta">0.70</span></label>
+              <input type="range" id="sliderEta" min="0.5" max="1.0" value="0.70" step="0.01" />
+            </div>
+
+            <div class="demo-readouts reveal">
+              <div class="readout">
+                <span class="readout-label">LHV Maximum S</span>
+                <span class="readout-value" id="readoutLhvMax">&mdash;</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="demo-svg-wrap">
+            <svg
+              id="efficiencySvg"
+              viewBox="0 0 700 350"
+              aria-label="Detection efficiency landscape chart"
+              role="img"
+            ></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Demo Panel 3: Post-Selection Bias -->
+      <div class="demo-panel" id="demo-postselect" role="tabpanel" aria-label="Post-Selection Bias demo">
+        <div class="demo-panel-inner">
+          <div class="demo-controls">
+            <h3 class="demo-heading reveal">Post-Selection Bias</h3>
+            <p class="demo-desc reveal">
+              Increase the post-selection bias to see how a purely classical LHV dataset inflates CHSH S
+              beyond 2 &mdash; and even beyond the Tsirelson bound of 2&radic;2 &approx; 2.828.
+            </p>
+
+            <div class="slider-group reveal">
+              <label for="sliderBias">Selection bias &rho;: <span id="valBias">0.00</span></label>
+              <input type="range" id="sliderBias" min="0" max="1" value="0" step="0.01" />
+            </div>
+
+            <div class="demo-readouts reveal">
+              <div class="readout">
+                <span class="readout-label">Post-selected S</span>
+                <span class="readout-value" id="readoutPostS">&mdash;</span>
+              </div>
+              <div class="readout">
+                <span class="readout-label">Acceptance Rate</span>
+                <span class="readout-value" id="readoutAccept">&mdash;</span>
+              </div>
+              <div class="readout readout--verdict">
+                <span class="readout-label">Verdict</span>
+                <span class="readout-value" id="readoutVerdict">&mdash;</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="demo-canvas-wrap">
+            <canvas id="postSelectCanvas" width="600" height="300" aria-label="Post-selection bias visualization"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOFS -->
+  <section id="proofs" class="section section--proofs">
+    <div class="container">
+      <p class="section-label reveal">Mathematical Foundations</p>
+      <h2 class="section-heading reveal">Three Theorems</h2>
+      <p class="section-intro reveal">
+        The arguments above rest on three established results. Each proof sketch below follows
+        the standard derivation; full proofs with citations are in the supplementary material.
+      </p>
+
+      <!-- Theorem 1 -->
+      <article class="theorem-card reveal" aria-labelledby="theorem-1-heading">
+        <header class="theorem-header">
+          <span class="theorem-number">Theorem 1</span>
+          <h3 id="theorem-1-heading" class="theorem-title">Classical CHSH Bound</h3>
+        </header>
+        <p class="theorem-statement reveal">
+          For any local hidden variable theory satisfying Locality, Realism, and Freedom:
+        </p>
+        <div class="theorem-math reveal">
+          <span class="math-display" data-latex="S \leq 2"></span>
+        </div>
+        <div class="theorem-proof reveal">
+          <p class="proof-label">Proof sketch</p>
+          <p class="proof-body">
+            Define X(&lambda;) = A(a,&lambda;)[B(b,&lambda;) &minus; B(b&prime;,&lambda;)] + A(a&prime;,&lambda;)[B(b,&lambda;) + B(b&prime;,&lambda;)].
+            Since B outcomes are &plusmn;1, either [B(b,&lambda;) &minus; B(b&prime;,&lambda;)] = 0
+            and [B(b,&lambda;) + B(b&prime;,&lambda;)] = &plusmn;2, or vice versa.
+            In either case |X(&lambda;)| &le; 2. Integration over &lambda; preserves the bound: S &le; 2.
+          </p>
+        </div>
+      </article>
+
+      <!-- Theorem 2 -->
+      <article class="theorem-card reveal" aria-labelledby="theorem-2-heading">
+        <header class="theorem-header">
+          <span class="theorem-number">Theorem 2</span>
+          <h3 id="theorem-2-heading" class="theorem-title">Tsirelson Bound</h3>
+        </header>
+        <p class="theorem-statement reveal">
+          In quantum mechanics with entangled state |&Phi;<sup>+</sup>&#10217; and optimal local observables:
+        </p>
+        <div class="theorem-math reveal">
+          <span class="math-display" data-latex="S \leq 2\sqrt{2} \approx 2.828"></span>
+        </div>
+        <div class="theorem-proof reveal">
+          <p class="proof-label">Proof sketch</p>
+          <p class="proof-body">
+            The CHSH operator S&#770;<sup>2</sup> = 4I &minus; [A,A&prime;] &otimes; [B,B&prime;].
+            Since commutator norms satisfy &Vert;[A,A&prime;]&Vert; &le; 2,
+            we get S&#770;<sup>2</sup> &le; 8I, so max&#10216;S&#770;&#10217; = &radic;8 = 2&radic;2.
+            Achieved with |&Phi;<sup>+</sup>&#10217; and angles 0, &pi;/4, &pi;/2, 3&pi;/4.
+          </p>
+        </div>
+      </article>
+
+      <!-- Theorem 3 -->
+      <article class="theorem-card reveal" aria-labelledby="theorem-3-heading">
+        <header class="theorem-header">
+          <span class="theorem-number">Theorem 3</span>
+          <h3 id="theorem-3-heading" class="theorem-title">Post-Selection Inflation</h3>
+        </header>
+        <p class="theorem-statement reveal">
+          Outcome-dependent post-selection on LHV data can achieve:
+        </p>
+        <div class="theorem-math reveal">
+          <span class="math-display" data-latex="S_{\text{post}} \to 4 \quad \text{(from purely classical data)}"></span>
+        </div>
+        <div class="theorem-proof reveal">
+          <p class="proof-label">Proof sketch</p>
+          <p class="proof-body">
+            Define selection f(A,B) = 1 when AB = +1, f = p when AB = &minus;1.
+            As p &rarr; 0, the post-selected estimator E<sub>post</sub>(a,b) &rarr; &plusmn;1.
+            The resulting CHSH value S &rarr; 4.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FIGURES -->
+  <section id="figures" class="section section--figures">
+    <div class="container">
+      <p class="section-label reveal">Visualizations</p>
+      <h2 class="section-heading reveal">Five Key Figures</h2>
+
+      <div class="figures-grid">
+        <!-- Fig 1 -->
+        <figure class="figure-card reveal" aria-labelledby="fig1-caption">
+          <div class="figure-img-wrap">
+            <img
+              src="assets/figures/fig1_chsh_bounds.png"
+              alt="CHSH S values across model types: classical LHV baseline, quantum singlet, and post-selected artifact"
+              loading="lazy"
+              class="figure-img"
+            />
+          </div>
+          <figcaption id="fig1-caption" class="figure-caption">
+            <span class="figure-number">Fig. 1</span>
+            CHSH S values across model types: classical LHV baseline (S=2.001), quantum singlet (S=2.821),
+            and post-selected artifact (S=3.716).
+          </figcaption>
+        </figure>
+
+        <!-- Fig 2 -->
+        <figure class="figure-card reveal" aria-labelledby="fig2-caption">
+          <div class="figure-img-wrap">
+            <img
+              src="assets/figures/fig2_efficiency_landscape.png"
+              alt="LHV maximum CHSH as a function of detection efficiency eta with critical threshold marked"
+              loading="lazy"
+              class="figure-img"
+            />
+          </div>
+          <figcaption id="fig2-caption" class="figure-caption">
+            <span class="figure-number">Fig. 2</span>
+            LHV maximum CHSH as a function of detection efficiency &eta;.
+            Critical threshold &eta;<sub>c</sub> &approx; 0.828 marked.
+          </figcaption>
+        </figure>
+
+        <!-- Fig 3 -->
+        <figure class="figure-card reveal" aria-labelledby="fig3-caption">
+          <div class="figure-img-wrap">
+            <img
+              src="assets/figures/fig3_postselection_mechanism.png"
+              alt="Acceptance rate vs inflated CHSH S showing inverse relationship"
+              loading="lazy"
+              class="figure-img"
+            />
+          </div>
+          <figcaption id="fig3-caption" class="figure-caption">
+            <span class="figure-number">Fig. 3</span>
+            Acceptance rate vs inflated CHSH S showing inverse relationship.
+          </figcaption>
+        </figure>
+
+        <!-- Fig 4 -->
+        <figure class="figure-card reveal" aria-labelledby="fig4-caption">
+          <div class="figure-img-wrap">
+            <img
+              src="assets/figures/fig4_bell_test_schematic.png"
+              alt="Canonical Bell test schematic showing source, detectors, coincidence unit, and four measurement settings"
+              loading="lazy"
+              class="figure-img"
+            />
+          </div>
+          <figcaption id="fig4-caption" class="figure-caption">
+            <span class="figure-number">Fig. 4</span>
+            Canonical Bell test schematic showing source, detectors, coincidence unit,
+            and four measurement settings.
+          </figcaption>
+        </figure>
+
+        <!-- Fig 5 -->
+        <figure class="figure-card reveal" aria-labelledby="fig5-caption">
+          <div class="figure-img-wrap">
+            <img
+              src="assets/figures/fig5_timeline.png"
+              alt="Historical timeline of Bell test experiments and loophole closures"
+              loading="lazy"
+              class="figure-img"
+            />
+          </div>
+          <figcaption id="fig5-caption" class="figure-caption">
+            <span class="figure-number">Fig. 5</span>
+            Historical timeline of Bell test experiments and loophole closures.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section id="references" class="section section--references">
+    <div class="container">
+      <p class="section-label reveal">Bibliography</p>
+      <h2 class="section-heading reveal">References</h2>
+
+      <ol class="references-list reveal" role="list">
+        <li class="reference-item">
+          Bell, J.S. (1964). On the Einstein-Podolsky-Rosen paradox.
+          <em>Physics</em>, 1(3), 195&ndash;200.
+        </li>
+        <li class="reference-item">
+          Clauser, J.F., Horne, M.A., Shimony, A., &amp; Holt, R.A. (1969).
+          Proposed experiment to test local hidden-variable theories.
+          <em>Physical Review Letters</em>, 23(15), 880&ndash;884.
+        </li>
+        <li class="reference-item">
+          Eberhard, P.H. (1993). Background level and counter efficiencies required for
+          a loophole-free EPR experiment.
+          <em>Physical Review A</em>, 47(2), R747.
+        </li>
+        <li class="reference-item">
+          Wang et al. (2025). [Experiment under examination &mdash; full citation in source repository
+          <code>paperNotes.bib</code>].
+        </li>
+        <li class="reference-item">
+          This work: meatheadphysicist rebuttal framework (2025).
+          <a href="https://github.com/alawein/meatheadphysicist" target="_blank" rel="noopener noreferrer">
+            github.com/alawein/meatheadphysicist
+          </a>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-text">
+        CHSH Lab &mdash; A dark-academic physics showcase by
+        <a href="https://github.com/alawein/meatheadphysicist" target="_blank" rel="noopener noreferrer">meatheadphysicist</a>.
+        Hosted on GitHub Pages.
+      </p>
+      <p class="footer-text footer-text--small">
+        All simulations run client-side. No data is collected or transmitted.
+        Source code available on
+        <a href="https://github.com/alawein/chshlab" target="_blank" rel="noopener noreferrer">GitHub</a>.
+      </p>
+    </div>
+  </footer>
+
+  <!-- JS entry point (type=module is deferred by spec) -->
+  <script type="module" src="js/main.js"></script>
+
+</body>
+</html>
