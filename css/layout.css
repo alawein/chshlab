@@ -151,3 +151,99 @@
   .hero__bounds  { justify-content: flex-start; }
   .demo-tabs     { overflow-x: auto; }
 }
+
+/* ── SECTION MODIFIERS ── */
+.section--hero {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+/* ── BADGE (hero bounds) ── */
+.badge {
+  border: 1px solid;
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.badge--amber   { border-color: var(--amber);   color: var(--amber); }
+.badge--blue    { border-color: var(--blue);    color: var(--blue); }
+.badge--crimson { border-color: var(--crimson); color: var(--crimson); }
+
+.badge-label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.badge-value {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ── SECTION HEADING + INTRO ── */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+  line-height: 1.15;
+}
+
+.section-intro {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 60ch;
+  margin-bottom: var(--space-5);
+  line-height: 1.7;
+}
+
+/* ── FIGURES GRID ── */
+.figures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-4);
+}
+
+/* ── DEMO PANEL INNER (two-col layout) ── */
+.demo-panel-inner {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.demo-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.demo-heading {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.demo-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.demo-readouts {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-4);
+}
+
+@media (min-width: 900px) {
+  .demo-panel-inner { grid-template-columns: 1fr 1fr; align-items: start; }
+}
