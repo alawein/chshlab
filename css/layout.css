@@ -19,9 +19,6 @@
   z-index: 10;
 }
 
-.section + .section {
-  border-top: 1px solid var(--border);
-}
 
 /* Section label (mono tag above heading) */
 .section-label {
@@ -104,6 +101,7 @@
   display: flex;
   border-bottom: 1px solid var(--border);
   margin-bottom: var(--space-5);
+  position: relative; /* ADD */
 }
 
 .demo-tab {
@@ -123,11 +121,26 @@
 .demo-tab.active,
 .demo-tab:hover {
   color: var(--text);
-  border-bottom-color: var(--amber);
+  border-bottom-color: transparent; /* was var(--amber) */
 }
 
-.demo-panel { display: none; }
-.demo-panel.active { display: block; }
+.demo-panel {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+  pointer-events: none;
+}
+.demo-panel.active {
+  visibility: visible;
+  opacity: 1;
+  position: relative;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0s;
+  pointer-events: auto;
+}
 
 /* Theorem grid */
 .theorem-grid {
@@ -158,6 +171,7 @@
   display: grid;
   place-items: center;
   text-align: center;
+  overflow: hidden; /* ADD */
 }
 
 /* ── BADGE (hero bounds) ── */
@@ -246,4 +260,31 @@
 
 @media (min-width: 900px) {
   .demo-panel-inner { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+/* ── SECTION RULE (animated divider) ── */
+.section-rule {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  max-width: var(--content-width);
+  margin: 0 auto;
+  transform: scaleX(0);
+  transform-origin: center;
+}
+
+/* ── TAB SLIDING INDICATOR ── */
+.demo-tabs__indicator {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background: var(--amber);
+  transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── DEMO PANELS WRAPPER ── */
+.demo-panels-wrap {
+  position: relative;
+  overflow: hidden;
 }

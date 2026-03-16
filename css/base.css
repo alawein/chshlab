@@ -3,7 +3,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; font-size: 18px; }
+html { font-size: 18px; }
 
 body {
   font-family: var(--font-body);
@@ -19,11 +19,20 @@ body {
 body::before {
   content: '';
   position: fixed;
-  inset: 0;
+  inset: -4px; /* was inset: 0 — prevents edge gap during grainShift */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
   opacity: 0.45;
+  animation: grainShift 0.15s steps(3) infinite;
+  will-change: transform;
+}
+
+@keyframes grainShift {
+  0%   { transform: translate(0, 0); }
+  33%  { transform: translate(-2px, 1px); }
+  66%  { transform: translate(1px, -1px); }
+  100% { transform: translate(0, 0); }
 }
 
 h1, h2, h3, h4 {
@@ -59,4 +68,15 @@ hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-6) 0; 
     transition-duration: 0.01ms !important;
   }
   html { scroll-behavior: auto; }
+  body::before { animation: none; }
+  .ambient-glow { animation: none; opacity: 0.5; }
+  .rebuttal-card::before { transform: scaleY(1); }
+  .hero__rule { transform: scaleX(1); }
+  .section-rule { transform: scaleX(1); }
+  [data-redpen="underline"],
+  [data-redpen="circle"],
+  [data-redpen="strike"] { clip-path: none; }
+  .figure-card__image-wrap { clip-path: none; }
+  .theorem-card__number { clip-path: none; }
+  .figure-card__label { clip-path: none; }
 }
