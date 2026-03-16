@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/redpen.css" />
 
   <!-- KaTeX -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
@@ -23,6 +24,7 @@
   <!-- GSAP + ScrollTrigger -->
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
 </head>
 <body>
 
@@ -41,6 +43,7 @@
 
   <!-- HERO -->
   <section id="hero" class="section section--hero">
+    <div class="ambient-glow"></div>
     <div class="container">
       <p class="hero__eyebrow reveal">Bell Inequality &middot; Post-Selection &middot; Detection Loophole</p>
       <h1 class="hero__title reveal">Does Low-Efficiency Bell Testing Prove Nonlocality?</h1>
@@ -48,6 +51,7 @@
         When effective detection efficiency falls below 82.8%, post-selected CHSH S &gt; 2 no longer rules out classical explanations.
         We show why &mdash; with rigorous proofs, reproducible simulations, and interactive demos.
       </p>
+      <div class="hero__rule"></div>
       <div class="hero__bounds reveal" role="list">
         <div class="badge badge--amber" role="listitem">
           <span class="badge-label">Classical LHV</span>
@@ -64,6 +68,8 @@
       </div>
     </div>
   </section>
+
+  <hr class="section-rule">
 
   <!-- PAPER -->
   <section id="paper" class="section section--paper">
@@ -99,6 +105,8 @@
     </div>
   </section>
 
+  <hr class="section-rule">
+
   <!-- REBUTTAL -->
   <section id="rebuttal" class="section section--rebuttal">
     <div class="container">
@@ -111,8 +119,8 @@
         <p class="rebuttal-card__claim"><em>"CHSH S &gt; 2 implies quantum nonlocality."</em></p>
         <p class="rebuttal-card__critique">
           This inference is only valid under loophole-free conditions &mdash; specifically, when detection efficiency
-          &eta; &ge; 82.8%. Below this threshold, local hidden variable (LHV) models can produce S &gt; 2
-          without any quantum entanglement.
+          <mark data-redpen="underline" data-note="Below critical &eta;c &asymp; 0.828 &mdash; loophole OPEN">&eta; &ge; 82.8%</mark>. Below this threshold, local hidden variable (LHV) models can produce <mark data-redpen="circle">S &gt; 2</mark>
+          <mark data-redpen="strike">without any quantum entanglement</mark>.
         </p>
         <p class="rebuttal-card__evidence"><code>Classical baseline (full dataset): S = 2.001, 95% CI [1.998, 2.004], 100% acceptance</code></p>
         <p class="rebuttal-card__implication">
@@ -131,7 +139,7 @@
         <p class="rebuttal-card__claim"><em>"Selecting on detected coincidences preserves statistical validity."</em></p>
         <p class="rebuttal-card__critique">
           Outcome-dependent post-selection biases the correlation estimator. By preferentially retaining
-          correlated event pairs, a purely classical LHV dataset can be filtered to produce S approaching 4
+          correlated event pairs, a purely classical LHV dataset can be filtered to produce <mark data-redpen="underline" data-note="Exceeds even quantum Tsirelson bound of 2&radic;2">S approaching 4</mark>
           &mdash; exceeding even the quantum Tsirelson bound.
         </p>
         <p class="rebuttal-card__evidence"><code>Post-selected classical artifact: S = 3.716, 95% CI [3.714, 3.717], only 70.0% acceptance</code></p>
@@ -150,9 +158,9 @@
         <p class="rebuttal-card__tag">Argument 3 &mdash; Reporting Standards</p>
         <p class="rebuttal-card__claim"><em>"Reporting CHSH S is sufficient for a Bell claim."</em></p>
         <p class="rebuttal-card__critique">
-          At detection efficiency &eta; = 70%, the LHV upper bound is S<sub>LHV,max</sub> = 4/0.70 &minus; 2 &approx; 3.71.
-          A post-selected S &approx; 3.7 exactly matches the classical artifact regime &mdash; making it
-          indistinguishable from a purely classical source without additional diagnostics.
+          At detection efficiency <mark data-redpen="circle">&eta; = 70%</mark>, the LHV upper bound is S<sub>LHV,max</sub> = 4/0.70 &minus; 2 &approx; 3.71.
+          A post-selected S &approx; 3.7 <mark data-redpen="underline" data-note="Matches classical artifact exactly &mdash; indistinguishable">exactly matches the classical artifact regime</mark> &mdash; making it
+          <mark data-redpen="strike">indistinguishable from a purely classical source</mark> without additional diagnostics.
         </p>
         <p class="rebuttal-card__evidence"><code>At &eta; = 70%: S_LHV,max = 3.71 &mdash; exactly matches post-selected artifact S = 3.716</code></p>
         <p class="rebuttal-card__implication">
@@ -166,6 +174,8 @@
       </article>
     </div>
   </section>
+
+  <hr class="section-rule">
 
   <!-- DEMOS -->
   <section id="demos" class="section section--demos">
@@ -200,7 +210,10 @@
           aria-controls="demo-postselect"
           data-panel="demo-postselect"
         >Post-Selection Bias</button>
+        <span class="demo-tabs__indicator"></span>
       </div>
+
+      <div class="demo-panels-wrap">
 
       <!-- Demo Panel 1: Angle Sweep -->
       <div class="demo-panel active" id="demo-angle" role="tabpanel" aria-label="Angle Sweep demo">
@@ -317,8 +330,12 @@
           </div>
         </div>
       </div>
+
+      </div><!-- /.demo-panels-wrap -->
     </div>
   </section>
+
+  <hr class="section-rule">
 
   <!-- PROOFS -->
   <section id="proofs" class="section section--proofs">
@@ -405,6 +422,8 @@
       </article>
     </div>
   </section>
+
+  <hr class="section-rule">
 
   <!-- FIGURES -->
   <section id="figures" class="section section--figures">
@@ -498,6 +517,8 @@
       </div>
     </div>
   </section>
+
+  <hr class="section-rule">
 
   <!-- REFERENCES -->
   <section id="references" class="section section--references">
