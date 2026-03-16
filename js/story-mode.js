@@ -334,7 +334,7 @@ export function initStoryMode() {
   if (!hero) return;
 
   const btn = document.createElement('button');
-  btn.className = 'story-trigger-btn reveal';
+  btn.className = 'story-trigger-btn';
   btn.textContent = 'Walk me through it \u2192';
   btn.addEventListener('click', openOverlay);
 
@@ -344,6 +344,11 @@ export function initStoryMode() {
     bounds.after(btn);
   } else {
     hero.appendChild(btn);
+  }
+
+  // Animate in (created after initScroll, so no ScrollTrigger catch-all)
+  if (typeof gsap !== 'undefined') {
+    gsap.from(btn, { opacity: 0, y: 16, duration: 0.6, ease: 'power2.out', delay: 0.3 });
   }
 
   // Keyboard shortcut: 's' opens story mode

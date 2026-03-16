@@ -210,7 +210,8 @@ export function initScroll() {
   });
 
   // ── REMAINING .reveal ELEMENTS (catch-all) ──
-  document.querySelectorAll('.reveal').forEach(el => {
+  const remaining = document.querySelectorAll('.reveal');
+  remaining.forEach(el => {
     gsap.from(el, {
       opacity: 0, y: 20, duration: 0.7, ease: 'power2.out',
       scrollTrigger: {
@@ -219,6 +220,7 @@ export function initScroll() {
         toggleActions: 'play none none none',
       },
     });
+    el.classList.remove('reveal');
   });
 
   // ── ATMOSPHERE + NAV ACTIVE ──
