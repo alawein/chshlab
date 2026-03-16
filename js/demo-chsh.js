@@ -41,17 +41,11 @@ export function initAngleDemo() {
   const readoutQ = document.getElementById('readoutQuantum');
   const readoutC = document.getElementById('readoutClassical');
 
-  function render() {
-    const angles = {};
-    Object.entries(sliders).forEach(([k, slider]) => {
-      angles[k] = deg(+slider.value);
-      if (valSpans[k]) {
-        valSpans[k].textContent = slider.value + '\u00b0'; // degree symbol
-      }
-    });
+  const state = { a: deg(+sliders.a.value), ap: deg(+sliders.ap.value), b: deg(+sliders.b.value), bp: deg(+sliders.bp.value) };
 
-    const sq = computeS(corrQuantum,   angles.a, angles.ap, angles.b, angles.bp);
-    const sc = computeS(corrClassical, angles.a, angles.ap, angles.b, angles.bp);
+  function render() {
+    const sq = computeS(corrQuantum,   state.a, state.ap, state.b, state.bp);
+    const sc = computeS(corrClassical, state.a, state.ap, state.b, state.bp);
 
     if (readoutQ) readoutQ.textContent = sq.toFixed(3);
     if (readoutC) readoutC.textContent = sc.toFixed(3);
@@ -61,12 +55,21 @@ export function initAngleDemo() {
       readoutQ.parentElement.style.color = sq > 2.01 ? 'var(--blue)' : 'var(--amber)';
     }
 
-    drawDiagram(ctx, canvas, angles, sq);
+    drawDiagram(ctx, canvas, state, sq);
   }
 
-  // Attach input listeners to all sliders
-  Object.values(sliders).forEach(slider => {
-    if (slider) slider.addEventListener('input', render);
+  // Attach input listeners to all sliders with GSAP-tweened interpolation
+  Object.entries(sliders).forEach(([key, slider]) => {
+    if (!slider) return;
+    slider.addEventListener('input', () => {
+      gsap.to(state, {
+        [key]: deg(+slider.value),
+        duration: 0.15,
+        ease: 'power1.out',
+        onUpdate: () => render(),
+      });
+      if (valSpans[key]) valSpans[key].textContent = slider.value + '\u00b0';
+    });
   });
 
   // Resize canvas to match CSS width

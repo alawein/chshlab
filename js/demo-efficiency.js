@@ -26,6 +26,9 @@ export function initEfficiencyDemo() {
   const valEta  = document.getElementById('valEta');
   const readout = document.getElementById('readoutLhvMax');
 
+  const state = { eta: parseFloat(slider.value) };
+  let firstDraw = true;
+
   const W   = 700;
   const H   = 350;
   const pad = { top: 30, right: 50, bottom: 50, left: 60 };
@@ -74,6 +77,17 @@ export function initEfficiencyDemo() {
       stroke: '#C94040',
       'stroke-width': '2',
     }));
+
+    if (firstDraw) {
+      const pathEl = svg.querySelector('path');
+      if (pathEl) {
+        const length = pathEl.getTotalLength();
+        pathEl.setAttribute('stroke-dasharray', length);
+        pathEl.setAttribute('stroke-dashoffset', length);
+        gsap.to(pathEl, { strokeDashoffset: 0, duration: 1.5, ease: 'power2.out' });
+      }
+      firstDraw = false;
+    }
 
     // Critical threshold vertical
     svg.appendChild(svgEl('line', {
@@ -138,20 +152,29 @@ export function initEfficiencyDemo() {
     }));
   }
 
-  function update() {
-    const eta = parseFloat(slider.value);
-    if (valEta)  valEta.textContent  = Math.round(eta * 100) + '%';
-    const s = sLhvMax(eta);
-    if (readout) readout.textContent = s.toFixed(3);
+  if (slider) slider.addEventListener('input', () => {
+    gsap.to(state, {
+      eta: parseFloat(slider.value),
+      duration: 0.15,
+      ease: 'power1.out',
+      onUpdate: () => {
+        if (valEta) valEta.textContent = Math.round(state.eta * 100) + '%';
+        const s = sLhvMax(state.eta);
+        if (readout) readout.textContent = s.toFixed(3);
+        if (readout && readout.parentElement) {
+          readout.parentElement.style.color = state.eta < ETA_CRIT ? 'var(--crimson)' : 'var(--green)';
+        }
+        rebuild(state.eta);
+      },
+    });
+  });
 
-    // Color: crimson if below critical threshold, green if safe
-    if (readout && readout.parentElement) {
-      readout.parentElement.style.color = eta < ETA_CRIT ? 'var(--crimson)' : 'var(--green)';
-    }
-
-    rebuild(eta);
+  // Initial render
+  if (valEta) valEta.textContent = Math.round(state.eta * 100) + '%';
+  const s = sLhvMax(state.eta);
+  if (readout) readout.textContent = s.toFixed(3);
+  if (readout && readout.parentElement) {
+    readout.parentElement.style.color = state.eta < ETA_CRIT ? 'var(--crimson)' : 'var(--green)';
   }
-
-  if (slider) slider.addEventListener('input', update);
-  update();
+  rebuild(state.eta);
 }

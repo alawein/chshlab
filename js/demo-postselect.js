@@ -18,6 +18,8 @@ export function initPostSelectDemo() {
   const readoutAccept  = document.getElementById('readoutAccept');
   const readoutVerdict = document.getElementById('readoutVerdict');
 
+  const state = { p: parseFloat(slider.value) };
+
   const ro = new ResizeObserver(() => {
     canvas.width  = canvas.offsetWidth;
     canvas.height = 300;
@@ -26,7 +28,7 @@ export function initPostSelectDemo() {
   ro.observe(canvas);
 
   function render() {
-    const p      = parseFloat(slider.value);
+    const p      = state.p;
     const s      = postS(p);
     const accept = acceptRate(p);
 
@@ -53,7 +55,14 @@ export function initPostSelectDemo() {
     drawGauge(ctx, canvas, s, accept);
   }
 
-  if (slider) slider.addEventListener('input', render);
+  if (slider) slider.addEventListener('input', () => {
+    gsap.to(state, {
+      p: parseFloat(slider.value),
+      duration: 0.15,
+      ease: 'power1.out',
+      onUpdate: () => render(),
+    });
+  });
   render();
 }
 
