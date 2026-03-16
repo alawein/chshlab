@@ -33,9 +33,11 @@ function initTabs() {
     });
   });
 
-  // Position indicator on the initially active tab
+  // Position indicator on the initially active tab (defer past KaTeX reflow)
   const activeTab = document.querySelector('.demo-tab.active');
-  if (activeTab) updateIndicator(activeTab);
+  if (activeTab) {
+    requestAnimationFrame(() => requestAnimationFrame(() => updateIndicator(activeTab)));
+  }
 
   // Reposition on resize
   window.addEventListener('resize', () => {
@@ -87,12 +89,20 @@ function initReadoutTick() {
 }
 
 window.addEventListener('load', async () => {
+  // Fade in body (prevents flash of unstyled content)
+  if (typeof gsap !== 'undefined') {
+    gsap.to(document.body, { opacity: 1, duration: 0.4, ease: 'power1.out' });
+  } else {
+    document.body.style.opacity = '1';
+  }
+
   initKaTeX();
   initTabs();
   initSmoothScroll();
   initMouseGlow();
   initReadoutTick();
 
+  const { initStarfield }      = await import('./starfield.js');
   const { initScroll }         = await import('./scroll.js');
   const { initAnnotations }    = await import('./annotations.js');
   const { initRedPen }         = await import('./redpen.js');
@@ -100,6 +110,7 @@ window.addEventListener('load', async () => {
   const { initEfficiencyDemo } = await import('./demo-efficiency.js');
   const { initPostSelectDemo } = await import('./demo-postselect.js');
 
+  initStarfield();
   initScroll();
   initAnnotations();
   initRedPen();

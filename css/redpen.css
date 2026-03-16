@@ -71,7 +71,7 @@
   padding-left: 12px;
   line-height: 1.5;
   opacity: 0;
-  transform: translateX(10px);
+  transform: translateX(20px) rotate(1deg);
   pointer-events: none;
 }
 .redpen-note::before {

@@ -238,6 +238,10 @@
 .theorem-card details[open] .theorem-card__proof .proof-body::before {
   transform: scaleY(1);
 }
+.theorem-card details[open] {
+  box-shadow: 0 0 0 1px rgba(100,140,230,0.2);
+  transition: box-shadow 0.4s ease;
+}
 
 /* ── FIGURE CARD ── */
 .figure-card {
@@ -269,8 +273,6 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* Invert light-background matplotlib figures for dark theme */
-  filter: invert(0.88) hue-rotate(180deg) saturate(0.85);
   transition: transform 0.3s var(--ease);
 }
 
@@ -307,7 +309,7 @@
   width: 100%;
   height: auto;
   display: block;
-  filter: invert(0.88) hue-rotate(180deg) saturate(0.7);
+  /* Native dark-theme figures — no filter needed */
 }
 
 .hotspot {
@@ -510,29 +512,6 @@ input[type="range"]::-moz-range-thumb:active {
   box-shadow: 0 0 0 6px rgba(201,169,77,0.15);
 }
 
-/* ── REFERENCES ── */
-.reference-list {
-  list-style: none;
-  margin-top: var(--space-5);
-}
-
-.reference-list li {
-  padding-block: var(--space-3);
-  border-bottom: 1px solid var(--border);
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  display: grid;
-  grid-template-columns: 2.5rem 1fr;
-  gap: var(--space-3);
-}
-
-.reference-list__num {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--amber);
-  padding-top: 2px;
-}
-
 /* ── SCROLL REVEAL (initial hidden state — GSAP animates to visible) ── */
 .reveal {
   opacity: 0;
@@ -646,5 +625,44 @@ input[type="range"]::-moz-range-thumb:active {
 
 .footer-text a { color: var(--amber); }
 
+.footer-socials {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-3);
+}
+
+.footer-socials a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--border);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.footer-socials a:hover {
+  color: var(--amber);
+  border-color: var(--amber-dim);
+  text-decoration: none;
+}
+
 /* ── VERDICT READOUT ── */
 .demo-readout--verdict { color: var(--text); }
+
+/* ── NAV ACTIVE LINK ── */
+.nav-link--active { color: var(--amber) !important; }
+
+/* ── FIGURE SCANNER LINE ── */
+.figures-scanner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  pointer-events: none;
+  z-index: 5;
+}

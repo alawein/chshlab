@@ -13,13 +13,15 @@ body {
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
   position: relative;
+  opacity: 0;
 }
+.no-js body { opacity: 1; }
 
-/* Noise texture overlay — pure CSS SVG data URI */
+/* Film grain overlay — high-frequency noise */
 body::before {
   content: '';
   position: fixed;
-  inset: -4px; /* was inset: 0 — prevents edge gap during grainShift */
+  inset: -4px;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
@@ -28,11 +30,28 @@ body::before {
   will-change: transform;
 }
 
+/* Textile weave overlay — low-frequency directional linen */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.015,0.08' numOctaves='2' stitchTiles='stitch' seed='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+  animation: textileBreath 8s ease-in-out infinite alternate;
+}
+
 @keyframes grainShift {
   0%   { transform: translate(0, 0); }
   33%  { transform: translate(-2px, 1px); }
   66%  { transform: translate(1px, -1px); }
   100% { transform: translate(0, 0); }
+}
+
+@keyframes textileBreath {
+  0%   { opacity: 0.5; }
+  100% { opacity: 0.7; }
 }
 
 h1, h2, h3, h4 {
@@ -62,6 +81,23 @@ a:hover { text-decoration: underline; }
 
 hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-6) 0; }
 
+/* ── Starfield canvas ── */
+#starfield {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* ── Section atmosphere wash ── */
+.atmosphere-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -69,6 +105,7 @@ hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-6) 0; 
   }
   html { scroll-behavior: auto; }
   body::before { animation: none; }
+  body::after { animation: none; opacity: 0.5; }
   .ambient-glow { animation: none; opacity: 0.5; }
   .rebuttal-card::before { transform: scaleY(1); }
   .hero__rule { transform: scaleX(1); }
@@ -79,4 +116,8 @@ hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-6) 0; 
   .figure-card__image-wrap { clip-path: none; }
   .theorem-card__number { clip-path: none; }
   .figure-card__label { clip-path: none; }
+  body { opacity: 1; }
+  #starfield { display: none; }
+  .atmosphere-layer { display: none; }
+  .figures-scanner { display: none; }
 }

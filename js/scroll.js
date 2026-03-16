@@ -131,12 +131,11 @@ export function initScroll() {
         opacity: 0, y: 24, duration: 0.7, ease: 'power2.out',
       }, '-=0.5');
 
-      // Theorem number clip-path wipe
+      // Theorem number clip-path wipe + stamp
       const num = card.querySelector('.theorem-card__number');
       if (num) {
-        tl.from(num, {
-          clipPath: 'inset(0 100% 0 0)', duration: 0.4, ease: 'power2.out',
-        }, '-=0.3');
+        tl.from(num, { clipPath: 'inset(0 100% 0 0)', duration: 0.4, ease: 'power2.out' }, '-=0.3');
+        tl.to(num, { scale: 1.08, duration: 0.15, yoyo: true, repeat: 1, ease: 'power1.inOut' }, '-=0.1');
       }
 
       // Math blur reveal
@@ -165,6 +164,9 @@ export function initScroll() {
     tl.from('#figures .section-label, #figures .section-heading', {
       opacity: 0, y: 20, duration: 0.7, ease: 'power2.out', stagger: 0.1,
     });
+
+    // Scanner line sweep
+    figureScanner(tl);
 
     figureCards.forEach((card) => {
       const imgWrap = card.querySelector('.figure-card__image-wrap');
@@ -218,6 +220,36 @@ export function initScroll() {
       },
     });
   });
+
+  // ── ATMOSPHERE + NAV ACTIVE ──
+  initAtmosphere();
+  initNavActive();
+}
+
+// ── HERO: Split title into word spans ──
+function splitHeroTitle(titleEl) {
+  const words = titleEl.textContent.trim().split(/\s+/);
+  titleEl.textContent = '';
+  words.forEach((word, i) => {
+    const outer = document.createElement('span');
+    const inner = document.createElement('span');
+    outer.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:bottom;';
+    inner.className = 'hero-word';
+    inner.textContent = word;
+    outer.appendChild(inner);
+    titleEl.appendChild(outer);
+    if (i < words.length - 1) titleEl.appendChild(document.createTextNode('\u00a0'));
+  });
+}
+
+// ── HERO: Badge stagger with power-on flash ──
+function animateBadges(tl) {
+  const badges = document.querySelectorAll('.hero__bounds .badge');
+  badges.forEach((badge, i) => {
+    const t = 2.0 + i * 0.12;
+    tl.from(badge, { opacity: 0, y: 20, scale: 0.95, duration: 0.7 }, t);
+    tl.to(badge, { borderColor: 'rgba(255,255,255,0.9)', duration: 0.1, yoyo: true, repeat: 1 }, t + 0.3);
+  });
 }
 
 // ── HERO TIMELINE ──
@@ -227,58 +259,30 @@ function heroTimeline() {
   const subtitle = document.querySelector('.hero__subtitle');
   const bounds = document.querySelector('.hero__bounds');
   const rule = document.querySelector('.hero__rule');
+  const glow = document.querySelector('.ambient-glow');
 
-  // Word-split the title
-  if (titleEl) {
-    const words = titleEl.textContent.trim().split(/\s+/);
-    titleEl.textContent = '';
-    words.forEach((word, i) => {
-      const outer = document.createElement('span');
-      const inner = document.createElement('span');
-      outer.style.cssText = 'display:inline-block;overflow:hidden;vertical-align:bottom;';
-      inner.className = 'hero-word';
-      inner.textContent = word;
-      outer.appendChild(inner);
-      titleEl.appendChild(outer);
-      if (i < words.length - 1) {
-        titleEl.appendChild(document.createTextNode('\u00a0'));
-      }
-    });
-  }
+  if (titleEl) splitHeroTitle(titleEl);
 
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-  // Eyebrow
+  if (glow) tl.to(glow, { opacity: 0.15, duration: 0.05, yoyo: true, repeat: 1 }, 0.1);
+
   if (eyebrow) {
     eyebrow.classList.remove('reveal');
     tl.from(eyebrow, { opacity: 0, y: 16, duration: 0.8 }, 0.3);
   }
-
-  // Title words (blur-to-sharp)
   if (titleEl) {
     titleEl.classList.remove('reveal');
-    tl.from('.hero-word', {
-      yPercent: 110, filter: 'blur(4px)', stagger: 0.06, duration: 0.9,
-    }, 0.5);
+    tl.from('.hero-word', { yPercent: 110, filter: 'blur(4px)', letterSpacing: '0.12em', stagger: 0.06, duration: 0.9 }, 0.5);
   }
-
-  // Rule wipe
-  if (rule) {
-    tl.to(rule, { scaleX: 1, duration: 1.2, ease: 'power2.out' }, 1.2);
-  }
-
-  // Subtitle
+  if (rule) tl.to(rule, { scaleX: 1, duration: 1.2, ease: 'power2.out' }, 1.2);
   if (subtitle) {
     subtitle.classList.remove('reveal');
     tl.from(subtitle, { opacity: 0, y: 12, duration: 0.8 }, 1.6);
   }
-
-  // Badges stagger
   if (bounds) {
     bounds.classList.remove('reveal');
-    tl.from('.hero__bounds .badge', {
-      opacity: 0, y: 20, scale: 0.95, stagger: 0.12, duration: 0.7,
-    }, 2.0);
+    animateBadges(tl);
   }
 }
 
@@ -304,4 +308,77 @@ function sectionReveal(sectionSelector, { children, stagger = 0.1 }) {
   });
 
   els.forEach(el => el.classList.remove('reveal'));
+}
+
+// ── FIGURE SCANNER LINE ──
+function figureScanner(tl) {
+  const figSection = document.getElementById('figures');
+  if (!figSection) return;
+  const scanner = document.createElement('div');
+  scanner.className = 'figures-scanner';
+  figSection.appendChild(scanner);
+  tl.fromTo(scanner, { top: '0%', opacity: 1 }, { top: '100%', opacity: 0, duration: 0.6, ease: 'power2.in' }, 0.5);
+}
+
+// ── NAV ACTIVE SECTION HIGHLIGHT ──
+function initNavActive() {
+  const links = document.querySelectorAll('.nav__links a');
+  if (!links.length) return;
+
+  ['paper', 'rebuttal', 'demos', 'proofs', 'figures', 'references'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top center',
+      end: 'bottom center',
+      onEnter: () => setActiveLink(links, id),
+      onEnterBack: () => setActiveLink(links, id),
+    });
+  });
+}
+
+function setActiveLink(links, id) {
+  links.forEach(a => a.classList.toggle('nav-link--active', a.getAttribute('href') === '#' + id));
+}
+
+// ── ATMOSPHERE: gradient map ──
+const ATMOSPHERE_GRADIENTS = {
+  rebuttal: 'radial-gradient(ellipse at 20% 80%, rgba(192,57,43,0.04) 0%, transparent 60%)',
+  demos: 'radial-gradient(ellipse at 85% 50%, rgba(100,140,230,0.04) 0%, transparent 60%)',
+  figures: 'radial-gradient(ellipse at 50% 90%, rgba(201,169,77,0.03) 0%, transparent 50%)',
+};
+
+// ── ATMOSPHERE: fade layer in/out ──
+function fadeAtmosphere(layer, bg, show) {
+  layer.style.background = bg;
+  gsap.to(layer, {
+    opacity: show ? 1 : 0,
+    duration: show ? 1.2 : 0.8,
+    overwrite: true,
+    onComplete: () => { if (!show) layer.style.background = 'transparent'; },
+  });
+}
+
+// ── ATMOSPHERE: bind ScrollTrigger per section ──
+function bindAtmosphereSection(layer, id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const bg = ATMOSPHERE_GRADIENTS[id] || 'transparent';
+  const hasGradient = bg !== 'transparent';
+
+  ScrollTrigger.create({
+    trigger: el,
+    start: 'top center',
+    end: 'bottom center',
+    onEnter: () => fadeAtmosphere(layer, bg, hasGradient),
+    onLeaveBack: () => fadeAtmosphere(layer, 'transparent', false),
+  });
+}
+
+// ── SECTION ATMOSPHERE WASHES ──
+function initAtmosphere() {
+  const layer = document.querySelector('.atmosphere-layer');
+  if (!layer) return;
+  ['hero', 'paper', 'rebuttal', 'demos', 'proofs', 'figures', 'references'].forEach(id => bindAtmosphereSection(layer, id));
 }
