@@ -1,6 +1,8 @@
 // chshlab/js/demo-efficiency.js
 // Demo 2: Detection efficiency threshold SVG chart
 
+import { emitState } from './animation-config.js';
+
 const ETA_CRIT = 2 / (1 + Math.sqrt(2)); // ≈ 0.8284
 
 function sLhvMax(eta) {
@@ -165,6 +167,7 @@ export function initEfficiencyDemo() {
           readout.parentElement.style.color = state.eta < ETA_CRIT ? 'var(--crimson)' : 'var(--green)';
         }
         rebuild(state.eta);
+        emitState({ demo: 'efficiency', eta: state.eta, sLhvMax: s, etaCrit: ETA_CRIT });
       },
     });
   });
@@ -177,4 +180,5 @@ export function initEfficiencyDemo() {
     readout.parentElement.style.color = state.eta < ETA_CRIT ? 'var(--crimson)' : 'var(--green)';
   }
   rebuild(state.eta);
+  emitState({ demo: 'efficiency', eta: state.eta, sLhvMax: s, etaCrit: ETA_CRIT });
 }

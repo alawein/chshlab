@@ -120,4 +120,9 @@ hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-6) 0; 
   #starfield { display: none; }
   .atmosphere-layer { display: none; }
   .figures-scanner { display: none; }
+  .story-overlay { transition: none; }
+  .bound-explorer__content { transition: none; }
+  .provenance-drawer { transition: none; }
+  .timeline-node { opacity: 1; transform: none; }
+  .story-trigger-btn { opacity: 1; transform: none; }
 }
