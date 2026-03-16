@@ -2,6 +2,8 @@
 // Demo 3: Post-selection bias simulator
 // Shows how outcome-dependent selection inflates CHSH S from classical LHV data
 
+import { emitState } from './animation-config.js';
+
 const ETA_CRIT = 2 / (1 + Math.sqrt(2)); // ≈ 0.8284
 
 // Theorem 3 constructive example formulas
@@ -53,6 +55,7 @@ export function initPostSelectDemo() {
     }
 
     drawGauge(ctx, canvas, s, accept);
+    emitState({ demo: 'postselect', s, accept, p: state.p });
   }
 
   if (slider) slider.addEventListener('input', () => {

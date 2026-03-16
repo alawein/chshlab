@@ -1,6 +1,8 @@
 // chshlab/js/demo-chsh.js
 // Demo 1: Angle slider → live CHSH S computation (quantum singlet + classical LHV)
 
+import { emitState } from './animation-config.js';
+
 // Quantum singlet correlation: E_Q(a,b) = -cos(a - b)
 function corrQuantum(a, b) {
   return -Math.cos(a - b);
@@ -49,6 +51,9 @@ export function initAngleDemo() {
 
     if (readoutQ) readoutQ.textContent = sq.toFixed(3);
     if (readoutC) readoutC.textContent = sc.toFixed(3);
+
+    // Emit state for Bound Explorer and sonification
+    emitState({ demo: 'angle', s: sq, sClassical: sc, a: state.a, ap: state.ap, b: state.b, bp: state.bp });
 
     // Color quantum readout: blue if violating classical bound, amber otherwise
     if (readoutQ && readoutQ.parentElement) {
