@@ -176,16 +176,37 @@ export function initBellTest() {
       const aliceX = W/2 + (p.aliceX - W/2) * p.progress;
       ctx.globalAlpha = p.alpha;
       ctx.fillStyle = p.outcomeA === 1 ? '#6B8F71' : '#C94040';
-      ctx.beginPath();
-      ctx.arc(aliceX, detY, 4, 0, Math.PI*2);
-      ctx.fill();
+      if (p.outcomeA === 1) {
+        ctx.beginPath();
+        ctx.arc(aliceX, detY, 4, 0, Math.PI*2);
+        ctx.fill();
+      } else {
+        // Diamond shape for -1 outcomes (colorblind-safe)
+        ctx.beginPath();
+        ctx.moveTo(aliceX, detY - 5);
+        ctx.lineTo(aliceX + 5, detY);
+        ctx.lineTo(aliceX, detY + 5);
+        ctx.lineTo(aliceX - 5, detY);
+        ctx.closePath();
+        ctx.fill();
+      }
 
       // Draw particle going to Bob (right)
       const bobX = W/2 + (p.bobX - W/2) * p.progress;
       ctx.fillStyle = p.outcomeB === 1 ? '#6B8F71' : '#C94040';
-      ctx.beginPath();
-      ctx.arc(bobX, detY, 4, 0, Math.PI*2);
-      ctx.fill();
+      if (p.outcomeB === 1) {
+        ctx.beginPath();
+        ctx.arc(bobX, detY, 4, 0, Math.PI*2);
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(bobX, detY - 5);
+        ctx.lineTo(bobX + 5, detY);
+        ctx.lineTo(bobX, detY + 5);
+        ctx.lineTo(bobX - 5, detY);
+        ctx.closePath();
+        ctx.fill();
+      }
 
       // Show outcome label when arrived
       if (p.phase === 'arrived') {

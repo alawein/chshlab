@@ -89,6 +89,18 @@
   <!-- Scroll progress bar -->
   <div class="scroll-progress" aria-hidden="true"></div>
 
+  <!-- Section indicator dots -->
+  <nav class="section-dots" aria-label="Section navigation" id="sectionDots">
+    <a href="#hook" class="section-dot section-dot--active" data-section="hook" title="Introduction"><span class="sr-only">Introduction</span></a>
+    <a href="#claim" class="section-dot" data-section="claim" title="The Claim"><span class="sr-only">The Claim</span></a>
+    <a href="#efficiency" class="section-dot" data-section="efficiency" title="The Number"><span class="sr-only">The Number</span></a>
+    <a href="#loophole" class="section-dot" data-section="loophole" title="The Loophole"><span class="sr-only">The Loophole</span></a>
+    <a href="#postselection" class="section-dot" data-section="postselection" title="Post-Selection"><span class="sr-only">Post-Selection</span></a>
+    <a href="#proof" class="section-dot" data-section="proof" title="The Proof"><span class="sr-only">The Proof</span></a>
+    <a href="#standards" class="section-dot" data-section="standards" title="Standards"><span class="sr-only">Standards</span></a>
+    <a href="#conclusion" class="section-dot" data-section="conclusion" title="Conclusion"><span class="sr-only">Conclusion</span></a>
+  </nav>
+
   <!-- NAV -->
   <nav class="nav" aria-label="Site navigation">
     <a class="nav__logo" href="#hook">CHSH <span>Lab</span></a>
@@ -176,6 +188,10 @@
           <span class="figure-label">Interactive</span>
           A Bell test in action. Particle pairs fly from the source to Alice and Bob&rsquo;s detectors.
           Select measurement settings and watch the correlation tally build.
+          <span class="figure-legend">
+            <span class="figure-legend__item"><span class="figure-legend__dot figure-legend__dot--green"></span> +1 outcome</span>
+            <span class="figure-legend__item"><span class="figure-legend__dot figure-legend__dot--red figure-legend__dot--diamond"></span> &minus;1 outcome</span>
+          </span>
         </p>
       </div>
     </div>
@@ -395,6 +411,10 @@
           <span class="figure-label">Interactive</span>
           Event pairs flow through a filter. Correlated pairs pass; anti-correlated pairs are discarded.
           Watch how selective filtering inflates S beyond the quantum limit &mdash; from purely classical data.
+          <span class="figure-legend">
+            <span class="figure-legend__item"><span class="figure-legend__dot figure-legend__dot--green"></span> Correlated (kept)</span>
+            <span class="figure-legend__item"><span class="figure-legend__dot figure-legend__dot--red figure-legend__dot--diamond"></span> Anti-correlated (filtered)</span>
+          </span>
         </p>
       </div>
 

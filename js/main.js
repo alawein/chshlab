@@ -190,6 +190,46 @@ function initScrollProgress() {
   }
 }
 
+// ── SECTION DOTS ──
+function initSectionDots() {
+  const dotsNav = document.getElementById('sectionDots');
+  if (!dotsNav) return;
+  const dots = dotsNav.querySelectorAll('.section-dot');
+  const sections = ['hook', 'claim', 'efficiency', 'loophole', 'postselection', 'proof', 'standards', 'conclusion'];
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        dots.forEach(dot => dot.classList.toggle('section-dot--active', dot.dataset.section === id));
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  // Show dots after scrolling past hero
+  window.addEventListener('scroll', () => {
+    dotsNav.classList.toggle('section-dots--visible', window.scrollY > window.innerHeight * 0.5);
+  }, { passive: true });
+
+  // Smooth scroll on dot click
+  dots.forEach(dot => {
+    dot.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.getElementById(dot.dataset.section);
+      if (target && typeof gsap !== 'undefined') {
+        gsap.to(window, { scrollTo: { y: target, offsetY: 52 }, duration: 0.8, ease: 'power2.inOut' });
+      } else if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+}
+
 // ── CLOSE MOBILE NAV ON LINK CLICK ──
 function initMobileNavClose() {
   const toggle = document.getElementById('navToggle');
@@ -227,6 +267,7 @@ window.addEventListener('load', async () => {
   enhanceSliderA11y();
   initKeyboardShortcuts();
   initScrollProgress();
+  initSectionDots();
   initMobileNavClose();
 
   // Dynamic imports with error handling

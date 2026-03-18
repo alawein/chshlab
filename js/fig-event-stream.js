@@ -101,7 +101,7 @@ export function initEventStream() {
 
       if (e.x > W + 20) { events.splice(i, 1); continue; }
 
-      // Draw
+      // Draw — circles for correlated, diamonds for anti-correlated (colorblind-safe)
       ctx.globalAlpha = e.alpha;
       if (e.phase === 'rejected') {
         ctx.fillStyle = 'rgba(201, 64, 64, 0.6)';
@@ -110,9 +110,19 @@ export function initEventStream() {
       } else {
         ctx.fillStyle = '#C94040';
       }
-      ctx.beginPath();
-      ctx.arc(e.x, e.y, 3.5, 0, Math.PI * 2);
-      ctx.fill();
+      if (e.correlated) {
+        ctx.beginPath();
+        ctx.arc(e.x, e.y, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(e.x, e.y - 4);
+        ctx.lineTo(e.x + 4, e.y);
+        ctx.lineTo(e.x, e.y + 4);
+        ctx.lineTo(e.x - 4, e.y);
+        ctx.closePath();
+        ctx.fill();
+      }
       ctx.globalAlpha = 1;
     }
 

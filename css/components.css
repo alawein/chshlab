@@ -584,6 +584,44 @@ input[type="range"]::-moz-range-thumb:active {
   background: rgba(201, 169, 77, 0.08);
 }
 
+/* ── FIGURE LEGEND ── */
+.figure-legend {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.figure-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+}
+
+.figure-legend__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.figure-legend__dot--green { background: #6B8F71; }
+.figure-legend__dot--red { background: #C94040; }
+.figure-legend__dot--amber { background: #C9A94D; }
+.figure-legend__dot--blue { background: #4FA3D4; }
+
+.figure-legend__dot--diamond {
+  border-radius: 0;
+  transform: rotate(45deg);
+  width: 7px;
+  height: 7px;
+}
+
 /* ── KEY STATISTIC HIGHLIGHT ── */
 .key-stat {
   font-family: var(--font-mono);
@@ -802,6 +840,53 @@ input[type="range"]::-moz-range-thumb:active {
   .badge--amber, .badge--blue, .badge--crimson { border-color: ButtonText; color: ButtonText; }
   .timeline-node__badge { border-color: ButtonText; color: ButtonText; }
   .theorem-card__number { color: Highlight; }
+}
+
+/* ── SECTION INDICATOR DOTS ── */
+.section-dots {
+  position: fixed;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 15;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.section-dots--visible {
+  opacity: 1;
+}
+
+.section-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  opacity: 0.3;
+  transition: opacity 0.2s, background 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+
+.section-dot:hover {
+  opacity: 0.7;
+  transform: scale(1.5);
+}
+
+.section-dot--active {
+  opacity: 1;
+  background: var(--amber);
+  transform: scale(1.3);
+}
+
+@media (max-width: 900px) {
+  .section-dots { display: none; }
+}
+
+@media print {
+  .section-dots { display: none; }
 }
 
 /* ── MOBILE TOUCH TARGETS ── */
