@@ -62,6 +62,25 @@ export function initEfficiencyDemo() {
       d += (i === 0 ? 'M' : 'L') + x + ',' + y;
     }
 
+    // Ambiguity zone: filled area between S=2 line and LHV curve
+    const zonePoints = [];
+    for (let eta = 0.5; eta <= 1.0; eta += 0.005) {
+      const sMax = 4 / eta - 2;
+      if (sMax > 2) {
+        zonePoints.push({ eta, s: Math.min(sMax, 6) });
+      }
+    }
+    if (zonePoints.length > 0) {
+      let zonePath = 'M' + etaX(zonePoints[0].eta).toFixed(1) + ',' + sY(2).toFixed(1);
+      zonePoints.forEach(p => { zonePath += 'L' + etaX(p.eta).toFixed(1) + ',' + sY(p.s).toFixed(1); });
+      zonePath += 'L' + etaX(zonePoints[zonePoints.length - 1].eta).toFixed(1) + ',' + sY(2).toFixed(1) + 'Z';
+      svg.appendChild(svgEl('path', {
+        d: zonePath,
+        fill: 'rgba(201,64,64,0.08)',
+        stroke: 'none',
+      }));
+    }
+
     // Grid reference lines
     svg.appendChild(svgEl('line', {
       x1: pad.left, y1: tsiY, x2: pad.left + plotW, y2: tsiY,
@@ -152,6 +171,19 @@ export function initEfficiencyDemo() {
       'text-anchor': 'middle',
       transform: 'rotate(-90, 14, ' + (H / 2) + ')',
     }));
+
+    // Wang et al. callout marker (at left edge, efficiency ~0 is off-scale)
+    const wangX = etaX(0.5);
+    svg.appendChild(svgText('Wang et al. \u03b7\u224810\u207b\xb9\u2078 \u2192', {
+      x: wangX + 8, y: sY(4) + 14,
+      fill: '#9A9485',
+      'font-size': '10',
+      'font-family': "'JetBrains Mono', monospace",
+    }));
+
+    // will-change on SVG container
+    const svgContainer = svg.parentElement;
+    if (svgContainer) svgContainer.style.willChange = 'transform';
   }
 
   if (slider) slider.addEventListener('input', () => {

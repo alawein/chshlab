@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bell Violations Without Entanglement? A Reproducible Rebuttal — Meshal Alawein</title>
+  <meta name="description" content="A classical hidden-variable model with post-selection produces S = 3.716, exceeding the Tsirelson bound. Formal paper with proofs and diagnostics." />
+  <meta name="author" content="Meshal Alawein" />
+  <link rel="canonical" href="https://chshlab.meshal.ai/paper.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Bell Violations Without Entanglement? A Reproducible Rebuttal" />
+  <meta property="og:description" content="A classical hidden-variable model with post-selection produces S = 3.716. Formal paper." />
+  <meta property="article:author" content="Meshal Alawein" />
+  <meta property="article:published_time" content="2025-01-01" />
+
+  <script>document.documentElement.classList.remove('no-js');</script>
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/paper.css" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+  <div class="paper-banner">
+    This is the formal paper. <a href="index.html">Visit the interactive experience &rarr;</a>
+  </div>
+
+  <div class="paper-layout">
+    <!-- ToC -->
+    <nav class="paper-toc" aria-label="Table of contents" id="paperToc">
+      <a href="#abstract">Abstract</a>
+      <a href="#introduction">Introduction</a>
+      <a href="#theory">Theoretical Background</a>
+      <a href="#methods">Methods</a>
+      <a href="#results">Results</a>
+      <a href="#discussion">Discussion</a>
+      <a href="#conclusion">Conclusion</a>
+      <a href="#appendix">Appendix</a>
+      <a href="#paper-references">References</a>
+    </nav>
+
+    <!-- Article -->
+    <article class="paper-article">
+      <h1>Bell Violations Without Entanglement?<br>A Reproducible Rebuttal of Wang et al. (2025)</h1>
+      <p class="paper-byline">
+        <a href="https://www.meshal.ai">Meshal Alawein</a> &middot; UC Berkeley &middot;
+        <a href="mailto:contact@meshal.ai">contact@meshal.ai</a>
+      </p>
+
+      <div class="paper-abstract" id="abstract">
+        <p>
+          A recent paper in <em>Science Advances</em> claims to demonstrate Bell-inequality
+          violation without entanglement. We argue that the reported result &mdash; a CHSH value
+          of S = 2.275 &plusmn; 0.057 obtained at a detection efficiency of roughly 10<sup>&minus;18</sup>
+          &mdash; does not support this conclusion. When acceptance rates drop this low,
+          outcome-dependent selection can inflate CHSH statistics regardless of whether the
+          underlying source is quantum, classical, or separable. We demonstrate this with explicit
+          simulations: a purely classical hidden-variable model, subjected to similar post-selection,
+          yields S = 3.716 (95% CI: [3.714, 3.717]), well above both the classical bound (S &le; 2)
+          and the Tsirelson bound (S &le; 2&radic;2 &approx; 2.83). We provide a straightforward
+          diagnostic protocol for future experiments.
+        </p>
+      </div>
+
+      <h2 id="introduction">Introduction</h2>
+      <p>
+        Bell&rsquo;s theorem has a clean statement: local hidden-variable theories cannot reproduce
+        all the correlations predicted by quantum mechanics
+        (<a href="https://doi.org/10.1103/PhysicsPhysique.1.195">Bell, 1964</a>). The CHSH
+        inequality gives this theorem an operational form:
+      </p>
+      <div class="math-block">
+        <span class="math-display" data-latex="S = |E(a,b) + E(a,b') + E(a',b) - E(a',b')| \leq 2"></span>
+      </div>
+      <p>
+        where E(a,b) is the correlation between Alice&rsquo;s measurement setting a and Bob&rsquo;s
+        setting b (<a href="https://doi.org/10.1103/PhysRevLett.23.880">Clauser et al., 1969</a>).
+        Quantum mechanics predicts a maximum value of S = 2&radic;2 &approx; 2.828, achieved with
+        maximally entangled states and optimal measurement angles.
+      </p>
+      <p>
+        The inference from S &gt; 2 to nonlocality requires a critical assumption: that the
+        detected sample fairly represents the full ensemble. When detection efficiency &eta; falls
+        below a critical threshold &eta;<sub>c</sub> &approx; 82.8%, this assumption fails
+        (<a href="https://doi.org/10.1103/PhysRevD.2.1418">Pearle, 1970</a>;
+        <a href="https://doi.org/10.1103/PhysRevA.47.R747">Eberhard, 1993</a>).
+      </p>
+      <p>
+        Wang et al. (2025) reported S = 2.275 &plusmn; 0.057 from a multiphoton interference
+        experiment with an effective detection efficiency of approximately 10<sup>&minus;18</sup>.
+        We demonstrate that this result is fully consistent with a classical local hidden-variable
+        model subjected to outcome-dependent post-selection.
+      </p>
+
+      <h2 id="theory">Theoretical Background</h2>
+
+      <h3>The CHSH Inequality</h3>
+      <p>
+        Consider a source emitting correlated pairs to two spatially separated parties, Alice
+        and Bob. Each party chooses between two measurement settings (a, a&prime; for Alice;
+        b, b&prime; for Bob) and records a binary outcome &plusmn;1. The CHSH parameter combines
+        four correlation functions:
+      </p>
+      <div class="math-block">
+        <span class="math-display" data-latex="S = |E(a,b) - E(a,b') + E(a',b) + E(a',b')|"></span>
+      </div>
+      <p>
+        For any local hidden-variable (LHV) theory satisfying Locality, Realism, and Freedom
+        of choice, the CHSH bound states S &le; 2.
+      </p>
+
+      <h3>Why Post-Selection Matters</h3>
+      <p>
+        When not all produced pairs are detected, the experimenter must decide how to handle
+        undetected events. If detection depends on the measurement outcome &mdash; which is
+        unavoidable when optical loss is setting-dependent &mdash; the post-selected sample
+        can exhibit spurious correlations.
+      </p>
+      <p>
+        Formally, define a selection function f(A,B) that determines whether an event is
+        kept. If f depends on outcomes A and B, the post-selected correlation estimator
+        is biased:
+      </p>
+      <div class="math-block">
+        <span class="math-display" data-latex="E_{\text{post}}(a,b) = \frac{\sum_{A,B} A \cdot B \cdot f(A,B) \cdot P(A,B|a,b)}{\sum_{A,B} f(A,B) \cdot P(A,B|a,b)}"></span>
+      </div>
+
+      <h3>The Detection Loophole</h3>
+      <p>
+        The critical detection efficiency threshold for the CHSH inequality is:
+      </p>
+      <div class="math-block">
+        <span class="math-display" data-latex="\eta_c = \frac{2}{1 + \sqrt{2}} \approx 82.8\%"></span>
+      </div>
+      <p>
+        Below this threshold, LHV models can achieve S values exceeding 2. The maximum
+        achievable S for an LHV model at efficiency &eta; is:
+      </p>
+      <div class="math-block">
+        <span class="math-display" data-latex="S_{\text{LHV,max}}(\eta) = \frac{4}{\eta} - 2"></span>
+      </div>
+
+      <h2 id="methods">Methods</h2>
+
+      <h3>Simulation Framework</h3>
+      <p>
+        We construct a classical hidden-variable model with a single parameter &lambda;
+        drawn uniformly from [0, 2&pi;). Alice&rsquo;s outcome is A(a, &lambda;) = sign(cos(a &minus; &lambda;))
+        and Bob&rsquo;s is B(b, &lambda;) = sign(cos(b &minus; &lambda;)). This model is explicitly
+        local and deterministic.
+      </p>
+
+      <h3>Post-Selection Model</h3>
+      <p>
+        We introduce outcome-dependent selection: events where A &middot; B = +1 are kept with
+        probability p<sub>hi</sub>, while events where A &middot; B = &minus;1 are kept with
+        probability p<sub>lo</sub>. When p<sub>hi</sub> &gt; p<sub>lo</sub>, the filter
+        preferentially retains correlated outcomes.
+      </p>
+      <p>
+        For our primary simulation: p<sub>hi</sub> = 0.9, p<sub>lo</sub> = 0.1, with
+        N = 10<sup>6</sup> trials per setting pair.
+      </p>
+
+      <h2 id="results">Results</h2>
+
+      <h3>Classical Baseline</h3>
+      <p>
+        Without post-selection (p<sub>hi</sub> = p<sub>lo</sub> = 1.0), our classical model
+        produces S = 2.001 (95% CI: [1.998, 2.004]) at 100% acceptance rate. This is consistent
+        with the CHSH bound, confirming the model&rsquo;s classical nature.
+      </p>
+
+      <h3>Post-Selected Results</h3>
+      <p>
+        With outcome-dependent selection (p<sub>hi</sub> = 0.9, p<sub>lo</sub> = 0.1),
+        the same classical source yields S = 3.716 (95% CI: [3.714, 3.717]) at 70.0%
+        acceptance rate. This exceeds both the classical bound (S = 2) and the quantum
+        Tsirelson bound (S = 2&radic;2 &approx; 2.828).
+      </p>
+
+      <h3>Comparison with Wang et al.</h3>
+      <p>
+        Wang et al. reported S = 2.275 &plusmn; 0.057 at an effective detection efficiency
+        of ~10<sup>&minus;18</sup>. At this efficiency, the LHV maximum is astronomically
+        large: S<sub>LHV,max</sub> = 4/10<sup>&minus;18</sup> &minus; 2 &approx; 4 &times; 10<sup>18</sup>.
+        Their reported value falls well within the regime where classical models can
+        trivially reproduce the result.
+      </p>
+
+      <h2 id="discussion">Discussion</h2>
+
+      <h3>What Makes a Bell Test Convincing?</h3>
+      <p>
+        The loophole-free Bell tests of 2015
+        (<a href="https://doi.org/10.1038/nature15759">Hensen et al.</a>;
+        <a href="https://doi.org/10.1103/PhysRevLett.115.250401">Giustina et al.</a>;
+        <a href="https://doi.org/10.1103/PhysRevLett.115.250402">Shalm et al.</a>)
+        achieved detection efficiencies above the critical threshold while simultaneously
+        closing the locality loophole. These experiments set the standard for Bell claims.
+      </p>
+
+      <h3>A Diagnostic Protocol</h3>
+      <p>
+        For experiments operating below &eta;<sub>c</sub>, we recommend reporting:
+        (1) raw correlations before selection;
+        (2) acceptance rates per setting pair;
+        (3) no-signaling tests on both selected and unselected data;
+        (4) independence tests between acceptance and measurement settings;
+        (5) sensitivity analysis for selection bias.
+      </p>
+
+      <h2 id="conclusion">Conclusion</h2>
+      <p>
+        We have demonstrated that outcome-dependent post-selection can produce CHSH values
+        well above the Tsirelson bound from purely classical data. The Wang et al. result
+        &mdash; obtained at detection efficiency ~10<sup>&minus;18</sup> &mdash; does not
+        constitute evidence for quantum nonlocality. The experiment represents impressive
+        optical engineering, but the statistical claim requires either closing the detection
+        loophole or providing explicit diagnostics ruling out selection artifacts.
+      </p>
+
+      <h2 id="appendix">Appendix: Detection Efficiency Threshold Derivation</h2>
+      <p>
+        The detection efficiency threshold for the CHSH inequality can be derived by
+        considering a local hidden-variable model where each detector independently
+        misses particles with probability 1 &minus; &eta;. Assigning outcome 0 to
+        undetected events and restricting the CHSH calculation to events where both
+        detectors fire, the effective bound becomes:
+      </p>
+      <div class="math-block">
+        <span class="math-display" data-latex="S_{\text{LHV}}(\eta) = \frac{4}{\eta} - 2"></span>
+      </div>
+      <p>
+        Setting S<sub>LHV</sub>(&eta;) = 2 yields:
+      </p>
+      <div class="math-block">
+        <span class="math-display" data-latex="\eta_c = \frac{4}{S+2}\bigg|_{S=2} = 1 \quad \text{(naive)}"></span>
+      </div>
+      <p>
+        The tighter bound using Eberhard&rsquo;s CH inequality gives:
+      </p>
+      <div class="math-block">
+        <span class="math-display" data-latex="\eta_c = \frac{2}{1 + \sqrt{2}} \approx 0.8284"></span>
+      </div>
+
+      <h2 id="paper-references">References</h2>
+      <ol class="references-list" id="paperReferencesList"></ol>
+    </article>
+  </div>
+
+  <script type="module">
+    // Paper-page JS: KaTeX + references + ToC scroll spy
+    import { initReferences } from './js/references.js';
+
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '1';
+
+      // KaTeX
+      if (typeof katex !== 'undefined') {
+        document.querySelectorAll('.math-display').forEach(el => {
+          const latex = el.dataset.latex;
+          if (latex) katex.render(latex, el, { displayMode: true, throwOnError: false });
+        });
+      }
+
+      // References (targets #paperReferencesList)
+      const list = document.getElementById('paperReferencesList');
+      if (list) {
+        // Reuse references module by temporarily swapping the list ID
+        const mainList = document.getElementById('referencesList');
+        list.id = 'referencesList';
+        initReferences();
+        list.id = 'paperReferencesList';
+        if (mainList) mainList.id = 'referencesList';
+      }
+
+      // ToC scroll spy
+      const tocLinks = document.querySelectorAll('.paper-toc a');
+      const sections = document.querySelectorAll('.paper-article h2[id]');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            tocLinks.forEach(l => l.classList.remove('toc-active'));
+            const active = document.querySelector('.paper-toc a[href="#' + e.target.id + '"]');
+            if (active) active.classList.add('toc-active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -60% 0px' });
+      sections.forEach(s => observer.observe(s));
+    });
+  </script>
+</body>
+</html>

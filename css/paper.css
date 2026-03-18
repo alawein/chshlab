@@ -1,0 +1,146 @@
+/* chshlab/css/paper.css — distill.pub-style article layout */
+
+.paper-banner {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+.paper-banner a { color: var(--amber); }
+
+.paper-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4);
+}
+
+@media (min-width: 1100px) {
+  .paper-layout {
+    grid-template-columns: 180px 700px 1fr;
+    gap: var(--space-5);
+  }
+}
+
+/* ToC sidebar */
+.paper-toc {
+  position: sticky;
+  top: var(--space-6);
+  align-self: start;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.paper-toc a {
+  color: var(--text-faint);
+  text-decoration: none;
+  display: block;
+  padding: 2px 0;
+  transition: color 0.15s;
+}
+
+.paper-toc a:hover,
+.paper-toc a.toc-active { color: var(--amber); }
+
+@media (max-width: 1099px) {
+  .paper-toc {
+    position: static;
+    margin-bottom: var(--space-5);
+    border: 1px solid var(--border);
+    padding: var(--space-3);
+  }
+}
+
+/* Article body */
+.paper-article {
+  max-width: 700px;
+  line-height: 1.85;
+}
+
+.paper-article h1 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  margin-bottom: var(--space-3);
+}
+
+.paper-article h2 {
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+  counter-increment: section;
+}
+
+.paper-article h2::before {
+  content: counter(section) ". ";
+  color: var(--text-faint);
+}
+
+.paper-article h3 {
+  font-size: 1.1rem;
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.paper-article p {
+  margin-bottom: var(--space-3);
+}
+
+.paper-byline {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-bottom: var(--space-5);
+}
+
+.paper-abstract {
+  border-left: 3px solid var(--amber);
+  padding-left: var(--space-4);
+  margin-bottom: var(--space-6);
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* Sidenotes */
+.sidenote {
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  line-height: 1.5;
+}
+
+@media (min-width: 1100px) {
+  .sidenote {
+    position: absolute;
+    right: -220px;
+    width: 200px;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 1099px) {
+  .sidenote {
+    display: block;
+    margin: var(--space-2) 0 var(--space-2) var(--space-4);
+    padding: var(--space-2);
+    border-left: 1px solid var(--border);
+  }
+}
+
+/* Paper figures — smaller inline */
+.paper-figure {
+  margin-block: var(--space-4);
+  max-width: 500px;
+}
+
+.paper-figure canvas,
+.paper-figure svg {
+  width: 100%;
+  will-change: transform;
+}
+
+/* Counter reset */
+.paper-article { counter-reset: section; }

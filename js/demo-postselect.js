@@ -85,31 +85,48 @@ function drawGauge(ctx, canvas, s, accept) {
   // Track
   ctx.fillStyle = 'rgba(255,255,255,0.05)';
   ctx.fillRect(startX, sBarY, maxW, barH);
-  // Fill
-  ctx.fillStyle = s > 2.01 ? '#C94040' : '#C9A94D';
+  // Fill — color transitions through three zones
+  if (s <= 2.01) {
+    ctx.fillStyle = '#C9A94D'; // classical zone — amber
+  } else if (s <= 2 * Math.SQRT2) {
+    ctx.fillStyle = '#4FA3D4'; // quantum zone — blue
+  } else {
+    ctx.fillStyle = '#C94040'; // artifact zone — crimson
+  }
   ctx.fillRect(startX, sBarY, maxW * (s / 4), barH);
 
-  // S markers at 2, 2√2, 4
-  const sMarkers = [
-    { val: 2,                color: '#C9A94D', label: '2' },
-    { val: 2 * Math.sqrt(2), color: '#4FA3D4', label: '2\u221a2' },
-    { val: 4,                color: '#5C5A55', label: '4' },
-  ];
-  sMarkers.forEach(m => {
-    const x = startX + maxW * (m.val / 4);
-    ctx.strokeStyle = m.color;
-    ctx.lineWidth   = 1;
-    ctx.setLineDash([3, 3]);
-    ctx.beginPath();
-    ctx.moveTo(x, sBarY - 6);
-    ctx.lineTo(x, sBarY + barH + 6);
-    ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.fillStyle   = m.color;
-    ctx.font        = '10px \'JetBrains Mono\', monospace';
-    ctx.textAlign   = 'center';
-    ctx.fillText(m.label, x, sBarY - 10);
-  });
+  // S=2 marker with zone label
+  const s2x = startX + maxW * (2 / 4);
+  ctx.strokeStyle = '#C9A94D';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(s2x, sBarY - 8);
+  ctx.lineTo(s2x, sBarY + barH + 8);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#C9A94D';
+  ctx.font = '9px \'JetBrains Mono\', monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Classical', s2x, sBarY - 12);
+
+  // S=2√2 marker with zone label
+  const tsX = startX + maxW * (2 * Math.SQRT2 / 4);
+  ctx.strokeStyle = '#4FA3D4';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(tsX, sBarY - 8);
+  ctx.lineTo(tsX, sBarY + barH + 8);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#4FA3D4';
+  ctx.fillText('Tsirelson', tsX, sBarY - 12);
+
+  // S=4 marker
+  const s4x = startX + maxW;
+  ctx.fillStyle = '#5C5A55';
+  ctx.fillText('4', s4x, sBarY - 10);
 
   // ── Acceptance bar ──
   // Track

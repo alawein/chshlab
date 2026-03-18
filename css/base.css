@@ -107,12 +107,7 @@ hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-6) 0; 
   body::before { animation: none; }
   body::after { animation: none; opacity: 0.5; }
   .ambient-glow { animation: none; opacity: 0.5; }
-  .rebuttal-card::before { transform: scaleY(1); }
-  .hero__rule { transform: scaleX(1); }
   .section-rule { transform: scaleX(1); }
-  [data-redpen="underline"],
-  [data-redpen="circle"],
-  [data-redpen="strike"] { clip-path: none; }
   .figure-card__image-wrap { clip-path: none; }
   .theorem-card__number { clip-path: none; }
   .figure-card__label { clip-path: none; }
@@ -120,9 +115,7 @@ hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-6) 0; 
   #starfield { display: none; }
   .atmosphere-layer { display: none; }
   .figures-scanner { display: none; }
-  .story-overlay { transition: none; }
-  .bound-explorer__content { transition: none; }
-  .provenance-drawer { transition: none; }
   .timeline-node { opacity: 1; transform: none; }
-  .story-trigger-btn { opacity: 1; transform: none; }
+  .figure-wrap canvas { animation: none; }
+  .beat .reveal { opacity: 1; transform: none; }
 }

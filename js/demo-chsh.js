@@ -1,26 +1,17 @@
 // chshlab/js/demo-chsh.js
-// Demo 1: Angle slider → live CHSH S computation (quantum singlet + classical LHV)
+// Demo: CHSH Angle Sweep — Polar correlation diagram
+// Beat 6 visualization. Four detector arms on unit circle, correlation arcs.
 
 import { emitState } from './animation-config.js';
 
-// Quantum singlet correlation: E_Q(a,b) = -cos(a - b)
-function corrQuantum(a, b) {
-  return -Math.cos(a - b);
-}
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Classical LHV (piecewise linear deterministic)
-function corrClassical(a, b) {
-  const diff = Math.abs(((a - b) + Math.PI) % (2 * Math.PI) - Math.PI);
-  return 1 - (2 / Math.PI) * diff;
-}
+function eQuantum(a, b) { return -Math.cos(a - b); }
 
-// CHSH: S = |E(a,b) - E(a,b') + E(a',b) + E(a',b')|
-function computeS(corrFn, a, ap, b, bp) {
-  return Math.abs(corrFn(a, b) - corrFn(a, bp) + corrFn(ap, b) + corrFn(ap, bp));
-}
-
-function deg(d) {
-  return d * Math.PI / 180;
+function eClassical(a, b) {
+  let diff = Math.abs(a - b) % Math.PI;
+  if (diff > Math.PI / 2) diff = Math.PI - diff;
+  return -(2 / Math.PI) * (Math.PI / 2 - diff);
 }
 
 export function initAngleDemo() {
@@ -29,114 +20,154 @@ export function initAngleDemo() {
   const ctx = canvas.getContext('2d');
 
   const sliders = {
-    a:  document.getElementById('sliderA'),
+    a: document.getElementById('sliderA'),
     ap: document.getElementById('sliderAp'),
-    b:  document.getElementById('sliderB'),
+    b: document.getElementById('sliderB'),
     bp: document.getElementById('sliderBp'),
   };
-  const valSpans = {
-    a:  document.getElementById('valA'),
+  const valLabels = {
+    a: document.getElementById('valA'),
     ap: document.getElementById('valAp'),
-    b:  document.getElementById('valB'),
+    b: document.getElementById('valB'),
     bp: document.getElementById('valBp'),
   };
-  const readoutQ = document.getElementById('readoutQuantum');
   const readoutC = document.getElementById('readoutClassical');
+  const readoutQ = document.getElementById('readoutQuantum');
 
-  const state = { a: deg(+sliders.a.value), ap: deg(+sliders.ap.value), b: deg(+sliders.b.value), bp: deg(+sliders.bp.value) };
+  function deg2rad(d) { return d * Math.PI / 180; }
 
-  function render() {
-    const sq = computeS(corrQuantum,   state.a, state.ap, state.b, state.bp);
-    const sc = computeS(corrClassical, state.a, state.ap, state.b, state.bp);
-
-    if (readoutQ) readoutQ.textContent = sq.toFixed(3);
-    if (readoutC) readoutC.textContent = sc.toFixed(3);
-
-    // Emit state for Bound Explorer and sonification
-    emitState({ demo: 'angle', s: sq, sClassical: sc, a: state.a, ap: state.ap, b: state.b, bp: state.bp });
-
-    // Color quantum readout: blue if violating classical bound, amber otherwise
-    if (readoutQ && readoutQ.parentElement) {
-      readoutQ.parentElement.style.color = sq > 2.01 ? 'var(--blue)' : 'var(--amber)';
-    }
-
-    drawDiagram(ctx, canvas, state, sq);
-  }
-
-  // Attach input listeners to all sliders with GSAP-tweened interpolation
-  Object.entries(sliders).forEach(([key, slider]) => {
-    if (!slider) return;
-    slider.addEventListener('input', () => {
-      gsap.to(state, {
-        [key]: deg(+slider.value),
-        duration: 0.15,
-        ease: 'power1.out',
-        onUpdate: () => render(),
-      });
-      if (valSpans[key]) valSpans[key].textContent = slider.value + '\u00b0';
-    });
-  });
-
-  // Resize canvas to match CSS width
   const ro = new ResizeObserver(() => {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = 300;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = canvas.offsetWidth * dpr;
+    canvas.height = 400 * dpr;
+    ctx.scale(dpr, dpr);
     render();
   });
   ro.observe(canvas);
-  render();
-}
 
-function drawDiagram(ctx, canvas, angles, sq) {
-  const W = canvas.width;
-  const H = canvas.height;
-  ctx.clearRect(0, 0, W, H);
+  function render() {
+    const W = canvas.offsetWidth;
+    const H = 400;
+    ctx.clearRect(0, 0, W, H);
 
-  const cx = W / 2;
-  const cy = H / 2;
-  const r  = Math.min(cx, cy) * 0.72;
+    const a  = deg2rad(parseFloat(sliders.a?.value || 0));
+    const ap = deg2rad(parseFloat(sliders.ap?.value || 90));
+    const b  = deg2rad(parseFloat(sliders.b?.value || 45));
+    const bp = deg2rad(parseFloat(sliders.bp?.value || 135));
 
-  // Outer circle
-  ctx.beginPath();
-  ctx.arc(cx, cy, r, 0, 2 * Math.PI);
-  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
-  ctx.lineWidth = 1;
-  ctx.stroke();
+    // Update labels
+    if (valLabels.a)  valLabels.a.textContent  = sliders.a.value;
+    if (valLabels.ap) valLabels.ap.textContent = sliders.ap.value;
+    if (valLabels.b)  valLabels.b.textContent  = sliders.b.value;
+    if (valLabels.bp) valLabels.bp.textContent = sliders.bp.value;
 
-  // Classical bound ring at normalized radius
-  ctx.beginPath();
-  ctx.arc(cx, cy, r * (1 / Math.sqrt(2)), 0, 2 * Math.PI);
-  ctx.strokeStyle = 'rgba(201,169,77,0.25)';
-  ctx.setLineDash([4, 4]);
-  ctx.stroke();
-  ctx.setLineDash([]);
+    // Quantum CHSH
+    const eAB  = eQuantum(a, b);
+    const eABp = eQuantum(a, bp);
+    const eApB = eQuantum(ap, b);
+    const eApBp= eQuantum(ap, bp);
+    const sq = Math.abs(eAB - eABp + eApB + eApBp);
 
-  // Draw angle arms
-  function drawArm(angle, color, lbl) {
-    const x = cx + r * Math.cos(angle);
-    const y = cy - r * Math.sin(angle);
+    // Classical CHSH
+    const cAB  = eClassical(a, b);
+    const cABp = eClassical(a, bp);
+    const cApB = eClassical(ap, b);
+    const cApBp= eClassical(ap, bp);
+    const sc = Math.abs(cAB - cABp + cApB + cApBp);
+
+    if (readoutC) readoutC.textContent = sc.toFixed(3);
+    if (readoutQ) readoutQ.textContent = sq.toFixed(3);
+
+    // Polar diagram
+    const cx = W / 2;
+    const cy = H / 2 - 20;
+    const R = Math.min(W, H) * 0.32;
+
+    // Unit circle
+    ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+    ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(x, y);
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
+    ctx.arc(cx, cy, R, 0, Math.PI * 2);
     ctx.stroke();
-    ctx.fillStyle = color;
-    ctx.font = '11px \'JetBrains Mono\', monospace';
-    const offsetX = x > cx ? 6 : -20;
-    const offsetY = y > cy ? 14 : -6;
-    ctx.fillText(lbl, x + offsetX, y + offsetY);
+
+    // Draw angle arms
+    const arms = [
+      { angle: a,  label: 'a',  color: '#C9A94D' },
+      { angle: ap, label: 'a\u2032', color: '#C9A94D' },
+      { angle: b,  label: 'b',  color: '#4FA3D4' },
+      { angle: bp, label: 'b\u2032', color: '#4FA3D4' },
+    ];
+
+    arms.forEach(arm => {
+      const ex = cx + R * Math.cos(arm.angle);
+      const ey = cy - R * Math.sin(arm.angle);
+      ctx.strokeStyle = arm.color;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(ex, ey);
+      ctx.stroke();
+
+      // Label
+      const lx = cx + (R + 18) * Math.cos(arm.angle);
+      const ly = cy - (R + 18) * Math.sin(arm.angle);
+      ctx.fillStyle = arm.color;
+      ctx.font = "12px 'JetBrains Mono', monospace";
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(arm.label, lx, ly);
+    });
+
+    // Correlation arcs between setting pairs
+    const pairs = [
+      { a1: a, a2: b, E: eAB, label: 'E(a,b)' },
+      { a1: a, a2: bp, E: eABp, label: 'E(a,b\u2032)' },
+      { a1: ap, a2: b, E: eApB, label: 'E(a\u2032,b)' },
+      { a1: ap, a2: bp, E: eApBp, label: 'E(a\u2032,b\u2032)' },
+    ];
+
+    pairs.forEach((p, i) => {
+      const arcR = R * 0.4 + i * 12;
+      const startAngle = -p.a1;
+      const endAngle = -p.a2;
+
+      ctx.strokeStyle = p.E < 0 ? 'rgba(201,64,64,0.4)' : 'rgba(107,143,113,0.4)';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(cx, cy, arcR, startAngle, endAngle, startAngle > endAngle);
+      ctx.stroke();
+    });
+
+    // S value display
+    ctx.fillStyle = sq > 2 ? '#C94040' : '#C9A94D';
+    ctx.font = "bold 18px 'JetBrains Mono', monospace";
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    ctx.fillText('S(quantum) = ' + sq.toFixed(3), cx, cy + R + 30);
+
+    ctx.fillStyle = '#9A9485';
+    ctx.font = "14px 'JetBrains Mono', monospace";
+    ctx.fillText('S(classical) = ' + sc.toFixed(3), cx, cy + R + 54);
+
+    // Reference lines
+    ctx.fillStyle = '#5C5A55';
+    ctx.font = "10px 'JetBrains Mono', monospace";
+    ctx.textAlign = 'right';
+    ctx.fillText('S=2 classical bound', W - 10, H - 30);
+    ctx.fillText('S=2\u221a2 Tsirelson bound', W - 10, H - 16);
+
+    emitState({ demo: 'angle', s: sq, sClassical: sc, a: sliders.a?.value, ap: sliders.ap?.value, b: sliders.b?.value, bp: sliders.bp?.value });
   }
 
-  drawArm(angles.a,  '#C9A94D', 'a');
-  drawArm(angles.ap, '#C9A94D', "a'");
-  drawArm(angles.b,  '#4FA3D4', 'b');
-  drawArm(angles.bp, '#4FA3D4', "b'");
+  Object.values(sliders).forEach(s => {
+    if (s) s.addEventListener('input', () => {
+      if (typeof gsap !== 'undefined' && !prefersReducedMotion) {
+        gsap.to({}, { duration: 0.1, onUpdate: render });
+      } else {
+        render();
+      }
+    });
+  });
 
-  // S value in center
-  ctx.fillStyle = sq > 2.01 ? '#4FA3D4' : '#C9A94D';
-  ctx.font = 'bold ' + Math.floor(r * 0.22) + 'px \'JetBrains Mono\', monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText('S = ' + sq.toFixed(3), cx, cy + 6);
-  ctx.textAlign = 'left';
+  render();
 }
