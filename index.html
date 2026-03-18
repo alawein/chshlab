@@ -175,7 +175,7 @@
 
       <!-- Interactive: Animated Bell Test -->
       <div class="figure-wrap reveal" aria-label="Interactive Bell test schematic showing particle pairs emitted from a source to two detectors">
-        <canvas id="bellTestCanvas" width="800" height="400"></canvas>
+        <canvas id="bellTestCanvas" width="800" height="400" aria-label="Bell test particle animation"></canvas>
         <div id="bellTestA11y" class="sr-only" aria-live="polite" role="status">Bell test simulation. Select measurement settings and observe CHSH correlations.</div>
         <div class="figure-controls" id="bellTestControls"></div>
         <div class="demo-readouts" id="bellTestReadouts" aria-live="polite">
@@ -220,7 +220,7 @@
 
       <!-- Interactive: Three Regions Gauge -->
       <div class="figure-wrap reveal" id="gaugeWrap" aria-label="CHSH S value gauge showing classical, quantum, and artifact regions">
-        <canvas id="gaugeCanvas" width="800" height="160"></canvas>
+        <canvas id="gaugeCanvas" width="800" height="160" aria-label="CHSH S value gauge"></canvas>
         <div id="gaugeA11y" class="sr-only" aria-live="polite" role="status">S value gauge: Classical zone 0 to 2, Quantum zone 2 to 2.828, Artifact zone 2.828 to 4. Wang et al. reported S equals 2.275.</div>
         <p class="figure-caption">
           <span class="figure-label">The S Landscape</span>
@@ -389,7 +389,7 @@
 
       <!-- Interactive: Event Stream -->
       <div class="figure-wrap reveal" aria-label="Visual event stream showing how post-selection filters bias CHSH statistics">
-        <canvas id="eventStreamCanvas" width="800" height="250"></canvas>
+        <canvas id="eventStreamCanvas" width="800" height="250" aria-label="Event stream filter visualization"></canvas>
         <div id="eventStreamA11y" class="sr-only" aria-live="polite" role="status">Event stream visualization. Particles flow through a selection filter.</div>
         <div class="figure-controls" id="eventStreamControls">
           <div class="demo-slider-row">

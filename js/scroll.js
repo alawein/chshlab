@@ -81,6 +81,9 @@ export function initScroll() {
     el.classList.remove('reveal');
   });
 
+  // ── THEOREM CARD STAMPS ──
+  initTheoremStamps();
+
   // ── ATMOSPHERE + NAV ACTIVE ──
   initAtmosphere();
   initNavActive();
@@ -175,6 +178,25 @@ function initNavActive() {
 
 function setActiveLink(links, id) {
   links.forEach(a => a.classList.toggle('nav-link--active', a.getAttribute('href') === '#' + id));
+}
+
+// ── THEOREM NUMBER STAMP ──
+function initTheoremStamps() {
+  document.querySelectorAll('.theorem-card__number').forEach(num => {
+    gsap.from(num, {
+      clipPath: 'inset(0 100% 0 0)',
+      duration: 0.5,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: num,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+      onComplete: () => {
+        gsap.to(num, { scale: 1.08, duration: 0.15, yoyo: true, repeat: 1, ease: 'power1.inOut' });
+      },
+    });
+  });
 }
 
 // ── ATMOSPHERE: gradient map ──

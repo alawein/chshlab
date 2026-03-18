@@ -441,17 +441,6 @@ input[type="range"]::-moz-range-thumb:active {
 /* ── NAV ACTIVE LINK ── */
 .nav-link--active { color: var(--amber) !important; }
 
-/* ── FIGURE SCANNER LINE ── */
-.figures-scanner {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--amber), transparent);
-  pointer-events: none;
-  z-index: 5;
-}
-
 /* ── TIMELINE ── */
 .timeline-track {
   display: flex;

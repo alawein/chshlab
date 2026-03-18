@@ -127,7 +127,6 @@ hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-6) 0; 
   body { opacity: 1; }
   #starfield { display: none; }
   .atmosphere-layer { display: none; }
-  .figures-scanner { display: none; }
   .timeline-node { opacity: 1; transform: none; }
   .figure-wrap canvas { animation: none; }
   .beat .reveal { opacity: 1; transform: none; }
