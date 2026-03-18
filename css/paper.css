@@ -139,7 +139,6 @@
 .paper-figure canvas,
 .paper-figure svg {
   width: 100%;
-  will-change: transform;
 }
 
 /* Counter reset */

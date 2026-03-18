@@ -2,9 +2,7 @@
 // Demo: CHSH Angle Sweep — Polar correlation diagram
 // Beat 6 visualization. Four detector arms on unit circle, correlation arcs.
 
-import { emitState } from './animation-config.js';
-
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+import { emitState, prefersReducedMotion } from './animation-config.js';
 
 function eQuantum(a, b) { return -Math.cos(a - b); }
 

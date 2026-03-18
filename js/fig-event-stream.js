@@ -2,9 +2,7 @@
 // Post-Selection Event Stream — particles flow through a filter gate
 // Beat 5 visualization. Canvas2D with object pooling.
 
-import { emitState } from './animation-config.js';
-
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+import { emitState, prefersReducedMotion } from './animation-config.js';
 
 export function initEventStream() {
   const canvas = document.getElementById('eventStreamCanvas');

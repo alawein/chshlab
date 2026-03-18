@@ -2,7 +2,7 @@
 // Animated Bell test schematic — particles fly from source to detectors
 // Beat 2 visualization. Canvas2D with requestAnimationFrame + object pooling.
 
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+import { prefersReducedMotion } from './animation-config.js';
 
 export function initBellTest() {
   const canvas = document.getElementById('bellTestCanvas');
@@ -237,6 +237,4 @@ export function initBellTest() {
     });
   }, { threshold: 0.1 });
   io.observe(canvas);
-
-  loop();
 }

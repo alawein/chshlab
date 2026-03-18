@@ -23,8 +23,10 @@ export function initPostSelectDemo() {
   const state = { p: parseFloat(slider.value) };
 
   const ro = new ResizeObserver(() => {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = 300;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width  = canvas.offsetWidth * dpr;
+    canvas.height = 300 * dpr;
+    ctx.scale(dpr, dpr);
     render();
   });
   ro.observe(canvas);
@@ -70,8 +72,8 @@ export function initPostSelectDemo() {
 }
 
 function drawGauge(ctx, canvas, s, accept) {
-  const W      = canvas.width;
-  const H      = canvas.height;
+  const W      = canvas.offsetWidth;
+  const H      = 300;
   ctx.clearRect(0, 0, W, H);
 
   const barH   = 28;

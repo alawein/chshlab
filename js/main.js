@@ -157,6 +157,44 @@ function restoreFromPermalink() {
   });
 }
 
+// ── SCROLL PROGRESS + SCROLL-TO-TOP ──
+function initScrollProgress() {
+  const bar = document.querySelector('.scroll-progress');
+  const btn = document.getElementById('scrollTopBtn');
+  if (!bar && !btn) return;
+
+  const update = () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+    if (bar) bar.style.width = progress + '%';
+    if (btn) btn.classList.toggle('scroll-top--visible', scrollTop > window.innerHeight);
+  };
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+
+  if (btn) {
+    btn.addEventListener('click', () => {
+      if (typeof gsap !== 'undefined') {
+        gsap.to(window, { scrollTo: { y: 0 }, duration: 0.8, ease: 'power2.inOut' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+}
+
+// ── CLOSE MOBILE NAV ON LINK CLICK ──
+function initMobileNavClose() {
+  const toggle = document.getElementById('navToggle');
+  if (!toggle) return;
+  document.querySelectorAll('.nav__links a').forEach(link => {
+    link.addEventListener('click', () => { toggle.checked = false; });
+  });
+}
+
 // ── KEYBOARD SHORTCUTS ──
 function initKeyboardShortcuts() {
   document.addEventListener('keydown', (e) => {
@@ -184,6 +222,8 @@ window.addEventListener('load', async () => {
   initDemoExport();
   enhanceSliderA11y();
   initKeyboardShortcuts();
+  initScrollProgress();
+  initMobileNavClose();
 
   // Dynamic imports with error handling
   async function safeImport(path, initName) {

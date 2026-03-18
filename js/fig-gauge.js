@@ -2,9 +2,7 @@
 // Three Regions Gauge — horizontal S range [0,4] with colored zones
 // Beat 3 visualization. Markers animate on via ScrollTrigger callbacks.
 
-import { emitState } from './animation-config.js';
-
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+import { emitState, prefersReducedMotion } from './animation-config.js';
 
 export function initGauge() {
   const canvas = document.getElementById('gaugeCanvas');

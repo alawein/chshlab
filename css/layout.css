@@ -100,7 +100,6 @@
 .figure-wrap canvas {
   width: 100%;
   display: block;
-  will-change: transform; /* GPU layer promotion */
 }
 
 /* GSAP-failure fallback: if JS doesn't run, show everything */

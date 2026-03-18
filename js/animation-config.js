@@ -1,6 +1,9 @@
 // chshlab/js/animation-config.js
 // Shared event bus, micro-interaction presets, and state management
 
+// ── REDUCED MOTION ──
+export const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // ── EVENT BUS ──
 // All demos emit 'chshlab:state' on document with their current values.
 // Consumers (Bound Explorer, sonification, etc.) listen for these events.

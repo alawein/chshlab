@@ -61,15 +61,9 @@ export function initSonification() {
     }
   });
 
-  // Create toggle button in each demo panel header
-  const panels = document.querySelectorAll('.demo-controls');
-  if (!panels.length) return;
-
-  // Single toggle in the demos section header
-  const demosSection = document.getElementById('demos');
-  if (!demosSection) return;
-  const heading = demosSection.querySelector('.section-heading');
-  if (!heading) return;
+  // Place toggle in the nav bar (always visible)
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
 
   const btn = document.createElement('button');
   btn.className = 'sonification-toggle';
@@ -103,10 +97,7 @@ export function initSonification() {
   muteLine.classList.add('mute-line');
   svg.appendChild(muteLine);
 
-  heading.style.display = 'flex';
-  heading.style.alignItems = 'center';
-  heading.style.gap = '12px';
-  heading.appendChild(btn);
+  nav.appendChild(btn);
 
   btn.addEventListener('click', () => {
     muted = !muted;

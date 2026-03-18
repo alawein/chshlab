@@ -8,6 +8,14 @@
   <meta name="author" content="Meshal Alawein" />
   <link rel="canonical" href="https://chshlab.meshal.ai/paper.html" />
 
+  <!-- Resource hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230E0F14'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='bold' fill='%23C9A94D'%3ES%3C/text%3E%3Cline x1='4' y1='27' x2='28' y2='27' stroke='%23C9A94D' stroke-width='1.5' opacity='0.4'/%3E%3C/svg%3E" />
+
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Bell Violations Without Entanglement? A Reproducible Rebuttal" />
   <meta property="og:description" content="A classical hidden-variable model with post-selection produces S = 3.716. Formal paper." />
@@ -16,8 +24,24 @@
 
   <script>document.documentElement.classList.remove('no-js');</script>
 
+  <style>
+    @keyframes forceVisible { to { opacity: 1; } }
+    body { animation: forceVisible 0s 3s forwards; }
+    @media print {
+      body::before, body::after, .paper-banner { display: none !important; }
+      body { opacity: 1 !important; background: white !important; color: black !important; }
+      .paper-layout { display: block; max-width: 100%; }
+      .paper-toc { display: none; }
+      .paper-article { max-width: 100%; }
+      .paper-abstract { border-left-color: #666; color: #333; }
+      .math-block { background: #f5f5f5; border-color: #ccc; }
+      a { color: #1a0dab; }
+    }
+  </style>
+
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/paper.css" />
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
