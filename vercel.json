@@ -1,4 +1,6 @@
 {
+  "buildCommand": "bash build.sh",
+  "outputDirectory": ".vercel/output",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
