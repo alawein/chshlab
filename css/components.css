@@ -77,8 +77,14 @@
 .theorem-card {
   background: var(--surface);
   border: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
   padding: var(--space-4);
   margin-block: var(--space-4);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theorem-card:hover {
+  box-shadow: 0 0 30px -10px rgba(201, 169, 77, 0.08);
 }
 
 .theorem-card__number {
@@ -402,6 +408,19 @@ input[type="range"]::-moz-range-thumb:active {
   z-index: 10;
 }
 
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--content-width);
+  max-width: calc(100% - var(--space-5) * 2);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber), var(--blue), transparent);
+  opacity: 0.3;
+}
+
 .footer-text {
   font-size: 0.85rem;
   color: var(--text-muted);
@@ -565,6 +584,68 @@ input[type="range"]::-moz-range-thumb:active {
   background: rgba(201, 169, 77, 0.08);
 }
 
+/* ── KEY STATISTIC HIGHLIGHT ── */
+.key-stat {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  padding: 1px 6px;
+  background: rgba(201, 169, 77, 0.06);
+  border: 1px solid rgba(201, 169, 77, 0.12);
+  white-space: nowrap;
+}
+.key-stat--quantum {
+  background: rgba(79, 163, 212, 0.06);
+  border-color: rgba(79, 163, 212, 0.12);
+  color: var(--blue);
+}
+.key-stat--danger {
+  background: rgba(201, 64, 64, 0.06);
+  border-color: rgba(201, 64, 64, 0.12);
+  color: var(--crimson);
+}
+
+/* ── SCROLL HINT (hero) ── */
+.scroll-hint {
+  position: absolute;
+  bottom: var(--space-5);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--text-faint);
+  opacity: 0;
+  animation: scrollHintIn 0.8s ease 2.8s forwards;
+}
+
+.scroll-hint__text {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.scroll-hint__chevron {
+  animation: scrollHintBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollHintIn {
+  to { opacity: 1; }
+}
+
+@keyframes scrollHintBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* Hide scroll hint once user has scrolled */
+.scroll-hint--hidden {
+  opacity: 0 !important;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
 /* ── SKIP LINK ── */
 .skip-link {
   position: fixed;
@@ -721,6 +802,41 @@ input[type="range"]::-moz-range-thumb:active {
   .badge--amber, .badge--blue, .badge--crimson { border-color: ButtonText; color: ButtonText; }
   .timeline-node__badge { border-color: ButtonText; color: ButtonText; }
   .theorem-card__number { color: Highlight; }
+}
+
+/* ── MOBILE TOUCH TARGETS ── */
+@media (max-width: 600px) {
+  .belltest-setting-btn {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .demo-export-btn {
+    min-height: 44px;
+    padding: var(--space-2) var(--space-3);
+  }
+  .conclusion-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .timeline-node {
+    flex: 0 0 220px;
+    padding: var(--space-4);
+  }
+  input[type="range"] {
+    height: 28px;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+  }
 }
 
 /* ── PRINT STYLES ── */

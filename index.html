@@ -123,9 +123,15 @@
         &middot; UC Berkeley
       </p>
     </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <span class="scroll-hint__text">Scroll</span>
+      <svg class="scroll-hint__chevron" width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M2 2l8 8 8-8"/>
+      </svg>
+    </div>
   </section>
 
-  <hr class="section-rule">
+  <hr class="section-rule section-rule--blue">
 
   <!-- BEAT 2: WHAT THEY DID -->
   <section id="claim" class="beat beat--claim">
@@ -138,7 +144,7 @@
           In early 2025,
           <a href="https://doi.org/10.1126/sciadv.ads0058" target="_blank" rel="noopener noreferrer">Wang et al.</a>
           published a striking result: a measured CHSH value of
-          <strong>S = 2.275 &plusmn; 0.057</strong> from a multiphoton interference experiment.
+          <strong class="key-stat">S = 2.275 &plusmn; 0.057</strong> from a multiphoton interference experiment.
           They claimed this constituted a Bell inequality violation &mdash; evidence that their optical
           system exhibited quantum nonlocality.
         </p>
@@ -158,6 +164,7 @@
       <!-- Interactive: Animated Bell Test -->
       <div class="figure-wrap reveal" aria-label="Interactive Bell test schematic showing particle pairs emitted from a source to two detectors">
         <canvas id="bellTestCanvas" width="800" height="400"></canvas>
+        <div id="bellTestA11y" class="sr-only" aria-live="polite" role="status">Bell test simulation. Select measurement settings and observe CHSH correlations.</div>
         <div class="figure-controls" id="bellTestControls"></div>
         <div class="demo-readouts" id="bellTestReadouts" aria-live="polite">
           <div class="demo-readout">
@@ -174,7 +181,7 @@
     </div>
   </section>
 
-  <hr class="section-rule">
+  <hr class="section-rule section-rule--amber">
 
   <!-- BEAT 3: THE NUMBER THAT MATTERS -->
   <section id="efficiency" class="beat beat--efficiency">
@@ -185,7 +192,7 @@
       <div class="beat__prose reveal">
         <p>
           Wang et al.&rsquo;s detection efficiency was approximately
-          <strong>10<sup>&minus;18</sup></strong>. That&rsquo;s one event kept for every
+          <strong class="key-stat key-stat--danger">10<sup>&minus;18</sup></strong>. That&rsquo;s one event kept for every
           quintillion produced. To put it another way: if every human on Earth ran the experiment
           once per second, you&rsquo;d wait about forty years for a single detected pair.
         </p>
@@ -198,6 +205,7 @@
       <!-- Interactive: Three Regions Gauge -->
       <div class="figure-wrap reveal" id="gaugeWrap" aria-label="CHSH S value gauge showing classical, quantum, and artifact regions">
         <canvas id="gaugeCanvas" width="800" height="160"></canvas>
+        <div id="gaugeA11y" class="sr-only" aria-live="polite" role="status">S value gauge: Classical zone 0 to 2, Quantum zone 2 to 2.828, Artifact zone 2.828 to 4. Wang et al. reported S equals 2.275.</div>
         <p class="figure-caption">
           <span class="figure-label">The S Landscape</span>
           Classical models stay below 2. Quantum mechanics reaches 2&radic;2.
@@ -223,7 +231,7 @@
     </div>
   </section>
 
-  <hr class="section-rule">
+  <hr class="section-rule section-rule--crimson">
 
   <!-- BEAT 4: THE DETECTION LOOPHOLE -->
   <section id="loophole" class="beat beat--loophole">
@@ -254,7 +262,7 @@
       <div class="beat__prose reveal">
         <p>
           Below this efficiency, the maximum CHSH value a classical model can achieve is not 2 &mdash;
-          it&rsquo;s <strong>4/&eta; &minus; 2</strong>. At Wang et al.&rsquo;s efficiency of ~10<sup>&minus;18</sup>,
+          it&rsquo;s <strong class="key-stat key-stat--danger">4/&eta; &minus; 2</strong>. At Wang et al.&rsquo;s efficiency of ~10<sup>&minus;18</sup>,
           that classical ceiling is astronomically high. Drag the slider below to see for yourself.
         </p>
       </div>
@@ -313,7 +321,7 @@
     </div>
   </section>
 
-  <hr class="section-rule">
+  <hr class="section-rule section-rule--crimson">
 
   <!-- BEAT 5: POST-SELECTION -->
   <section id="postselection" class="beat beat--postselection">
@@ -366,6 +374,7 @@
       <!-- Interactive: Event Stream -->
       <div class="figure-wrap reveal" aria-label="Visual event stream showing how post-selection filters bias CHSH statistics">
         <canvas id="eventStreamCanvas" width="800" height="250"></canvas>
+        <div id="eventStreamA11y" class="sr-only" aria-live="polite" role="status">Event stream visualization. Particles flow through a selection filter.</div>
         <div class="figure-controls" id="eventStreamControls">
           <div class="demo-slider-row">
             <label for="sliderStreamBias">Selection bias &rho;: <span id="valStreamBias">0.50</span></label>
@@ -425,7 +434,7 @@
     </div>
   </section>
 
-  <hr class="section-rule">
+  <hr class="section-rule section-rule--amber">
 
   <!-- BEAT 6: WE BUILT IT -->
   <section id="proof" class="beat beat--proof">
@@ -439,12 +448,12 @@
           Just deterministic outcomes from a hidden variable &lambda;, sampled uniformly from [0, 2&pi;).
         </p>
         <p>
-          Without post-selection, this model produces <strong>S = 2.001</strong>
+          Without post-selection, this model produces <strong class="key-stat">S = 2.001</strong>
           (95% CI: [1.998, 2.004]) &mdash; consistent with the classical bound, as it should be.
         </p>
         <p>
           With outcome-dependent selection (p<sub>hi</sub> = 0.9, p<sub>lo</sub> = 0.1),
-          the <em>same classical source</em> yields <strong>S = 3.716</strong>
+          the <em>same classical source</em> yields <strong class="key-stat key-stat--danger">S = 3.716</strong>
           (95% CI: [3.714, 3.717]) at 70% acceptance. That exceeds both the classical bound
           <em>and</em> the Tsirelson bound.
         </p>
@@ -559,7 +568,7 @@
     </div>
   </section>
 
-  <hr class="section-rule">
+  <hr class="section-rule section-rule--blue">
 
   <!-- BEAT 7: WHAT WOULD CONVINCE US -->
   <section id="standards" class="beat beat--standards">
@@ -615,7 +624,7 @@
     </div>
   </section>
 
-  <hr class="section-rule">
+  <hr class="section-rule section-rule--amber">
 
   <!-- BEAT 8: CONCLUSION -->
   <section id="conclusion" class="beat beat--conclusion">

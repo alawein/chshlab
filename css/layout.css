@@ -95,6 +95,35 @@
   background: var(--surface);
   border: 1px solid var(--border);
   padding: var(--space-4);
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.figure-wrap:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Section-themed figure glow on hover */
+.beat--claim .figure-wrap:hover {
+  box-shadow: 0 0 40px -12px rgba(79, 163, 212, 0.12);
+  border-color: rgba(79, 163, 212, 0.15);
+}
+.beat--efficiency .figure-wrap:hover {
+  box-shadow: 0 0 40px -12px rgba(201, 169, 77, 0.12);
+  border-color: rgba(201, 169, 77, 0.15);
+}
+.beat--loophole .figure-wrap:hover,
+.beat--postselection .figure-wrap:hover {
+  box-shadow: 0 0 40px -12px rgba(201, 64, 64, 0.12);
+  border-color: rgba(201, 64, 64, 0.15);
+}
+.beat--proof .figure-wrap:hover {
+  box-shadow: 0 0 40px -12px rgba(201, 169, 77, 0.15);
+  border-color: rgba(201, 169, 77, 0.18);
+}
+.beat--standards .figure-wrap:hover {
+  box-shadow: 0 0 40px -12px rgba(79, 163, 212, 0.12);
+  border-color: rgba(79, 163, 212, 0.15);
 }
 
 .figure-wrap canvas {
@@ -334,12 +363,17 @@
 .section-rule {
   border: none;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  background: linear-gradient(90deg, transparent, var(--rule-color, var(--amber)), transparent);
   max-width: var(--content-width);
   margin: 0 auto;
   transform: scaleX(0);
   transform-origin: center;
 }
+
+/* Section-themed divider colors */
+.section-rule--blue   { --rule-color: var(--blue); }
+.section-rule--crimson { --rule-color: var(--crimson); }
+.section-rule--amber  { --rule-color: var(--amber); }
 
 /* ── FOOTER AUTHOR (expanded) ── */
 .footer-author {

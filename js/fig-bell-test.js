@@ -10,6 +10,8 @@ export function initBellTest() {
   const ctx = canvas.getContext('2d');
   const controlsWrap = document.getElementById('bellTestControls');
 
+  const a11y = document.getElementById('bellTestA11y');
+
   // State
   let running = !prefersReducedMotion;
   let setting = { alice: 0, bob: 0 }; // 0 or 1
@@ -223,6 +225,11 @@ export function initBellTest() {
       ctx.font = "bold 16px 'JetBrains Mono', monospace";
       ctx.textAlign = 'right';
       ctx.fillText('S = ' + S.toFixed(3), W * 0.92, tallyY + 16);
+
+      // Update screen reader description (throttled to every 30 frames)
+      if (a11y && emitTimer % 30 === 0) {
+        a11y.textContent = 'CHSH S value: ' + S.toFixed(3) + '. ' + totalN + ' events recorded across 4 setting pairs.';
+      }
     }
   }
 

@@ -13,6 +13,7 @@ export function initEventStream() {
   const readoutAccepted = document.getElementById('readoutStreamAccepted');
   const readoutS = document.getElementById('readoutStreamS');
 
+  const a11y = document.getElementById('eventStreamA11y');
   let rho = slider ? parseFloat(slider.value) : 0.5;
   const events = [];
   const MAX_EVENTS = 100;
@@ -136,6 +137,10 @@ export function initEventStream() {
     slider.addEventListener('input', () => {
       rho = parseFloat(slider.value);
       if (valLabel) valLabel.textContent = rho.toFixed(2);
+      if (a11y) {
+        const s = postS(rho);
+        a11y.textContent = 'Selection bias rho: ' + rho.toFixed(2) + '. Post-selected S: ' + s.toFixed(3) + '. Acceptance rate: ' + (acceptRate(rho) * 100).toFixed(1) + '%.';
+      }
     });
   }
 

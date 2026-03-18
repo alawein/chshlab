@@ -170,6 +170,10 @@ function initScrollProgress() {
 
     if (bar) bar.style.width = progress + '%';
     if (btn) btn.classList.toggle('scroll-top--visible', scrollTop > window.innerHeight);
+
+    // Hide scroll hint after scrolling past 100px
+    const hint = document.querySelector('.scroll-hint');
+    if (hint) hint.classList.toggle('scroll-hint--hidden', scrollTop > 100);
   };
 
   window.addEventListener('scroll', update, { passive: true });
