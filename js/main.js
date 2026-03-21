@@ -16,7 +16,7 @@ function initKaTeX() {
 function initSmoothScroll() {
   if (typeof gsap === 'undefined' || typeof ScrollToPlugin === 'undefined') return;
   gsap.registerPlugin(ScrollToPlugin);
-  document.querySelectorAll('.nav__links a, .nav__logo').forEach(link => {
+  document.querySelectorAll('.nav__links a, .nav__logo, .evidence-link').forEach(link => {
     link.addEventListener('click', e => {
       const href = link.getAttribute('href');
       if (!href || !href.startsWith('#')) return;
@@ -230,45 +230,73 @@ function initSectionDots() {
   });
 }
 
-// ── CLOSE MOBILE NAV ON LINK CLICK ──
-function initMobileNavClose() {
+// ── MOBILE NAV ──
+function initMobileNav() {
+  const nav = document.querySelector('.nav');
   const toggle = document.getElementById('navToggle');
-  if (!toggle) return;
-  document.querySelectorAll('.nav__links a').forEach(link => {
-    link.addEventListener('click', () => { toggle.checked = false; });
+  const menu = document.getElementById('navMenu');
+  if (!nav || !toggle || !menu) return { closeNav: () => {} };
+
+  const closeNav = () => {
+    nav.classList.remove('nav--open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open navigation menu');
+  };
+
+  const openNav = () => {
+    nav.classList.add('nav--open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close navigation menu');
+  };
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('nav--open')) {
+      closeNav();
+      return;
+    }
+    openNav();
   });
+
+  menu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      closeNav();
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!nav.classList.contains('nav--open')) return;
+    if (nav.contains(e.target)) return;
+    closeNav();
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 600) closeNav();
+  });
+
+  return { closeNav };
 }
 
 // ── KEYBOARD SHORTCUTS ──
-function initKeyboardShortcuts() {
+function initKeyboardShortcuts(closeNav = () => {}) {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      // Close any open drawers/overlays
-      document.querySelectorAll('[aria-expanded="true"]').forEach(el => {
-        el.setAttribute('aria-expanded', 'false');
-      });
+      closeNav();
     }
   });
 }
 
 // ── MAIN INIT ──
-window.addEventListener('load', async () => {
-  if (typeof gsap !== 'undefined') {
-    gsap.to(document.body, { opacity: 1, duration: 0.4, ease: 'power1.out' });
-  } else {
-    document.body.style.opacity = '1';
-  }
-
+document.addEventListener('DOMContentLoaded', async () => {
   initKaTeX();
   initSmoothScroll();
   initReadoutTick();
   initTimeline();
   initDemoExport();
   enhanceSliderA11y();
-  initKeyboardShortcuts();
   initScrollProgress();
   initSectionDots();
-  initMobileNavClose();
+  const { closeNav } = initMobileNav();
+  initKeyboardShortcuts(closeNav);
 
   // Dynamic imports with error handling
   async function safeImport(path, initName) {

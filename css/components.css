@@ -45,13 +45,45 @@
   text-transform: uppercase;
   color: var(--text-muted);
   text-decoration: none;
-  transition: color 0.15s;
+  transition: color 0.15s ease;
 }
 
 .nav__links a:hover { color: var(--text); }
 
-@media (max-width: 600px) {
-  .nav__links { display: none; }
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid transparent;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  z-index: 22;
+}
+
+.nav__toggle-bar {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+
+.nav--open .nav__toggle .nav__toggle-bar:nth-child(1) {
+  transform: translateY(5.5px) rotate(45deg);
+}
+
+.nav--open .nav__toggle .nav__toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav--open .nav__toggle .nav__toggle-bar:nth-child(3) {
+  transform: translateY(-5.5px) rotate(-45deg);
 }
 
 /* ── MATH BLOCK ── */
@@ -687,8 +719,25 @@ input[type="range"]::-moz-range-thumb:active {
   text-decoration: none;
   transition: top 0.2s;
 }
-.skip-link:focus {
+.skip-link:focus-visible {
   top: var(--space-2);
+}
+
+:where(
+  .nav__logo,
+  .nav__links a,
+  .nav__toggle,
+  .theorem-card summary,
+  .demo-export-btn,
+  .sonification-toggle,
+  .belltest-setting-btn,
+  .section-dot,
+  .scroll-top,
+  .conclusion-link
+):focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 /* ── SCROLL PROGRESS BAR ── */
@@ -736,39 +785,6 @@ input[type="range"]::-moz-range-thumb:active {
 }
 
 /* ── MOBILE NAV (hamburger) ── */
-.nav__toggle-input {
-  display: none;
-}
-.nav__toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  width: 28px;
-  height: 28px;
-  cursor: pointer;
-  z-index: 22;
-}
-.nav__toggle-bar {
-  display: block;
-  width: 18px;
-  height: 1.5px;
-  background: var(--text-muted);
-  transition: transform 0.25s ease, opacity 0.2s ease;
-  transform-origin: center;
-}
-
-/* Hamburger → X animation */
-.nav__toggle-input:checked ~ .nav__toggle .nav__toggle-bar:nth-child(1) {
-  transform: translateY(5.5px) rotate(45deg);
-}
-.nav__toggle-input:checked ~ .nav__toggle .nav__toggle-bar:nth-child(2) {
-  opacity: 0;
-}
-.nav__toggle-input:checked ~ .nav__toggle .nav__toggle-bar:nth-child(3) {
-  transform: translateY(-5.5px) rotate(-45deg);
-}
-
 @media (max-width: 600px) {
   .nav__toggle { display: flex; }
 
@@ -791,7 +807,7 @@ input[type="range"]::-moz-range-thumb:active {
     z-index: 21;
   }
 
-  .nav__toggle-input:checked ~ .nav__links {
+  .nav--open .nav__links {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
@@ -850,24 +866,79 @@ input[type="range"]::-moz-range-thumb:active {
 }
 
 .section-dot {
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.section-dot::before {
+  content: '';
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: var(--text-faint);
-  opacity: 0.3;
-  transition: opacity 0.2s, background 0.2s, transform 0.2s;
-  text-decoration: none;
+  opacity: 0.35;
+  transition: opacity 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
 .section-dot:hover {
-  opacity: 0.7;
-  transform: scale(1.5);
+  transform: scale(1.12);
 }
 
-.section-dot--active {
+.section-dot:hover::before {
+  opacity: 0.7;
+}
+
+.section-dot--active::before {
   opacity: 1;
   background: var(--amber);
   transform: scale(1.3);
+}
+
+/* ── EVIDENCE STRIP ── */
+.evidence-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: var(--space-4);
+}
+
+.evidence-card--muted {
+  border-color: rgba(79, 163, 212, 0.14);
+}
+
+.evidence-card--danger {
+  border-color: rgba(201, 64, 64, 0.22);
+  box-shadow: 0 0 36px -20px rgba(201, 64, 64, 0.28);
+}
+
+.evidence-card__label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.evidence-card__value {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: clamp(1.25rem, 3vw, 1.8rem);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.evidence-card__note {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
 }
 
 @media (max-width: 900px) {

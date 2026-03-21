@@ -27,9 +27,6 @@ export function initScroll() {
     return;
   }
 
-  // ── HERO / HOOK TIMELINE ──
-  hookTimeline();
-
   // ── NAV SCROLL STATE ──
   ScrollTrigger.create({
     trigger: '#hook',
@@ -122,7 +119,7 @@ function hookTimeline() {
   }
   if (titleEl) {
     titleEl.classList.remove('reveal');
-    tl.from('.hook-word', { yPercent: 110, filter: 'blur(4px)', letterSpacing: '0.12em', stagger: 0.06, duration: 0.9 }, 0.5);
+    tl.from('.hook-word', { yPercent: 110, opacity: 0, letterSpacing: '0.12em', stagger: 0.06, duration: 0.8 }, 0.35);
   }
   if (subtitle) {
     subtitle.classList.remove('reveal');

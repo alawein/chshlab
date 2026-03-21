@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" />
 
   <!-- Favicon (Bell curve S icon) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230E0F14'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='bold' fill='%23C9A94D'%3ES%3C/text%3E%3Cline x1='4' y1='27' x2='28' y2='27' stroke='%23C9A94D' stroke-width='1.5' opacity='0.4'/%3E%3C/svg%3E" />
@@ -59,13 +60,6 @@
   </script>
 
   <script>document.documentElement.classList.remove('no-js');</script>
-
-  <!-- Loading fallback: show page after 3s even if JS fails -->
-  <style>
-    @keyframes forceVisible { to { opacity: 1; } }
-    body { animation: forceVisible 0s 3s forwards; }
-  </style>
-
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/layout.css" />
@@ -81,7 +75,7 @@
 </head>
 <body>
   <!-- Skip navigation -->
-  <a class="skip-link" href="#claim">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <canvas id="starfield" aria-hidden="true"></canvas>
   <div class="atmosphere-layer" aria-hidden="true"></div>
@@ -104,32 +98,33 @@
   <!-- NAV -->
   <nav class="nav" aria-label="Site navigation">
     <a class="nav__logo" href="#hook">CHSH <span>Lab</span></a>
-    <input type="checkbox" id="navToggle" class="nav__toggle-input" aria-hidden="true" />
-    <label for="navToggle" class="nav__toggle" aria-label="Toggle navigation menu">
-      <span class="nav__toggle-bar"></span>
-      <span class="nav__toggle-bar"></span>
-      <span class="nav__toggle-bar"></span>
-    </label>
-    <ul class="nav__links" role="list">
+    <button type="button" id="navToggle" class="nav__toggle" aria-expanded="false" aria-controls="navMenu" aria-label="Open navigation menu">
+      <span class="nav__toggle-bar" aria-hidden="true"></span>
+      <span class="nav__toggle-bar" aria-hidden="true"></span>
+      <span class="nav__toggle-bar" aria-hidden="true"></span>
+    </button>
+    <ul class="nav__links" role="list" id="navMenu">
       <li><a href="#claim">The Claim</a></li>
       <li><a href="#loophole">The Loophole</a></li>
       <li><a href="#postselection">Post-Selection</a></li>
       <li><a href="#proof">The Proof</a></li>
       <li><a href="#standards">Standards</a></li>
-      <li><a href="paper">Paper</a></li>
+      <li><a href="paper.html">Paper</a></li>
     </ul>
   </nav>
+
+  <main id="main">
 
   <!-- BEAT 1: THE HOOK -->
   <section id="hook" class="beat beat--hook">
     <div class="container">
-      <p class="beat__eyebrow reveal">A Reproducible Rebuttal</p>
-      <h1 class="beat__title reveal">Bell Violations Without Entanglement?</h1>
-      <p class="beat__subtitle reveal">
+      <p class="beat__eyebrow">A Reproducible Rebuttal</p>
+      <h1 class="beat__title">Bell Violations Without Entanglement?</h1>
+      <p class="beat__subtitle">
         A 2025 paper in <em>Science Advances</em> claimed to violate Bell&rsquo;s inequality
         without entanglement. The result made waves. There&rsquo;s just one problem.
       </p>
-      <p class="beat__byline reveal">
+      <p class="beat__byline">
         <a href="https://www.meshal.ai" target="_blank" rel="noopener noreferrer">Meshal Alawein</a>
         &middot; <a href="https://www.meshal.ai" target="_blank" rel="noopener noreferrer">meshal.ai</a>
         &middot; UC Berkeley
@@ -140,6 +135,39 @@
       <svg class="scroll-hint__chevron" width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M2 2l8 8 8-8"/>
       </svg>
+    </div>
+  </section>
+
+  <section class="evidence-strip section" aria-labelledby="evidenceTitle">
+    <div class="container">
+      <p class="section-label reveal">Argument in 60 Seconds</p>
+      <h2 class="section-heading reveal" id="evidenceTitle">Three Numbers Decide the Case</h2>
+      <p class="evidence-strip__summary reveal">
+        A classical model stays at <strong class="key-stat">S = 2.001</strong> without selection, jumps to
+        <strong class="key-stat key-stat--danger">S = 3.716</strong> under post-selection, and makes the reported
+        <strong class="key-stat">S = 2.275</strong> non-diagnostic at vanishing efficiency.
+      </p>
+      <div class="evidence-strip__grid reveal" role="list">
+        <article class="evidence-card evidence-card--muted" role="listitem">
+          <span class="evidence-card__label">Wang et al. (2025)</span>
+          <strong class="evidence-card__value">2.275 &plusmn; 0.057</strong>
+          <p class="evidence-card__note">Measured at ~10<sup>&minus;18</sup> efficiency. The loophole is wide open.</p>
+        </article>
+        <article class="evidence-card" role="listitem">
+          <span class="evidence-card__label">Classical Baseline</span>
+          <strong class="evidence-card__value">2.001</strong>
+          <p class="evidence-card__note">No selection, 100% acceptance. The model behaves classically.</p>
+        </article>
+        <article class="evidence-card evidence-card--danger" role="listitem">
+          <span class="evidence-card__label">Post-Selected Classical</span>
+          <strong class="evidence-card__value">3.716</strong>
+          <p class="evidence-card__note">Same source, biased acceptance. The artifact exceeds the quantum limit.</p>
+        </article>
+      </div>
+      <div class="conclusion-links reveal">
+        <a href="#proof" class="conclusion-link conclusion-link--primary evidence-link">See the Comparison Table &rarr;</a>
+        <a href="paper.html#results" class="conclusion-link">Open the Formal Results</a>
+      </div>
     </div>
   </section>
 
@@ -668,7 +696,7 @@
       </div>
 
       <div class="conclusion-links reveal">
-        <a href="paper" class="conclusion-link conclusion-link--primary">Read the Formal Paper &rarr;</a>
+        <a href="paper.html" class="conclusion-link conclusion-link--primary">Read the Formal Paper &rarr;</a>
         <a href="https://github.com/alawein/chshlab" target="_blank" rel="noopener noreferrer" class="conclusion-link">Source Code on GitHub</a>
         <a href="https://doi.org/10.1126/sciadv.ads0058" target="_blank" rel="noopener noreferrer" class="conclusion-link">Wang et al. (2025)</a>
       </div>
@@ -692,6 +720,8 @@
       <path d="M18 15l-6-6-6 6"/>
     </svg>
   </button>
+
+  </main>
 
   <!-- FOOTER -->
   <footer class="site-footer">

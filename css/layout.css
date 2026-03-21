@@ -17,6 +17,7 @@
   padding-block: var(--space-8);
   position: relative;
   z-index: 10;
+  scroll-margin-top: 76px;
 }
 
 /* Section label (mono tag above heading) */
@@ -35,6 +36,7 @@
   padding-block: var(--space-8);
   position: relative;
   z-index: 10;
+  scroll-margin-top: 76px;
 }
 
 .beat--hook {
@@ -87,6 +89,30 @@
 .beat__prose p {
   margin-bottom: var(--space-3);
   line-height: 1.75;
+}
+
+/* ── EVIDENCE STRIP ── */
+.evidence-strip {
+  padding-top: var(--space-5);
+  padding-bottom: var(--space-6);
+}
+
+.evidence-strip__summary {
+  max-width: 62ch;
+  margin-bottom: var(--space-5);
+  color: var(--text-muted);
+}
+
+.evidence-strip__grid {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+@media (min-width: 900px) {
+  .evidence-strip__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 /* ── FIGURE WRAP ── */

@@ -4,35 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bell Violations Without Entanglement? A Reproducible Rebuttal — Meshal Alawein</title>
-  <meta name="description" content="A classical hidden-variable model with post-selection produces S = 3.716, exceeding the Tsirelson bound. Formal paper with proofs and diagnostics." />
+  <meta name="description" content="Formal paper: a classical hidden-variable model with post-selection produces S = 3.716, exceeding the Tsirelson bound and exposing the detection-loophole vulnerability of low-efficiency Bell claims." />
   <meta name="author" content="Meshal Alawein" />
   <link rel="canonical" href="https://chshlab.meshal.ai/paper.html" />
 
-  <!-- Resource hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230E0F14'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='bold' fill='%23C9A94D'%3ES%3C/text%3E%3Cline x1='4' y1='27' x2='28' y2='27' stroke='%23C9A94D' stroke-width='1.5' opacity='0.4'/%3E%3C/svg%3E" />
 
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Bell Violations Without Entanglement? A Reproducible Rebuttal" />
-  <meta property="og:description" content="A classical hidden-variable model with post-selection produces S = 3.716. Formal paper." />
+  <meta property="og:description" content="Formal paper with figures, tables, and diagnostics showing how outcome-dependent post-selection can inflate CHSH statistics." />
   <meta property="article:author" content="Meshal Alawein" />
   <meta property="article:published_time" content="2025-01-01" />
 
   <script>document.documentElement.classList.remove('no-js');</script>
 
   <style>
-    @keyframes forceVisible { to { opacity: 1; } }
-    body { animation: forceVisible 0s 3s forwards; }
     @media print {
-      body::before, body::after, .paper-banner { display: none !important; }
-      body { opacity: 1 !important; background: white !important; color: black !important; }
+      body::before, body::after, .paper-banner, .paper-actions, .paper-toc, .paper-toc-mobile { display: none !important; }
+      body { background: white !important; color: black !important; }
       .paper-layout { display: block; max-width: 100%; }
-      .paper-toc { display: none; }
       .paper-article { max-width: 100%; }
+      .paper-section, .paper-figure, .paper-table-wrap { break-inside: avoid; }
       .paper-abstract { border-left-color: #666; color: #333; }
       .math-block { background: #f5f5f5; border-color: #ccc; }
       a { color: #1a0dab; }
@@ -50,11 +47,26 @@
 </head>
 <body>
   <div class="paper-banner">
-    This is the formal paper. <a href="/">Visit the interactive experience &rarr;</a>
+    Formal paper with figures, tables, and print-ready references.
+    <a href="/">Visit the interactive experience &rarr;</a>
   </div>
 
-  <div class="paper-layout">
-    <!-- ToC -->
+  <main class="paper-layout" id="paper-main">
+    <details class="paper-toc-mobile">
+      <summary>Jump to Section</summary>
+      <nav aria-label="Mobile table of contents">
+        <a href="#abstract">Abstract</a>
+        <a href="#introduction">Introduction</a>
+        <a href="#theory">Theoretical Background</a>
+        <a href="#methods">Methods</a>
+        <a href="#results">Results</a>
+        <a href="#discussion">Discussion</a>
+        <a href="#conclusion">Conclusion</a>
+        <a href="#appendix">Appendix</a>
+        <a href="#paper-references">References</a>
+      </nav>
+    </details>
+
     <nav class="paper-toc" aria-label="Table of contents" id="paperToc">
       <a href="#abstract">Abstract</a>
       <a href="#introduction">Introduction</a>
@@ -67,260 +79,416 @@
       <a href="#paper-references">References</a>
     </nav>
 
-    <!-- Article -->
     <article class="paper-article">
-      <h1>Bell Violations Without Entanglement?<br>A Reproducible Rebuttal of Wang et al. (2025)</h1>
-      <p class="paper-byline">
-        <a href="https://www.meshal.ai">Meshal Alawein</a> &middot; UC Berkeley &middot;
-        <a href="mailto:contact@meshal.ai">contact@meshal.ai</a>
-      </p>
-
-      <div class="paper-abstract" id="abstract">
-        <p>
-          A recent paper in <em>Science Advances</em> claims to demonstrate Bell-inequality
-          violation without entanglement. We argue that the reported result &mdash; a CHSH value
-          of S = 2.275 &plusmn; 0.057 obtained at a detection efficiency of roughly 10<sup>&minus;18</sup>
-          &mdash; does not support this conclusion. When acceptance rates drop this low,
-          outcome-dependent selection can inflate CHSH statistics regardless of whether the
-          underlying source is quantum, classical, or separable. We demonstrate this with explicit
-          simulations: a purely classical hidden-variable model, subjected to similar post-selection,
-          yields S = 3.716 (95% CI: [3.714, 3.717]), well above both the classical bound (S &le; 2)
-          and the Tsirelson bound (S &le; 2&radic;2 &approx; 2.83). We provide a straightforward
-          diagnostic protocol for future experiments.
+      <header class="paper-header">
+        <p class="paper-kicker">Formal Paper</p>
+        <h1>Bell Violations Without Entanglement?<br />A Reproducible Rebuttal of Wang et al. (2025)</h1>
+        <p class="paper-byline">
+          <a href="https://www.meshal.ai">Meshal Alawein</a> &middot; UC Berkeley &middot;
+          <a href="mailto:contact@meshal.ai">contact@meshal.ai</a>
         </p>
-      </div>
 
-      <h2 id="introduction">Introduction</h2>
-      <p>
-        Bell&rsquo;s theorem has a clean statement: local hidden-variable theories cannot reproduce
-        all the correlations predicted by quantum mechanics
-        (<a href="https://doi.org/10.1103/PhysicsPhysique.1.195">Bell, 1964</a>). The CHSH
-        inequality gives this theorem an operational form:
-      </p>
-      <div class="math-block">
-        <span class="math-display" data-latex="S = |E(a,b) + E(a,b') + E(a',b) - E(a',b')| \leq 2"></span>
-      </div>
-      <p>
-        where E(a,b) is the correlation between Alice&rsquo;s measurement setting a and Bob&rsquo;s
-        setting b (<a href="https://doi.org/10.1103/PhysRevLett.23.880">Clauser et al., 1969</a>).
-        Quantum mechanics predicts a maximum value of S = 2&radic;2 &approx; 2.828, achieved with
-        maximally entangled states and optimal measurement angles.
-      </p>
-      <p>
-        The inference from S &gt; 2 to nonlocality requires a critical assumption: that the
-        detected sample fairly represents the full ensemble. When detection efficiency &eta; falls
-        below a critical threshold &eta;<sub>c</sub> &approx; 82.8%, this assumption fails
-        (<a href="https://doi.org/10.1103/PhysRevD.2.1418">Pearle, 1970</a>;
-        <a href="https://doi.org/10.1103/PhysRevA.47.R747">Eberhard, 1993</a>).
-      </p>
-      <p>
-        Wang et al. (2025) reported S = 2.275 &plusmn; 0.057 from a multiphoton interference
-        experiment with an effective detection efficiency of approximately 10<sup>&minus;18</sup>.
-        We demonstrate that this result is fully consistent with a classical local hidden-variable
-        model subjected to outcome-dependent post-selection.
-      </p>
+        <dl class="paper-meta">
+          <div>
+            <dt>Status</dt>
+            <dd>Version 1.1</dd>
+          </div>
+          <div>
+            <dt>Updated</dt>
+            <dd>March 21, 2026</dd>
+          </div>
+          <div>
+            <dt>Artifact</dt>
+            <dd>HTML paper with print styling</dd>
+          </div>
+        </dl>
 
-      <h2 id="theory">Theoretical Background</h2>
+        <div class="paper-actions">
+          <a class="paper-action" href="/">Interactive Experience</a>
+          <a class="paper-action" href="https://github.com/alawein/chshlab">Source Code</a>
+          <button type="button" class="paper-action paper-action--button" id="paperPrintBtn">Print / Save PDF</button>
+        </div>
 
-      <h3>The CHSH Inequality</h3>
-      <p>
-        Consider a source emitting correlated pairs to two spatially separated parties, Alice
-        and Bob. Each party chooses between two measurement settings (a, a&prime; for Alice;
-        b, b&prime; for Bob) and records a binary outcome &plusmn;1. The CHSH parameter combines
-        four correlation functions:
-      </p>
-      <div class="math-block">
-        <span class="math-display" data-latex="S = |E(a,b) - E(a,b') + E(a',b) + E(a',b')|"></span>
-      </div>
-      <p>
-        For any local hidden-variable (LHV) theory satisfying Locality, Realism, and Freedom
-        of choice, the CHSH bound states S &le; 2.
-      </p>
+        <p class="paper-thesis">
+          Outcome-dependent post-selection is sufficient to reproduce the reported Bell violation regime from a purely classical source when detection efficiency collapses.
+        </p>
 
-      <h3>Why Post-Selection Matters</h3>
-      <p>
-        When not all produced pairs are detected, the experimenter must decide how to handle
-        undetected events. If detection depends on the measurement outcome &mdash; which is
-        unavoidable when optical loss is setting-dependent &mdash; the post-selected sample
-        can exhibit spurious correlations.
-      </p>
-      <p>
-        Formally, define a selection function f(A,B) that determines whether an event is
-        kept. If f depends on outcomes A and B, the post-selected correlation estimator
-        is biased:
-      </p>
-      <div class="math-block">
-        <span class="math-display" data-latex="E_{\text{post}}(a,b) = \frac{\sum_{A,B} A \cdot B \cdot f(A,B) \cdot P(A,B|a,b)}{\sum_{A,B} f(A,B) \cdot P(A,B|a,b)}"></span>
-      </div>
+        <ul class="paper-findings">
+          <li>A classical hidden-variable model stays at <strong>S = 2.001</strong> without selection and rises to <strong>S = 3.716</strong> with biased acceptance.</li>
+          <li>At Wang et al.&rsquo;s reported efficiency of ~10<sup>&minus;18</sup>, the experiment sits deep inside the detection-loophole-vulnerable regime.</li>
+          <li>A convincing low-efficiency Bell claim therefore requires explicit diagnostics, not just a post-selected CHSH value above 2.</li>
+        </ul>
 
-      <h3>The Detection Loophole</h3>
-      <p>
-        The critical detection efficiency threshold for the CHSH inequality is:
-      </p>
-      <div class="math-block">
-        <span class="math-display" data-latex="\eta_c = \frac{2}{1 + \sqrt{2}} \approx 82.8\%"></span>
-      </div>
-      <p>
-        Below this threshold, LHV models can achieve S values exceeding 2. The maximum
-        achievable S for an LHV model at efficiency &eta; is:
-      </p>
-      <div class="math-block">
-        <span class="math-display" data-latex="S_{\text{LHV,max}}(\eta) = \frac{4}{\eta} - 2"></span>
-      </div>
+        <section class="paper-section paper-section--abstract" id="abstract">
+          <p class="paper-section-label">Abstract</p>
+          <div class="paper-abstract">
+            <p>
+              A recent <em>Science Advances</em> paper claims Bell-inequality violation without entanglement. We argue that the reported result &mdash; a CHSH value of
+              <strong>S = 2.275 &plusmn; 0.057</strong> at an effective detection efficiency of roughly <strong>10<sup>&minus;18</sup></strong> &mdash; does not support that conclusion on its own.
+              At efficiencies this low, outcome-dependent selection can inflate CHSH statistics regardless of whether the underlying source is quantum, classical, or separable. We show this directly with a deterministic local hidden-variable simulation:
+              without post-selection the model yields <strong>S = 2.001</strong> (95% CI [1.998, 2.004]) at 100% acceptance, while the same source with biased acceptance yields <strong>S = 3.716</strong> (95% CI [3.714, 3.717]) at 70.0% acceptance.
+              The implication is narrow but decisive: a post-selected CHSH value above 2 is not, by itself, evidence of nonlocality in a regime where classical selection artifacts remain available. We conclude with a diagnostic protocol for future low-efficiency experiments.
+            </p>
+          </div>
+        </section>
+      </header>
 
-      <h2 id="methods">Methods</h2>
+      <section class="paper-section" id="introduction">
+        <h2>Introduction</h2>
+        <p>
+          Bell&rsquo;s theorem states that no local hidden-variable theory can reproduce all of the correlations predicted by quantum mechanics
+          <a class="paper-citation" href="#ref-bell1964">[1]</a>. The Clauser-Horne-Shimony-Holt (CHSH) inequality turns that statement into an operational test
+          <a class="paper-citation" href="#ref-chsh1969">[2]</a>. In one common sign convention,
+        </p>
+        <div class="math-block">
+          <span class="math-display" data-latex="S = \left|E(a,b) + E(a,b') + E(a',b) - E(a',b')\right| \leq 2"></span>
+        </div>
+        <p>
+          where Alice and Bob each choose between two settings and record binary outcomes. Quantum mechanics permits values up to the Tsirelson bound,
+          <span class="mono">2&radic;2</span>, but only under conditions where the detected sample faithfully represents the emitted ensemble
+          <a class="paper-citation" href="#ref-tsirelson1980">[5]</a>.
+        </p>
+        <p>
+          Wang et al. report <strong>S = 2.275 &plusmn; 0.057</strong> from a multiphoton interference experiment and interpret that result as Bell-inequality violation without entanglement
+          <a class="paper-citation" href="#ref-wang2025">[12]</a>. The central issue in this paper is not whether their optical setup is impressive. It is whether a post-selected CHSH value in an ultra-low-efficiency regime can rule out local classical explanations.
+        </p>
+        <aside class="sidenote">
+          This paper makes one narrow claim: the reported statistic is not self-authenticating evidence of nonlocality when selection effects remain available.
+        </aside>
+      </section>
 
-      <h3>Simulation Framework</h3>
-      <p>
-        We construct a classical hidden-variable model with a single parameter &lambda;
-        drawn uniformly from [0, 2&pi;). Alice&rsquo;s outcome is A(a, &lambda;) = sign(cos(a &minus; &lambda;))
-        and Bob&rsquo;s is B(b, &lambda;) = sign(cos(b &minus; &lambda;)). This model is explicitly
-        local and deterministic.
-      </p>
+      <section class="paper-section" id="theory">
+        <h2>Theoretical Background</h2>
 
-      <h3>Post-Selection Model</h3>
-      <p>
-        We introduce outcome-dependent selection: events where A &middot; B = +1 are kept with
-        probability p<sub>hi</sub>, while events where A &middot; B = &minus;1 are kept with
-        probability p<sub>lo</sub>. When p<sub>hi</sub> &gt; p<sub>lo</sub>, the filter
-        preferentially retains correlated outcomes.
-      </p>
-      <p>
-        For our primary simulation: p<sub>hi</sub> = 0.9, p<sub>lo</sub> = 0.1, with
-        N = 10<sup>6</sup> trials per setting pair.
-      </p>
+        <h3>The CHSH Bound &amp; Equivalent Sign Conventions</h3>
+        <p>
+          The specific placement of the minus sign in the CHSH combination is conventional. Relabeling settings or outcomes maps one sign convention to another without changing the attainable classical or quantum bounds. We therefore use the expression above throughout this paper and interpret all comparisons under that equivalent convention set.
+        </p>
+        <p>
+          For any local hidden-variable theory satisfying locality, realism, and free setting choice, the classical bound remains
+        </p>
+        <div class="math-block">
+          <span class="math-display" data-latex="S_{\mathrm{LHV}} \leq 2"></span>
+        </div>
 
-      <h2 id="results">Results</h2>
+        <figure class="paper-figure">
+          <img src="assets/figures/fig1_chsh_bounds.png" width="1292" height="856" alt="CHSH bounds figure showing the classical bound at 2, the quantum Tsirelson bound at 2 root 2, and the algebraic ceiling at 4." />
+          <figcaption>
+            <span class="figure-label">Figure 1</span>
+            CHSH bounds in one view. The key point for this paper is not merely that the algebraic maximum is 4, but that post-selection lets classical data migrate into that upper region.
+          </figcaption>
+        </figure>
 
-      <h3>Classical Baseline</h3>
-      <p>
-        Without post-selection (p<sub>hi</sub> = p<sub>lo</sub> = 1.0), our classical model
-        produces S = 2.001 (95% CI: [1.998, 2.004]) at 100% acceptance rate. This is consistent
-        with the CHSH bound, confirming the model&rsquo;s classical nature.
-      </p>
+        <h3>The Detection Loophole</h3>
+        <p>
+          The inference from <span class="mono">S &gt; 2</span> to nonlocality depends on fair sampling. When detection efficiency drops, the surviving sample can cease to represent the emitted ensemble. Pearle and Eberhard showed that low-efficiency Bell experiments are vulnerable to local models that exploit selection effects
+          <a class="paper-citation" href="#ref-pearle1970">[3]</a>
+          <a class="paper-citation" href="#ref-eberhard1993">[7]</a>.
+        </p>
+        <p>
+          A useful summary of the efficiency-dependent local ceiling is
+        </p>
+        <div class="math-block">
+          <span class="math-display" data-latex="S_{\mathrm{LHV,max}}(\eta) = \frac{4}{\eta} - 2"></span>
+        </div>
+        <p>
+          which grows rapidly as the detection efficiency <span class="mono">&eta;</span> falls. That is the regime relevant to the Wang et al. measurement.
+        </p>
 
-      <h3>Post-Selected Results</h3>
-      <p>
-        With outcome-dependent selection (p<sub>hi</sub> = 0.9, p<sub>lo</sub> = 0.1),
-        the same classical source yields S = 3.716 (95% CI: [3.714, 3.717]) at 70.0%
-        acceptance rate. This exceeds both the classical bound (S = 2) and the quantum
-        Tsirelson bound (S = 2&radic;2 &approx; 2.828).
-      </p>
+        <figure class="paper-figure">
+          <img src="assets/figures/fig2_efficiency_landscape.png" width="1285" height="859" alt="Efficiency landscape showing how the classical local-hidden-variable ceiling grows as detection efficiency decreases." loading="lazy" />
+          <figcaption>
+            <span class="figure-label">Figure 2</span>
+            Efficiency landscape. Once efficiency drops below the critical threshold, local hidden-variable models can reach CHSH values that overlap the region usually associated with quantum violation.
+          </figcaption>
+        </figure>
 
-      <h3>Comparison with Wang et al.</h3>
-      <p>
-        Wang et al. reported S = 2.275 &plusmn; 0.057 at an effective detection efficiency
-        of ~10<sup>&minus;18</sup>. At this efficiency, the LHV maximum is astronomically
-        large: S<sub>LHV,max</sub> = 4/10<sup>&minus;18</sup> &minus; 2 &approx; 4 &times; 10<sup>18</sup>.
-        Their reported value falls well within the regime where classical models can
-        trivially reproduce the result.
-      </p>
+        <aside class="sidenote">
+          The argument does not require Wang et al.&rsquo;s apparatus to be classical. It requires only that the observed statistic remain compatible with a local-selection artifact.
+        </aside>
+      </section>
 
-      <h2 id="discussion">Discussion</h2>
+      <section class="paper-section" id="methods">
+        <h2>Methods</h2>
 
-      <h3>What Makes a Bell Test Convincing?</h3>
-      <p>
-        The loophole-free Bell tests of 2015
-        (<a href="https://doi.org/10.1038/nature15759">Hensen et al.</a>;
-        <a href="https://doi.org/10.1103/PhysRevLett.115.250401">Giustina et al.</a>;
-        <a href="https://doi.org/10.1103/PhysRevLett.115.250402">Shalm et al.</a>)
-        achieved detection efficiencies above the critical threshold while simultaneously
-        closing the locality loophole. These experiments set the standard for Bell claims.
-      </p>
+        <h3>Simulation Framework</h3>
+        <p>
+          We model a deterministic local hidden-variable source with a single latent variable <span class="mono">&lambda;</span> drawn uniformly from <span class="mono">[0, 2&pi;)</span>. Alice and Bob return binary outcomes according to
+        </p>
+        <div class="math-block">
+          <span class="math-display" data-latex="A(a,\lambda)=\operatorname{sign}\left(\cos(a-\lambda)\right), \qquad B(b,\lambda)=\operatorname{sign}\left(\cos(b-\lambda)\right)"></span>
+        </div>
+        <p>
+          This construction is local, deterministic, and intentionally simple. The point is not to maximize realism. The point is to test whether a classical source, once filtered, can enter the same statistical regime as the reported experiment.
+        </p>
 
-      <h3>A Diagnostic Protocol</h3>
-      <p>
-        For experiments operating below &eta;<sub>c</sub>, we recommend reporting:
-        (1) raw correlations before selection;
-        (2) acceptance rates per setting pair;
-        (3) no-signaling tests on both selected and unselected data;
-        (4) independence tests between acceptance and measurement settings;
-        (5) sensitivity analysis for selection bias.
-      </p>
+        <div class="paper-table-wrap">
+          <table class="paper-table">
+            <caption>Table 1. Simulation parameters used for the rebuttal model.</caption>
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hidden variable distribution</td>
+                <td>Uniform on [0, 2&pi;)</td>
+                <td>Ensures isotropic local source sampling.</td>
+              </tr>
+              <tr>
+                <td>Trials per setting pair</td>
+                <td>10<sup>6</sup></td>
+                <td>Stabilizes the reported confidence intervals.</td>
+              </tr>
+              <tr>
+                <td>Selection probabilities</td>
+                <td>p<sub>hi</sub> = 0.9, p<sub>lo</sub> = 0.1</td>
+                <td>Biases retention toward desired outcomes.</td>
+              </tr>
+              <tr>
+                <td>Confidence interval</td>
+                <td>95% normal approximation</td>
+                <td>Summarizes repeatable Monte Carlo uncertainty.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h2 id="conclusion">Conclusion</h2>
-      <p>
-        We have demonstrated that outcome-dependent post-selection can produce CHSH values
-        well above the Tsirelson bound from purely classical data. The Wang et al. result
-        &mdash; obtained at detection efficiency ~10<sup>&minus;18</sup> &mdash; does not
-        constitute evidence for quantum nonlocality. The experiment represents impressive
-        optical engineering, but the statistical claim requires either closing the detection
-        loophole or providing explicit diagnostics ruling out selection artifacts.
-      </p>
+        <h3>Post-Selection Model</h3>
+        <p>
+          Outcome-dependent selection is introduced by retaining events with probability <span class="mono">p<sub>hi</sub></span> when the product <span class="mono">A&middot;B</span> matches the favored outcome class, and with probability <span class="mono">p<sub>lo</sub></span> otherwise. The post-selected estimator becomes
+        </p>
+        <div class="math-block">
+          <span class="math-display" data-latex="E_{\mathrm{post}}(a,b)=\frac{\sum_{A,B} A B\, f(A,B)\, P(A,B|a,b)}{\sum_{A,B} f(A,B)\, P(A,B|a,b)}"></span>
+        </div>
+        <p>
+          When the selection function <span class="mono">f(A,B)</span> depends on outcomes, the estimator is biased by construction. That mechanism is the statistical core of this rebuttal.
+        </p>
 
-      <h2 id="appendix">Appendix: Detection Efficiency Threshold Derivation</h2>
-      <p>
-        The detection efficiency threshold for the CHSH inequality can be derived by
-        considering a local hidden-variable model where each detector independently
-        misses particles with probability 1 &minus; &eta;. Assigning outcome 0 to
-        undetected events and restricting the CHSH calculation to events where both
-        detectors fire, the effective bound becomes:
-      </p>
-      <div class="math-block">
-        <span class="math-display" data-latex="S_{\text{LHV}}(\eta) = \frac{4}{\eta} - 2"></span>
-      </div>
-      <p>
-        Setting S<sub>LHV</sub>(&eta;) = 2 yields:
-      </p>
-      <div class="math-block">
-        <span class="math-display" data-latex="\eta_c = \frac{4}{S+2}\bigg|_{S=2} = 1 \quad \text{(naive)}"></span>
-      </div>
-      <p>
-        The tighter bound using Eberhard&rsquo;s CH inequality gives:
-      </p>
-      <div class="math-block">
-        <span class="math-display" data-latex="\eta_c = \frac{2}{1 + \sqrt{2}} \approx 0.8284"></span>
-      </div>
+        <aside class="sidenote">
+          The exotic-looking result is not produced by an exotic hidden-variable model. It is produced by selective retention of otherwise ordinary local data.
+        </aside>
+      </section>
 
-      <h2 id="paper-references">References</h2>
-      <ol class="references-list" id="paperReferencesList"></ol>
+      <section class="paper-section" id="results">
+        <h2>Results</h2>
+
+        <h3>Baseline vs. Post-Selected Artifact</h3>
+        <p>
+          Without post-selection, the classical model yields <strong>S = 2.001</strong> (95% CI [1.998, 2.004]) at 100% acceptance, as expected for a local hidden-variable source. With biased retention, the same source yields <strong>S = 3.716</strong> (95% CI [3.714, 3.717]) at 70.0% acceptance. The important point is not just that the inflated statistic exceeds 2. It exceeds the Tsirelson bound as well.
+        </p>
+
+        <div class="paper-table-wrap">
+          <table class="paper-table">
+            <caption>Table 2. Comparison of the reported experiment with the rebuttal model.</caption>
+            <thead>
+              <tr>
+                <th>Dataset</th>
+                <th>CHSH S</th>
+                <th>Acceptance / Efficiency</th>
+                <th>Interpretation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Classical model, no selection</td>
+                <td>2.001 &plusmn; 0.009</td>
+                <td>100%</td>
+                <td>Behaves classically, as expected.</td>
+              </tr>
+              <tr>
+                <td>Classical model, post-selected</td>
+                <td>3.716 &plusmn; 0.004</td>
+                <td>70.0%</td>
+                <td>Selection artifact exceeds both classical and quantum bounds.</td>
+              </tr>
+              <tr>
+                <td>Wang et al. (2025)</td>
+                <td>2.275 &plusmn; 0.057</td>
+                <td>~10<sup>&minus;18</sup></td>
+                <td>Falls inside a regime where local artifacts remain available.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <figure class="paper-figure">
+          <img src="assets/figures/fig3_postselection_mechanism.png" width="1377" height="859" alt="Diagram showing how post-selection preserves favored events and removes disfavored events, inflating observed CHSH statistics." loading="lazy" />
+          <figcaption>
+            <span class="figure-label">Figure 3</span>
+            Post-selection mechanism. The filter, not the source, creates the apparent super-classical behavior by preferentially retaining one outcome class.
+          </figcaption>
+        </figure>
+
+        <h3>Why Wang et al. Remain Non-Diagnostic Here</h3>
+        <p>
+          Wang et al. report a value below our classical artifact, but that is not the key comparison. The decisive point is simpler: the rebuttal model proves that local classical data can occupy the reported regime once selection effects are admitted. At <span class="mono">&eta; \approx 10^{-18}</span>, the efficiency-adjusted local ceiling is so large that <span class="mono">S = 2.275</span> is plainly not exclusionary evidence against local models.
+        </p>
+
+        <aside class="sidenote">
+          The result need not be “more extreme than Wang” to matter. It only has to demonstrate that local post-selection can generate the class of evidence being interpreted as nonlocal.
+        </aside>
+      </section>
+
+      <section class="paper-section" id="discussion">
+        <h2>Discussion</h2>
+
+        <h3>What Would Make a Bell Claim Convincing?</h3>
+        <p>
+          The standard was set by the loophole-free Bell tests of 2015, which combined sufficiently high efficiency with locality protections and careful diagnostics
+          <a class="paper-citation" href="#ref-hensen2015">[9]</a>
+          <a class="paper-citation" href="#ref-giustina2015">[10]</a>
+          <a class="paper-citation" href="#ref-shalm2015">[11]</a>. Those experiments did not rest their case on a post-selected CHSH number alone.
+        </p>
+
+        <div class="paper-table-wrap">
+          <table class="paper-table">
+            <caption>Table 3. Minimum diagnostic package for low-efficiency Bell claims.</caption>
+            <thead>
+              <tr>
+                <th>Diagnostic</th>
+                <th>Why it matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Raw correlations before selection</td>
+                <td>Shows whether the effect exists before the filtering step.</td>
+              </tr>
+              <tr>
+                <td>Acceptance rate by setting pair</td>
+                <td>Tests whether retention depends on measurement context.</td>
+              </tr>
+              <tr>
+                <td>No-signaling checks on selected and unselected data</td>
+                <td>Detects selection-induced inconsistencies across marginals.</td>
+              </tr>
+              <tr>
+                <td>Independence tests for acceptance vs. settings</td>
+                <td>Checks whether the filter is entangled with the measurement choices.</td>
+              </tr>
+              <tr>
+                <td>Sensitivity analysis for selection bias</td>
+                <td>Quantifies how much artifact could be created by retention asymmetry.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Scope, Objections, and Limits</h3>
+        <p>
+          This paper does not prove that Wang et al.&rsquo;s apparatus is classical. It proves that the reported statistic does not exclude classical post-selection artifacts. A defender of the original claim could still recover it by showing that their filtering cannot depend on outcomes in a way that biases the estimator, or by providing diagnostics that eliminate the relevant local alternatives.
+        </p>
+        <p>
+          That is why the burden here is evidentiary, not rhetorical. Once efficiency falls this far below the fair-sampling threshold, the experiment must report enough structure to discriminate genuine nonlocality from a selection artifact. Without that structure, a CHSH value above 2 should be treated as suggestive at most, not decisive.
+        </p>
+
+        <aside class="sidenote">
+          The strongest skeptical objection is “perhaps the apparatus is still quantum.” That objection is compatible with this paper. The point is that the reported evidence does not force the nonlocal interpretation.
+        </aside>
+      </section>
+
+      <section class="paper-section" id="conclusion">
+        <h2>Conclusion</h2>
+        <p>
+          The core finding is straightforward. A local hidden-variable model with outcome-dependent post-selection reproduces the qualitative regime of the reported Bell claim and surpasses the Tsirelson bound, all without entanglement. That means the Wang et al. result, taken as a post-selected CHSH statistic at ultra-low efficiency, does not by itself establish quantum nonlocality.
+        </p>
+        <p>
+          The experiment remains technically impressive. But technical impressiveness is not the same thing as a loophole-free inference. To make the claim persuasive, future iterations need transparent diagnostic reporting that rules out precisely the selection mechanism demonstrated here.
+        </p>
+      </section>
+
+      <section class="paper-section" id="appendix">
+        <h2>Appendix: Detection-Efficiency Threshold Derivation</h2>
+        <p>
+          One useful summary of the efficiency problem is the local ceiling
+        </p>
+        <div class="math-block">
+          <span class="math-display" data-latex="S_{\mathrm{LHV,max}}(\eta) = \frac{4}{\eta} - 2"></span>
+        </div>
+        <p>
+          As <span class="mono">&eta;</span> decreases, the strongest post-selected local artifact becomes larger. A CHSH violation alone is decisive only when the best available local artifact still lies below the quantum ceiling.
+        </p>
+        <p>
+          Setting the efficiency-adjusted local ceiling equal to the Tsirelson bound therefore gives the critical threshold:
+        </p>
+        <div class="math-block">
+          <span class="math-display" data-latex="\frac{4}{\eta_c} - 2 = 2\sqrt{2}"></span>
+        </div>
+        <p>
+          Solving for <span class="mono">&eta;<sub>c</sub></span> yields
+        </p>
+        <div class="math-block">
+          <span class="math-display" data-latex="\eta_c = \frac{4}{2 + 2\sqrt{2}} = \frac{2}{1 + \sqrt{2}} \approx 0.8284"></span>
+        </div>
+        <p>
+          This is the familiar ~82.8% threshold associated with fair-sampling-safe CHSH inference, consistent with the broader Pearle and Eberhard literature
+          <a class="paper-citation" href="#ref-pearle1970">[3]</a>
+          <a class="paper-citation" href="#ref-eberhard1993">[7]</a>.
+        </p>
+      </section>
+
+      <section class="paper-section" id="paper-references">
+        <h2>References</h2>
+        <ol class="references-list">
+          <li class="reference-item" id="ref-bell1964">Bell, J.S. (1964). <em>On the Einstein-Podolsky-Rosen paradox</em>. Physics, 1(3), 195&ndash;200. <a href="https://doi.org/10.1103/PhysicsPhysique.1.195">DOI</a></li>
+          <li class="reference-item" id="ref-chsh1969">Clauser, J.F., Horne, M.A., Shimony, A., &amp; Holt, R.A. (1969). <em>Proposed experiment to test local hidden-variable theories</em>. Physical Review Letters, 23(15), 880&ndash;884. <a href="https://doi.org/10.1103/PhysRevLett.23.880">DOI</a></li>
+          <li class="reference-item" id="ref-pearle1970">Pearle, P.M. (1970). <em>Hidden-variable example based upon data rejection</em>. Physical Review D, 2(8), 1418&ndash;1425. <a href="https://doi.org/10.1103/PhysRevD.2.1418">DOI</a></li>
+          <li class="reference-item" id="ref-freedman1972">Freedman, S.J., &amp; Clauser, J.F. (1972). <em>Experimental test of local hidden-variable theories</em>. Physical Review Letters, 28(14), 938&ndash;941. <a href="https://doi.org/10.1103/PhysRevLett.28.938">DOI</a></li>
+          <li class="reference-item" id="ref-tsirelson1980">Tsirelson, B.S. (1980). <em>Quantum generalizations of Bell&rsquo;s inequality</em>. Letters in Mathematical Physics, 4, 93&ndash;98. <a href="https://doi.org/10.1007/BF00417500">DOI</a></li>
+          <li class="reference-item" id="ref-aspect1982">Aspect, A., Grangier, P., &amp; Roger, G. (1982). <em>Experimental realization of EPR-Bohm Gedankenexperiment</em>. Physical Review Letters, 49(2), 91&ndash;94. <a href="https://doi.org/10.1103/PhysRevLett.49.91">DOI</a></li>
+          <li class="reference-item" id="ref-eberhard1993">Eberhard, P.H. (1993). <em>Background level and counter efficiencies required for a loophole-free EPR experiment</em>. Physical Review A, 47(2), R747. <a href="https://doi.org/10.1103/PhysRevA.47.R747">DOI</a></li>
+          <li class="reference-item" id="ref-weihs1998">Weihs, G. et al. (1998). <em>Violation of Bell&rsquo;s inequality under strict Einstein locality conditions</em>. Physical Review Letters, 81(23), 5039&ndash;5043. <a href="https://doi.org/10.1103/PhysRevLett.81.5039">DOI</a></li>
+          <li class="reference-item" id="ref-hensen2015">Hensen, B. et al. (2015). <em>Loophole-free Bell inequality violation using electron spins separated by 1.3 kilometres</em>. Nature, 526, 682&ndash;686. <a href="https://doi.org/10.1038/nature15759">DOI</a></li>
+          <li class="reference-item" id="ref-giustina2015">Giustina, M. et al. (2015). <em>Significant-loophole-free test of Bell&rsquo;s theorem with entangled photons</em>. Physical Review Letters, 115, 250401. <a href="https://doi.org/10.1103/PhysRevLett.115.250401">DOI</a></li>
+          <li class="reference-item" id="ref-shalm2015">Shalm, L.K. et al. (2015). <em>Strong loophole-free test of local realism</em>. Physical Review Letters, 115, 250402. <a href="https://doi.org/10.1103/PhysRevLett.115.250402">DOI</a></li>
+          <li class="reference-item" id="ref-wang2025">Wang, M. et al. (2025). <em>Bell inequality violation without entanglement</em>. Science Advances, 11, eads0058. <a href="https://doi.org/10.1126/sciadv.ads0058">DOI</a></li>
+        </ol>
+      </section>
 
       <div class="paper-footer">
-        <p>&copy; 2025 <a href="https://www.meshal.ai">Meshal Alawein</a>. All simulations run client-side.</p>
-        <p><a href="/">Interactive version</a> &middot; <a href="https://github.com/alawein/chshlab">Source code</a></p>
+        <p>&copy; 2025&ndash;2026 <a href="https://www.meshal.ai">Meshal Alawein</a>. This paper is the canonical text artifact for the project.</p>
+        <p><a href="/">Interactive experience</a> &middot; <a href="https://github.com/alawein/chshlab">Source code</a> &middot; Use browser print to save a PDF snapshot.</p>
       </div>
     </article>
-  </div>
+  </main>
 
-  <script type="module">
-    // Paper-page JS: KaTeX + references + ToC scroll spy
-    import { initReferences } from './js/references.js';
-
-    window.addEventListener('load', () => {
-      document.body.style.opacity = '1';
-
-      // KaTeX
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
       if (typeof katex !== 'undefined') {
-        document.querySelectorAll('.math-display').forEach(el => {
+        document.querySelectorAll('.math-display').forEach((el) => {
           const latex = el.dataset.latex;
           if (latex) katex.render(latex, el, { displayMode: true, throwOnError: false });
         });
       }
 
-      // References (targets #paperReferencesList)
-      const list = document.getElementById('paperReferencesList');
-      if (list) {
-        // Reuse references module by temporarily swapping the list ID
-        const mainList = document.getElementById('referencesList');
-        list.id = 'referencesList';
-        initReferences();
-        list.id = 'paperReferencesList';
-        if (mainList) mainList.id = 'referencesList';
+      const printBtn = document.getElementById('paperPrintBtn');
+      if (printBtn) {
+        printBtn.addEventListener('click', () => window.print());
       }
 
-      // ToC scroll spy
+      document.querySelectorAll('.paper-toc-mobile a').forEach((link) => {
+        link.addEventListener('click', () => {
+          const toc = document.querySelector('.paper-toc-mobile');
+          if (toc) toc.open = false;
+        });
+      });
+
       const tocLinks = document.querySelectorAll('.paper-toc a');
-      const sections = document.querySelectorAll('.paper-article h2[id]');
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            tocLinks.forEach(l => l.classList.remove('toc-active'));
-            const active = document.querySelector('.paper-toc a[href="#' + e.target.id + '"]');
-            if (active) active.classList.add('toc-active');
-          }
+      const sections = document.querySelectorAll('.paper-section[id]');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          tocLinks.forEach((link) => link.classList.remove('toc-active'));
+          const active = document.querySelector('.paper-toc a[href="#' + entry.target.id + '"]');
+          if (active) active.classList.add('toc-active');
         });
       }, { rootMargin: '-20% 0px -60% 0px' });
-      sections.forEach(s => observer.observe(s));
+
+      sections.forEach((section) => observer.observe(section));
     });
   </script>
 </body>
