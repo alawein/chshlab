@@ -1,3 +1,10 @@
+---
+type: canonical
+source: none
+sync: none
+sla: none
+---
+
 # Academic Fact-Check
 
 Claim-by-claim trace: each rebuttal argument mapped to its theorem, figure, and inline simulation.

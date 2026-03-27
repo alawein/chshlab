@@ -1,3 +1,10 @@
+---
+type: canonical
+source: none
+sync: none
+sla: none
+---
+
 # Superpowers Specs
 
 Design specifications that define the target interaction model, narrative structure, and motion system for major upgrades.

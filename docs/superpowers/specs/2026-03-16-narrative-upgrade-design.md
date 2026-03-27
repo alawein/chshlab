@@ -1,3 +1,10 @@
+---
+type: canonical
+source: none
+sync: none
+sla: none
+---
+
 # CHSH Lab — Narrative Upgrade Design Spec
 
 **Date:** 2026-03-16

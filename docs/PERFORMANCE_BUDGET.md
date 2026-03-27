@@ -1,3 +1,10 @@
+---
+type: canonical
+source: none
+sync: none
+sla: none
+---
+
 # Performance Budget
 
 Targets and audit checklist for CHSH Lab deployments.

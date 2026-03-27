@@ -1,3 +1,10 @@
+---
+type: canonical
+source: none
+sync: none
+sla: none
+---
+
 # CHSH Lab Animation Upgrade — Design Spec
 
 **Date:** 2026-03-15

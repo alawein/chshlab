@@ -1,3 +1,10 @@
+---
+type: canonical
+source: none
+sync: none
+sla: none
+---
+
 # Superpowers Plans
 
 Implementation plans for major site revisions.

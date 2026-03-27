@@ -1,3 +1,10 @@
+---
+type: canonical
+source: none
+sync: none
+sla: none
+---
+
 # CHSH Lab Documentation
 
 Use this directory as the entrypoint for project planning, evidence mapping, performance constraints, and design history.

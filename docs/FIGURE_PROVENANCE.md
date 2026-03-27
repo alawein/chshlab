@@ -1,3 +1,10 @@
+---
+type: canonical
+source: none
+sync: none
+sla: none
+---
+
 # Figure Provenance
 
 Complete provenance record for all five figures in CHSH Lab.

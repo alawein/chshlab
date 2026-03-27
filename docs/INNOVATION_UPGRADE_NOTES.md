@@ -1,3 +1,10 @@
+---
+type: canonical
+source: none
+sync: none
+sla: none
+---
+
 # Innovation Upgrade Notes
 
 Record of all features implemented, deferred features with reasons, and known limitations.

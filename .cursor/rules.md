@@ -1,3 +1,10 @@
+---
+type: canonical
+source: none
+sync: none
+sla: none
+---
+
 # Cursor Rules for chshlab
 
 You are working in chshlab.

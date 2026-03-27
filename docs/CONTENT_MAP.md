@@ -1,3 +1,10 @@
+---
+type: canonical
+source: none
+sync: none
+sla: none
+---
+
 # CHSH Lab — Content Map
 
 Maps source evidence from `../meatheadphysicist` to each site section and rebuttal argument.
