@@ -1,3 +1,10 @@
+---
+type: derived
+source: directory-structure
+sync: script
+sla: on-change
+---
+
 # Documentation Index
 
 ## Top Level

@@ -1,3 +1,10 @@
+---
+type: canonical
+source: none
+sync: none
+sla: none
+---
+
 <!-- CUSTOM OVERRIDE: entire file — project-specific agent rules for static CHSH site, no-framework constraint, academic content integrity, build.sh/Vercel deploy. [Task 1.4 audit 2026-03-22] -->
 ---
 type: normative
