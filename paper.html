@@ -6,8 +6,9 @@
   <title>Bell Violations Without Entanglement? A Reproducible Rebuttal — Meshal Alawein</title>
   <meta name="description" content="Formal paper with propositions, proof sketches, and appendices showing how outcome-coupled post-selection can inflate CHSH statistics in a local model." />
   <meta name="author" content="Meshal Alawein" />
-  <link rel="canonical" href="https://chshlab.meshal.ai/paper.html" />
+  <link rel="canonical" href="https://chshlab.meshal.ai/paper" />
 
+  <!-- SHARED_HEAD:START -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
@@ -15,29 +16,19 @@
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230E0F14'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='bold' fill='%23C9A94D'%3ES%3C/text%3E%3Cline x1='4' y1='27' x2='28' y2='27' stroke='%23C9A94D' stroke-width='1.5' opacity='0.4'/%3E%3C/svg%3E" />
 
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <!-- SHARED_HEAD:END -->
+
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Bell Violations Without Entanglement? A Reproducible Rebuttal" />
   <meta property="og:description" content="Formal paper with figures, tables, and diagnostics showing how outcome-dependent post-selection can inflate CHSH statistics." />
   <meta property="article:author" content="Meshal Alawein" />
   <meta property="article:published_time" content="2025-01-01" />
 
-  <script>document.documentElement.classList.remove('no-js');</script>
-
-  <style>
-    @media print {
-      body::before, body::after, .paper-banner, .paper-actions, .paper-toc, .paper-toc-mobile { display: none !important; }
-      body { background: white !important; color: black !important; }
-      .paper-layout { display: block; max-width: 100%; }
-      .paper-article { max-width: 100%; }
-      .paper-section, .paper-figure, .paper-table-wrap, .paper-formal, .paper-proof { break-inside: avoid; }
-      .paper-abstract { border-left-color: #666; color: #333; }
-      .math-block { background: #f5f5f5; border-color: #ccc; }
-      a { color: #1a0dab; }
-    }
-  </style>
-
+  <!-- SHARED_CORE_STYLES:START -->
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
+  <!-- SHARED_CORE_STYLES:END -->
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/paper.css" />
 
@@ -46,12 +37,13 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#paper-main">Skip to paper</a>
   <div class="paper-banner">
     Formal paper with figures, tables, and print-ready references.
     <a href="/">Visit the interactive experience &rarr;</a>
   </div>
 
-  <main class="paper-layout" id="paper-main">
+  <main class="paper-layout" id="paper-main" tabindex="-1">
     <details class="paper-toc-mobile">
       <summary>Jump to Section</summary>
       <nav aria-label="Mobile table of contents">
@@ -786,40 +778,6 @@
     </article>
   </main>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof katex !== 'undefined') {
-        document.querySelectorAll('.math-display').forEach((el) => {
-          const latex = el.dataset.latex;
-          if (latex) katex.render(latex, el, { displayMode: true, throwOnError: false });
-        });
-      }
-
-      const printBtn = document.getElementById('paperPrintBtn');
-      if (printBtn) {
-        printBtn.addEventListener('click', () => window.print());
-      }
-
-      document.querySelectorAll('.paper-toc-mobile a').forEach((link) => {
-        link.addEventListener('click', () => {
-          const toc = document.querySelector('.paper-toc-mobile');
-          if (toc) toc.open = false;
-        });
-      });
-
-      const tocLinks = document.querySelectorAll('.paper-toc a');
-      const sections = document.querySelectorAll('.paper-section[id]');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          tocLinks.forEach((link) => link.classList.remove('toc-active'));
-          const active = document.querySelector('.paper-toc a[href="#' + entry.target.id + '"]');
-          if (active) active.classList.add('toc-active');
-        });
-      }, { rootMargin: '-20% 0px -60% 0px' });
-
-      sections.forEach((section) => observer.observe(section));
-    });
-  </script>
+  <script type="module" src="js/paper.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # build.sh — Create Vercel Build Output API v3 structure for static site
 set -euo pipefail
+python scripts/sync_shared_html.py
 rm -rf .vercel/output
 mkdir -p .vercel/output/static
 cp -r css js index.html paper.html 404.html .vercel/output/static/

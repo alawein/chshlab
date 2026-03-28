@@ -12,6 +12,51 @@ export function emitState(detail) {
   document.dispatchEvent(new CustomEvent('chshlab:state', { detail }));
 }
 
+export function emitMetric(name, { source, fig } = {}) {
+  document.dispatchEvent(new CustomEvent('chshlab:metric', {
+    detail: {
+      name,
+      source,
+      fig,
+      timestamp: new Date().toISOString(),
+    },
+  }));
+}
+
+function fallbackCopyText(text) {
+  return new Promise((resolve, reject) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', 'readonly');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    textarea.style.pointerEvents = 'none';
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, textarea.value.length);
+
+    try {
+      if (document.execCommand('copy')) {
+        resolve();
+      } else {
+        reject(new Error('Copy command failed.'));
+      }
+    } catch (error) {
+      reject(error);
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  });
+}
+
+export function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text).catch(() => fallbackCopyText(text));
+  }
+
+  return fallbackCopyText(text);
+}
+
 // ── MICRO-INTERACTION PRESETS ──
 export const MICRO = {
   cardLift:      { y: -4, duration: 0.2, ease: 'power1.out' },

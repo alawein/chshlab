@@ -1,0 +1,102 @@
+.not-found-page {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: var(--space-4);
+}
+
+.not-found {
+  width: min(100%, 34rem);
+  position: relative;
+  z-index: 10;
+}
+
+.not-found__panel {
+  padding: clamp(var(--space-4), 5vw, var(--space-5));
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(circle at top center, rgba(201, 169, 77, 0.08), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01)),
+    var(--surface);
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
+}
+
+.not-found__code {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 16vw, 8rem);
+  font-weight: 300;
+  line-height: 0.95;
+  color: var(--amber);
+  opacity: 0.78;
+}
+
+.not-found__title {
+  margin-bottom: var(--space-3);
+  font-size: clamp(1.4rem, 5vw, 2rem);
+}
+
+.not-found__divider {
+  width: 72px;
+  height: 1px;
+  margin: 0 auto var(--space-3);
+  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  opacity: 0.45;
+}
+
+.not-found__message {
+  margin-inline: auto;
+  margin-bottom: var(--space-4);
+  color: var(--text-muted);
+  max-width: 30ch;
+}
+
+.not-found__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.not-found__link:hover {
+  color: var(--text);
+  border-color: var(--amber-dim);
+  text-decoration: none;
+}
+
+.not-found__link:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+.not-found__equation {
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--text-subtle);
+}
+
+@media (max-width: 600px) {
+  .not-found-page {
+    padding: var(--space-3);
+  }
+
+  .not-found__panel {
+    padding: var(--space-4);
+  }
+
+  .not-found__link {
+    width: 100%;
+  }
+}

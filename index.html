@@ -9,14 +9,16 @@
   <meta name="keywords" content="Bell inequality, CHSH, detection loophole, post-selection bias, quantum nonlocality, Bell test, Tsirelson bound, Wang et al 2025, rebuttal" />
   <link rel="canonical" href="https://chshlab.meshal.ai" />
 
-  <!-- Resource hints -->
+  <!-- SHARED_HEAD:START -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" />
 
-  <!-- Favicon (Bell curve S icon) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230E0F14'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='bold' fill='%23C9A94D'%3ES%3C/text%3E%3Cline x1='4' y1='27' x2='28' y2='27' stroke='%23C9A94D' stroke-width='1.5' opacity='0.4'/%3E%3C/svg%3E" />
+
+  <script>document.documentElement.classList.remove('no-js');</script>
+  <!-- SHARED_HEAD:END -->
 
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
@@ -59,9 +61,10 @@
   }
   </script>
 
-  <script>document.documentElement.classList.remove('no-js');</script>
+  <!-- SHARED_CORE_STYLES:START -->
   <link rel="stylesheet" href="css/tokens.css" />
   <link rel="stylesheet" href="css/base.css" />
+  <!-- SHARED_CORE_STYLES:END -->
   <link rel="stylesheet" href="css/layout.css" />
   <link rel="stylesheet" href="css/components.css" />
 
@@ -92,6 +95,7 @@
     <a href="#postselection" class="section-dot" data-section="postselection" title="Post-Selection"><span class="sr-only">Post-Selection</span></a>
     <a href="#proof" class="section-dot" data-section="proof" title="The Proof"><span class="sr-only">The Proof</span></a>
     <a href="#standards" class="section-dot" data-section="standards" title="Standards"><span class="sr-only">Standards</span></a>
+    <a href="#lab-dashboard" class="section-dot" data-section="lab-dashboard" title="Dashboard"><span class="sr-only">Dashboard</span></a>
     <a href="#conclusion" class="section-dot" data-section="conclusion" title="Conclusion"><span class="sr-only">Conclusion</span></a>
   </nav>
 
@@ -661,7 +665,7 @@
       </div>
 
       <!-- Interactive: Timeline -->
-      <div class="figure-wrap reveal" id="timelineWrap" aria-label="Interactive timeline of Bell test experiments from 1964 to 2025">
+      <div class="figure-wrap timeline-wrap reveal" id="timelineWrap" aria-label="Interactive timeline of Bell test experiments from 1964 to 2025">
         <div id="timelineContainer" class="timeline-track"></div>
         <p class="figure-caption">
           <span class="figure-label">Timeline</span>
@@ -673,6 +677,116 @@
   </section>
 
   <hr class="section-rule section-rule--amber">
+
+  <!-- LIVE LAB DASHBOARD -->
+  <section id="lab-dashboard" class="beat beat--dashboard">
+    <div class="container">
+      <p class="section-label reveal">Testing Dashboard</p>
+      <h2 class="section-heading reveal">Live Physics And Algorithm Snapshot</h2>
+
+      <div class="beat__prose reveal">
+        <p>
+          This dashboard stays inside the argument surface. It watches the existing
+          demos, keeps a short in-memory history, and turns the latest interaction
+          into one scannable view of the physics thresholds, post-selection behavior,
+          and shareable rebuttal state.
+        </p>
+      </div>
+
+      <div class="dashboard-shell reveal" id="labDashboard" aria-label="Physics and algorithm testing dashboard">
+        <section class="dashboard-panel dashboard-panel--kpis" aria-labelledby="dashboardKpisTitle">
+          <div class="dashboard-panel__header">
+            <span class="figure-label">KPIs</span>
+            <h3 class="dashboard-panel__title" id="dashboardKpisTitle">Current diagnostics</h3>
+          </div>
+          <div class="dashboard-kpis">
+            <article class="dashboard-kpi" data-kpi="current-s">
+              <span class="dashboard-kpi__label">Current S</span>
+              <strong class="dashboard-kpi__value">--</strong>
+              <span class="dashboard-kpi__note">Waiting for demo state</span>
+            </article>
+            <article class="dashboard-kpi" data-kpi="classical-s">
+              <span class="dashboard-kpi__label">Classical S</span>
+              <strong class="dashboard-kpi__value">--</strong>
+              <span class="dashboard-kpi__note">Angle demo baseline</span>
+            </article>
+            <article class="dashboard-kpi" data-kpi="lhv-max">
+              <span class="dashboard-kpi__label">LHV Max</span>
+              <strong class="dashboard-kpi__value">--</strong>
+              <span class="dashboard-kpi__note">Detection threshold ceiling</span>
+            </article>
+            <article class="dashboard-kpi" data-kpi="acceptance">
+              <span class="dashboard-kpi__label">Acceptance</span>
+              <strong class="dashboard-kpi__value">--</strong>
+              <span class="dashboard-kpi__note">Selection-sensitive rate</span>
+            </article>
+            <article class="dashboard-kpi" data-kpi="efficiency">
+              <span class="dashboard-kpi__label">Efficiency</span>
+              <strong class="dashboard-kpi__value">--</strong>
+              <span class="dashboard-kpi__note">Detector efficiency eta</span>
+            </article>
+          </div>
+        </section>
+
+        <div class="dashboard-panel-grid">
+          <section class="dashboard-panel" aria-labelledby="dashboardTrendsTitle">
+            <div class="dashboard-panel__header">
+              <span class="figure-label">Trend Charts</span>
+              <h3 class="dashboard-panel__title" id="dashboardTrendsTitle">Recent slider history</h3>
+            </div>
+            <div class="dashboard-charts">
+              <article class="dashboard-chart">
+                <div class="dashboard-chart__header">
+                  <span class="dashboard-chart__label">Current S</span>
+                  <span class="dashboard-chart__note" data-chart-note="s">No samples yet</span>
+                </div>
+                <svg class="dashboard-chart__svg" data-chart="s" viewBox="0 0 320 120" role="img" aria-label="Recent current S history"></svg>
+              </article>
+              <article class="dashboard-chart">
+                <div class="dashboard-chart__header">
+                  <span class="dashboard-chart__label">LHV max</span>
+                  <span class="dashboard-chart__note" data-chart-note="lhv">No samples yet</span>
+                </div>
+                <svg class="dashboard-chart__svg" data-chart="lhv" viewBox="0 0 320 120" role="img" aria-label="Recent local hidden variable maximum history"></svg>
+              </article>
+              <article class="dashboard-chart">
+                <div class="dashboard-chart__header">
+                  <span class="dashboard-chart__label">Acceptance rate</span>
+                  <span class="dashboard-chart__note" data-chart-note="accept">No samples yet</span>
+                </div>
+                <svg class="dashboard-chart__svg" data-chart="accept" viewBox="0 0 320 120" role="img" aria-label="Recent acceptance rate history"></svg>
+              </article>
+            </div>
+          </section>
+
+          <section class="dashboard-panel" aria-labelledby="dashboardTableTitle">
+            <div class="dashboard-panel__header">
+              <span class="figure-label">Breakdown</span>
+              <h3 class="dashboard-panel__title" id="dashboardTableTitle">Per-demo status</h3>
+            </div>
+            <div class="dashboard-table-wrap">
+              <table class="dashboard-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Demo</th>
+                    <th scope="col">Current values</th>
+                    <th scope="col">Interpretation</th>
+                  </tr>
+                </thead>
+                <tbody data-dashboard-rows>
+                  <tr>
+                    <td colspan="3">Waiting for demo state...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-rule section-rule--blue">
 
   <!-- BEAT 8: CONCLUSION -->
   <section id="conclusion" class="beat beat--conclusion">
@@ -699,6 +813,21 @@
         <a href="paper.html" class="conclusion-link conclusion-link--primary">Read the Formal Paper &rarr;</a>
         <a href="https://github.com/alawein/chshlab" target="_blank" rel="noopener noreferrer" class="conclusion-link">Source Code on GitHub</a>
         <a href="https://doi.org/10.1126/sciadv.ads0058" target="_blank" rel="noopener noreferrer" class="conclusion-link">Wang et al. (2025)</a>
+      </div>
+
+      <div class="share-module reveal" id="shareModule" aria-labelledby="shareModuleTitle">
+        <div class="share-module__copy">
+          <span class="figure-label">Share This Rebuttal</span>
+          <h3 class="share-module__title" id="shareModuleTitle">Copy the live state into a clean rebuttal snapshot.</h3>
+          <p class="share-module__summary" id="shareSnapshotText" aria-live="polite">
+            Three numbers decide the case: classical S = 2.001, post-selected S = 3.716,
+            and Wang et al. report S = 2.275 at vanishing efficiency.
+          </p>
+        </div>
+        <div class="share-module__actions">
+          <button type="button" class="demo-export-btn share-module__button" id="shareSummaryBtn">Copy Summary</button>
+          <button type="button" class="demo-export-btn share-module__button" id="shareLinkBtn">Copy Snapshot Link</button>
+        </div>
       </div>
     </div>
   </section>

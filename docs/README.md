@@ -1,8 +1,8 @@
 ---
-type: canonical
-source: none
-sync: none
-sla: none
+type: derived
+source: docs/INDEX.md
+sync: manual
+sla: manual
 ---
 
 # CHSH Lab Documentation
@@ -24,3 +24,8 @@ Use this directory as the entrypoint for project planning, evidence mapping, per
 ## Design History
 
 - [superpowers/README.md](superpowers/README.md) - Archived planning and design-spec work for major site upgrades.
+
+## Meta
+
+- [meta/README.md](meta/README.md) - Non-runtime repository collateral.
+- [meta/ai/README.md](meta/ai/README.md) - Prompt packs and agent-oriented reference material.
