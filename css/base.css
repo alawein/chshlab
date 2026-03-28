@@ -9,7 +9,10 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: var(--bg);
+  background:
+    radial-gradient(circle at top center, rgba(201, 169, 77, 0.08), transparent 28%),
+    radial-gradient(circle at 78% 8%, rgba(201, 64, 64, 0.08), transparent 20%),
+    linear-gradient(180deg, #12131a 0%, #0e1016 34%, #11151d 100%);
   color: var(--text);
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
@@ -29,8 +32,8 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
-  opacity: 0.45;
-  animation: grainShift 0.15s steps(3) infinite;
+  opacity: 0.32;
+  animation: grainShift 0.2s steps(3) infinite;
   will-change: transform;
 }
 
@@ -42,8 +45,8 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.015,0.08' numOctaves='2' stitchTiles='stitch' seed='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)' opacity='0.025'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
-  opacity: 0.6;
-  animation: textileBreath 8s ease-in-out infinite alternate;
+  opacity: 0.48;
+  animation: textileBreath 10s ease-in-out infinite alternate;
 }
 
 @keyframes grainShift {
@@ -81,6 +84,11 @@ code, .mono {
 a { color: var(--blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+::selection {
+  background: rgba(201, 64, 64, 0.3);
+  color: #fff7ec;
+}
+
 /* Visually hidden but accessible to screen readers */
 .sr-only {
   position: absolute;
@@ -94,7 +102,10 @@ a:hover { text-decoration: underline; }
   border: 0;
 }
 
-.katex { color: var(--text); }
+.katex {
+  color: var(--text);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+}
 .katex-display { overflow-x: auto; padding: var(--space-2) 0; }
 
 hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-6) 0; }

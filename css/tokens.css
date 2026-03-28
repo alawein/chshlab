@@ -4,6 +4,16 @@
   --surface:      #161820;
   --surface-2:    #1E2028;
   --surface-3:    #262834;
+  --surface-paper: rgba(241, 232, 209, 0.05);
+  --surface-paper-strong: rgba(241, 232, 209, 0.08);
+  --paper-stain: rgba(201, 169, 77, 0.08);
+  --paper-stain-soft: rgba(201, 169, 77, 0.04);
+  --marker-amber: rgba(201, 169, 77, 0.18);
+  --marker-crimson: rgba(201, 64, 64, 0.20);
+  --marker-crimson-soft: rgba(201, 64, 64, 0.12);
+  --paper-shadow: 0 20px 60px rgba(0, 0, 0, 0.34);
+  --paper-shadow-soft: 0 14px 38px rgba(0, 0, 0, 0.24);
+  --ink-shadow: 0 1px 0 rgba(0, 0, 0, 0.28);
 
   --border:       rgba(255, 255, 255, 0.08);
   --border-light: rgba(255, 255, 255, 0.04);
@@ -31,6 +41,8 @@
   --chart-s-stroke:      #C94040;
   --chart-lhv-stroke:    #C9A94D;
   --chart-accept-stroke: #6B8F71;
+  --chart-grid:          rgba(255, 248, 230, 0.10);
+  --chart-paper:         rgba(241, 232, 209, 0.04);
 
   --space-1: 4px;
   --space-2: 8px;

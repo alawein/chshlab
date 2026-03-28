@@ -76,21 +76,43 @@ function renderChart(svg, points, options) {
   clearNode(svg);
 
   const width = 320;
-  const height = 120;
-  const padX = 14;
-  const padY = 16;
+  const height = 132;
+  const padX = 18;
+  const padY = 18;
   const innerWidth = width - padX * 2;
   const innerHeight = height - padY * 2;
+  const gridColor = readColorToken('--chart-grid', 'rgba(255, 248, 230, 0.1)');
+  const paperColor = readColorToken('--chart-paper', 'rgba(241, 232, 209, 0.04)');
+  const axisColor = readColorToken('--border', 'rgba(255,255,255,0.08)');
+  const textColor = readColorToken('--text-faint', '#5C5A55');
+  const panelStroke = 'rgba(255, 248, 230, 0.06)';
+
+  svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+  svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 
   const background = createSvgElement('rect', {
     x: '0',
     y: '0',
     width: String(width),
     height: String(height),
-    rx: '10',
-    fill: 'rgba(255,255,255,0.02)',
+    rx: '12',
+    fill: paperColor,
+    stroke: panelStroke,
   });
   svg.appendChild(background);
+
+  for (let index = 0; index <= 3; index += 1) {
+    const y = padY + (innerHeight * index) / 3;
+    svg.appendChild(createSvgElement('line', {
+      x1: String(padX),
+      y1: y.toFixed(1),
+      x2: String(width - padX),
+      y2: y.toFixed(1),
+      stroke: gridColor,
+      'stroke-width': index === 3 ? '1.2' : '1',
+      'stroke-dasharray': index === 3 ? '0' : '3 5',
+    }));
+  }
 
   if (!points.length) {
     const label = createSvgElement('text', {
@@ -110,23 +132,92 @@ function renderChart(svg, points, options) {
   const min = options.min !== undefined ? options.min : Math.min(...values);
   const max = options.max !== undefined ? options.max : Math.max(...values);
   const range = max - min || 1;
+  const safeThresholds = Array.isArray(options.thresholds) ? options.thresholds : [];
+
+  function pointX(index) {
+    return padX + (innerWidth * index) / Math.max(points.length - 1, 1);
+  }
+
+  function pointY(value) {
+    return padY + innerHeight - ((value - min) / range) * innerHeight;
+  }
 
   const baseline = createSvgElement('line', {
     x1: String(padX),
     y1: String(height - padY),
     x2: String(width - padX),
     y2: String(height - padY),
-    stroke: 'rgba(255,255,255,0.08)',
+    stroke: axisColor,
     'stroke-width': '1',
   });
   svg.appendChild(baseline);
 
+  svg.appendChild(createSvgElement('text', {
+    x: String(padX),
+    y: String(padY - 6),
+    fill: textColor,
+    'font-size': '9',
+    'font-family': 'JetBrains Mono, monospace',
+  }));
+  svg.lastChild.textContent = Number.isFinite(max) ? max.toFixed(max >= 10 ? 0 : 2) : '';
+
+  svg.appendChild(createSvgElement('text', {
+    x: String(padX),
+    y: String(height - 4),
+    fill: textColor,
+    'font-size': '9',
+    'font-family': 'JetBrains Mono, monospace',
+  }));
+  svg.lastChild.textContent = Number.isFinite(min) ? min.toFixed(min >= 10 ? 0 : 2) : '';
+
+  safeThresholds.forEach((threshold) => {
+    if (!Number.isFinite(threshold.value) || threshold.value < min || threshold.value > max) return;
+    const y = pointY(threshold.value);
+    svg.appendChild(createSvgElement('line', {
+      x1: String(padX),
+      y1: y.toFixed(1),
+      x2: String(width - padX),
+      y2: y.toFixed(1),
+      stroke: threshold.stroke || options.stroke,
+      'stroke-width': '1',
+      'stroke-dasharray': '6 4',
+      opacity: '0.72',
+    }));
+
+    if (threshold.label) {
+      const thresholdLabel = createSvgElement('text', {
+        x: String(width - padX - 2),
+        y: (y < padY + 12 ? y + 10 : y - 4).toFixed(1),
+        'text-anchor': 'end',
+        fill: threshold.stroke || options.stroke,
+        'font-size': '9',
+        'font-family': 'JetBrains Mono, monospace',
+      });
+      thresholdLabel.textContent = threshold.label;
+      svg.appendChild(thresholdLabel);
+    }
+  });
+
   let pathData = '';
   points.forEach((point, index) => {
-    const x = padX + (innerWidth * index) / Math.max(points.length - 1, 1);
-    const y = padY + innerHeight - ((point.value - min) / range) * innerHeight;
+    const x = pointX(index);
+    const y = pointY(point.value);
     pathData += (index === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
   });
+
+  const firstX = pointX(0);
+  const lastX = pointX(points.length - 1);
+  const areaData = points.length > 1
+    ? pathData + 'L' + lastX.toFixed(1) + ',' + (height - padY).toFixed(1) + 'L' + firstX.toFixed(1) + ',' + (height - padY).toFixed(1) + 'Z'
+    : '';
+
+  if (areaData) {
+    const area = createSvgElement('path', {
+      d: areaData,
+      fill: options.fill || 'transparent',
+    });
+    svg.appendChild(area);
+  }
 
   const path = createSvgElement('path', {
     d: pathData,
@@ -139,13 +230,23 @@ function renderChart(svg, points, options) {
   svg.appendChild(path);
 
   const latest = points[points.length - 1];
-  const latestX = padX + (innerWidth * (points.length - 1)) / Math.max(points.length - 1, 1);
-  const latestY = padY + innerHeight - ((latest.value - min) / range) * innerHeight;
+  const latestX = pointX(points.length - 1);
+  const latestY = pointY(latest.value);
+  const halo = createSvgElement('circle', {
+    cx: latestX.toFixed(1),
+    cy: latestY.toFixed(1),
+    r: '8',
+    fill: options.stroke,
+    opacity: '0.12',
+  });
+  svg.appendChild(halo);
   const marker = createSvgElement('circle', {
     cx: latestX.toFixed(1),
     cy: latestY.toFixed(1),
     r: '4.5',
     fill: options.stroke,
+    stroke: readColorToken('--bg', '#0E0F14'),
+    'stroke-width': '2',
   });
   svg.appendChild(marker);
 }
@@ -252,6 +353,11 @@ export function initDashboard() {
     lhv: readColorToken('--chart-lhv-stroke', '#C9A94D'),
     accept: readColorToken('--chart-accept-stroke', '#6B8F71'),
   };
+  const chartFills = {
+    s: 'rgba(201, 64, 64, 0.14)',
+    lhv: 'rgba(201, 169, 77, 0.14)',
+    accept: 'rgba(107, 143, 113, 0.14)',
+  };
 
   const kpiCards = new Map();
   dashboard.querySelectorAll('[data-kpi]').forEach((card) => {
@@ -329,9 +435,34 @@ export function initDashboard() {
       chartNotes.accept.textContent = acceptSeries.length ? 'Latest ' + acceptSeries[acceptSeries.length - 1].value.toFixed(1) + '%' : 'No samples yet';
     }
 
-    renderChart(charts.s, sSeries, { stroke: chartColors.s, min: 0, max: 4 });
-    renderChart(charts.lhv, lhvSeries, { stroke: chartColors.lhv, min: 2, max: 6 });
-    renderChart(charts.accept, acceptSeries, { stroke: chartColors.accept, min: 50, max: 100 });
+    renderChart(charts.s, sSeries, {
+      stroke: chartColors.s,
+      fill: chartFills.s,
+      min: 0,
+      max: 4,
+      thresholds: [
+        { value: 2, label: 'S = 2', stroke: chartColors.lhv },
+        { value: 2 * Math.SQRT2, label: '2√2', stroke: readColorToken('--blue', '#4FA3D4') },
+      ],
+    });
+    renderChart(charts.lhv, lhvSeries, {
+      stroke: chartColors.lhv,
+      fill: chartFills.lhv,
+      min: 2,
+      max: 6,
+      thresholds: [
+        { value: 2, label: 'S = 2', stroke: chartColors.lhv },
+      ],
+    });
+    renderChart(charts.accept, acceptSeries, {
+      stroke: chartColors.accept,
+      fill: chartFills.accept,
+      min: 50,
+      max: 100,
+      thresholds: [
+        { value: 82.8, label: 'ηc', stroke: chartColors.lhv },
+      ],
+    });
   }
 
   function updateTable() {
