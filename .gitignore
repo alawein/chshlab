@@ -2,3 +2,7 @@
 .superpowers/
 debug.log
 __pycache__/
+output/
+tmp/
+.playwright-cli/
+.playwright-mcp/

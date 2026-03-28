@@ -1,17 +1,12 @@
 /* chshlab/css/paper.css */
 
-html,
-body {
-  overflow-x: hidden;
-}
-
 .paper-banner {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   padding: var(--space-2) var(--space-4);
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--text-faint);
+  color: var(--text-muted);
   text-align: center;
 }
 
@@ -23,6 +18,10 @@ body {
   max-width: 1160px;
   margin: 0 auto;
   padding: var(--space-6) var(--space-4);
+}
+
+.paper-layout > * {
+  min-width: 0;
 }
 
 @media (min-width: 1100px) {
@@ -39,20 +38,21 @@ body {
   font-family: var(--font-mono);
   font-size: 11px;
   line-height: 1.8;
+  min-width: 0;
 }
 
 .paper-toc a {
   display: block;
   padding: 3px 0 3px 12px;
   border-left: 1px solid var(--border);
-  color: var(--text-faint);
+  color: var(--text-muted);
   text-decoration: none;
   transition: color 0.15s ease, border-color 0.2s ease;
 }
 
 .paper-toc a:hover {
-  color: var(--text-muted);
-  border-left-color: var(--text-faint);
+  color: var(--text);
+  border-left-color: var(--text-subtle);
 }
 
 .paper-toc a.toc-active {
@@ -99,13 +99,16 @@ body {
 }
 
 .paper-article {
+  width: min(100%, 760px);
   max-width: 760px;
+  min-width: 0;
   line-height: 1.85;
   counter-reset: section;
 }
 
 .paper-header {
   margin-bottom: var(--space-6);
+  min-width: 0;
 }
 
 .paper-kicker,
@@ -132,11 +135,12 @@ body {
 .paper-byline {
   font-family: var(--font-mono);
   font-size: 12px;
-  color: var(--text-faint);
+  color: var(--text-muted);
   margin-bottom: var(--space-4);
+  overflow-wrap: anywhere;
 }
 
-.paper-byline a { color: var(--text-muted); }
+.paper-byline a { color: var(--text); }
 
 .paper-meta {
   display: grid;
@@ -164,8 +168,10 @@ body {
 .paper-actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: stretch;
   gap: var(--space-2);
   margin-bottom: var(--space-4);
+  min-width: 0;
 }
 
 .paper-action {
@@ -173,6 +179,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 40px;
+  min-width: 0;
   padding: var(--space-2) var(--space-3);
   border: 1px solid var(--border);
   background: transparent;
@@ -520,6 +527,14 @@ body {
     max-width: none;
   }
 
+  .paper-actions {
+    flex-direction: column;
+  }
+
+  .paper-action {
+    width: 100%;
+  }
+
   .paper-meta {
     grid-template-columns: 1fr;
   }
@@ -532,8 +547,52 @@ body {
 }
 
 @media print {
+  body::before,
+  body::after,
+  .paper-banner,
+  .paper-actions,
+  .paper-toc,
+  .paper-toc-mobile,
+  .skip-link {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .paper-layout {
+    display: block;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .paper-article {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .paper-section,
+  .paper-figure,
+  .paper-table-wrap,
   .paper-formal,
   .paper-proof {
     break-inside: avoid;
+  }
+
+  .paper-abstract {
+    border-left-color: #666;
+    color: #333;
+  }
+
+  .math-block,
+  .paper-article .math-block {
+    background: #f5f5f5;
+    border-color: #ccc;
+  }
+
+  a {
+    color: #1a0dab;
   }
 }

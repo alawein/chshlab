@@ -337,9 +337,13 @@ input[type="range"] {
   appearance: none;
   height: 2px;
   background: var(--border);
-  outline: none;
   width: 100%;
   cursor: pointer;
+}
+
+input[type="range"]:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 6px;
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -555,7 +559,7 @@ input[type="range"]::-moz-range-thumb:active {
   padding: var(--space-1) var(--space-2);
   border: 1px solid var(--border);
   background: none;
-  color: var(--text-faint);
+  color: var(--text-muted);
   cursor: pointer;
   transition: color 0.2s, border-color 0.2s;
 }
@@ -567,7 +571,7 @@ input[type="range"]::-moz-range-thumb:active {
   height: 28px;
   border: 1px solid var(--border);
   background: none;
-  color: var(--text-faint);
+  color: var(--text-muted);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -795,7 +799,11 @@ input[type="range"]::-moz-range-thumb:active {
     top: 52px;
     left: 0;
     right: 0;
-    background: rgba(14, 15, 20, 0.97);
+    min-height: calc(100svh - 52px);
+    overflow-y: auto;
+    background:
+      linear-gradient(180deg, rgba(14, 15, 20, 0.995), rgba(14, 15, 20, 0.985)),
+      rgba(14, 15, 20, 0.99);
     backdrop-filter: blur(16px);
     padding: var(--space-4) var(--space-5);
     gap: var(--space-3);

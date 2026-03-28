@@ -4,7 +4,7 @@ source: none
 sync: none
 sla: none
 authority: canonical
-last-verified: 2026-03-21
+last-verified: 2026-03-27
 audience: [ai-agents, contributors]
 ---
 
@@ -25,6 +25,7 @@ audience: [ai-agents, contributors]
 - HTML5 documents with CDN-loaded dependencies
 - CSS custom-property design system
 - Browser ES modules in `js/`
+- Shared static HTML partial sync in `partials/` via `scripts/sync_shared_html.py`
 - Python utility script for figure generation: `scripts/generate_figures.py`
 
 No package manifest, no test runner, no linter config, and no typechecker config are currently present in this repository.
@@ -54,9 +55,15 @@ chshlab/
     base.css
     layout.css
     components.css
+    not-found.css
     paper.css
   js/
     main.js
+    katex-render.js
+    page-navigation.js
+    page-state.js
+    page-timeline.js
+    paper.js
     scroll.js
     animation-config.js
     fig-bell-test.js
@@ -68,8 +75,13 @@ chshlab/
     references.js
     sonification.js
     starfield.js
+  partials/
+    head-shared.html
+    styles-core.html
   scripts/
     generate_figures.py
+    run_visual_audit.py
+    sync_shared_html.py
   docs/
     README.md
     INDEX.md
@@ -81,6 +93,13 @@ chshlab/
     PERFORMANCE_BUDGET.md
     INNOVATION_UPGRADE_NOTES.md
     migration_changelog.md
+    meta/
+      README.md
+      ai/
+        README.md
+        claude-code-guide.jsx
+        claude-code-superprompt.jsx
+        REPO-SWEEP-PROMPT.md
     superpowers/
 ```
 
@@ -90,6 +109,8 @@ chshlab/
 - `paper.html` is the formal, print-friendly paper artifact.
 - `assets/figures/` stores the figure set used by both pages.
 - `docs/` stores planning, provenance, and upgrade history rather than runtime code.
+- `docs/meta/ai/` stores prompt collateral and other agent-side reference material that should not clutter the root.
+- `partials/` plus `scripts/sync_shared_html.py` are the source of truth for shared head/style fragments across the public HTML pages.
 
 ## Notes On Drift
 

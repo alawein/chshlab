@@ -11,6 +11,7 @@
   --text:         #EAE6DA;
   --text-muted:   #9A9485;
   --text-faint:   #5C5A55;
+  --text-subtle:  #7A756B;
 
   --amber:        #C9A94D;
   --amber-dim:    #6B5820;
@@ -23,9 +24,13 @@
 
   --rule:         rgba(201, 169, 77, 0.20);
 
-  --font-display: 'Cormorant Garant', 'Georgia', serif;
+  --font-display: 'Cormorant Garamond', 'Georgia', serif;
   --font-body:    'EB Garamond', 'Georgia', serif;
   --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+
+  --chart-s-stroke:      #C94040;
+  --chart-lhv-stroke:    #C9A94D;
+  --chart-accept-stroke: #6B8F71;
 
   --space-1: 4px;
   --space-2: 8px;

@@ -2,7 +2,7 @@
 // Cinematic scroll choreography — GSAP timelines per beat section
 
 export function initScroll() {
-  if (typeof gsap === 'undefined') return;
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -10,10 +10,7 @@ export function initScroll() {
 
   if (prefersReducedMotion) {
     // Show everything immediately — no animations
-    document.querySelectorAll('.reveal').forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
-    });
+    revealImmediately(document.querySelectorAll('.reveal'));
     document.querySelectorAll('.section-rule').forEach(r => { r.style.transform = 'scaleX(1)'; });
 
     // Still register nav scroll toggle (visual, a11y-neutral)
@@ -51,7 +48,7 @@ export function initScroll() {
 
   // ── BEAT SECTIONS: PROSE + FIGURES ──
   // Reveal each beat's content as user scrolls into view
-  ['claim', 'efficiency', 'loophole', 'postselection', 'proof', 'standards', 'conclusion'].forEach(id => {
+  ['claim', 'efficiency', 'loophole', 'postselection', 'proof', 'standards', 'lab-dashboard', 'conclusion'].forEach(id => {
     sectionReveal('#' + id, {
       children: '.reveal',
       stagger: 0.1,
@@ -67,6 +64,11 @@ export function initScroll() {
   // ── REMAINING .reveal ELEMENTS (catch-all) ──
   const remaining = document.querySelectorAll('.reveal');
   remaining.forEach(el => {
+    if (isInInitialView(el)) {
+      revealImmediately([el]);
+      return;
+    }
+
     gsap.from(el, {
       opacity: 0, y: 20, duration: 0.7, ease: 'power2.out',
       scrollTrigger: {
@@ -84,6 +86,22 @@ export function initScroll() {
   // ── ATMOSPHERE + NAV ACTIVE ──
   initAtmosphere();
   initNavActive();
+}
+
+function setRevealVisible(element) {
+  element.style.opacity = '1';
+  element.style.transform = 'none';
+  element.classList.remove('reveal');
+}
+
+function revealImmediately(elements) {
+  elements.forEach(element => setRevealVisible(element));
+}
+
+function isInInitialView(element, thresholdRatio = 0.88) {
+  const rect = element.getBoundingClientRect();
+  const threshold = window.innerHeight * thresholdRatio;
+  return rect.top <= threshold && rect.bottom >= 0;
 }
 
 // ── HOOK: Split title into word spans ──
@@ -138,6 +156,11 @@ function sectionReveal(sectionSelector, { children, stagger = 0.1 }) {
 
   const els = section.querySelectorAll(children);
   if (!els.length) return;
+
+  if (isInInitialView(section)) {
+    revealImmediately(els);
+    return;
+  }
 
   gsap.from(els, {
     opacity: 0,

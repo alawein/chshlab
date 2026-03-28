@@ -17,6 +17,10 @@ body {
   position: relative;
 }
 
+body.nav-open {
+  overflow: hidden;
+}
+
 /* Film grain overlay — high-frequency noise */
 body::before {
   content: '';

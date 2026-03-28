@@ -65,7 +65,14 @@ function createSvgElement(tag, attrs = {}) {
   return element;
 }
 
+function readColorToken(name, fallback) {
+  const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return value || fallback;
+}
+
 function renderChart(svg, points, options) {
+  if (!svg) return;
+
   clearNode(svg);
 
   const width = 320;
@@ -90,7 +97,7 @@ function renderChart(svg, points, options) {
       x: String(width / 2),
       y: String(height / 2 + 4),
       'text-anchor': 'middle',
-      fill: '#9A9485',
+      fill: readColorToken('--text-muted', '#9A9485'),
       'font-size': '12',
       'font-family': 'JetBrains Mono, monospace',
     });
@@ -240,6 +247,12 @@ export function initDashboard() {
   const dashboard = document.getElementById('labDashboard');
   if (!dashboard) return;
 
+  const chartColors = {
+    s: readColorToken('--chart-s-stroke', '#C94040'),
+    lhv: readColorToken('--chart-lhv-stroke', '#C9A94D'),
+    accept: readColorToken('--chart-accept-stroke', '#6B8F71'),
+  };
+
   const kpiCards = new Map();
   dashboard.querySelectorAll('[data-kpi]').forEach((card) => {
     kpiCards.set(card.dataset.kpi, {
@@ -316,12 +329,13 @@ export function initDashboard() {
       chartNotes.accept.textContent = acceptSeries.length ? 'Latest ' + acceptSeries[acceptSeries.length - 1].value.toFixed(1) + '%' : 'No samples yet';
     }
 
-    renderChart(charts.s, sSeries, { stroke: '#C94040', min: 0, max: 4 });
-    renderChart(charts.lhv, lhvSeries, { stroke: '#C9A94D', min: 2, max: 6 });
-    renderChart(charts.accept, acceptSeries, { stroke: '#6B8F71', min: 50, max: 100 });
+    renderChart(charts.s, sSeries, { stroke: chartColors.s, min: 0, max: 4 });
+    renderChart(charts.lhv, lhvSeries, { stroke: chartColors.lhv, min: 2, max: 6 });
+    renderChart(charts.accept, acceptSeries, { stroke: chartColors.accept, min: 50, max: 100 });
   }
 
   function updateTable() {
+    if (!rowsTarget) return;
     clearNode(rowsTarget);
 
     DEMO_ORDER.forEach((demo) => {

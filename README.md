@@ -4,7 +4,7 @@ source: none
 sync: none
 sla: none
 authority: canonical
-last-verified: 2026-03-21
+last-verified: 2026-03-27
 audience: [ai-agents, contributors]
 ---
 
@@ -20,8 +20,12 @@ CHSH Lab is a static website that presents an interactive rebuttal to claims of 
 - `assets/figures/` generated figures used across the site
 - `css/` design tokens and page styling
 - `js/` ES-module interactions and demo logic
+- `partials/` shared HTML head/style fragments synced into public pages
 - `scripts/generate_figures.py` figure regeneration utility
+- `scripts/sync_shared_html.py` shared head/style sync step for static pages
+- `scripts/run_visual_audit.py` repeatable Playwright screenshot matrix
 - `docs/` planning, fact-check, provenance, and upgrade history
+- `docs/meta/ai/` non-runtime prompt and agent collateral
 
 ## Local Preview
 
@@ -45,6 +49,7 @@ bash build.sh
 ```
 
 Successful output is written to `.vercel/output/`.
+The build also runs `python scripts/sync_shared_html.py` so shared head/style fragments stay aligned across `index.html`, `paper.html`, and `404.html`.
 
 ## Figure Regeneration
 
@@ -63,6 +68,14 @@ It writes figure assets into `assets/figures/`. The script expects the Python sc
 - Automated typecheck: `n/a`
 - Automated tests: `n/a`
 - Manual verification: local browser pass on `index.html` and `paper.html`
+
+## Visual Audit
+
+Capture the standard breakpoint matrix into `output/playwright/`:
+
+```bash
+python scripts/run_visual_audit.py
+```
 
 ## Documentation
 
