@@ -1,8 +1,8 @@
 ---
-type: canonical
-source: none
-sync: none
-sla: none
+type: derived
+source: docs/INDEX.md
+sync: manual
+sla: manual
 ---
 
 # CHSH Lab Documentation

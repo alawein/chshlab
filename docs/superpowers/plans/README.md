@@ -1,8 +1,8 @@
 ---
-type: canonical
-source: none
-sync: none
-sla: none
+type: derived
+source: docs/superpowers/plans/
+sync: manual
+sla: manual
 ---
 
 # Superpowers Plans

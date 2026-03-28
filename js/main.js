@@ -1,7 +1,7 @@
 // chshlab/js/main.js
 // Entrypoint: KaTeX, smooth scroll, module loading, timeline, permalink restore
 
-import { paramsToState, initMicroInteractions } from './animation-config.js';
+import { copyText, paramsToState, initMicroInteractions } from './animation-config.js';
 
 // ── KATEX ──
 function initKaTeX() {
@@ -127,13 +127,17 @@ function initDemoExport() {
     linkBtn.className = 'demo-export-btn';
     linkBtn.textContent = 'Copy Link';
     linkBtn.addEventListener('click', () => {
+      const originalLabel = linkBtn.textContent;
       const params = new URLSearchParams();
       params.set('fig', panel.id);
       panel.querySelectorAll('input[type="range"]').forEach(s => params.set(s.id, s.value));
       const url = window.location.origin + window.location.pathname + '?' + params.toString();
-      navigator.clipboard.writeText(url).then(() => {
+      copyText(url).then(() => {
         linkBtn.textContent = 'Copied!';
-        setTimeout(() => { linkBtn.textContent = 'Copy Link'; }, 1500);
+        setTimeout(() => { linkBtn.textContent = originalLabel; }, 1500);
+      }).catch(() => {
+        linkBtn.textContent = 'Copy failed';
+        setTimeout(() => { linkBtn.textContent = originalLabel; }, 1500);
       });
     });
 
@@ -195,7 +199,7 @@ function initSectionDots() {
   const dotsNav = document.getElementById('sectionDots');
   if (!dotsNav) return;
   const dots = dotsNav.querySelectorAll('.section-dot');
-  const sections = ['hook', 'claim', 'efficiency', 'loophole', 'postselection', 'proof', 'standards', 'conclusion'];
+  const sections = ['hook', 'claim', 'efficiency', 'loophole', 'postselection', 'proof', 'standards', 'lab-dashboard', 'conclusion'];
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -314,6 +318,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const { initScroll } = await import('./scroll.js').catch(() => ({ initScroll: null }));
   if (initScroll) initScroll();
 
+  await safeImport('./dashboard.js', 'initDashboard');
   await safeImport('./fig-bell-test.js', 'initBellTest');
   await safeImport('./fig-gauge.js', 'initGauge');
   await safeImport('./demo-efficiency.js', 'initEfficiencyDemo');
