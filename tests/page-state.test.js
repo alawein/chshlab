@@ -92,7 +92,7 @@ describe('initDemoExport', () => {
 
   it('Copy Link button copies permalink to clipboard', async () => {
     Object.defineProperty(window, 'location', {
-      value: { origin: 'https://chshlab.meshal.ai', pathname: '/' },
+      value: { origin: 'https://chshlab.online', pathname: '/' },
       writable: true,
     });
 
@@ -117,7 +117,7 @@ describe('initDemoExport', () => {
 
   it('Copy Link button shows "Copied!" feedback temporarily', async () => {
     Object.defineProperty(window, 'location', {
-      value: { origin: 'https://chshlab.meshal.ai', pathname: '/' },
+      value: { origin: 'https://chshlab.online', pathname: '/' },
       writable: true,
     });
 
