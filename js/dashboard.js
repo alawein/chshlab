@@ -530,25 +530,27 @@ export function initDashboard() {
 
   if (shareSummaryBtn) {
     shareSummaryBtn.dataset.label = shareSummaryBtn.textContent;
-    shareSummaryBtn.addEventListener('click', () => {
-      copyText(buildShareText()).then(() => {
+    shareSummaryBtn.addEventListener('click', async () => {
+      try {
+        await copyText(buildShareText());
         emitMetric('share_clicked', { source: 'conclusion-share', fig: 'share' });
         setButtonFeedback(shareSummaryBtn, 'Copied');
-      }).catch(() => {
+      } catch {
         setButtonFeedback(shareSummaryBtn, 'Copy failed');
-      });
+      }
     });
   }
 
   if (shareLinkBtn) {
     shareLinkBtn.dataset.label = shareLinkBtn.textContent;
-    shareLinkBtn.addEventListener('click', () => {
-      copyText(buildPermalink()).then(() => {
+    shareLinkBtn.addEventListener('click', async () => {
+      try {
+        await copyText(buildPermalink());
         emitMetric('share_clicked', { source: 'conclusion-share', fig: 'share' });
         setButtonFeedback(shareLinkBtn, 'Copied');
-      }).catch(() => {
+      } catch {
         setButtonFeedback(shareLinkBtn, 'Copy failed');
-      });
+      }
     });
   }
 }
