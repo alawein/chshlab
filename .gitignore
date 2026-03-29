@@ -6,3 +6,5 @@ output/
 tmp/
 .playwright-cli/
 .playwright-mcp/
+node_modules/
+coverage/
