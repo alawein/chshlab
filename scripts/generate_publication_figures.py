@@ -112,7 +112,7 @@ def fig1_bounds(theme: Theme, out_dir: Path) -> None:
 
     ax.text(2.02, -0.55, 'fair-sampling local ceiling', color=theme.amber, fontsize=9)
     ax.text(2 * np.sqrt(2) + 0.03, 1.55, 'quantum ceiling', color=theme.green, fontsize=9)
-    _save(fig, 'publication_fig1_bounds.png', out_dir, theme)
+    _save(fig, 'fig1_bounds.png', out_dir, theme)
     plt.close(fig)
 
 
@@ -145,7 +145,7 @@ def fig2_efficiency(theme: Theme, out_dir: Path) -> None:
     ax.text(1.4e-19, 0.92, 'selection-heavy regime', color=theme.crimson, fontsize=9)
     ax.text(0.72, 0.92, 'threshold regime for serious loophole control', color=theme.green,
             fontsize=9, ha='left')
-    _save(fig, 'publication_fig2_efficiency.png', out_dir, theme)
+    _save(fig, 'fig2_efficiency.png', out_dir, theme)
     plt.close(fig)
 
 
@@ -189,7 +189,7 @@ def fig3_postselection_curve(theme: Theme, out_dir: Path) -> None:
 
     ax1.text(0.015, 2.03, 'classical bound', color=theme.amber, fontsize=9)
     ax1.text(0.015, 2 * np.sqrt(2) + 0.03, 'Tsirelson bound', color=theme.green, fontsize=9)
-    _save(fig, 'publication_fig3_postselection_curve.png', out_dir, theme)
+    _save(fig, 'fig3_postselection_curve.png', out_dir, theme)
     plt.close(fig)
 
 
@@ -217,7 +217,7 @@ def fig4_correlators(theme: Theme, out_dir: Path) -> None:
     ax.text(0.02, 0.92, 'Raw S = 2.000', transform=ax.transAxes, fontsize=9, color=theme.blue)
     ax.text(0.02, 0.84, 'Selected S = 26/7 = 3.714', transform=ax.transAxes, fontsize=9,
             color=theme.crimson)
-    _save(fig, 'publication_fig4_correlators.png', out_dir, theme)
+    _save(fig, 'fig4_correlators.png', out_dir, theme)
     plt.close(fig)
 
 
