@@ -87,11 +87,15 @@ export function initDemoExport() {
       });
 
       const url = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
-      copyText(url).then(() => {
-        setTemporaryButtonLabel(linkButton, 'Copied!');
-      }).catch(() => {
-        setTemporaryButtonLabel(linkButton, 'Copy failed');
-      });
+      (async () => {
+        try {
+          await copyText(url);
+          setTemporaryButtonLabel(linkButton, 'Copied!');
+        } catch (error) {
+          console.error('Copy link failed', error);
+          setTemporaryButtonLabel(linkButton, 'Copy failed');
+        }
+      })();
     });
 
     wrap.appendChild(exportButton);

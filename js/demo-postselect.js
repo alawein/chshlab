@@ -1,14 +1,14 @@
 // chshlab/js/demo-postselect.js
 // Demo 3: Post-selection bias simulator
-// Shows how outcome-dependent selection inflates CHSH S from classical LHV data
+// Shows how the paper's exact outcome-coupled filter inflates CHSH S from classical LHV data
 
 import { emitState } from './animation-config.js';
 
 const ETA_CRIT = 2 / (1 + Math.sqrt(2)); // ≈ 0.8284
 
 // Theorem 3 constructive example formulas
-function postS(p)      { return 2 + 2 * (1 - p); }       // 2 at p=1, 4 at p=0
-function acceptRate(p) { return 0.5 + 0.5 * p; }         // 100% at p=1, 50% at p=0
+function postS(pLo)      { return 2 + 2 * (1 - pLo); }  // 4 at pLo=0, 2 at pLo=1
+function acceptRate(pLo) { return 0.5 + 0.5 * pLo; }    // 50% at pLo=0, 100% at pLo=1
 
 export function initPostSelectDemo() {
   const canvas         = document.getElementById('postSelectCanvas');
@@ -20,7 +20,7 @@ export function initPostSelectDemo() {
   const readoutAccept  = document.getElementById('readoutAccept');
   const readoutVerdict = document.getElementById('readoutVerdict');
 
-  const state = { p: parseFloat(slider.value) };
+  const state = { pLo: parseFloat(slider.value) };
 
   const ro = new ResizeObserver(() => {
     const dpr = window.devicePixelRatio || 1;
@@ -32,11 +32,11 @@ export function initPostSelectDemo() {
   ro.observe(canvas);
 
   function render() {
-    const p      = state.p;
-    const s      = postS(p);
-    const accept = acceptRate(p);
+    const pLo    = state.pLo;
+    const s      = postS(pLo);
+    const accept = acceptRate(pLo);
 
-    if (valBias)        valBias.textContent        = p.toFixed(2);
+    if (valBias)        valBias.textContent        = pLo.toFixed(2);
     if (readoutS)       readoutS.textContent       = s.toFixed(3);
     if (readoutAccept)  readoutAccept.textContent  = (accept * 100).toFixed(1) + '%';
 
@@ -57,16 +57,21 @@ export function initPostSelectDemo() {
     }
 
     drawGauge(ctx, canvas, s, accept);
-    emitState({ demo: 'postselect', s, accept, p: state.p });
+    emitState({ demo: 'postselect', s, accept, pLo, pHi: 1 - pLo });
   }
 
   if (slider) slider.addEventListener('input', () => {
-    gsap.to(state, {
-      p: parseFloat(slider.value),
-      duration: 0.15,
-      ease: 'power1.out',
-      onUpdate: () => render(),
-    });
+    if (typeof gsap !== 'undefined') {
+      gsap.to(state, {
+        pLo: parseFloat(slider.value),
+        duration: 0.15,
+        ease: 'power1.out',
+        onUpdate: () => render(),
+      });
+    } else {
+      state.pLo = parseFloat(slider.value);
+      render();
+    }
   });
   render();
 }

@@ -1,17 +1,11 @@
 ---
 type: canonical
-source: none
-sync: none
-sla: none
+authority: canonical
+audience: [ai-agents, contributors]
+last-verified: 2026-03-21
 ---
 
 <!-- CUSTOM OVERRIDE: entire file — static two-page site for CHSH Bell inequality rebuttal, build.sh deploy, no framework, browser ES modules. [Task 1.4 audit 2026-03-22] -->
----
-type: guide
-authority: canonical
-last-verified: 2026-03-21
-audience: [ai-agents, contributors]
----
 
 # CLAUDE
 

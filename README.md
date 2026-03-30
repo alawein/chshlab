@@ -40,6 +40,16 @@ Then open:
 - `http://127.0.0.1:4317/index.html`
 - `http://127.0.0.1:4317/paper.html`
 
+## Notebook Execution
+
+Run the simulation notebook through the repo-local wrapper:
+
+```powershell
+.\scripts\run_chshlab_notebook.ps1
+```
+
+This uses the working Python 3.12 interpreter on this machine and writes the executed artifact to `output/jupyter-notebook/chshlab-simulations-executed.ipynb`.
+
 ## Build
 
 This repo uses a shell script to produce a Vercel Build Output API bundle:

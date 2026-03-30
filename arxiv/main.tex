@@ -1,0 +1,310 @@
+% arXiv submission source for CHSH Lab.
+% Compile with pdflatex twice after regenerating publication figures.
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue
+}
+
+\graphicspath{{figures/}}
+\setlength{\emergencystretch}{2em}
+\urlstyle{same}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\sel}{\mathrm{sel}}
+\newcommand{\lhv}{\mathrm{LHV}}
+\newcommand{\qm}{\mathrm{QM}}
+
+\title{Bell Violations Without Entanglement?\\A Source-Checked Reassessment of Wang et al.~(2025)}
+\author{Meshal Alawein\\UC Berkeley\\\texttt{contact@meshal.ai}}
+\date{Version 1.3\\March 30, 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Wang et al.~report a Bell-inequality violation without entanglement by constructing CHSH correlators from postselected fourfold coincidences in a path-identity interferometric experiment \cite{wang2025}. The experiment is serious quantum optics. The narrower question is whether the reported scalar $S=2.275 \pm 0.057$, obtained at an effective efficiency of roughly $10^{-18}$, can support the stronger conclusion that local models have been excluded. This paper argues that it cannot, not without additional control on the selection rule. The argument has three parts. First, Bell and CHSH constrain the emitted ensemble under locality, realism, and setting independence; transferring that bound to a filtered ensemble requires fair-sampling style assumptions or an equivalent diagnostic argument \cite{bell1964,chsh1969,pearle1970,clauserhorne1974,gargmermin1987,eberhard1993}. Second, the path-identity literature explains why the Wang apparatus can display structured multiphoton interference without settling the Bell-inference question by itself \cite{zou1991,krenn2017,hochrainer2022}. Third, an exact local counterexample matching the current website widget and notebook yields $S_{\sel}=26/7 \approx 3.714$ at $70.0\%$ acceptance while remaining classical before selection. The resulting conclusion is modest but firm: in an ultra-low-efficiency, postselected regime, a super-classical CHSH value is non-exclusionary evidence against local models until the filter itself is constrained.
+\end{abstract}
+
+\paragraph{Claim.}
+Wang et al.~report a genuinely interesting path-identity interference experiment, but their postselected $S>2$ does not yet exclude local models because the selection rule and the efficiency regime do most of the inferential work.
+
+\paragraph{Headline findings.}
+\begin{itemize}
+  \item Wang et al.~explicitly construct CHSH correlations from postselected fourfold coincidences and report $S=2.275 \pm 0.057$ at an effective efficiency near $10^{-18}$ \cite{wang2025}.
+  \item The exact local toy filter now implemented in the website and notebook yields $S=26/7 \approx 3.714$ at $70.0\%$ acceptance even though the raw source remains classical.
+  \item The optics are worth taking seriously. The weaker point is the inference: clever interferometers do not waive the bookkeeping rules for selection bias.
+\end{itemize}
+
+\section{Introduction}
+
+Bell's theorem is powerful because it is conditional. If measurement settings are free, if outcomes are local functions of a hidden variable, and if the correlations are evaluated on the relevant ensemble, then Bell inequalities follow \cite{bell1964}. CHSH made the experimental form memorable by reducing the logic to a single scalar,
+\[
+S = \left|E_{00}+E_{01}+E_{10}-E_{11}\right|,
+\]
+with the classical ceiling $S \le 2$ under the standard assumptions \cite{chsh1969}. A large CHSH number can be exciting; it is not, by itself, a loophole-closure certificate.
+
+That caveat matters here because Wang et al.~do not present a high-efficiency two-party Bell test. They present a multiphoton interference experiment, grounded in path identity, and then build Bell-style correlators from postselected fourfold coincidences \cite{wang2025}. The result is interesting, but the interpretation requires tighter control than the headline claim itself provides.
+
+\begin{table}[t]
+\centering
+\caption{Literature checkpoints relevant to the present claim.}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.24\linewidth}Y Y@{}}
+\toprule
+Cluster & What it establishes & Why it matters here \\
+\midrule
+Bell and CHSH & Local hidden-variable models satisfy a bound on the full correlation structure. & The theorem targets the emitted ensemble, not an arbitrary filtered subset. \\
+Pearle to Eberhard & Selection and efficiency can open a detection loophole unless explicitly controlled. & Wang et al.~operate far inside the regime where that warning is operationally important. \\
+Path identity optics & Indistinguishable generation pathways can create striking interference effects. & The optical novelty is not being denied; the Bell inference is the narrower issue. \\
+Bell benchmarks & Strong Bell claims are paired with explicit closure strategies, not just large $S$. & That is the comparison class for any foundational headline. \\
+2025 response papers & The postpublication debate quickly focused on postselection and interpretation. & The present paper joins that narrower, more technical conversation. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{publication_fig1_bounds.png}
+\caption{Reference scales for the revised paper. Wang et al.'s reported value sits above the classical bound, but the exact local counterexample used here sits even higher. The point is not empirical fit; it is to show what a filtered estimator can and cannot prove on its own.}
+\end{figure}
+
+\section{Background and Literature}
+
+The clean way to state the issue is with two ensembles. Let the emitted ensemble contain outcomes $A_x,B_y \in \{-1,+1\}$ for settings $x,y \in \{0,1\}$. Let $D \in \{0,1\}$ indicate whether a trial survives the analysis filter. The selected correlator is then not the original quantity but the conditional one
+\[
+E^{\sel}_{xy} = \E[A_x B_y \mid x,y,D=1],
+\qquad
+S_{\sel} = \left|E^{\sel}_{00}+E^{\sel}_{01}+E^{\sel}_{10}-E^{\sel}_{11}\right|.
+\]
+If the filter is fair, or otherwise independent of the hidden outcome pattern in the required sense, the usual local bound transfers to the retained data. If it is not fair, it need not. That is the central inferential issue.
+
+This is precisely why the selection literature matters here. Pearle's data-rejection model, the Clauser-Horne analysis, Garg and Mermin's efficiency thresholds, and Eberhard's low-threshold construction all exist because one cannot infer too much from selected samples without handling detection and filtering carefully \cite{pearle1970,clauserhorne1974,gargmermin1987,eberhard1993}. Brunner et al.~summarize the modern Bell-nonlocality landscape from the same perspective: the inequalities are exact, but the experimental inferences depend on what data enter the estimator and why \cite{brunner2014}.
+
+The path-identity literature is equally important, and for a different reason. Zou, Wang, and Mandel showed long ago that induced coherence and indistinguishability can produce striking interference effects \cite{zou1991}. Krenn et al.~framed entanglement by path identity explicitly, and Hochrainer, Lahiri, and Zeilinger reviewed the broader program in depth \cite{krenn2017,hochrainer2022}. Those papers explain why Wang et al.'s experiment is interesting quantum optics. They do not remove the need to inspect how the Bell statistic is assembled.
+\section{Methods}
+
+The rewrite follows a simple rule: every citation used here was checked against an existing source page, DOI landing page, or journal article page before inclusion. The paper also distinguishes three tasks that were blurred in the earlier draft: explaining Bell's logic, summarizing Wang et al.'s apparatus, and exhibiting a local counterexample.
+
+\subsection{Reading Wang et al.~carefully}
+
+Wang et al.~do not present a loophole-free Bell test. They construct joint probabilities from fourfold coincidence rates and phase-shifted settings in a path-identity experiment, then compute CHSH-style correlators from those postselected counts \cite{wang2025}. That is a meaningful optical construction. It is also exactly the kind of construction for which selection dependence must be discussed explicitly, not waved away as an implementation detail.
+
+\subsection{Exact local counterexample used in the website and notebook}
+
+The current website widget and the Colab notebook share the same paper-grade toy filter. Start with raw local correlators of magnitude $1/2$, so the unselected source saturates the classical CHSH ceiling at $S=2$. Then accept sign-favorable events with probability $p_{\mathrm{hi}}=1-p_{\mathrm{lo}}$ and disfavored events with probability $p_{\mathrm{lo}}$. The exact selected correlator magnitude is
+\[
+E^{\sel}(p_{\mathrm{lo}})
+=
+\frac{((p_{\mathrm{hi}}+p_{\mathrm{lo}})\,\tfrac{1}{2})+(p_{\mathrm{hi}}-p_{\mathrm{lo}})}{(p_{\mathrm{hi}}+p_{\mathrm{lo}})+(\tfrac{1}{2})(p_{\mathrm{hi}}-p_{\mathrm{lo}})}
+=
+\frac{\tfrac{3}{2}-2p_{\mathrm{lo}}}{\tfrac{3}{2}-p_{\mathrm{lo}}},
+\qquad
+S^{\sel}=4E^{\sel}.
+\]
+The acceptance rate is equally simple:
+\[
+\eta(p_{\mathrm{lo}})
+=
+\frac{(p_{\mathrm{hi}}+p_{\mathrm{lo}})+(\tfrac{1}{2})(p_{\mathrm{hi}}-p_{\mathrm{lo}})}{2}
+=
+\tfrac{3}{4}-\tfrac{1}{2}p_{\mathrm{lo}}.
+\]
+At the paper point $p_{\mathrm{lo}}=0.10$, one obtains
+\[
+E^{\sel}=\frac{13}{14},
+\qquad
+S^{\sel}=\frac{26}{7}\approx 3.714,
+\qquad
+\eta=0.70.
+\]
+
+\section{Results}
+
+The first result is contextual rather than novel: Wang et al.'s reported value should be interpreted inside the long literature on selection effects and loophole control, not in isolation. The second result is constructive: a local model with the exact website filter reaches a larger postselected $S$ than the one reported by Wang et al. The point is not numerical mimicry. The point is logical underdetermination.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{publication_fig2_efficiency.png}
+\caption{Efficiency context. Wang et al.~report an effective efficiency near $10^{-18}$, far below the threshold regime usually discussed when one wants detector-loophole-resistant Bell claims \cite{wang2025,gargmermin1987,eberhard1993}.}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{publication_fig3_postselection_curve.png}
+\caption{The exact local counterexample used by the revised paper, website widget, and notebook. At $p_{\mathrm{lo}}=0.10$, the model yields $S=26/7$ with $70.0\%$ acceptance while the underlying source remains local and classical before selection.}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{publication_fig4_correlators.png}
+\caption{Selection inflates the correlators, not the underlying locality class. Raw correlators of magnitude $1/2$ become retained correlators of magnitude $13/14$ at the paper point. The apparent Bell excess is therefore generated in the conditioning step.}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\caption{Key quantitative comparisons used in the revised argument.}
+\begin{tabularx}{\linewidth}{@{}p{0.34\linewidth}p{0.23\linewidth}Y@{}}
+\toprule
+Quantity & Value & Interpretive use \\
+\midrule
+Wang et al.~reported statistic & $S = 2.275 \pm 0.057$ & Empirical headline to be interpreted, not denied. \\
+Wang et al.~effective efficiency & about $10^{-18}$ & Places the experiment deep inside a loophole-sensitive regime. \\
+Raw local toy model & $S = 2.000$ & Shows the source itself is classical before filtering. \\
+Selected local toy model at $p_{\mathrm{lo}}=0.10$ & $S = 26/7 \approx 3.714$ & Constructive counterexample to the inference from selected $S$ alone. \\
+Acceptance at the paper point & $70.0\%$ & Matches the revised website and notebook implementation. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The third result is comparative. Once one reads Wang et al.~alongside the response literature, the disagreement becomes easier to locate. Wharton and Price explicitly frame the issue as postselection; W\'ojcik and W\'ojcik present a simple reinterpretation of the apparent nonlocality; and Cieslinski et al.~recast the debate around what Bell theorem is actually at stake \cite{wharton2025,wojcik2025,cieslinski2025}. That is healthy progress. It moves the discussion away from slogans and toward assumptions.
+
+\section{Discussion}
+
+A fair summary of Wang et al.~is therefore two-part. The positive part is easy: the experiment is a sophisticated demonstration of multiphoton frustrated interference and path identity. The critical part is equally easy once stated plainly: the paper does not close the detection loophole, does not argue fair sampling from first principles, and does not make the postselection dependence disappear by giving it a different optical narrative.
+
+This is also why comparisons to loophole-free Bell tests are clarifying rather than hostile. Hensen, Giustina, and Shalm are not cited here as rhetorical trophies \cite{hensen2015,giustina2015,shalm2015}. They are cited because they show what the field has learned to demand when the claim is genuinely anti-local: explicit closure strategies, efficiency accounting, and a transparent relation between the measured events and the theorem being invoked.
+
+The broader foundational discussion has not ended in 2015, as recent work on the physical significance of Bell non-locality makes clear \cite{vieira2025}. But that larger debate begins only after the estimator has been disciplined. Otherwise one risks drawing foundational conclusions from a filter. The optics may be subtle; the logic should not be.
+
+\section{Conclusion}
+
+The revised thesis is deliberately narrower than the earlier website copy. Wang et al.~have shown an intriguing path-identity interference experiment together with a postselected Bell-style statistic. What they have not yet shown is that the reported $S>2$ excludes local models without further assumptions.
+
+That is enough to justify the present paper and its revised figure set. The paper should slow the argument down, name the assumptions, and make the literature review do real work. This version does that. The conclusion is therefore modest but firm: in an ultra-low-efficiency, postselected regime, a Bell violation headline is an invitation to inspect the filter before declaring victory over local realism.
+
+\appendix
+\section{Appendix: Figure Provenance and Source Discipline}
+
+The paper surfaces now use a separate light-background figure set generated from the repository Python script and copied into both the website figure lane and the arXiv figure lane. The darker image set remains available for the interactive narrative on \texttt{index.html}.
+\begin{thebibliography}{99}
+
+\bibitem{bell1964}
+J. S. Bell,
+\newblock ``On the Einstein Podolsky Rosen paradox,''
+\newblock {\em Physics Physique Fizika} 1, 195--200 (1964).
+\newblock \url{https://doi.org/10.1103/PhysicsPhysiqueFizika.1.195}
+
+\bibitem{chsh1969}
+J. F. Clauser, M. A. Horne, A. Shimony, and R. A. Holt,
+\newblock ``Proposed experiment to test local hidden-variable theories,''
+\newblock {\em Physical Review Letters} 23, 880--884 (1969).
+\newblock \url{https://doi.org/10.1103/PhysRevLett.23.880}
+
+\bibitem{pearle1970}
+P. M. Pearle,
+\newblock ``Hidden-variable example based upon data rejection,''
+\newblock {\em Physical Review D} 2, 1418--1425 (1970).
+\newblock \url{https://doi.org/10.1103/PhysRevD.2.1418}
+
+\bibitem{clauserhorne1974}
+J. F. Clauser and M. A. Horne,
+\newblock ``Experimental consequences of objective local theories,''
+\newblock {\em Physical Review D} 10, 526--535 (1974).
+\newblock \url{https://doi.org/10.1103/PhysRevD.10.526}
+
+\bibitem{gargmermin1987}
+A. Garg and N. D. Mermin,
+\newblock ``Detector inefficiencies in the Einstein-Podolsky-Rosen experiment,''
+\newblock {\em Physical Review D} 35, 3831--3835 (1987).
+\newblock \url{https://doi.org/10.1103/PhysRevD.35.3831}
+
+\bibitem{eberhard1993}
+P. H. Eberhard,
+\newblock ``Background level and counter efficiencies required for a loophole-free Einstein-Podolsky-Rosen experiment,''
+\newblock {\em Physical Review A} 47, R747--R750 (1993).
+\newblock \url{https://doi.org/10.1103/PhysRevA.47.R747}
+
+\bibitem{brunner2014}
+N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani, and S. Wehner,
+\newblock ``Bell nonlocality,''
+\newblock {\em Reviews of Modern Physics} 86, 419--478 (2014).
+\newblock \url{https://doi.org/10.1103/RevModPhys.86.419}
+
+\bibitem{zou1991}
+X. Y. Zou, L. J. Wang, and L. Mandel,
+\newblock ``Induced coherence and indistinguishability in optical interference,''
+\newblock {\em Physical Review Letters} 67, 318--321 (1991).
+\newblock \url{https://doi.org/10.1103/PhysRevLett.67.318}
+
+\bibitem{krenn2017}
+M. Krenn, M. Malik, T. Scheidl, R. Ursin, and A. Zeilinger,
+\newblock ``Entanglement by path identity,''
+\newblock {\em Physical Review Letters} 118, 080401 (2017).
+\newblock \url{https://doi.org/10.1103/PhysRevLett.118.080401}
+
+\bibitem{hochrainer2022}
+A. Hochrainer, M. Lahiri, and A. Zeilinger,
+\newblock ``Quantum indistinguishability by path identity and with undetected photons,''
+\newblock {\em Reviews of Modern Physics} 94, 025007 (2022).
+\newblock \url{https://doi.org/10.1103/RevModPhys.94.025007}
+
+\bibitem{hensen2015}
+B. Hensen et al.,
+\newblock ``Loophole-free Bell inequality violation using electron spins separated by 1.3 kilometres,''
+\newblock {\em Nature} 526, 682--686 (2015).
+\newblock \url{https://doi.org/10.1038/nature15759}
+
+\bibitem{giustina2015}
+M. Giustina et al.,
+\newblock ``Significant-loophole-free test of Bell's theorem with entangled photons,''
+\newblock {\em Physical Review Letters} 115, 250401 (2015).
+\newblock \url{https://doi.org/10.1103/PhysRevLett.115.250401}
+
+\bibitem{shalm2015}
+L. K. Shalm et al.,
+\newblock ``Strong loophole-free test of local realism,''
+\newblock {\em Physical Review Letters} 115, 250402 (2015).
+\newblock \url{https://doi.org/10.1103/PhysRevLett.115.250402}
+
+\bibitem{wang2025}
+K. Wang et al.,
+\newblock ``Violation of Bell inequality with unentangled photons,''
+\newblock {\em Science Advances} 11(31), eadr1794 (2025).
+\newblock \url{https://doi.org/10.1126/sciadv.adr1794}
+
+\bibitem{wharton2025}
+K. B. Wharton and H. Price,
+\newblock ``Bell Inequality Violations Without Entanglement? It's Just Postselection,''
+\newblock arXiv:2508.13431 (2025).
+\newblock \url{https://arxiv.org/abs/2508.13431}
+
+\bibitem{wojcik2025}
+A. W\'ojcik and D. K. W\'ojcik,
+\newblock ``Simple explanation of apparent Bell nonlocality of unentangled photons,''
+\newblock arXiv:2509.03127 (2025).
+\newblock \url{https://arxiv.org/abs/2509.03127}
+
+\bibitem{cieslinski2025}
+J. Cieslinski et al.,
+\newblock ``Unquestionable Bell theorem for interwoven frustrated down conversion processes,''
+\newblock arXiv:2508.19207 (2025).
+\newblock \url{https://arxiv.org/abs/2508.19207}
+
+\bibitem{vieira2025}
+C. Vieira, R. Ramanathan, and A. Cabello,
+\newblock ``Test of the physical significance of Bell non-locality,''
+\newblock {\em Nature Communications} 16, 4390 (2025).
+\newblock \url{https://www.nature.com/articles/s41467-025-59247-7}
+
+\end{thebibliography}
+
+\end{document}
+
+

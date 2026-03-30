@@ -455,12 +455,12 @@
         <div class="figure-interactive" id="postSelectFigure">
           <div class="figure-controls">
             <div class="demo-slider-row">
-              <label for="sliderBias">Selection bias &rho;: <span id="valBias">0.50</span></label>
-              <input type="range" id="sliderBias" min="0.01" max="1.0" value="0.50" step="0.01" />
+              <label for="sliderBias">Disfavored-sign keep rate p<sub>lo</sub>: <span id="valBias">0.10</span></label>
+              <input type="range" id="sliderBias" min="0.00" max="0.50" value="0.10" step="0.01" />
             </div>
             <div class="demo-readouts">
               <div class="demo-readout">
-                <span class="demo-readout__label">Post-selected S</span>
+                <span class="demo-readout__label">Exact post-selected S</span>
                 <span class="readout-value" id="readoutPostS">&mdash;</span>
               </div>
               <div class="demo-readout">
@@ -479,8 +479,8 @@
         </div>
         <p class="figure-caption">
           <span class="figure-label">Interactive</span>
-          Drag the bias slider to see how acceptance rate and inflated S are inversely related.
-          Lower acceptance = higher S. At 70% acceptance, S already exceeds the Tsirelson bound.
+          Sweep the exact toy filter used in the paper along the slice p<sub>hi</sub> = 1 - p<sub>lo</sub>.
+          The paper point is p<sub>lo</sub> = 0.10, which yields 70% acceptance and S = 26/7 &asymp; 3.714.
         </p>
       </div>
     </div>
