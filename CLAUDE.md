@@ -87,6 +87,8 @@ Regenerate both with: `python scripts/generate_publication_figures.py`
 
 Never change the website figure palette to white or dark — the cream theme must match the site's visual language.
 
+Current figure filenames: `fig1_bounds.png`, `fig2_efficiency.png`, `fig3_postselection_curve.png`, `fig4_correlators.png`. Do NOT prefix with `publication_` again — those names are permanently immutably cached on Vercel's CDN as white-background versions.
+
 ## Paper Structure (`paper.html`)
 
 The paper has a full academic structure — do NOT wholesale-rewrite or summarize it. Key elements that must survive every edit:
