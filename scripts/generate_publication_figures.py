@@ -24,18 +24,18 @@ class Theme(NamedTuple):
     edge: str
 
 
-# Dark theme — matches the website's color tokens (css/tokens.css)
+# Warm cream theme — formal paper aesthetic for publication figures on the website
 WEB_THEME = Theme(
-    bg='#0E0F14',
-    ink='#E8E4DC',
-    muted='#9A9485',
-    crimson='#C94040',
-    amber='#C9A94D',
-    blue='#4FA3D4',
-    green='#6B8F71',
-    sand='#2A2C35',
-    grid='#1E2028',
-    edge='#3A3C45',
+    bg='#f7f4ee',
+    ink='#1d2430',
+    muted='#5f6773',
+    crimson='#9f3d3d',
+    amber='#b8842f',
+    blue='#3f7192',
+    green='#537a5a',
+    sand='#dfd5c5',
+    grid='#d8d1c5',
+    edge='#dfd5c5',
 )
 
 # Light theme — white background for arXiv / print
