@@ -4,7 +4,22 @@ debug.log
 __pycache__/
 output/
 tmp/
+tmp_*
 .playwright-cli/
 .playwright-mcp/
 node_modules/
 coverage/
+.jupyter-local/
+.jupyter-local-runtime/
+.jupyter_runtime/
+
+# LaTeX build artifacts
+arxiv/*.aux
+arxiv/*.log
+arxiv/*.out
+arxiv/*.bbl
+arxiv/*.blg
+arxiv/*.toc
+arxiv/*.fls
+arxiv/*.fdb_latexmk
+arxiv/*.synctex.gz
