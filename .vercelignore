@@ -1,0 +1,30 @@
+# Local build artifacts — re-created by build.sh on Vercel
+output/
+
+# Package dependencies — not needed for static site build
+node_modules/
+
+# Research/notebook artifacts — not web assets
+arxiv/
+notebooks/
+scripts/execute_notebook_custom_km.py
+scripts/generate_publication_figures.py
+scripts/run_chshlab_notebook.ps1
+scripts/run_visual_audit.py
+
+# Test infrastructure
+tests/
+coverage/
+.playwright-cli/
+.playwright-mcp/
+
+# Local tooling / editor state
+.jupyter-local/
+.jupyter-local-runtime/
+.superpowers/
+
+# Temp scripts and logs
+tmp_*
+
+# Docs (not served)
+docs/
