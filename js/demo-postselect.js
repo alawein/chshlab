@@ -5,10 +5,23 @@
 import { emitState } from './animation-config.js';
 
 const ETA_CRIT = 2 / (1 + Math.sqrt(2)); // ≈ 0.8284
+const RAW_CORRELATION_MAGNITUDE = 0.5;
 
-// Theorem 3 constructive example formulas
-function postS(pLo)      { return 2 + 2 * (1 - pLo); }  // 4 at pLo=0, 2 at pLo=1
-function acceptRate(pLo) { return 0.5 + 0.5 * pLo; }    // 50% at pLo=0, 100% at pLo=1
+function paperSelectedMagnitude(pHi, pLo) {
+  const numerator = ((pHi + pLo) * RAW_CORRELATION_MAGNITUDE) + (pHi - pLo);
+  const denominator = (pHi + pLo) + (RAW_CORRELATION_MAGNITUDE * (pHi - pLo));
+  return numerator / denominator;
+}
+
+function postS(pLo) {
+  const pHi = 1 - pLo;
+  return 4 * paperSelectedMagnitude(pHi, pLo);
+}
+
+function acceptRate(pLo) {
+  const pHi = 1 - pLo;
+  return ((pHi + pLo) + (RAW_CORRELATION_MAGNITUDE * (pHi - pLo))) / 2;
+}
 
 export function initPostSelectDemo() {
   const canvas         = document.getElementById('postSelectCanvas');
