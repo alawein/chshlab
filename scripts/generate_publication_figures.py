@@ -144,16 +144,33 @@ def fig2_efficiency(theme: Theme, out_dir: Path) -> None:
     ax.axvspan(2 / 3, 1.2, color=theme.green, alpha=green_alpha)
 
     markers = [
-        ('Wang et al. reported eta ~ 1e-18', 1e-18, theme.crimson, 0.18),
-        ('Eberhard 1993 threshold ~ 0.667', 2 / 3, theme.amber, 0.40),
-        ('Garg-Mermin threshold ~ 0.828', 2 / (1 + np.sqrt(2)), theme.blue, 0.62),
-        ('Unit efficiency', 1.0, theme.muted, 0.84),
+        ('Wang et al. reported eta ~ 1e-18', 1e-18, theme.crimson, 0.18, (0.05, 0.20)),
+        ('Eberhard 1993 threshold ~ 0.667', 2 / 3, theme.amber, 0.43, (0.74, 0.43)),
+        ('Garg-Mermin threshold ~ 0.828', 2 / (1 + np.sqrt(2)), theme.blue, 0.66, (0.74, 0.66)),
+        ('Unit efficiency', 1.0, theme.muted, 0.89, (0.80, 0.89)),
     ]
 
-    for label, value, color, y in markers:
+    for label, value, color, y, text_pos in markers:
         ax.axvline(value, color=color, linewidth=2)
         ax.scatter([value], [y], s=42, color=color, zorder=3)
-        ax.text(value * 1.06, y, label, color=color, va='center', fontsize=9)
+        ax.annotate(
+            label,
+            xy=(value, y),
+            xycoords='data',
+            xytext=text_pos,
+            textcoords='axes fraction',
+            color=color,
+            va='center',
+            ha='left',
+            fontsize=9,
+            arrowprops={
+                'arrowstyle': '-',
+                'color': color,
+                'linewidth': 1.0,
+                'shrinkA': 0,
+                'shrinkB': 0,
+            },
+        )
 
     ax.text(1.4e-19, 0.92, 'selection-heavy regime', color=theme.crimson, fontsize=9)
     ax.text(0.72, 0.92, 'threshold regime for serious loophole control', color=theme.green,
@@ -227,9 +244,6 @@ def fig4_correlators(theme: Theme, out_dir: Path) -> None:
     ax.grid(axis='y', linestyle='--', linewidth=0.8, alpha=0.7)
     ax.legend(frameon=False, loc='upper right')
 
-    ax.text(0.02, 0.92, 'Raw S = 2.000', transform=ax.transAxes, fontsize=9, color=theme.blue)
-    ax.text(0.02, 0.84, 'Selected S = 26/7 = 3.714', transform=ax.transAxes, fontsize=9,
-            color=theme.crimson)
     _save(fig, 'fig4_correlators.png', out_dir, theme)
     plt.close(fig)
 
