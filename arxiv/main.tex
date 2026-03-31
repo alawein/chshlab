@@ -12,6 +12,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{fancyhdr}
 \usepackage{hyperref}
 
 \hypersetup{
@@ -23,7 +24,12 @@
 
 \graphicspath{{figures/}}
 \setlength{\emergencystretch}{2em}
+\setlength{\headheight}{14pt}
+\setlength{\textfloatsep}{14pt plus 2pt minus 3pt}
+\setlength{\floatsep}{12pt plus 2pt minus 3pt}
+\setlength{\intextsep}{12pt plus 2pt minus 3pt}
 \urlstyle{same}
+\renewcommand{\arraystretch}{1.08}
 
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 \newcommand{\E}{\mathbb{E}}
@@ -40,6 +46,14 @@
 \begin{document}
 
 \maketitle
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize Alawein (2026)}
+\fancyhead[R]{\footnotesize Bell Violations Without Entanglement?}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
 
 \begin{abstract}
 A recent \emph{Science Advances} paper reports \textbf{$S = 2.275 \pm 0.057$} at an effective detection efficiency of roughly \textbf{$10^{-18}$} and interprets that statistic as Bell-inequality violation without entanglement \cite{wang2025}. The present paper makes a narrower claim. In such a severely filtered regime, the scalar fact $S > 2$ is not exclusionary evidence against local models unless the selection mechanism is independently constrained. We formalize this point in three steps. First, we write the selected estimator as a conditional expectation on accepted events and identify fair sampling as the assumption that transfers the classical CHSH bound from the emitted ensemble to the retained one. Second, we construct a deterministic local hidden-variable model with an outcome-coupled acceptance rule and derive the exact toy-model expectations $E_{\sel} = \pm 13/14$ and $S_{\sel} = 26/7 \approx 3.714$. Third, we compare those exact expectations with the site's paper-grade Monte Carlo artifact, which yields \textbf{$S = 3.716$} (95\% CI [3.714, 3.717]) at \textbf{70.0\%} acceptance, and with the Wang et al.~report. The evidentiary consequence is limited but decisive: in an ultra-low-efficiency Bell test, a post-selected CHSH value above 2 is suggestive at most until raw correlations, setting-resolved acceptance rates, and fair-sampling diagnostics are reported.

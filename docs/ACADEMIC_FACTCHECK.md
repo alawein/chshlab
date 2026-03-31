@@ -7,121 +7,119 @@ sla: none
 
 # Academic Fact-Check
 
-Claim-by-claim trace: each rebuttal argument mapped to its theorem, figure, and inline simulation.
+Canonical claim trace for the current `v1.3` paper and homepage.
 
----
+## Core Position
 
-## Argument 1 — Classical Bound
+The shipped argument is narrower than "Wang et al. are classical." It is:
 
-### Claim
-> "CHSH S > 2 implies quantum nonlocality."
+> In the ultra-low-efficiency regime, a post-selected CHSH value above 2 is non-exclusionary evidence until the selection rule itself is constrained.
 
-### Rebuttal
-This inference is only valid under loophole-free conditions — specifically, when detection efficiency eta >= 82.8%. Below this threshold, local hidden variable (LHV) models can produce S > 2 without any quantum entanglement.
+That sentence is the governing claim in both [paper.html](../paper.html) and [arxiv/main.tex](../arxiv/main.tex).
 
-### Supporting Theorem
-**Theorem 1 (Classical CHSH Bound):** For any LHV theory satisfying Locality, Realism, and Freedom: S <= 2.
+## Claim 1 - The local CHSH bound only transfers under fair sampling
 
-- This bound assumes 100% detection efficiency.
-- When eta < eta_c = 2/(1+sqrt(2)) ~ 0.8284, the operative bound is S_LHV,max(eta) = 4/eta - 2, not S = 2.
+### Canonical source
+- Proposition 1 in [arxiv/main.tex](../arxiv/main.tex)
+- "Theoretical Background" in [paper.html](../paper.html)
 
-### Supporting Figures
-- **Fig. 2** — Efficiency landscape shows S_LHV,max(eta) curve crossing S = 2 at eta_c
-- **Fig. 1** — Classical LHV baseline S = 2.001 (full dataset, no post-selection)
+### Shipped statement
+- For local hidden-variable models satisfying locality, realism, freedom, and fair sampling, `S_LHV <= 2`.
+- The key qualifier is fair sampling. The paper does not claim that every filtered estimator must obey the unconditional bound.
 
-### Supporting Simulations
-- **Demo 2 (Efficiency Landscape):** Interactive eta slider computes S_LHV,max in real-time
-- At eta = 0.70: S_LHV,max = 4/0.70 - 2 = 3.714 (exceeds Tsirelson bound)
-- At eta = 1.00: S_LHV,max = 4/1.00 - 2 = 2.000 (classical bound recovered)
+### Supporting evidence
+- [paper.html](../paper.html) Figure 1 and Table 1
+- [index.html](../index.html) efficiency and proof sections
+- [js/demo-efficiency.js](../js/demo-efficiency.js)
 
-### Evidence Block
-```
-Classical baseline (full dataset): S = 2.001, 95% CI [1.998, 2.004], 100% acceptance
-```
+### Audit note
+- The older docs that reduced this to "eta >= 82.8% or else nothing matters" were too loose. The current paper is more careful: it identifies fair sampling as the bridge between the emitted and retained ensembles.
 
-### Key Formula
-S_LHV,max(eta) = 4/eta - 2, with eta_c = 2/(1+sqrt(2)) ~ 0.828
+## Claim 2 - Selection changes the estimator
 
----
+### Canonical source
+- Proposition 3 in [arxiv/main.tex](../arxiv/main.tex)
+- Appendix B in [paper.html](../paper.html)
 
-## Argument 2 — Post-Selection Inflation
+### Shipped statement
+- Once trials are filtered, the operational quantity is
+  `E_xy^(sel) = E[A_x B_y | x, y, D = 1]`
+  rather than the unconditional `E_xy`.
+- This is the statistical form of the detection-loophole objection used throughout the site.
 
-### Claim
-> "Selecting on detected coincidences preserves statistical validity."
+### Supporting evidence
+- [paper.html](../paper.html) discussion of conditionalization
+- [index.html](../index.html) post-selection beat and comparison table
+- [js/demo-postselect.js](../js/demo-postselect.js)
 
-### Rebuttal
-Outcome-dependent post-selection biases the correlation estimator. By preferentially retaining correlated event pairs, a purely classical LHV dataset can be filtered to produce S approaching 4 — exceeding even the quantum Tsirelson bound.
+### Audit note
+- The current site no longer relies on the older approximate slider story as the primary argument. The exact conditional estimator from the paper is the canonical source.
 
-### Supporting Theorem
-**Theorem 3 (Post-Selection Inflation):** Outcome-dependent post-selection on LHV data can achieve S_post -> 4 (from purely classical data).
+## Claim 3 - The shipped local counterexample is exact at the paper point
 
-- Construction: Define selection f(A,B) = 1 when AB = +1, f = rho when AB = -1.
-- As rho -> 0, E_post(a,b) -> +/-1, giving S -> 4.
-- Acceptance rate: accept(rho) = 0.5 + 0.5*rho (drops to 50% as S -> 4).
+### Canonical source
+- Proposition 4 and Appendix B in [arxiv/main.tex](../arxiv/main.tex)
+- Results and Appendix in [paper.html](../paper.html)
 
-### Supporting Figures
-- **Fig. 3** — Acceptance rate vs inflated CHSH S showing inverse relationship
-- **Fig. 1** — Post-selected artifact S = 3.716 (from classical LHV data)
+### Shipped statement
+- With raw correlations `(1/2, 1/2, 1/2, -1/2)` and the filter `p_hi = 0.9`, `p_lo = 0.1`, the exact selected correlators are `(+13/14, +13/14, +13/14, -13/14)`.
+- The exact toy-model value is `S_sel = 26/7 ~= 3.714`.
+- The paper-grade Monte Carlo artifact is `S = 3.716` with 95% CI `[3.714, 3.717]` at `70.0%` acceptance.
 
-### Supporting Simulations
-- **Demo 3 (Post-Selection Bias):** Interactive rho slider shows S inflation in real-time
-- At rho = 0.50: S = 3.000, acceptance = 75%
-- At rho = 0.30: S = 3.400, acceptance = 65%
-- At rho = 0.01: S = 3.980, acceptance = 50.5%
+### Supporting evidence
+- [paper.html](../paper.html) Figure 3, Figure 4, Table 2, and Table 3
+- [index.html](../index.html) post-selection beat and comparison table
+- [scripts/generate_publication_figures.py](../scripts/generate_publication_figures.py)
 
-### Evidence Block
-```
-Post-selected classical artifact: S = 3.716, 95% CI [3.714, 3.717], only 70.0% acceptance
-```
+### Audit note
+- The superseded docs that described the main mechanism as `S_post -> 4` via a generic `rho` filter were legacy explanatory material. The shipped paper now centers the exact `26/7` construction and the corresponding Monte Carlo artifact.
 
-### Key Formula
-S_post <= 4 (achievable from LHV data via outcome-dependent selection)
+## Claim 4 - Wang et al.'s reported statistic is non-diagnostic in this evidentiary regime
 
----
+### Canonical source
+- Results, Discussion, and Conclusion in [paper.html](../paper.html)
+- Sections 4 through 6 in [arxiv/main.tex](../arxiv/main.tex)
 
-## Argument 3 — Reporting Standards
+### Shipped statement
+- Wang et al. report `S = 2.275 +- 0.057` at effective efficiency around `10^-18`.
+- The rebuttal does not need to prove their apparatus is classical. It only needs to show that the reported evidence class is still available to local explanations.
 
-### Claim
-> "Reporting CHSH S is sufficient for a Bell claim."
+### Supporting evidence
+- [paper.html](../paper.html) Table 2 and conclusion
+- [index.html](../index.html) evidence strip, comparison table, and conclusion beat
+- [js/references.js](../js/references.js) entries for `wang2025`, `wharton2025`, `wojcik2025`, `cieslinski2025`, and `vieira2025`
 
-### Rebuttal
-At detection efficiency eta = 70%, the LHV upper bound is S_LHV,max = 4/0.70 - 2 ~ 3.71. A post-selected S ~ 3.7 exactly matches the classical artifact regime — making it indistinguishable from a purely classical source without additional diagnostics.
+### Audit note
+- The canonical Wang citation is:
+  `K. Wang et al., "Violation of Bell inequality with unentangled photons," Science Advances 11(31), eadr1794 (2025).`
+  DOI: `https://doi.org/10.1126/sciadv.adr1794`
 
-### Supporting Theorem
-All three theorems in synthesis:
-- **Theorem 1:** Classical bound S <= 2 (ideal conditions only)
-- **Theorem 2:** Quantum Tsirelson bound S <= 2sqrt(2) ~ 2.828
-- **Theorem 3:** Post-selection artifact S -> 4 (classical data)
+## Required diagnostics
 
-### Supporting Figures
-- **Fig. 1** — All three S values compared: classical (2.001), quantum (2.821), artifact (3.716)
-- **Fig. 2** — At eta = 0.70, S_LHV,max = 3.714 falls in artifact region
-- **Fig. 3** — Inverse acceptance/S relationship demonstrates diagnostic necessity
+The shipped standard for a persuasive low-efficiency Bell claim is the same across the homepage and paper:
 
-### Supporting Simulations
-- **Demo 2:** At eta = 0.70, S_LHV,max = 3.714 — shows this exceeds Tsirelson bound
-- **Demo 3:** At rho ~ 0.30, S ~ 3.7 with only 65% acceptance — matches artifact exactly
+| Diagnostic | Why it matters |
+|---|---|
+| Raw correlations before selection | Shows whether the effect exists prior to filtering. |
+| Acceptance rate by setting pair | Tests whether retention is coupled to measurement context. |
+| No-signaling checks on raw and selected data | Detects filter-induced distortions in the observed marginals. |
+| Independence tests for acceptance vs. outcomes/settings | Directly probes the fair-sampling assumption. |
+| Sensitivity analysis for plausible filter bias | Quantifies how much apparent violation could be manufactured by conditioning. |
 
-### Evidence Block
-```
-At eta = 70%: S_LHV,max = 3.71 — exactly matches post-selected artifact S = 3.716
-```
+## Canonical figure mapping
 
-### Required Diagnostics
-Report: S_full, S_selected, eta_eff, r_accept(a,b)
+| Paper figure | File | Role in the argument |
+|---|---|---|
+| Figure 1 | `assets/figures/publication/fig1_bounds.png` | Places the classical bound, Wang et al., Tsirelson, and the local counterexample on one scale. |
+| Figure 2 | `assets/figures/publication/fig2_efficiency.png` | Places the claimed efficiency against the benchmark thresholds. |
+| Figure 3 | `assets/figures/publication/fig3_postselection_curve.png` | Shows the exact paper filter and the paper point `p_lo = 0.10`. |
+| Figure 4 | `assets/figures/publication/fig4_correlators.png` | Shows how selection changes the correlators while the source stays local. |
 
-These four quantities together allow discrimination between genuine quantum violations and classical artifacts. Reporting S_selected alone is insufficient.
+## Conclusion
 
----
+The current `v1.3` site and paper make a coherent claim when read together:
 
-## Synthesis
-
-| Quantity | Value | Source | Interpretation |
-|---|---|---|---|
-| S (classical LHV, full) | 2.001 | Theorem 1 / Fig. 1 | Consistent with S <= 2 |
-| S (quantum singlet) | 2.821 | Theorem 2 / Fig. 1 | Consistent with S <= 2sqrt(2) |
-| S (post-selected) | 3.716 | Theorem 3 / Fig. 1 | Classical artifact, not quantum |
-| S_LHV,max at eta=0.70 | 3.714 | Fig. 2 / Demo 2 | Artifact indistinguishable |
-| eta_c | 0.828 | Eberhard 1993 / Demo 2 | Minimum for loophole closure |
-
-Every claim in the rebuttal is traced to at least one theorem, one figure, and one interactive simulation. No unsupported assertions exist in the site content.
+- `S > 2` is not being dismissed universally.
+- The rebuttal is about inference under severe filtering.
+- The exact local counterexample is `S_sel = 26/7 ~= 3.714`, with the shipped Monte Carlo artifact at `S = 3.716`.
+- The correct reading of the reported Wang result at `~10^-18` efficiency is caution, not coronation.

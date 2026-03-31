@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bell Violations Without Entanglement? A Reproducible Rebuttal — CHSH Lab</title>
-  <meta name="description" content="Wang et al. (2025) claimed Bell violation without entanglement. A classical model with post-selection produces S = 3.716 — exceeding even the quantum limit. Interactive proofs and simulations by Meshal Alawein." />
+  <meta name="description" content="Interactive narrative and formal paper showing that, at ultra-low efficiency, a post-selected CHSH value above 2 is non-exclusionary until the selection rule itself is constrained." />
   <meta name="author" content="Meshal Alawein" />
   <meta name="keywords" content="Bell inequality, CHSH, detection loophole, post-selection bias, quantum nonlocality, Bell test, Tsirelson bound, Wang et al 2025, rebuttal" />
   <link rel="canonical" href="https://chshlab.online" />
@@ -23,18 +23,18 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Bell Violations Without Entanglement? A Reproducible Rebuttal" />
-  <meta property="og:description" content="Wang et al. (2025) claimed Bell violation without entanglement. A classical model with post-selection produces S = 3.716. Interactive proofs." />
+  <meta property="og:description" content="A reproducible rebuttal showing how a local model with outcome-coupled post-selection yields S = 3.716 at 70.0% acceptance." />
   <meta property="og:url" content="https://chshlab.online" />
   <meta property="og:site_name" content="CHSH Lab" />
-  <meta property="og:image" content="https://chshlab.online/assets/figures/fig1_chsh_bounds.png" />
+  <meta property="og:image" content="https://chshlab.online/assets/figures/publication/fig1_bounds.png" />
   <meta property="article:author" content="Meshal Alawein" />
-  <meta property="article:published_time" content="2025-01-01" />
+  <meta property="article:published_time" content="2026-03-30" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Bell Violations Without Entanglement? A Reproducible Rebuttal" />
-  <meta name="twitter:description" content="A classical model with post-selection produces S = 3.716. Interactive proofs by Meshal Alawein." />
-  <meta name="twitter:image" content="https://chshlab.online/assets/figures/fig1_chsh_bounds.png" />
+  <meta name="twitter:description" content="A local model with outcome-coupled post-selection yields S = 3.716 at 70.0% acceptance. Interactive narrative plus canonical paper." />
+  <meta name="twitter:image" content="https://chshlab.online/assets/figures/publication/fig1_bounds.png" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -43,15 +43,17 @@
     "@type": "ScholarlyArticle",
     "name": "Bell Violations Without Entanglement? A Reproducible Rebuttal of Wang et al. (2025)",
     "author": { "@type": "Person", "name": "Meshal Alawein", "url": "https://www.meshal.ai" },
-    "description": "A classical hidden-variable model with outcome-dependent post-selection produces CHSH S = 3.716, exceeding the Tsirelson bound. Interactive proofs and simulations.",
+    "description": "A reproducible rebuttal showing that, in the ultra-low-efficiency regime, a post-selected CHSH value above 2 is non-exclusionary evidence until the selection rule itself is constrained.",
     "url": "https://chshlab.online",
-    "datePublished": "2025-01-01",
+    "datePublished": "2026-03-30",
+    "dateModified": "2026-03-30",
+    "image": "https://chshlab.online/assets/figures/publication/fig1_bounds.png",
     "about": ["Bell inequality", "CHSH inequality", "detection loophole", "quantum nonlocality", "post-selection"],
     "isBasedOn": {
       "@type": "ScholarlyArticle",
       "name": "Bell inequality violation without entanglement",
       "author": "Wang et al.",
-      "url": "https://doi.org/10.1126/sciadv.ads0058"
+      "url": "https://doi.org/10.1126/sciadv.adr1794"
     },
     "citation": [
       { "@type": "ScholarlyArticle", "name": "On the Einstein-Podolsky-Rosen paradox", "author": "J.S. Bell", "datePublished": "1964" },
@@ -130,8 +132,8 @@
       </p>
       <p class="beat__byline">
         <a href="https://www.meshal.ai" target="_blank" rel="noopener noreferrer">Meshal Alawein</a>
-        &middot; <a href="https://www.meshal.ai" target="_blank" rel="noopener noreferrer">meshal.ai</a>
         &middot; UC Berkeley
+        &middot; <a href="mailto:contact@meshal.ai">contact@meshal.ai</a>
       </p>
     </div>
     <div class="scroll-hint" aria-hidden="true">
@@ -186,7 +188,7 @@
       <div class="beat__prose reveal">
         <p>
           In early 2025,
-          <a href="https://doi.org/10.1126/sciadv.ads0058" target="_blank" rel="noopener noreferrer">Wang et al.</a>
+          <a href="https://doi.org/10.1126/sciadv.adr1794" target="_blank" rel="noopener noreferrer">Wang et al.</a>
           published a striking result: a measured CHSH value of
           <strong class="key-stat">S = 2.275 &plusmn; 0.057</strong> from a multiphoton interference experiment.
           They claimed this constituted a Bell inequality violation &mdash; evidence that their optical
@@ -791,28 +793,29 @@
   <!-- BEAT 8: CONCLUSION -->
   <section id="conclusion" class="beat beat--conclusion">
     <div class="container">
-      <h2 class="section-heading reveal">The Experiment Is Impressive. The Claim Doesn&rsquo;t Hold.</h2>
+      <h2 class="section-heading reveal">Caution, Not Coronation.</h2>
 
       <div class="beat__prose reveal">
         <p>
-          We have shown that a classical hidden-variable model, when subjected to
-          outcome-dependent post-selection, can produce CHSH values well above the
-          Tsirelson bound. This does not disprove quantum mechanics or invalidate Bell
-          inequalities &mdash; far from it. It illustrates a principle that has been known
-          for decades: post-selection can create apparent violations where none exist.
+          The conclusion is narrower than a manifesto and stronger than a complaint. A local
+          hidden-variable source with outcome-coupled acceptance reproduces the evidentiary
+          regime of a post-selected Bell claim and can exceed the Tsirelson bound without
+          entanglement. The Wang et al. statistic, considered as a selected CHSH number at
+          ultra-low effective efficiency, therefore does not by itself establish quantum
+          nonlocality.
         </p>
         <p>
-          The Wang et al. experiment represents impressive optical engineering.
-          Perhaps future work with additional diagnostics will establish their claim.
-          But the burden of proof lies with the claimant, and the present data do not
-          meet that burden.
+          The remedy is methodological rather than theatrical: report the raw correlations,
+          the setting-resolved acceptance structure, and the diagnostics that constrain fair
+          sampling. Until then, the correct interpretation of a low-efficiency post-selected
+          violation is caution, not coronation.
         </p>
       </div>
 
       <div class="conclusion-links reveal">
         <a href="paper.html" class="conclusion-link conclusion-link--primary">Read the Formal Paper &rarr;</a>
         <a href="https://github.com/alawein/chshlab" target="_blank" rel="noopener noreferrer" class="conclusion-link">Source Code on GitHub</a>
-        <a href="https://doi.org/10.1126/sciadv.ads0058" target="_blank" rel="noopener noreferrer" class="conclusion-link">Wang et al. (2025)</a>
+        <a href="https://doi.org/10.1126/sciadv.adr1794" target="_blank" rel="noopener noreferrer" class="conclusion-link">Wang et al. (2025)</a>
       </div>
 
       <div class="share-module reveal" id="shareModule" aria-labelledby="shareModuleTitle">
@@ -820,8 +823,9 @@
           <span class="figure-label">Share This Rebuttal</span>
           <h3 class="share-module__title" id="shareModuleTitle">Copy the live state into a clean rebuttal snapshot.</h3>
           <p class="share-module__summary" id="shareSnapshotText" aria-live="polite">
-            Three numbers decide the case: classical S = 2.001, post-selected S = 3.716,
-            and Wang et al. report S = 2.275 at vanishing efficiency.
+            Three numbers decide the case: classical S = 2.001, post-selected S = 3.716 at
+            70.0% acceptance, and Wang et al. report S = 2.275 at ~10<sup>&minus;18</sup>
+            efficiency.
           </p>
         </div>
         <div class="share-module__actions">

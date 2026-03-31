@@ -1,8 +1,8 @@
 ---
-type: canonical
-source: none
-sync: none
-sla: none
+type: derived
+source: arxiv/main.tex
+sync: manual
+sla: manual
 ---
 
 # arXiv submission notes
