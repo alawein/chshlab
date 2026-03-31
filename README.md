@@ -90,3 +90,8 @@ python scripts/run_visual_audit.py
 ## Documentation
 
 Start with [docs/README.md](docs/README.md) for the documentation index and supporting research/provenance files.
+
+## Ownership
+
+- **Maintainer:** @alawein
+- **Support:** GitHub Issues on this repository
