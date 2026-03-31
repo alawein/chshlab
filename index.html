@@ -686,11 +686,25 @@
 
       <!-- Interactive: Timeline -->
       <div class="figure-wrap timeline-wrap reveal" id="timelineWrap" aria-label="Interactive timeline of Bell test experiments from 1964 to 2025">
-        <div id="timelineContainer" class="timeline-track"></div>
+        <div class="timeline-toolbar">
+          <p class="timeline-toolbar__hint">Swipe or use the arrows to move through the timeline.</p>
+          <div class="timeline-toolbar__controls" aria-label="Timeline navigation controls">
+            <button type="button" class="timeline-nav-btn" id="timelinePrev" aria-controls="timelineContainer" aria-label="Scroll timeline backward">
+              <span aria-hidden="true">&larr;</span>
+            </button>
+            <button type="button" class="timeline-nav-btn" id="timelineNext" aria-controls="timelineContainer" aria-label="Scroll timeline forward">
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+          </div>
+        </div>
+        <div class="timeline-viewport" id="timelineViewport" data-scroll-start="true" data-scroll-end="false">
+          <div id="timelineContainer" class="timeline-track" tabindex="0" role="list" aria-describedby="timelineStatus"></div>
+        </div>
+        <p id="timelineStatus" class="timeline-status" aria-live="polite">Timeline ready. Use horizontal scroll, swipe, or the arrow buttons to reveal all seven entries.</p>
         <p class="figure-caption">
           <span class="figure-label">Timeline</span>
           From Bell&rsquo;s 1964 theorem through loophole-free tests in 2015 to Wang et al.&rsquo;s 2025 claim.
-          Scroll horizontally to explore the full timeline.
+          Use horizontal scroll, swipe, or the arrow controls to explore the full sequence.
         </p>
       </div>
     </div>

@@ -2,6 +2,11 @@ export function initTimeline() {
   const container = document.getElementById('timelineContainer');
   if (!container) return;
 
+  const viewport = document.getElementById('timelineViewport');
+  const prevButton = document.getElementById('timelinePrev');
+  const nextButton = document.getElementById('timelineNext');
+  const status = document.getElementById('timelineStatus');
+
   const line = document.createElement('div');
   line.className = 'timeline-line';
   container.appendChild(line);
@@ -19,6 +24,7 @@ export function initTimeline() {
   nodes.forEach((nodeData) => {
     const node = document.createElement('div');
     node.className = 'timeline-node reveal';
+    node.setAttribute('role', 'listitem');
 
     const year = document.createElement('span');
     year.className = 'timeline-node__year';
@@ -42,4 +48,67 @@ export function initTimeline() {
     node.appendChild(badge);
     container.appendChild(node);
   });
+
+  const scrollStep = () => {
+    const firstNode = container.querySelector('.timeline-node');
+    if (!firstNode) return Math.max(container.clientWidth * 0.85, 240);
+    const styles = window.getComputedStyle(container);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap || '0') || 0;
+    return firstNode.getBoundingClientRect().width + gap;
+  };
+
+  const updateScrollState = () => {
+    const maxScrollLeft = Math.max(container.scrollWidth - container.clientWidth, 0);
+    const atStart = container.scrollLeft <= 4;
+    const atEnd = container.scrollLeft >= maxScrollLeft - 4;
+
+    if (viewport) {
+      viewport.dataset.scrollStart = String(atStart);
+      viewport.dataset.scrollEnd = String(atEnd);
+    }
+    if (prevButton) {
+      prevButton.disabled = atStart;
+    }
+    if (nextButton) {
+      nextButton.disabled = atEnd;
+    }
+
+    const total = nodes.length;
+    const current = Math.min(
+      total,
+      Math.max(1, Math.round(container.scrollLeft / Math.max(scrollStep(), 1)) + 1),
+    );
+    if (status) {
+      status.textContent = `Timeline entry ${current} of ${total}. Use horizontal scroll, swipe, or the arrow buttons to reveal all entries.`;
+    }
+  };
+
+  const scrollByStep = (direction) => {
+    container.scrollBy({
+      left: direction * scrollStep(),
+      behavior: 'smooth',
+    });
+  };
+
+  if (prevButton) {
+    prevButton.addEventListener('click', () => scrollByStep(-1));
+  }
+  if (nextButton) {
+    nextButton.addEventListener('click', () => scrollByStep(1));
+  }
+
+  container.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      scrollByStep(-1);
+    }
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      scrollByStep(1);
+    }
+  });
+
+  container.addEventListener('scroll', updateScrollState, { passive: true });
+  window.addEventListener('resize', updateScrollState, { passive: true });
+  requestAnimationFrame(updateScrollState);
 }
