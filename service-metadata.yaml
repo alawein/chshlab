@@ -1,0 +1,14 @@
+# Service Metadata — chshlab
+# See: docs/governance/repository-standardization-program.md
+name: chshlab
+type: web-app
+runtime: node
+tier: tier-3
+deploy: vercel
+owner: alawein
+team: alawein-core
+oncall: "@alawein"
+compliance:
+  pii: false
+  soc2: false
+  hipaa: false
