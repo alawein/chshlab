@@ -16,8 +16,9 @@ chshlab — Claude Code configuration
 
 ## Quick Links
 
-- Governance: [AGENTS.md](AGENTS.md)
-- Shared governance guides: [../../../docs/shared/](../../../docs/shared/)
+- Governance: [AGENTS.md](../AGENTS.md)
+- Repo guidance: [CLAUDE.md](../CLAUDE.md), [SSOT.md](../SSOT.md)
+- Documentation index: [docs/README.md](../docs/README.md)
 
 ## Session Bootstrap
 

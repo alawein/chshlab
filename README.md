@@ -76,7 +76,7 @@ It writes figure assets into `assets/figures/`. The script expects the Python sc
 - Automated build: `bash build.sh`
 - Automated lint: `n/a`
 - Automated typecheck: `n/a`
-- Automated tests: `n/a`
+- Automated tests: `npm test`
 - Manual verification: local browser pass on `index.html` and `paper.html`
 
 ## Visual Audit

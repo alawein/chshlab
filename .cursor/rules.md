@@ -15,9 +15,8 @@ You are working in chshlab.
 
 ## Key Files
 
-- Config: [CLAUDE.md](../CLAUDE.md), [AGENTS.md](../AGENTS.md)
-- Guidelines: [GUIDELINES.md](../GUIDELINES.md)
-- Shared governance guides: [../../../docs/shared/](../../../docs/shared/)
+- Config: [CLAUDE.md](../CLAUDE.md), [AGENTS.md](../AGENTS.md), [SSOT.md](../SSOT.md)
+- Documentation: [docs/README.md](../docs/README.md), [docs/INDEX.md](../docs/INDEX.md)
 
 ## Work Style
 

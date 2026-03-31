@@ -27,6 +27,10 @@ sla: none
 
 ## 2026-03-30
 
+- Re-ran the documentation audit manually because `ops/consolidation_toolbox.py` is still not present in this repository.
+- Fixed broken governance/bootstrap links in [.claude/CLAUDE.md](../.claude/CLAUDE.md) and [.cursor/rules.md](../.cursor/rules.md) by pointing them at repo-local source-of-truth files.
+- Replaced machine-specific absolute file links in [IMPLEMENTATION_STEPS.md](IMPLEMENTATION_STEPS.md) and [PLAN.md](PLAN.md) with portable repo-relative links.
+- Confirmed the repaired Markdown link set no longer contains missing or non-portable targets in the audited files.
 - Re-audited the canonical paper surface against a newer local `v1.3` source of truth and rejected an older Claude-generated PDF as a regression target.
 - Updated [index.html](../index.html) metadata, structured data, citation links, and conclusion copy so the homepage matches the canonical paper argument and publication figure family.
 - Replaced the homepage bibliography data in [js/references.js](../js/references.js) with the paper's current 21-entry reference list and corrected the Wang 2025 DOI to `10.1126/sciadv.adr1794`.

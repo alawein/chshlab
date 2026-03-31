@@ -7,7 +7,7 @@ sla: none
 
 # CHSH Lab — Implementation Steps
 
-> Historical implementation checklist from the initial site launch. For the current `v1.3` publication workflow and figure/source-of-truth mapping, use [FIGURE_PROVENANCE.md](/Users/mesha/Desktop/GitHub/alawein/chshlab/docs/FIGURE_PROVENANCE.md), [CONTENT_MAP.md](/Users/mesha/Desktop/GitHub/alawein/chshlab/docs/CONTENT_MAP.md), and [ACADEMIC_FACTCHECK.md](/Users/mesha/Desktop/GitHub/alawein/chshlab/docs/ACADEMIC_FACTCHECK.md).
+> Historical implementation checklist from the initial site launch. For the current `v1.3` publication workflow and figure/source-of-truth mapping, use [FIGURE_PROVENANCE.md](FIGURE_PROVENANCE.md), [CONTENT_MAP.md](CONTENT_MAP.md), and [ACADEMIC_FACTCHECK.md](ACADEMIC_FACTCHECK.md).
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
