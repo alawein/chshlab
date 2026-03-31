@@ -81,18 +81,42 @@ That sentence is the governing claim in both [paper.html](../paper.html) and [ar
 - Sections 4 through 6 in [arxiv/main.tex](../arxiv/main.tex)
 
 ### Shipped statement
-- Wang et al. report `S = 2.275 +- 0.057` at effective efficiency around `10^-18`.
+- Wang et al. report `S = 2.275 +- 0.057` at an effective acceptance or post-selection probability around `10^-18`, not an ordinary per-arm detector efficiency.
 - The rebuttal does not need to prove their apparatus is classical. It only needs to show that the reported evidence class is still available to local explanations.
+- The shipped surfaces now also say that the published critique literature goes further and converges on a stronger artifact diagnosis centered on fourfold post-selection and unconventional normalization.
 
 ### Supporting evidence
 - [paper.html](../paper.html) Table 2 and conclusion
-- [index.html](../index.html) evidence strip, comparison table, and conclusion beat
+- [index.html](../index.html) evidence strip, claim beat, comparison table, and conclusion beat
 - [js/references.js](../js/references.js) entries for `wang2025`, `wharton2025`, `wojcik2025`, `cieslinski2025`, and `vieira2025`
 
 ### Audit note
 - The canonical Wang citation is:
   `K. Wang et al., "Violation of Bell inequality with unentangled photons," Science Advances 11(31), eadr1794 (2025).`
   DOI: `https://doi.org/10.1126/sciadv.adr1794`
+- The Cieśliński response is now treated as:
+  `P. Cieśliński, J.-Å. Larsson, M. Markiewicz, K. Schlichtholz, and M. Żukowski, "Unquestionable Bell theorem for interwoven frustrated down conversion processes," Physical Review Letters 136, 090206 (2026); arXiv:2508.19207.`
+
+## Claim 5 - The experiment-specific dispute is about fourfold post-selection and cross-setting normalization
+
+### Canonical source
+- Introduction and Discussion in [paper.html](../paper.html)
+- Introduction and Discussion in [arxiv/main.tex](../arxiv/main.tex)
+- "What Wang et al. Actually Did" in [index.html](../index.html)
+
+### Shipped statement
+- Wang et al. retain only fourfold coincidences in a four-photon frustrated-interference setup.
+- The reported `-1` outcomes are inferred by a `pi`-shift of the local phases, and the operational joint probabilities are reconstructed from counts collected at four different settings.
+- Three independent critiques treat that fourfold post-selection plus unconventional normalization as the central reason the reported statistic does not count as decisive Bell evidence.
+
+### Supporting evidence
+- [paper.html](../paper.html) introduction and discussion
+- [arxiv/main.tex](../arxiv/main.tex) introduction and discussion
+- [index.html](../index.html) claim beat
+
+### Audit note
+- The formal thesis of this repo remains narrower than "Wang et al. are classical."
+- The stronger artifact diagnosis is presented as convergent external context, not as a new theorem proved by the site.
 
 ## Required diagnostics
 
@@ -121,5 +145,7 @@ The current `v1.3` site and paper make a coherent claim when read together:
 
 - `S > 2` is not being dismissed universally.
 - The rebuttal is about inference under severe filtering.
+- The critical `~10^-18` number is described as effective acceptance or post-selection probability.
 - The exact local counterexample is `S_sel = 26/7 ~= 3.714`, with the shipped Monte Carlo artifact at `S = 3.716`.
-- The correct reading of the reported Wang result at `~10^-18` efficiency is caution, not coronation.
+- The critique literature now converges on a stronger diagnosis centered on fourfold post-selection and unconventional normalization.
+- The correct reading of the reported Wang result at `~10^-18` effective acceptance is caution, not coronation.

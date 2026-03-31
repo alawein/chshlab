@@ -85,7 +85,7 @@
 }
 
 .beat__byline a {
-  color: var(--text-muted);
+  color: var(--blue);
 }
 
 .beat__prose {
@@ -452,7 +452,7 @@
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: var(--text-muted);
+  color: var(--blue);
   text-decoration: none;
   padding: var(--space-1) var(--space-2);
   border: 1px solid var(--border);
@@ -460,8 +460,8 @@
 }
 
 .footer-author a:hover {
-  color: var(--amber);
-  border-color: var(--amber-dim);
+  color: #78b7df;
+  border-color: rgba(79, 163, 212, 0.35);
   text-decoration: none;
 }
 

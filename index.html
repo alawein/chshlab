@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bell Violations Without Entanglement? A Reproducible Rebuttal — CHSH Lab</title>
-  <meta name="description" content="Interactive narrative and formal paper showing that, at ultra-low efficiency, a post-selected CHSH value above 2 is non-exclusionary until the selection rule itself is constrained." />
+  <meta name="description" content="Interactive narrative and formal paper showing why Wang et al.'s fourfold post-selection leaves a post-selected CHSH value above 2 non-exclusionary until the selection rule itself is constrained." />
   <meta name="author" content="Meshal Alawein" />
   <meta name="keywords" content="Bell inequality, CHSH, detection loophole, post-selection bias, quantum nonlocality, Bell test, Tsirelson bound, Wang et al 2025, rebuttal" />
   <link rel="canonical" href="https://chshlab.online" />
@@ -23,7 +23,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Bell Violations Without Entanglement? A Reproducible Rebuttal" />
-  <meta property="og:description" content="A reproducible rebuttal showing how a local model with outcome-coupled post-selection yields S = 3.716 at 70.0% acceptance." />
+  <meta property="og:description" content="A reproducible rebuttal explaining Wang et al.'s fourfold post-selection, counterfactual normalization, and the narrower evidentiary claim they leave behind." />
   <meta property="og:url" content="https://chshlab.online" />
   <meta property="og:site_name" content="CHSH Lab" />
   <meta property="og:image" content="https://chshlab.online/assets/figures/publication/fig1_bounds.png" />
@@ -33,7 +33,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Bell Violations Without Entanglement? A Reproducible Rebuttal" />
-  <meta name="twitter:description" content="A local model with outcome-coupled post-selection yields S = 3.716 at 70.0% acceptance. Interactive narrative plus canonical paper." />
+  <meta name="twitter:description" content="Interactive narrative plus canonical paper explaining why fourfold post-selection and counterfactual normalization leave Wang et al.'s CHSH claim non-exclusive." />
   <meta name="twitter:image" content="https://chshlab.online/assets/figures/publication/fig1_bounds.png" />
 
   <!-- Structured Data -->
@@ -42,8 +42,8 @@
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
     "name": "Bell Violations Without Entanglement? A Reproducible Rebuttal of Wang et al. (2025)",
-    "author": { "@type": "Person", "name": "Meshal Alawein", "url": "https://www.meshal.ai" },
-    "description": "A reproducible rebuttal showing that, in the ultra-low-efficiency regime, a post-selected CHSH value above 2 is non-exclusionary evidence until the selection rule itself is constrained.",
+    "author": { "@type": "Person", "name": "Meshal Alawein", "url": "https://www.meshal.ai", "email": "mailto:meshal@berkeley.edu" },
+    "description": "A reproducible rebuttal showing that, in the ultra-low-efficiency regime, a post-selected CHSH value above 2 remains non-exclusionary until the selection rule itself is constrained.",
     "url": "https://chshlab.online",
     "datePublished": "2026-03-30",
     "dateModified": "2026-03-30",
@@ -128,12 +128,12 @@
       <h1 class="beat__title">Bell Violations Without Entanglement?</h1>
       <p class="beat__subtitle">
         A 2025 paper in <em>Science Advances</em> claimed to violate Bell&rsquo;s inequality
-        without entanglement. The result made waves. There&rsquo;s just one problem.
+        without entanglement. The result drew immediate attention, but its interpretation depends on the post-selection rule.
       </p>
       <p class="beat__byline">
         <a href="https://www.meshal.ai" target="_blank" rel="noopener noreferrer">Meshal Alawein</a>
         &middot; UC Berkeley
-        &middot; <a href="mailto:contact@meshal.ai">contact@meshal.ai</a>
+        &middot; <a href="mailto:meshal@berkeley.edu">meshal@berkeley.edu</a>
       </p>
     </div>
     <div class="scroll-hint" aria-hidden="true">
@@ -151,13 +151,13 @@
       <p class="evidence-strip__summary reveal">
         A classical model stays at <strong class="key-stat">S = 2.001</strong> without selection, jumps to
         <strong class="key-stat key-stat--danger">S = 3.716</strong> under post-selection, and makes the reported
-        <strong class="key-stat">S = 2.275</strong> non-diagnostic at vanishing efficiency.
+        <strong class="key-stat">S = 2.275</strong> non-diagnostic at vanishing effective acceptance.
       </p>
       <div class="evidence-strip__grid reveal" role="list">
         <article class="evidence-card evidence-card--muted" role="listitem">
           <span class="evidence-card__label">Wang et al. (2025)</span>
           <strong class="evidence-card__value">2.275 &plusmn; 0.057</strong>
-          <p class="evidence-card__note">Measured at ~10<sup>&minus;18</sup> efficiency. The loophole is wide open.</p>
+          <p class="evidence-card__note">Measured at ~10<sup>&minus;18</sup> effective acceptance, where post-selection diagnostics remain decisive.</p>
         </article>
         <article class="evidence-card" role="listitem">
           <span class="evidence-card__label">Classical Baseline</span>
@@ -187,7 +187,7 @@
 
       <div class="beat__prose reveal">
         <p>
-          In early 2025,
+          On August 1, 2025,
           <a href="https://doi.org/10.1126/sciadv.adr1794" target="_blank" rel="noopener noreferrer">Wang et al.</a>
           published a striking result: a measured CHSH value of
           <strong class="key-stat">S = 2.275 &plusmn; 0.057</strong> from a multiphoton interference experiment.
@@ -195,15 +195,24 @@
           system exhibited quantum nonlocality.
         </p>
         <p>
-          The experiment itself was technically impressive. Multiphoton interference at these scales
-          is genuinely difficult, and the optical engineering deserves admiration. But admiration of
-          the apparatus should not cloud judgment about what the measurements actually establish.
+          The apparatus uses four-photon frustrated interference, also described in the follow-up
+          literature as interwoven frustrated down-conversion. Four SPDC pathways are arranged so
+          that a retained event is a <em>fourfold coincidence</em>: one photon detected in each output mode,
+          with local phases &alpha; and &beta; controlling the interference pattern.
         </p>
         <p>
-          A Bell test works like this: a source produces correlated particle pairs. Alice and Bob
-          each choose between two measurement settings and record &plusmn;1 outcomes. Four correlations
-          are combined into the CHSH parameter S. If S &gt; 2, local hidden variables can&rsquo;t explain
-          the result &mdash; <em>provided every pair is detected</em>.
+          That is already not a standard Bell trial. Wang et al. keep only fourfold coincidences,
+          infer the &minus;1 outcomes by shifting a phase by &pi;, and normalize the reported joint
+          probabilities with counts taken at four different phase settings. In an ordinary Bell test,
+          each trial yields definite local &plusmn;1 outcomes at the chosen settings without that
+          counterfactual renormalization step.
+        </p>
+        <p>
+          This is why the formal claim on this site stays narrow. The optics are real and interesting,
+          but three independent published critiques now converge on a stronger diagnosis: the reported
+          violation is driven by fourfold post-selection and unconventional normalization rather than
+          by a loophole-free demonstration of nonlocality. Wang et al. themselves acknowledge open
+          locality and sampling loopholes and rely on fair sampling.
         </p>
       </div>
 
@@ -241,14 +250,15 @@
 
       <div class="beat__prose reveal">
         <p>
-          Wang et al.&rsquo;s detection efficiency was approximately
-          <strong class="key-stat key-stat--danger">10<sup>&minus;18</sup></strong>. That&rsquo;s one event kept for every
-          quintillion produced. To put it another way: if every human on Earth ran the experiment
-          once per second, you&rsquo;d wait about four years for a single detected pair.
+          Wang et al.&rsquo;s critical number was an effective acceptance or post-selection probability of
+          approximately <strong class="key-stat key-stat--danger">10<sup>&minus;18</sup></strong>. That is not an ordinary
+          per-arm detector specification. It is the fraction of trials that survive the fourfold-coincidence
+          filter. In everyday terms: one retained event for every quintillion opportunities.
         </p>
         <p>
-          Why does this matter? The CHSH bound S &le; 2 holds for local hidden variable theories &mdash;
-          but only when <em>all</em> particle pairs are detected. Three numbers define the landscape:
+          In CHSH-style reasoning, the local bound S &le; 2 transfers cleanly only
+          when the retained sample tracks the emitted ensemble. At ~10<sup>&minus;18</sup> effective
+          acceptance, that transfer cannot simply be assumed. Three numbers define the landscape:
         </p>
       </div>
 
@@ -260,7 +270,7 @@
           <span class="figure-label">The S Landscape</span>
           Classical models stay below 2. Quantum mechanics reaches 2&radic;2.
           Post-selection artifacts can push all the way to 4.
-          Wang et al. reported S = 2.275 &mdash; which zone does it really belong in?
+          Wang et al. reported S = 2.275, so the relevant question is which evidentiary regime that statistic occupies.
         </p>
       </div>
 
@@ -287,7 +297,7 @@
   <section id="loophole" class="beat beat--loophole">
     <div class="container">
       <p class="section-label reveal">The Detection Loophole</p>
-      <h2 class="section-heading reveal">Can Classical Models Fake Bell Violations?</h2>
+      <h2 class="section-heading reveal">Classical Counterexamples Under Post-Selection</h2>
 
       <div class="beat__prose reveal">
         <p>
@@ -295,9 +305,9 @@
           <a href="https://doi.org/10.1103/PhysRevD.2.1418" target="_blank" rel="noopener noreferrer">Pearle (1970)</a>
           and
           <a href="https://doi.org/10.1103/PhysRevA.47.R747" target="_blank" rel="noopener noreferrer">Eberhard (1993)</a>
-          showed decades ago, is yes &mdash; if detection efficiency is low enough. When detectors
-          miss particles, the surviving sample is no longer representative. A classical model can
-          exploit these gaps to mimic quantum correlations.
+          showed decades ago, is yes &mdash; if the retained-event rate is low enough. When detectors
+          miss particles, or when post-selection keeps only a tiny subset, the surviving sample is no
+          longer representative. A classical model can exploit these gaps to mimic quantum correlations.
         </p>
         <p>
           The critical threshold is:
@@ -311,8 +321,8 @@
 
       <div class="beat__prose reveal">
         <p>
-          Below this efficiency, the maximum CHSH value a classical model can achieve is not 2 &mdash;
-          it&rsquo;s <strong class="key-stat key-stat--danger">4/&eta; &minus; 2</strong>. At Wang et al.&rsquo;s efficiency of ~10<sup>&minus;18</sup>,
+          Below this CHSH benchmark, the maximum CHSH value a classical model can achieve is not 2 &mdash;
+          it&rsquo;s <strong class="key-stat key-stat--danger">4/&eta; &minus; 2</strong>. At Wang et al.&rsquo;s effective acceptance of ~10<sup>&minus;18</sup>,
           that classical ceiling is astronomically high. Drag the slider below to see for yourself.
         </p>
       </div>
@@ -343,11 +353,11 @@
       </article>
 
       <!-- Interactive: Efficiency Landscape -->
-      <div class="figure-wrap reveal" aria-label="Interactive efficiency landscape showing how classical models can exceed quantum bounds at low detection efficiency">
+      <div class="figure-wrap reveal" aria-label="Interactive efficiency landscape showing how classical models can exceed quantum bounds when the retained-event rate is very low">
         <div class="figure-interactive" id="efficiencyFigure">
           <div class="figure-controls">
             <div class="demo-slider-row">
-              <label for="sliderEta">Detection efficiency &eta;: <span id="valEta">70%</span></label>
+              <label for="sliderEta">CHSH benchmark &eta;: <span id="valEta">70%</span></label>
               <input type="range" id="sliderEta" min="0.01" max="1.0" value="0.70" step="0.01" />
             </div>
             <div class="demo-readouts">
@@ -358,14 +368,14 @@
             </div>
           </div>
           <div class="demo-canvas-wrap">
-            <svg id="efficiencySvg" viewBox="0 0 700 350" aria-label="Detection efficiency landscape chart" role="img"></svg>
+            <svg id="efficiencySvg" viewBox="0 0 700 350" aria-label="CHSH benchmark landscape chart" role="img"></svg>
           </div>
         </div>
         <p class="figure-caption">
           <span class="figure-label">Interactive</span>
-          Sweep detection efficiency to see the classical LHV bound grow.
+          Sweep the CHSH benchmark parameter &eta; to see the local LHV ceiling grow.
           At &eta; = 70%, classical models can reach S = 3.71 &mdash; exceeding even the quantum limit.
-          Wang et al. sits at ~10<sup>&minus;18</sup>, deep in the loophole-vulnerable regime.
+          Wang et al. sits at ~10<sup>&minus;18</sup> effective acceptance, deep in the loophole-vulnerable regime.
         </p>
       </div>
     </div>
@@ -494,7 +504,7 @@
   <section id="proof" class="beat beat--proof">
     <div class="container">
       <p class="section-label reveal">The Proof</p>
-      <h2 class="section-heading reveal">Don&rsquo;t Take Our Word For It</h2>
+      <h2 class="section-heading reveal">A Constructive Counterexample</h2>
 
       <div class="beat__prose reveal">
         <p>
@@ -639,12 +649,20 @@
           were careful not to claim more than the data warranted.
         </p>
         <p>
-          The community converged on a standard: either close the detection loophole
-          (&eta; &gt; 82.8%), or provide diagnostics that rule out selection artifacts.
-          In 2015, three independent groups achieved both simultaneously:
+          The community converged on a stricter standard: close the relevant loopholes directly, or
+          publish diagnostics strong enough to show that selection is not doing the work. For CHSH-style
+          fair-sampling discussions, &eta; &gt; 82.8% is the familiar benchmark. CH and Eberhard analyses
+          can go lower, and the decisive 2015 photon tests were framed that way.
+        </p>
+        <p>
+          In 2015, three independent groups closed the case by engineering around the loopholes instead of
+          normalizing them away:
           <a href="https://doi.org/10.1038/nature15759" target="_blank" rel="noopener noreferrer">Hensen et al.</a> (Delft),
-          <a href="https://doi.org/10.1103/PhysRevLett.115.250401" target="_blank" rel="noopener noreferrer">Giustina et al.</a> (Vienna),
-          <a href="https://doi.org/10.1103/PhysRevLett.115.250402" target="_blank" rel="noopener noreferrer">Shalm et al.</a> (NIST).
+          used an event-ready architecture, while
+          <a href="https://doi.org/10.1103/PhysRevLett.115.250401" target="_blank" rel="noopener noreferrer">Giustina et al.</a> (Vienna)
+          and
+          <a href="https://doi.org/10.1103/PhysRevLett.115.250402" target="_blank" rel="noopener noreferrer">Shalm et al.</a> (NIST)
+          used high-efficiency entangled-photon tests analyzed with CH/Eberhard-style logic.
         </p>
         <p>
           For future experiments with low acceptance rates, we recommend reporting:
@@ -656,7 +674,7 @@
         <li><strong>Acceptance rates</strong> broken down by measurement setting.</li>
         <li><strong>No-signaling tests</strong> on both selected and unselected data.</li>
         <li><strong>Independence tests</strong> between acceptance and measurement settings.</li>
-        <li><strong>Sensitivity analysis:</strong> how much could selection bias the result?</li>
+        <li><strong>Sensitivity analysis:</strong> quantify the range of selection-induced distortion consistent with the observed result.</li>
       </ol>
 
       <div class="beat__prose reveal">
@@ -725,7 +743,7 @@
             <article class="dashboard-kpi" data-kpi="efficiency">
               <span class="dashboard-kpi__label">Efficiency</span>
               <strong class="dashboard-kpi__value">--</strong>
-              <span class="dashboard-kpi__note">Detector efficiency eta</span>
+              <span class="dashboard-kpi__note">CHSH benchmark eta</span>
             </article>
           </div>
         </section>
@@ -793,22 +811,28 @@
   <!-- BEAT 8: CONCLUSION -->
   <section id="conclusion" class="beat beat--conclusion">
     <div class="container">
-      <h2 class="section-heading reveal">Caution, Not Coronation.</h2>
+      <h2 class="section-heading reveal">Evidentiary Caution.</h2>
 
       <div class="beat__prose reveal">
         <p>
-          The conclusion is narrower than a manifesto and stronger than a complaint. A local
+          The conclusion is narrower than the strongest claims made in the debate. A local
           hidden-variable source with outcome-coupled acceptance reproduces the evidentiary
           regime of a post-selected Bell claim and can exceed the Tsirelson bound without
           entanglement. The Wang et al. statistic, considered as a selected CHSH number at
-          ultra-low effective efficiency, therefore does not by itself establish quantum
+          ultra-low effective acceptance, therefore does not by itself establish quantum
           nonlocality.
         </p>
         <p>
-          The remedy is methodological rather than theatrical: report the raw correlations,
+          The broader critique literature now goes further: three independent analyses trace the
+          reported violation to fourfold post-selection and unconventional normalization. This site
+          uses that convergence as context while keeping the formal thesis narrower than
+          &ldquo;Wang et al. are classical.&rdquo;
+        </p>
+        <p>
+          The remedy is methodological: report the raw correlations,
           the setting-resolved acceptance structure, and the diagnostics that constrain fair
-          sampling. Until then, the correct interpretation of a low-efficiency post-selected
-          violation is caution, not coronation.
+          sampling. Until then, the appropriate interpretation of a low-efficiency post-selected
+          violation is evidentiary caution.
         </p>
       </div>
 
@@ -825,7 +849,7 @@
           <p class="share-module__summary" id="shareSnapshotText" aria-live="polite">
             Three numbers decide the case: classical S = 2.001, post-selected S = 3.716 at
             70.0% acceptance, and Wang et al. report S = 2.275 at ~10<sup>&minus;18</sup>
-            efficiency.
+            effective acceptance.
           </p>
         </div>
         <div class="share-module__actions">
@@ -867,7 +891,7 @@
         <a href="https://www.meshal.ai" target="_blank" rel="noopener noreferrer">meshal.ai</a>
         <a href="https://www.linkedin.com/in/alawein" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://www.github.com/alawein" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="mailto:contact@meshal.ai">contact@meshal.ai</a>
+        <a href="mailto:meshal@berkeley.edu">meshal@berkeley.edu</a>
       </nav>
       <p class="footer-text footer-text--small">
         All simulations run client-side. No data is collected or transmitted.

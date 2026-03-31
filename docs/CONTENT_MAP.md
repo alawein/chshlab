@@ -13,7 +13,7 @@ This map identifies the current source-of-truth relationships for the shipped si
 
 | Surface | Source of truth | Notes |
 |---|---|---|
-| `paper.html` | `paper.html` + `arxiv/main.tex` | These two artifacts must stay argument-level identical. |
+| `paper.html` | `paper.html` + `arxiv/main.tex` | These two artifacts must stay argument-level identical, including the hybrid thesis and experiment-specific critique framing. |
 | `index.html` narrative | `paper.html` | The homepage is a guided presentation layer, not an independent argument source. |
 | Homepage bibliography | `paper.html` references rendered via `js/references.js` | The homepage list should mirror the paper's current bibliography, even if the rendering format is lighter. |
 | Publication figures | `scripts/generate_publication_figures.py` | Writes the four canonical figures to both website and arXiv directories. |
@@ -66,7 +66,7 @@ The current rebuttal depends on the following paper-era cluster:
 - `wang2025`
 - `wharton2025`
 - `wojcik2025`
-- `cieslinski2025`
+- `cieslinski2025` (legacy key name; published as PRL 136, 090206 (2026))
 - `vieira2025`
 
 Any change to the argument or bibliography should be reflected in all three places:
@@ -81,5 +81,6 @@ When revising content, verify these invariants:
 
 - Homepage metadata uses the publication figure family, not the legacy figure family.
 - The Wang citation uses DOI `10.1126/sciadv.adr1794`.
+- When mentioning `~10^-18`, describe it as effective acceptance or post-selection probability, or explicitly as a CHSH benchmark proxy for the retained-event rate.
 - The paper point remains `p_lo = 0.10`, `S_sel = 26/7 ~= 3.714`, and Monte Carlo `S = 3.716` at `70.0%` acceptance.
 - `paper.html` and `arxiv/main.tex` keep the same title block, figure count, bibliography, and conclusion.

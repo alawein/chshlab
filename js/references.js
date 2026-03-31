@@ -166,7 +166,7 @@ export const REFS = [
   },
   {
     key: 'wojcik2025',
-    authors: 'A. Wojcik and D. K. Wojcik',
+    authors: 'A. Wojcik and J. Wojcik',
     year: 2025,
     title: 'Simple explanation of apparent Bell nonlocality of unentangled photons',
     journal: 'arXiv',
@@ -175,11 +175,11 @@ export const REFS = [
   },
   {
     key: 'cieslinski2025',
-    authors: 'J. Cieslinski et al.',
-    year: 2025,
+    authors: 'P. Cieslinski, J.-A. Larsson, M. Markiewicz, K. Schlichtholz, and M. Zukowski',
+    year: 2026,
     title: 'Unquestionable Bell theorem for interwoven frustrated down conversion processes',
-    journal: 'arXiv',
-    details: '2508.19207',
+    journal: 'Physical Review Letters',
+    details: '136, 090206; arXiv:2508.19207',
     href: 'https://arxiv.org/abs/2508.19207',
   },
   {
