@@ -20,8 +20,8 @@ class Theme(NamedTuple):
     blue: str
     green: str
     sand: str
-    grid: str
-    edge: str
+    grid: str | tuple[float, float, float, float]
+    edge: str | tuple[float, float, float, float]
 
 
 # Transparent dark-site theme for publication figures on the website
@@ -34,8 +34,8 @@ WEB_THEME = Theme(
     blue='#4FA3D4',
     green='#6B8F71',
     sand='#5C5A55',
-    grid='rgba(255, 248, 230, 0.10)',
-    edge='rgba(255, 255, 255, 0.08)',
+    grid=(1.0, 248 / 255, 230 / 255, 0.10),
+    edge=(1.0, 1.0, 1.0, 0.08),
 )
 
 # Light theme — white background for arXiv / print
