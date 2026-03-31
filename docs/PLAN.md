@@ -7,6 +7,8 @@ sla: none
 
 # CHSH Lab — Site Architecture Plan
 
+> Historical planning document from the pre-`v1.3` site buildout. For current publication truth, use [FIGURE_PROVENANCE.md](/Users/mesha/Desktop/GitHub/alawein/chshlab/docs/FIGURE_PROVENANCE.md), [CONTENT_MAP.md](/Users/mesha/Desktop/GitHub/alawein/chshlab/docs/CONTENT_MAP.md), and the current publication surfaces in [paper.html](/Users/mesha/Desktop/GitHub/alawein/chshlab/paper.html) and [arxiv/main.tex](/Users/mesha/Desktop/GitHub/alawein/chshlab/arxiv/main.tex).
+
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build a world-class static site on GitHub Pages that showcases the CHSH/Bell inequality rebuttal with interactive math demos and rigorous academic presentation.

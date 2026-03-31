@@ -7,182 +7,88 @@ sla: none
 
 # Figure Provenance
 
-Complete provenance record for all five figures in CHSH Lab.
-Each entry traces the figure to its generation script, parameters, and validated theorems.
+This document records the canonical figure family used by the current `v1.3` paper.
 
----
+## Canonical outputs
 
-## Fig. 1 — CHSH S Values Across Model Types
+`scripts/generate_publication_figures.py` is the source of truth for the paper figures. It writes the same four figures to both:
 
-| Field | Value |
-|---|---|
-| **File** | `assets/figures/fig1_chsh_bounds.png` |
-| **Generator** | Python 3.11 · matplotlib 3.8 · numpy 1.26 |
-| **Script** | `scripts/fig1_chsh_bounds.py` |
+- `assets/figures/publication/`
+- `arxiv/figures/`
 
-### Parameters
+The web outputs use a transparent dark-site theme. The arXiv outputs use a white print theme.
 
-| Parameter | Value |
-|---|---|
-| N (trials per model) | 10,000 |
-| Angles (optimal) | a=0, a'=pi/4, b=pi/8, b'=3pi/8 |
-| Models | Classical LHV, Quantum Singlet, Post-Selected Classical |
-| Post-selection bias (rho) | 0.30 |
-| Random seed | 42 |
-
-### Validation
-
-- Classical LHV S = 2.001 — consistent with **Theorem 1** (S <= 2)
-- Quantum singlet S = 2.821 — consistent with **Theorem 2** (S <= 2sqrt(2) = 2.828)
-- Post-selected S = 3.716 — consistent with **Theorem 3** (S -> 4 via post-selection)
-
-### Cross-References
-
-- Theorems 1, 2, 3
-- Demo 1 (Angle Sweep): reproduces quantum and classical S values interactively
-- Demo 3 (Post-Selection Bias): reproduces post-selected S values interactively
-
----
-
-## Fig. 2 — Detection Efficiency Landscape
+## Figure 1 - Reference scales for the two papers
 
 | Field | Value |
 |---|---|
-| **File** | `assets/figures/fig2_efficiency_landscape.png` |
-| **Generator** | Python 3.11 · matplotlib 3.8 · numpy 1.26 |
-| **Script** | `scripts/fig2_efficiency_landscape.py` |
+| File | `assets/figures/publication/fig1_bounds.png` |
+| Script | `scripts/generate_publication_figures.py` |
+| Inputs | Classical bound `2.0`, Wang et al. `2.275`, Tsirelson `2*sqrt(2)`, local toy-model value `26/7` |
+| Validation target | Introduction + Figure 1 in `paper.html` and `arxiv/main.tex` |
 
-### Parameters
+### Audit notes
+- This figure is the canonical social/share image for both `/paper` and the homepage metadata.
+- It replaces the older homepage share reference to `assets/figures/fig1_chsh_bounds.png`.
 
-| Parameter | Value |
-|---|---|
-| eta range | 0.50 - 1.00 (step 0.001) |
-| Formula | S_LHV,max(eta) = 4/eta - 2 |
-| Critical threshold | eta_c = 2/(1+sqrt(2)) = 0.8284 |
-| Reference lines | S=2 (classical bound), S=2sqrt(2) (Tsirelson bound) |
-
-### Validation
-
-- LHV max curve matches analytic formula S_LHV,max = 4/eta - 2 pointwise
-- eta_c threshold correctly placed at 0.8284 (intersection with S=2)
-- At eta=0.70: S_LHV,max = 3.714 — matches Argument 3 evidence block
-- Matches **Demo 2** (Efficiency Landscape) interactive simulation exactly
-
-### Cross-References
-
-- Theorem 1 (establishes classical bound S <= 2 that eta_c preserves)
-- Argument 1 (classical bound rebuttal — eta dependency)
-- Demo 2 (interactive efficiency sweep)
-
----
-
-## Fig. 3 — Post-Selection Mechanism
+## Figure 2 - Efficiency context
 
 | Field | Value |
 |---|---|
-| **File** | `assets/figures/fig3_postselection_mechanism.png` |
-| **Generator** | Python 3.11 · matplotlib 3.8 · numpy 1.26 |
-| **Script** | `scripts/fig3_postselection_mechanism.py` |
+| File | `assets/figures/publication/fig2_efficiency.png` |
+| Script | `scripts/generate_publication_figures.py` |
+| Inputs | Wang marker `1e-18`, Eberhard threshold `2/3`, Garg-Mermin threshold `2/(1+sqrt(2))`, unit efficiency `1.0` |
+| Validation target | Theoretical Background + Figure 2 in `paper.html` and `arxiv/main.tex` |
 
-### Parameters
+### Audit notes
+- The figure is log-scale on the x-axis and explicitly distinguishes the selection-heavy regime from the threshold regime.
+- The shipped paper uses this benchmark figure, not the earlier site-only `fig2_efficiency_landscape.png`, as the canonical publication asset.
 
-| Parameter | Value |
-|---|---|
-| rho range | 0.01 - 1.00 (step 0.01) |
-| S formula | S_post(rho) = 2 + 2(1 - rho) |
-| Acceptance formula | accept(rho) = 0.5 + 0.5*rho |
-| N (simulated trials) | 10,000 per rho value |
-
-### Validation
-
-- Inverse relationship confirmed: lower acceptance rate -> higher S
-- At rho=0.30: S = 3.4, acceptance = 65% (consistent with Fig. 1 post-selection parameters)
-- Limiting cases correct: rho=1.00 gives S=2, accept=100%; rho->0 gives S->4, accept->50%
-- Matches **Demo 3** (Post-Selection Bias) interactive simulation exactly
-
-### Cross-References
-
-- Theorem 3 (constructive proof of post-selection inflation)
-- Argument 2 (post-selection inflation rebuttal)
-- Demo 3 (interactive bias sweep)
-
----
-
-## Fig. 4 — Bell Test Schematic
+## Figure 3 - Exact local counterexample
 
 | Field | Value |
 |---|---|
-| **File** | `assets/figures/fig4_bell_test_schematic.png` |
-| **Generator** | Python 3.11 · matplotlib 3.8 · matplotlib.patches |
-| **Script** | `scripts/fig4_bell_test_schematic.py` |
+| File | `assets/figures/publication/fig3_postselection_curve.png` |
+| Script | `scripts/generate_publication_figures.py` |
+| Inputs | `p_lo` over `[0, 0.5]`, `S_sel = 4*((1.5 - 2*p_lo)/(1.5 - p_lo))`, `accept = 0.75 - 0.5*p_lo` |
+| Paper point | `p_lo = 0.10`, `S_sel = 26/7 ~= 3.714`, acceptance `0.70` |
+| Validation target | Results + Figure 3 in `paper.html` and `arxiv/main.tex` |
 
-### Parameters
+### Audit notes
+- This is the canonical post-selection figure because it matches the exact formula used in `js/demo-postselect.js`.
+- The older narrative figure `fig3_postselection_mechanism.png` remains only as legacy collateral; it is not the publication figure family.
 
-| Parameter | Value |
-|---|---|
-| Layout | Source (center), Alice detector (left), Bob detector (right) |
-| Settings | 4 measurement angles (a, a', b, b') |
-| Coincidence unit | Shown between detectors |
-| Detection markers | eta labels on each detector arm |
-
-### Validation
-
-- Standard Bell test topology reproduced accurately
-- Consistent with textbook diagrams (Bell 1964, CHSH 1969)
-- All four measurement settings labeled correctly
-- Detection efficiency markers present on both detector arms
-
-### Cross-References
-
-- Paper Section introduction (displayed as primary schematic)
-- All three arguments reference this experimental setup
-- Annotations.js overlays interactive hotspots on this figure
-
----
-
-## Fig. 5 — Historical Timeline
+## Figure 4 - Correlator inflation without changing locality class
 
 | Field | Value |
 |---|---|
-| **File** | `assets/figures/fig5_timeline.png` |
-| **Generator** | Python 3.11 · matplotlib 3.8 |
-| **Script** | `scripts/fig5_timeline.py` |
+| File | `assets/figures/publication/fig4_correlators.png` |
+| Script | `scripts/generate_publication_figures.py` |
+| Inputs | Raw correlators `(0.5, 0.5, 0.5, -0.5)`, selected correlators `(13/14, 13/14, 13/14, -13/14)` |
+| Validation target | Results + Figure 4 in `paper.html` and `arxiv/main.tex` |
 
-### Parameters
+### Audit notes
+- This figure is the publication replacement for the older site schematic/timeline pair when the goal is paper parity.
+- It visualizes the paper's central point directly: the filter changes the retained correlators, not the underlying locality class.
 
-| Parameter | Value |
-|---|---|
-| Events | Bell 1964, CHSH 1969, Aspect 1982, Eberhard 1993, Loophole-free 2015, Wang 2025 |
-| Loophole status | Marked per experiment (open/partial/closed) |
-| Color coding | Green (loophole closed), Amber (partial), Red (loophole open) |
+## Legacy assets
 
-### Validation
+The following files remain in `assets/figures/` for backward compatibility and archival context:
 
-- All dates and attributions verified against published records
-- Loophole closure status consistent with contemporary review literature
-- Eberhard 1993 correctly identified as the source of eta_c threshold
-- 2015 loophole-free experiments (Delft, NIST, Vienna) correctly categorized
+- `fig1_chsh_bounds.png`
+- `fig2_efficiency_landscape.png`
+- `fig3_postselection_mechanism.png`
+- `fig4_bell_test_schematic.png`
+- `fig5_timeline.png`
 
-### Cross-References
+They are not the canonical paper figure family. Future documentation should reference them only when discussing early site design history or legacy interactive surfaces.
 
-- Timeline Section (interactive timeline mirrors this figure's content)
-- References section (all cited works correspond to timeline nodes)
-- Argument evolution narrative
+## Regeneration
 
----
+Run from the repository root:
 
-## Reproduction Instructions
-
-All figures can be regenerated from the Python scripts in `scripts/`.
-Requirements: Python 3.11+, matplotlib 3.8+, numpy 1.26+.
-
-```bash
-cd chshlab/scripts
-python fig1_chsh_bounds.py
-python fig2_efficiency_landscape.py
-python fig3_postselection_mechanism.py
-python fig4_bell_test_schematic.py
-python fig5_timeline.py
+```powershell
+python scripts/generate_publication_figures.py
 ```
 
-Output PNGs are written to `assets/figures/` with dark-theme styling (no inversion needed).
+That refreshes both the website publication figures and the arXiv figures in one step.
