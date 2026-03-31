@@ -24,18 +24,18 @@ class Theme(NamedTuple):
     edge: str
 
 
-# Warm cream theme — formal paper aesthetic for publication figures on the website
+# Transparent dark-site theme for publication figures on the website
 WEB_THEME = Theme(
-    bg='#f7f4ee',
-    ink='#1d2430',
-    muted='#5f6773',
-    crimson='#9f3d3d',
-    amber='#b8842f',
-    blue='#3f7192',
-    green='#537a5a',
-    sand='#dfd5c5',
-    grid='#d8d1c5',
-    edge='#dfd5c5',
+    bg='none',
+    ink='#EAE6DA',
+    muted='#9A9485',
+    crimson='#C94040',
+    amber='#C9A94D',
+    blue='#4FA3D4',
+    green='#6B8F71',
+    sand='#5C5A55',
+    grid='rgba(255, 248, 230, 0.10)',
+    edge='rgba(255, 255, 255, 0.08)',
 )
 
 # Light theme — white background for arXiv / print
@@ -54,9 +54,11 @@ ARXIV_THEME = Theme(
 
 
 def _apply_theme(theme: Theme) -> None:
+    is_transparent = theme.bg == 'none'
+    facecolor = 'none' if is_transparent else theme.bg
     plt.rcParams.update({
-        'figure.facecolor': theme.bg,
-        'axes.facecolor': theme.bg,
+        'figure.facecolor': facecolor,
+        'axes.facecolor': facecolor,
         'axes.edgecolor': theme.edge,
         'axes.labelcolor': theme.ink,
         'axes.titlecolor': theme.ink,
@@ -68,7 +70,7 @@ def _apply_theme(theme: Theme) -> None:
         'font.family': 'DejaVu Serif',
         'axes.spines.top': False,
         'axes.spines.right': False,
-        'savefig.facecolor': theme.bg,
+        'savefig.facecolor': facecolor,
     })
 
 
@@ -79,7 +81,16 @@ def ensure_dirs() -> None:
 
 def _save(fig: plt.Figure, name: str, out_dir: Path, theme: Theme) -> None:
     target = out_dir / name
-    fig.savefig(target, dpi=300, bbox_inches='tight', facecolor=theme.bg, edgecolor='none')
+    transparent = theme.bg == 'none'
+    facecolor = 'none' if transparent else theme.bg
+    fig.savefig(
+        target,
+        dpi=300,
+        bbox_inches='tight',
+        facecolor=facecolor,
+        edgecolor='none',
+        transparent=transparent,
+    )
     print(f'Wrote {target}')
 
 
@@ -127,8 +138,10 @@ def fig2_efficiency(theme: Theme, out_dir: Path) -> None:
     ax.set_title('Efficiency context for interpreting S > 2')
     ax.grid(axis='x', which='both', linestyle='--', linewidth=0.8, alpha=0.7)
 
-    ax.axvspan(1e-19, 2 / 3, color=theme.crimson, alpha=0.08)
-    ax.axvspan(2 / 3, 1.2, color=theme.green, alpha=0.05)
+    crimson_alpha = 0.15 if theme.bg == 'none' else 0.08
+    green_alpha = 0.10 if theme.bg == 'none' else 0.05
+    ax.axvspan(1e-19, 2 / 3, color=theme.crimson, alpha=crimson_alpha)
+    ax.axvspan(2 / 3, 1.2, color=theme.green, alpha=green_alpha)
 
     markers = [
         ('Wang et al. reported eta ~ 1e-18', 1e-18, theme.crimson, 0.18),
