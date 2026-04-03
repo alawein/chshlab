@@ -678,7 +678,6 @@ input[type="range"]::-moz-range-thumb:active {
   gap: var(--space-5);
   position: relative;
   padding: var(--space-5) var(--space-1) var(--space-4);
-  min-width: max-content;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
@@ -1044,7 +1043,7 @@ input[type="range"]::-moz-range-thumb:active {
 /* ── TIMELINE SCROLL AFFORDANCE ── */
 .timeline-wrap {
   position: relative;
-  overflow: clip;
+  overflow: visible;  /* override .figure-wrap's overflow:hidden to allow .timeline-track scrolling */
 }
 
 /* ── HIGH CONTRAST / FORCED COLORS ── */
@@ -1417,6 +1416,50 @@ input[type="range"]::-moz-range-thumb:active {
   input[type="range"]::-moz-range-thumb {
     width: 22px;
     height: 22px;
+  }
+}
+
+/* ── CONTESTED BADGE PULSE ── */
+@media (prefers-reduced-motion: no-preference) {
+  .timeline-node__badge--contested {
+    animation: pulse-contested 2s ease-in-out infinite;
+  }
+  @keyframes pulse-contested {
+    0%, 100% { box-shadow: 0 0 0 rgba(248, 113, 113, 0); }
+    50% { box-shadow: 0 0 12px rgba(248, 113, 113, 0.4); }
+  }
+}
+
+/* ── TIMELINE CONNECTION LINES ── */
+@media (prefers-reduced-motion: no-preference) {
+  .timeline-node::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    width: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(201, 64, 64, 0.4), rgba(201, 169, 77, 0.3));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .timeline-node:last-child::after {
+    display: none;
+  }
+  .timeline-node.revealed::after {
+    transform: scaleX(1);
+  }
+}
+
+/* ── EVIDENCE CARD VALUE COUNTER ── */
+@media (prefers-reduced-motion: no-preference) {
+  .evidence-card__value {
+    transition: opacity 0.4s ease;
+  }
+  .evidence-card__value.counting {
+    font-variant-numeric: tabular-nums;
   }
 }
 

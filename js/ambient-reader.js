@@ -20,7 +20,14 @@ const MASTER_VOLUME = 0.045;
 
 function initCtx() {
   if (ctx) return;
-  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const Ctor = window.AudioContext || window.webkitAudioContext;
+  if (!Ctor) return;
+
+  try {
+    ctx = new Ctor();
+  } catch (_) {
+    return;
+  }
 
   // Master gain — very soft
   masterGain = ctx.createGain();
@@ -114,6 +121,7 @@ function scheduleNext() {
 function start() {
   if (playing) return;
   initCtx();
+  if (!ctx) return;
   if (ctx.state === 'suspended') {
     ctx.resume();
   }
