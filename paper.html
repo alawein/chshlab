@@ -72,6 +72,9 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
   <style>
     @media print {
       @page { margin: 0.65in; }
@@ -91,6 +94,7 @@
   </style>
 </head>
 <body>
+  <div class="reading-progress" id="readingProgress"></div>
   <a class="skip-link" href="#paper-main">Skip to paper</a>
   <div class="paper-banner">
     Formal paper with figures, tables, and print-ready references.
@@ -148,7 +152,7 @@
         </div>
 
         <p class="paper-thesis">
-          Claim: in the ultra-low-efficiency regime, a post-selected CHSH value above 2 is non-exclusionary evidence until the selection rule itself is constrained.
+          Claim: in the ultra-low-efficiency regime, <span class="highlight-mark">a post-selected CHSH value above 2 is non-exclusionary evidence until the selection rule itself is constrained.</span>
         </p>
 
         <ul class="paper-findings">
@@ -167,7 +171,7 @@
               <a class="paper-citation" href="#ref-wharton2025">[18]</a>
               <a class="paper-citation" href="#ref-wojcik2025">[19]</a>
               <a class="paper-citation" href="#ref-cieslinski2025">[20]</a>. In such a severely filtered regime, the scalar fact
-              <span class="mono">S &gt; 2</span> is not exclusionary evidence against local models unless the selection mechanism is independently constrained. We formalize this point in three steps.
+              <span class="mono">S &gt; 2</span> is <span class="highlight-mark">not exclusionary evidence against local models unless the selection mechanism is independently constrained</span>. We formalize this point in three steps.
               First, we write the selected estimator as a conditional expectation on accepted events and identify fair sampling as the assumption that transfers the classical CHSH bound from the emitted ensemble to the retained one.
               Second, we construct a deterministic local hidden-variable model with an outcome-coupled acceptance rule and derive the exact analytic toy-model expectations
               <span class="mono">E<sub>sel</sub> = &plusmn;13/14</span> and <span class="mono">S<sub>sel</sub> = 26/7 &asymp; 3.714</span>.
@@ -385,8 +389,8 @@
           <p>
             For the deterministic model used here, the raw correlations are <span class="mono">E<sub>00</sub> = E<sub>01</sub> = E<sub>10</sub> = 1/2</span> and
             <span class="mono">E<sub>11</sub> = -1/2</span>. Setting <span class="mono">p<sub>hi</sub> = 0.9</span> and <span class="mono">p<sub>lo</sub> = 0.1</span> yields the exact toy-model expectations
-            <span class="mono">E<sub>xy</sub><sup>(sel)</sup> = d<sub>xy</sub> &middot; 13/14</span> and therefore
-            <span class="mono">S<sub>sel</sub> = 26/7 &asymp; 3.714</span>.
+            <span class="highlight-mark"><span class="mono">E<sub>xy</sub><sup>(sel)</sup> = d<sub>xy</sub> &middot; 13/14</span> and therefore
+            <span class="mono">S<sub>sel</sub> = 26/7 &asymp; 3.714</span></span>.
           </p>
           <details class="paper-proof">
             <summary>Proof Sketch</summary>
@@ -395,7 +399,7 @@
                 Write <span class="mono">q<sub>xy</sub> = P(A<sub>x</sub>B<sub>y</sub> = d<sub>xy</sub> | x,y)</span>. Then
                 \(q_{xy} = (1 + d_{xy}E_{xy})/2\), the acceptance rate is
                 \(\eta_{xy} = p_{\mathrm{hi}}q_{xy} + p_{\mathrm{lo}}(1 - q_{xy})\), and the selected correlation is
-                \(d_{xy}[p_{\mathrm{hi}}q_{xy} - p_{\mathrm{lo}}(1 - q_{xy})] / \eta_{xy}\). Appendix B expands the algebra. The important structural fact is plain: once the filter rewards the sign pattern that maximizes the CHSH combination, the statistic follows the filter.
+                \(d_{xy}[p_{\mathrm{hi}}q_{xy} - p_{\mathrm{lo}}(1 - q_{xy})] / \eta_{xy}\). Appendix B expands the algebra. The important structural fact is plain: <span class="highlight-mark">once the filter rewards the sign pattern that maximizes the CHSH combination, the statistic follows the filter</span>.
               </p>
             </div>
           </details>
@@ -628,7 +632,7 @@
 
         <h3 id="discussion-proves">What the Model Proves</h3>
         <p>
-          A deterministic local source paired with an outcome-coupled acceptance rule can generate a selected CHSH value above both 2 and the Tsirelson bound. A selected scalar alone therefore does not certify nonlocality in a regime where such filters remain experimentally admissible. The conclusion is conditional, but the relevant condition is the one under dispute in the Wang et al. interpretation.
+          A deterministic local source paired with an outcome-coupled acceptance rule can generate a selected CHSH value above both 2 and the Tsirelson bound. <span class="highlight-mark">A selected scalar alone therefore does not certify nonlocality in a regime where such filters remain experimentally admissible.</span> The conclusion is conditional, but the relevant condition is the one under dispute in the Wang et al. interpretation.
         </p>
 
         <h3 id="discussion-not-proves">What the Model Does Not Prove</h3>
@@ -714,7 +718,7 @@
           The published critique literature now goes further and largely attributes the reported violation to fourfold post-selection and unconventional normalization. This paper treats that stronger diagnosis as context while retaining the narrower evidentiary thesis.
         </p>
         <p>
-          The remedy is methodological: report the raw correlations, the setting-resolved acceptance structure, and the diagnostics that constrain fair sampling. Until then, the appropriate interpretation of a low-efficiency post-selected violation is evidentiary caution.
+          The remedy is methodological: report the raw correlations, the setting-resolved acceptance structure, and the diagnostics that constrain fair sampling. Until then, <span class="highlight-mark">the appropriate interpretation of a low-efficiency post-selected violation is evidentiary caution</span>.
         </p>
       </section>
 
@@ -846,34 +850,8 @@
     </article>
   </main>
 
-  <script>
-    document.getElementById('paperPrintBtn')?.addEventListener('click', () => window.print());
-    window.addEventListener('DOMContentLoaded', () => {
-      if (window.renderMathInElement) {
-        window.renderMathInElement(document.body, {
-          delimiters: [
-            { left: '$$', right: '$$', display: true },
-            { left: '\\(', right: '\\)', display: false },
-            { left: '\\[', right: '\\]', display: true }
-          ],
-          throwOnError: false
-        });
-      }
-      const toc = document.getElementById('paperToc');
-      if (!toc || !('IntersectionObserver' in window)) return;
-      const links = new Map(Array.from(toc.querySelectorAll('a')).map((link) => [link.getAttribute('href').slice(1), link]));
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          const link = links.get(entry.target.id);
-          if (!link) return;
-          if (entry.isIntersecting) {
-            links.forEach((value) => value.classList.remove('toc-active'));
-            link.classList.add('toc-active');
-          }
-        });
-      }, { rootMargin: '-20% 0px -60% 0px', threshold: 0.01 });
-      document.querySelectorAll('.paper-section').forEach((section) => observer.observe(section));
-    });
-  </script>
+  <button id="ambientToggle" class="ambient-toggle" aria-label="Toggle reading music" title="Reading music">&#9834;</button>
+
+  <script type="module" src="js/paper.js"></script>
 </body>
 </html>

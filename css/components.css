@@ -511,6 +511,40 @@ input[type="range"]::-moz-range-thumb:active {
   line-height: 1.6;
 }
 
+/* ── AMBIENT MUSIC TOGGLE ── */
+.ambient-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  background: rgba(22, 25, 33, 0.80);
+  backdrop-filter: blur(12px);
+  color: var(--text-muted, #64748b);
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 100;
+  transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.ambient-toggle:hover {
+  color: var(--blue, #60a5fa);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+.ambient-toggle.active {
+  color: var(--blue, #60a5fa);
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.2);
+}
+
+@media print {
+  .ambient-toggle {
+    display: none !important;
+  }
+}
+
 /* ── SITE FOOTER ── */
 .site-footer {
   padding-block: var(--space-6);

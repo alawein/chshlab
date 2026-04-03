@@ -18,6 +18,7 @@ import {
   restoreFromPermalink,
 } from './page-state.js';
 import { initTimeline } from './page-timeline.js';
+import { toggle as toggleAmbient } from './ambient-reader.js';
 
 async function safeImport(path, initName) {
   try {
@@ -56,4 +57,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   initMicroInteractions();
   restoreFromPermalink();
   restoreHashTargetFocus();
+
+  // Ambient music toggle
+  const ambientBtn = document.getElementById('ambientToggle');
+  if (ambientBtn) {
+    ambientBtn.addEventListener('click', () => {
+      const isPlaying = toggleAmbient();
+      ambientBtn.classList.toggle('active', isPlaying);
+    });
+  }
 });
