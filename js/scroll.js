@@ -260,4 +260,16 @@ function initAtmosphere() {
   const layer = document.querySelector('.atmosphere-layer');
   if (!layer) return;
   ['hook', 'claim', 'efficiency', 'loophole', 'postselection', 'proof', 'standards', 'conclusion', 'references'].forEach(id => bindAtmosphereSection(layer, id));
+
+  // Subtle parallax: atmosphere layer moves slower than content scroll
+  gsap.to(layer, {
+    yPercent: -8,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: document.body,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 0.5,
+    },
+  });
 }

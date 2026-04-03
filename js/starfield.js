@@ -52,6 +52,27 @@ const initStarfield = () => {
     makeParticle(canvas.width, canvas.height)
   );
 
+  // ── SHOOTING STARS ──
+  const shootingStars = [];
+  const SHOOTING_STAR_CHANCE = 0.002; // per frame chance of spawning
+  const SHOOTING_STAR_MAX = 2;
+
+  const spawnShootingStar = (w, h) => {
+    const angle = Math.PI * 0.15 + Math.random() * Math.PI * 0.2; // roughly 30-60 degrees
+    const speed = 3 + Math.random() * 4;
+    const [r, g, b] = pick(TINTS);
+    return {
+      x: Math.random() * w * 0.8,
+      y: Math.random() * h * 0.4,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      life: 1.0,
+      decay: 0.015 + Math.random() * 0.01,
+      length: 20 + Math.random() * 30,
+      color: [r, g, b],
+    };
+  };
+
   let lastScrollY = window.scrollY;
   let scrollDelta = 0;
   let scrollDecay = 0;
@@ -111,6 +132,37 @@ const initStarfield = () => {
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fillStyle = p.color;
       ctx.fill();
+    }
+
+    // ── SHOOTING STARS UPDATE + DRAW ──
+    if (shootingStars.length < SHOOTING_STAR_MAX && Math.random() < SHOOTING_STAR_CHANCE) {
+      shootingStars.push(spawnShootingStar(w, h));
+    }
+
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+      const s = shootingStars[i];
+      s.x += s.vx;
+      s.y += s.vy;
+      s.life -= s.decay;
+
+      if (s.life <= 0 || s.x > w + 50 || s.y > h + 50) {
+        shootingStars.splice(i, 1);
+        continue;
+      }
+
+      const tailX = s.x - (s.vx / Math.sqrt(s.vx * s.vx + s.vy * s.vy)) * s.length * s.life;
+      const tailY = s.y - (s.vy / Math.sqrt(s.vx * s.vx + s.vy * s.vy)) * s.length * s.life;
+
+      const grad = ctx.createLinearGradient(tailX, tailY, s.x, s.y);
+      grad.addColorStop(0, `rgba(${s.color[0]},${s.color[1]},${s.color[2]},0)`);
+      grad.addColorStop(1, `rgba(${s.color[0]},${s.color[1]},${s.color[2]},${s.life * 0.6})`);
+
+      ctx.beginPath();
+      ctx.moveTo(tailX, tailY);
+      ctx.lineTo(s.x, s.y);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
     }
 
     drawVignette(w, h);
