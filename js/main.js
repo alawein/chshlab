@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await safeImport('./fig-event-stream.js', 'initEventStream');
   await safeImport('./demo-postselect.js', 'initPostSelectDemo');
   await safeImport('./demo-chsh.js', 'initAngleDemo');
+  await safeImport('./interference-viz.js', 'initInterference');
   await safeImport('./sonification.js', 'initSonification');
   await safeImport('./references.js', 'initReferences');
 
@@ -72,6 +73,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!prefersReducedMotion && 'IntersectionObserver' in window) {
     // A. Animated number counters on evidence cards
     initEvidenceCounters();
+
+    // B. Red highlighter marks on paper excerpt
+    initRedmarkReveal();
 
     // D. Timeline node reveal with connection lines
     initTimelineNodeReveal();
@@ -130,6 +134,28 @@ function animateCounter(el) {
   }
 
   requestAnimationFrame(tick);
+}
+
+// ── RED HIGHLIGHTER MARKS REVEAL ──
+function initRedmarkReveal() {
+  const marks = document.querySelectorAll('.redmark');
+  if (!marks.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+          setTimeout(() => el.classList.add('revealed'), delay);
+          observer.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  marks.forEach((mark) => observer.observe(mark));
 }
 
 // ── TIMELINE NODE REVEAL (connection lines animate on scroll) ──

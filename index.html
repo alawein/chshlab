@@ -144,6 +144,42 @@
     </div>
   </section>
 
+  <!-- PAPER EXCERPT with animated red highlighter -->
+  <section class="paper-excerpt-section" aria-label="Key excerpt from the contested paper">
+    <div class="container">
+      <div class="paper-excerpt">
+        <div class="paper-excerpt__page">
+          <div class="paper-excerpt__margin">
+            <span class="paper-excerpt__margin-note">Key claims</span>
+          </div>
+          <div class="paper-excerpt__body">
+            <p class="paper-excerpt__text">
+              The experiment reports a CHSH value of <span class="redmark" data-delay="0">S = 2.275 &plusmn; 0.057</span>,
+              obtained from a <span class="redmark" data-delay="300">four-photon frustrated interference</span> setup.
+              The authors claim this constitutes <span class="redmark" data-delay="600">a Bell inequality violation
+              without entanglement</span> &mdash; a result that, if correct, would challenge decades of quantum foundations.
+            </p>
+            <p class="paper-excerpt__text">
+              However, the protocol <span class="redmark" data-delay="900">retains only fourfold coincidences</span>,
+              discarding the vast majority of detection events. At an effective acceptance of
+              <span class="redmark" data-delay="1200">&eta; &approx; 10<sup>&minus;18</sup></span>, the post-selection window acts as a
+              hidden filter that preferentially retains correlated outcomes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WebGL INTERFERENCE PATTERN -->
+  <section class="interference-section" aria-hidden="true">
+    <canvas id="interferenceCanvas" class="interference-canvas"></canvas>
+    <div class="interference-overlay">
+      <p class="interference-label">Simulated interference &mdash; phase shifts reveal the selection artifact</p>
+    </div>
+    <div class="interference-fallback" aria-hidden="true"></div>
+  </section>
+
   <section class="evidence-strip section" aria-labelledby="evidenceTitle">
     <div class="container">
       <p class="section-label reveal">Argument in 60 Seconds</p>
