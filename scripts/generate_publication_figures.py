@@ -32,7 +32,7 @@ class Theme:
     slate: str
 
 
-PUBLICATION_THEME = Theme(
+ARXIV_THEME = Theme(
     bg='#ffffff',
     ink='#1e2630',
     muted='#556270',
@@ -44,6 +44,20 @@ PUBLICATION_THEME = Theme(
     gold='#b18418',
     green='#4d7a5a',
     slate='#778497',
+)
+
+WEB_DARK_THEME = Theme(
+    bg='#161921',
+    ink='#e2e8f0',
+    muted='#94a3b8',
+    grid='#1f2333',
+    edge='#3b4459',
+    blue='#60a5fa',
+    blue_light='#1e3a5f',
+    crimson='#f87171',
+    gold='#c9a94d',
+    green='#4ade80',
+    slate='#7c8da3',
 )
 
 
@@ -96,22 +110,27 @@ def style_axes(ax: plt.Axes, theme: Theme, *, x_minor: int | None = None, y_mino
     ax.tick_params(which='minor', length=2.5, width=0.6)
 
 
-def save_outputs(fig: plt.Figure, stem: str) -> None:
+def save_web(fig: plt.Figure, stem: str) -> None:
     web_png = WEB_OUT / f'{stem}.png'
     web_svg = WEB_OUT / f'{stem}.svg'
-    arxiv_pdf = ARXIV_OUT / f'{stem}.pdf'
-
     fig.savefig(web_png, dpi=450, bbox_inches='tight', pad_inches=0.03)
     fig.savefig(web_svg, bbox_inches='tight', pad_inches=0.03)
-    fig.savefig(arxiv_pdf, bbox_inches='tight', pad_inches=0.03)
-
     print(f'Wrote {web_png}')
     print(f'Wrote {web_svg}')
-    print(f'Wrote {arxiv_pdf}')
     plt.close(fig)
 
 
-def fig1_bounds(theme: Theme) -> None:
+def save_arxiv(fig: plt.Figure, stem: str) -> None:
+    arxiv_pdf = ARXIV_OUT / f'{stem}.pdf'
+    arxiv_png = ARXIV_OUT / f'{stem}.png'
+    fig.savefig(arxiv_pdf, bbox_inches='tight', pad_inches=0.03)
+    fig.savefig(arxiv_png, dpi=450, bbox_inches='tight', pad_inches=0.03)
+    print(f'Wrote {arxiv_pdf}')
+    print(f'Wrote {arxiv_png}')
+    plt.close(fig)
+
+
+def fig1_bounds(theme: Theme, save_fn) -> None:
     configure(theme)
     labels = [
         'Classical bound',
@@ -144,10 +163,10 @@ def fig1_bounds(theme: Theme) -> None:
     ax.set_xlabel('CHSH value $S$')
     style_axes(ax, theme, x_minor=2)
     ax.spines['left'].set_visible(False)
-    save_outputs(fig, 'fig1_bounds')
+    save_fn(fig, 'fig1_bounds')
 
 
-def fig2_efficiency(theme: Theme) -> None:
+def fig2_efficiency(theme: Theme, save_fn) -> None:
     configure(theme)
     fig, ax = plt.subplots(figsize=(7.8, 3.0), layout='constrained')
 
@@ -199,10 +218,10 @@ def fig2_efficiency(theme: Theme) -> None:
     ax.spines['bottom'].set_color(theme.edge)
     ax.tick_params(axis='x', which='major', length=4, width=0.8)
     ax.tick_params(axis='x', which='minor', length=2.2, width=0.6)
-    save_outputs(fig, 'fig2_efficiency')
+    save_fn(fig, 'fig2_efficiency')
 
 
-def fig3_postselection_curve(theme: Theme) -> None:
+def fig3_postselection_curve(theme: Theme, save_fn) -> None:
     configure(theme)
     p_lo = np.linspace(0.0, 0.5, 400)
     s_sel = 4 * ((1.5 - 2 * p_lo) / (1.5 - p_lo))
@@ -260,10 +279,10 @@ def fig3_postselection_curve(theme: Theme) -> None:
     ax_bottom.text(0.01, 0.90, '(b)', transform=ax_bottom.transAxes, fontsize=9.4, fontweight='bold')
     style_axes(ax_bottom, theme, x_minor=2, y_minor=2)
 
-    save_outputs(fig, 'fig3_postselection_curve')
+    save_fn(fig, 'fig3_postselection_curve')
 
 
-def fig4_correlators(theme: Theme) -> None:
+def fig4_correlators(theme: Theme, save_fn) -> None:
     configure(theme)
     settings = ['$(a,b)$', "$(a,b')$", "$(a',b)$", "$(a',b')$"]
     raw = np.array([0.5, 0.5, 0.5, -0.5])
@@ -281,11 +300,16 @@ def fig4_correlators(theme: Theme) -> None:
         linewidth=1.0,
         label='Raw correlators',
     )
+    # Derive a muted crimson fill from the theme crimson
+    crimson_rgb = matplotlib.colors.to_rgb(theme.crimson)
+    bg_rgb = matplotlib.colors.to_rgb(theme.bg)
+    crimson_fill = tuple(c * 0.25 + b * 0.75 for c, b in zip(crimson_rgb, bg_rgb))
+
     ax.bar(
         x + width / 2,
         selected,
         width=width,
-        color='#ecd8dc',
+        color=crimson_fill,
         edgecolor=theme.crimson,
         linewidth=1.0,
         label='Selected correlators',
@@ -296,13 +320,16 @@ def fig4_correlators(theme: Theme) -> None:
     ax.set_ylabel('Correlation value')
     ax.legend(loc='upper right', ncols=1)
     style_axes(ax, theme, y_minor=2)
-    save_outputs(fig, 'fig4_correlators')
+    save_fn(fig, 'fig4_correlators')
 
 
 def main() -> None:
     ensure_dirs()
-    for figure in (fig1_bounds, fig2_efficiency, fig3_postselection_curve, fig4_correlators):
-        figure(PUBLICATION_THEME)
+    figures = (fig1_bounds, fig2_efficiency, fig3_postselection_curve, fig4_correlators)
+    for figure in figures:
+        figure(WEB_DARK_THEME, save_web)
+    for figure in figures:
+        figure(ARXIV_THEME, save_arxiv)
 
 
 if __name__ == '__main__':
