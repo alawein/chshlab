@@ -170,6 +170,64 @@ function initKatex() {
   }
 }
 
+// ── TYPING EFFECT ON PAPER TITLE (desktop only) ──
+function initTitleTyping() {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+  if (window.innerWidth < 1100) return;
+
+  const header = document.querySelector('.paper-header h1');
+  if (!header) return;
+
+  header.classList.add('paper-title-animate');
+}
+
+// ── SMOOTH SECTION FADE ON SCROLL OUT ──
+function initSectionFade() {
+  if (!('IntersectionObserver' in window)) return;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  const sections = document.querySelectorAll('.paper-section');
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle('section-faded', !entry.isIntersecting);
+      });
+    },
+    { rootMargin: '-5% 0px -5% 0px', threshold: 0.01 }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+}
+
+// ── SIDENOTE ENTRANCE ANIMATION ──
+function initSidenoteEntrance() {
+  if (!('IntersectionObserver' in window)) return;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+  if (window.innerWidth < 1100) return;
+
+  const sidenotes = document.querySelectorAll('.sidenote');
+  if (!sidenotes.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('sidenote-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { rootMargin: '0px 0px -15% 0px', threshold: 0.1 }
+  );
+
+  sidenotes.forEach((note) => observer.observe(note));
+}
+
 // ── INIT ──
 function initPaperPage() {
   initKatex();
@@ -180,6 +238,9 @@ function initPaperPage() {
   initHighlightMarks();
   initAmbientToggle();
   initScrollReveal();
+  initTitleTyping();
+  initSectionFade();
+  initSidenoteEntrance();
 }
 
 if (document.readyState === 'loading') {

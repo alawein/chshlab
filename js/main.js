@@ -66,4 +66,88 @@ document.addEventListener('DOMContentLoaded', async () => {
       ambientBtn.classList.toggle('active', isPlaying);
     });
   }
+
+  // ── ENHANCED ANIMATIONS (respect prefers-reduced-motion) ──
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    // A. Animated number counters on evidence cards
+    initEvidenceCounters();
+
+    // D. Timeline node reveal with connection lines
+    initTimelineNodeReveal();
+  }
 });
+
+// ── EVIDENCE CARD COUNTER ANIMATION ──
+function initEvidenceCounters() {
+  const cards = document.querySelectorAll('.evidence-card__value');
+  if (!cards.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  cards.forEach((card) => observer.observe(card));
+}
+
+function animateCounter(el) {
+  const text = el.textContent.trim();
+  // Extract leading numeric value (e.g., "2.275" from "2.275 +/- 0.057" or "3.716")
+  const match = text.match(/^([\d.]+)/);
+  if (!match) return;
+
+  const target = parseFloat(match[1]);
+  if (isNaN(target)) return;
+
+  const suffix = text.slice(match[0].length);
+  const decimals = (match[1].split('.')[1] || '').length;
+  const duration = 1200;
+  const start = performance.now();
+
+  el.classList.add('counting');
+
+  function tick(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = eased * target;
+    el.textContent = current.toFixed(decimals) + suffix;
+
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      el.classList.remove('counting');
+    }
+  }
+
+  requestAnimationFrame(tick);
+}
+
+// ── TIMELINE NODE REVEAL (connection lines animate on scroll) ──
+function initTimelineNodeReveal() {
+  const nodes = document.querySelectorAll('.timeline-node');
+  if (!nodes.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.3, root: document.getElementById('timelineContainer') }
+  );
+
+  nodes.forEach((node) => observer.observe(node));
+}
