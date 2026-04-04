@@ -19,13 +19,17 @@
   <script>document.documentElement.classList.remove('no-js');</script>
   <!-- SHARED_HEAD:END -->
 
+  <!-- Analytics (Plausible — privacy-first, no cookies, GDPR-compliant) -->
+  <script async src="https://plausible.io/js/pa-TbbpW4U0i_eBDPnVivUf9.js"></script>
+  <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Bell Violations Without Entanglement? A Reproducible Rebuttal" />
   <meta property="og:description" content="Formal paper explaining why fourfold post-selection and counterfactual normalization leave Wang et al.'s CHSH claim non-exclusive." />
   <meta property="og:url" content="https://chshlab.online/paper" />
   <meta property="og:site_name" content="CHSH Lab" />
-  <meta property="og:image" content="https://chshlab.online/assets/figures/publication/fig1_bounds.png" />
+  <meta property="og:image" content="https://chshlab.online/assets/figures/og-image.png" />
   <meta property="article:author" content="Meshal Alawein" />
   <meta property="article:published_time" content="2026-03-30" />
   <meta property="article:modified_time" content="2026-03-30" />
@@ -33,8 +37,8 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Bell Violations Without Entanglement? A Reproducible Rebuttal" />
-  <meta name="twitter:description" content="A formal rebuttal of Wang et al. (2025) that keeps a narrow thesis while engaging the stronger critique literature on fourfold post-selection." />
-  <meta name="twitter:image" content="https://chshlab.online/assets/figures/publication/fig1_bounds.png" />
+  <meta name="twitter:description" content="Formal paper with proofs and Monte Carlo benchmarks showing that post-selection at ultra-low efficiency makes a CHSH value above 2 non-exclusionary. By Meshal Alawein, UC Berkeley." />
+  <meta name="twitter:image" content="https://chshlab.online/assets/figures/og-image.png" />
 
   <script type="application/ld+json">
   {
@@ -51,13 +55,23 @@
     },
     "datePublished": "2026-03-30",
     "dateModified": "2026-03-30",
-    "image": "https://chshlab.online/assets/figures/publication/fig1_bounds.png",
+    "image": "https://chshlab.online/assets/figures/og-image.png",
     "url": "https://chshlab.online/paper",
     "isPartOf": {
       "@type": "WebSite",
       "name": "CHSH Lab",
       "url": "https://chshlab.online/"
-    }
+    },
+    "citation": [
+      { "@type": "ScholarlyArticle", "name": "Violation of Bell inequality with unentangled photons", "author": "K. Wang et al.", "datePublished": "2025", "url": "https://doi.org/10.1126/sciadv.adr1794" },
+      { "@type": "ScholarlyArticle", "name": "On the Einstein-Podolsky-Rosen paradox", "author": "J.S. Bell", "datePublished": "1964" },
+      { "@type": "ScholarlyArticle", "name": "Proposed experiment to test local hidden-variable theories", "author": "Clauser, Horne, Shimony, Holt", "datePublished": "1969" },
+      { "@type": "ScholarlyArticle", "name": "Hidden-variable example based upon data rejection", "author": "P.M. Pearle", "datePublished": "1970" },
+      { "@type": "ScholarlyArticle", "name": "Background level and counter efficiencies required for a loophole-free EPR experiment", "author": "P.H. Eberhard", "datePublished": "1993" },
+      { "@type": "ScholarlyArticle", "name": "Loophole-free Bell inequality violation using electron spins separated by 1.3 kilometres", "author": "B. Hensen et al.", "datePublished": "2015", "url": "https://doi.org/10.1038/nature15759" },
+      { "@type": "ScholarlyArticle", "name": "Significant-loophole-free test of Bell's theorem with entangled photons", "author": "M. Giustina et al.", "datePublished": "2015", "url": "https://doi.org/10.1103/PhysRevLett.115.250401" },
+      { "@type": "ScholarlyArticle", "name": "Strong loophole-free test of local realism", "author": "L.K. Shalm et al.", "datePublished": "2015", "url": "https://doi.org/10.1103/PhysRevLett.115.250402" }
+    ]
   }
   </script>
 
@@ -132,7 +146,7 @@
     <article class="paper-article">
       <header class="paper-header">
         <p class="paper-kicker">Formal Paper</p>
-        <h1>Bell Violations Without Entanglement?<br />A Reproducible Rebuttal of Wang et al. (2025)</h1>
+        <h1>Bell Violations Without Entanglement?<br />A Reproducible Rebuttal</h1>
         <p class="paper-byline">
           <a href="https://www.meshal.ai">Meshal Alawein</a> &middot; UC Berkeley &middot;
           <a href="mailto:meshal@berkeley.edu">meshal@berkeley.edu</a>
@@ -147,8 +161,11 @@
 
         <div class="paper-actions">
           <a class="paper-action" href="/">Interactive Experience</a>
-          <a class="paper-action" href="https://github.com/alawein/chshlab">Source Code</a>
+          <a class="paper-action" href="https://github.com/alawein/chshlab" target="_blank" rel="noopener noreferrer">Source Code</a>
+          <a class="paper-action" href="https://www.linkedin.com/sharing/share-offsite/?url=https://chshlab.online/paper" target="_blank" rel="noopener noreferrer">Share on LinkedIn</a>
           <button type="button" class="paper-action paper-action--button" id="paperPrintBtn">Print / Save PDF</button>
+          <button type="button" class="paper-action paper-action--button" id="citeBibtexBtn" title="Copy BibTeX citation">Cite (BibTeX)</button>
+          <button type="button" class="paper-action paper-action--button" id="citeApaBtn" title="Copy APA citation">Cite (APA)</button>
         </div>
 
         <p class="paper-thesis">
@@ -845,7 +862,7 @@
 
       <footer class="paper-footer">
         <p>&copy; 2025&ndash;2026 <a href="https://www.meshal.ai">Meshal Alawein</a>. This paper is the canonical text for the project.</p>
-        <p><a href="/">Interactive experience</a> &middot; <a href="https://github.com/alawein/chshlab">Source code</a> &middot; Use browser print to save a PDF snapshot.</p>
+        <p><a href="/">Interactive experience</a> &middot; <a href="https://www.linkedin.com/in/alawein" target="_blank" rel="noopener noreferrer">LinkedIn</a> &middot; <a href="https://github.com/alawein/chshlab" target="_blank" rel="noopener noreferrer">Source code</a> &middot; Use browser print to save a PDF snapshot.</p>
       </footer>
     </article>
   </main>

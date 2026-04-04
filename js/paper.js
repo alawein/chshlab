@@ -11,6 +11,34 @@ function initPrintButton() {
   printButton.addEventListener('click', () => window.print());
 }
 
+// ── CITATION COPY BUTTONS ──
+function initCiteButtons() {
+  const bibtex = `@article{alawein2026chshlab,
+  title   = {Bell Violations Without Entanglement? A Reproducible Rebuttal},
+  author  = {Alawein, Meshal},
+  year    = {2026},
+  url     = {https://chshlab.online/paper},
+  note    = {Interactive simulations at https://chshlab.online}
+}`;
+
+  const apa = 'Alawein, M. (2026). Bell violations without entanglement? A reproducible rebuttal. CHSH Lab. https://chshlab.online/paper';
+
+  function copyAndFeedback(btn, text) {
+    const original = btn.textContent;
+    navigator.clipboard.writeText(text).then(
+      () => { btn.textContent = 'Copied!'; },
+      () => { btn.textContent = 'Copy failed'; }
+    );
+    setTimeout(() => { btn.textContent = original; }, 1400);
+  }
+
+  const bibtexBtn = document.getElementById('citeBibtexBtn');
+  if (bibtexBtn) bibtexBtn.addEventListener('click', () => copyAndFeedback(bibtexBtn, bibtex));
+
+  const apaBtn = document.getElementById('citeApaBtn');
+  if (apaBtn) apaBtn.addEventListener('click', () => copyAndFeedback(apaBtn, apa));
+}
+
 // ── MOBILE TOC ──
 function initMobileToc() {
   const toc = document.querySelector('.paper-toc-mobile');
@@ -170,18 +198,6 @@ function initKatex() {
   }
 }
 
-// ── TYPING EFFECT ON PAPER TITLE (desktop only) ──
-function initTitleTyping() {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
-  if (window.innerWidth < 1100) return;
-
-  const header = document.querySelector('.paper-header h1');
-  if (!header) return;
-
-  header.classList.add('paper-title-animate');
-}
-
 // ── SMOOTH SECTION FADE ON SCROLL OUT ──
 function initSectionFade() {
   if (!('IntersectionObserver' in window)) return;
@@ -232,13 +248,13 @@ function initSidenoteEntrance() {
 function initPaperPage() {
   initKatex();
   initPrintButton();
+  initCiteButtons();
   initMobileToc();
   initTableOfContents();
   initReadingProgress();
   initHighlightMarks();
   initAmbientToggle();
   initScrollReveal();
-  initTitleTyping();
   initSectionFade();
   initSidenoteEntrance();
 }

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bell Violations Without Entanglement? A Reproducible Rebuttal — CHSH Lab</title>
-  <meta name="description" content="Interactive narrative and formal paper showing why Wang et al.'s fourfold post-selection leaves a post-selected CHSH value above 2 non-exclusionary until the selection rule itself is constrained." />
+  <meta name="description" content="A reproducible rebuttal of Wang et al. (2025): interactive simulations show how post-selection at ultra-low efficiency allows classical models to exceed Bell's inequality without entanglement. By Meshal Alawein, UC Berkeley." />
   <meta name="author" content="Meshal Alawein" />
   <meta name="keywords" content="Bell inequality, CHSH, detection loophole, post-selection bias, quantum nonlocality, Bell test, Tsirelson bound, Wang et al 2025, rebuttal" />
   <link rel="canonical" href="https://chshlab.online" />
@@ -20,21 +20,25 @@
   <script>document.documentElement.classList.remove('no-js');</script>
   <!-- SHARED_HEAD:END -->
 
+  <!-- Analytics (Plausible — privacy-first, no cookies, GDPR-compliant) -->
+  <script async src="https://plausible.io/js/pa-TbbpW4U0i_eBDPnVivUf9.js"></script>
+  <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+
   <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Bell Violations Without Entanglement? A Reproducible Rebuttal" />
   <meta property="og:description" content="A reproducible rebuttal explaining Wang et al.'s fourfold post-selection, counterfactual normalization, and the narrower evidentiary claim they leave behind." />
   <meta property="og:url" content="https://chshlab.online" />
   <meta property="og:site_name" content="CHSH Lab" />
-  <meta property="og:image" content="https://chshlab.online/assets/figures/publication/fig1_bounds.png" />
+  <meta property="og:image" content="https://chshlab.online/assets/figures/og-image.png" />
   <meta property="article:author" content="Meshal Alawein" />
   <meta property="article:published_time" content="2026-03-30" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Bell Violations Without Entanglement? A Reproducible Rebuttal" />
-  <meta name="twitter:description" content="Interactive narrative plus canonical paper explaining why fourfold post-selection and counterfactual normalization leave Wang et al.'s CHSH claim non-exclusive." />
-  <meta name="twitter:image" content="https://chshlab.online/assets/figures/publication/fig1_bounds.png" />
+  <meta name="twitter:description" content="A reproducible rebuttal of Wang et al. (2025): interactive simulations show how post-selection at ultra-low efficiency allows classical models to exceed Bell's inequality. By Meshal Alawein, UC Berkeley." />
+  <meta name="twitter:image" content="https://chshlab.online/assets/figures/og-image.png" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -47,7 +51,7 @@
     "url": "https://chshlab.online",
     "datePublished": "2026-03-30",
     "dateModified": "2026-03-30",
-    "image": "https://chshlab.online/assets/figures/publication/fig1_bounds.png",
+    "image": "https://chshlab.online/assets/figures/og-image.png",
     "about": ["Bell inequality", "CHSH inequality", "detection loophole", "quantum nonlocality", "post-selection"],
     "isBasedOn": {
       "@type": "ScholarlyArticle",
@@ -133,7 +137,9 @@
       <p class="beat__byline">
         <a href="https://www.meshal.ai" target="_blank" rel="noopener noreferrer">Meshal Alawein</a>
         &middot; UC Berkeley
+        &middot; <a href="https://www.meshal.ai" target="_blank" rel="noopener noreferrer">meshal.ai</a>
         &middot; <a href="mailto:meshal@berkeley.edu">meshal@berkeley.edu</a>
+        &middot; ~18 min read + interactive simulations
       </p>
     </div>
     <div class="scroll-hint" aria-hidden="true">
@@ -183,18 +189,18 @@
       <div class="evidence-strip__grid" role="list">
         <article class="evidence-card evidence-card--muted" role="listitem">
           <span class="evidence-card__label">Wang et al. (2025)</span>
-          <strong class="evidence-card__value">2.275 &plusmn; 0.057</strong>
+          <strong class="evidence-card__value">S = 2.275</strong>
           <p class="evidence-card__note">Measured at ~10<sup>&minus;18</sup> effective acceptance, where post-selection diagnostics remain decisive.</p>
         </article>
-        <article class="evidence-card" role="listitem">
+        <article class="evidence-card evidence-card--baseline" role="listitem">
           <span class="evidence-card__label">Classical Baseline</span>
-          <strong class="evidence-card__value">2.001</strong>
-          <p class="evidence-card__note">No selection, 100% acceptance. The model behaves classically.</p>
+          <strong class="evidence-card__value">S = 2.001</strong>
+          <p class="evidence-card__note">No selection, 100% acceptance. The model stays below the Bell bound.</p>
         </article>
         <article class="evidence-card evidence-card--danger" role="listitem">
           <span class="evidence-card__label">Post-Selected Classical</span>
-          <strong class="evidence-card__value">3.716</strong>
-          <p class="evidence-card__note">Same source, biased acceptance. The artifact exceeds the quantum limit.</p>
+          <strong class="evidence-card__value">S = 3.716</strong>
+          <p class="evidence-card__note">Same source, biased acceptance. The artifact exceeds the Tsirelson bound.</p>
         </article>
       </div>
       <div class="conclusion-links">
@@ -494,7 +500,7 @@
         <div class="figure-interactive" id="postSelectFigure">
           <div class="figure-controls">
             <div class="demo-slider-row">
-              <label for="sliderBias">Disfavored-sign keep rate p<sub>lo</sub>: <span id="valBias">0.10</span></label>
+              <label for="sliderBias">Disfavored-sign keep rate (<abbr title="p low">p<sub>lo</sub></abbr>): <span id="valBias">0.10</span></label>
               <input type="range" id="sliderBias" min="0.00" max="0.50" value="0.10" step="0.01" />
             </div>
             <div class="demo-readouts">
@@ -879,19 +885,24 @@
 
       <div class="conclusion-links reveal">
         <a href="paper.html" class="conclusion-link conclusion-link--primary">Read the Formal Paper &rarr;</a>
-        <a href="https://github.com/alawein/chshlab" target="_blank" rel="noopener noreferrer" class="conclusion-link">Source Code on GitHub</a>
         <a href="https://doi.org/10.1126/sciadv.adr1794" target="_blank" rel="noopener noreferrer" class="conclusion-link">Wang et al. (2025)</a>
+        <a href="https://www.linkedin.com/in/alawein" target="_blank" rel="noopener noreferrer" class="conclusion-link">Follow on LinkedIn</a>
       </div>
 
       <div class="share-module reveal" id="shareModule" aria-labelledby="shareModuleTitle">
         <div class="share-module__copy">
           <span class="figure-label">Share This Rebuttal</span>
-          <h3 class="share-module__title" id="shareModuleTitle">Copy the live state into a clean rebuttal snapshot.</h3>
+          <h3 class="share-module__title" id="shareModuleTitle">Spread this analysis across the platforms that matter.</h3>
           <p class="share-module__summary" id="shareSnapshotText" aria-live="polite">
             Three numbers decide the case: classical S = 2.001, post-selected S = 3.716 at
             70.0% acceptance, and Wang et al. report S = 2.275 at ~10<sup>&minus;18</sup>
             effective acceptance.
           </p>
+        </div>
+        <div class="share-module__actions share-module__actions--platforms">
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://chshlab.online" target="_blank" rel="noopener noreferrer" class="demo-export-btn share-module__button share-module__button--platform">Share on LinkedIn</a>
+          <a href="https://news.ycombinator.com/submitlink?u=https://chshlab.online&amp;t=Bell+Violations+Without+Entanglement%3F+A+Reproducible+Rebuttal+(Interactive)" target="_blank" rel="noopener noreferrer" class="demo-export-btn share-module__button share-module__button--platform">Submit to HN</a>
+          <a href="https://www.reddit.com/submit?url=https://chshlab.online&amp;title=Reproducible+rebuttal+of+Wang+et+al.+(2025)+Bell+violation+claim" target="_blank" rel="noopener noreferrer" class="demo-export-btn share-module__button share-module__button--platform">Post to Reddit</a>
         </div>
         <div class="share-module__actions">
           <button type="button" class="demo-export-btn share-module__button" id="shareSummaryBtn">Copy Summary</button>
@@ -931,12 +942,13 @@
       <nav class="footer-author" aria-label="Author links">
         <a href="https://www.meshal.ai" target="_blank" rel="noopener noreferrer">meshal.ai</a>
         <a href="https://www.linkedin.com/in/alawein" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://www.github.com/alawein" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://github.com/alawein" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://github.com/morphism-systems" target="_blank" rel="noopener noreferrer">Morphism Systems</a>
+        <a href="https://gravatar.com/sweetlyzorro8cec2cde43" target="_blank" rel="noopener noreferrer">Gravatar</a>
         <a href="mailto:meshal@berkeley.edu">meshal@berkeley.edu</a>
       </nav>
       <p class="footer-text footer-text--small">
         All simulations run client-side. No data is collected or transmitted.
-        <a href="https://github.com/alawein/chshlab" target="_blank" rel="noopener noreferrer">Source code on GitHub.</a>
       </p>
     </div>
   </footer>

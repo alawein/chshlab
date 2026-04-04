@@ -7,6 +7,8 @@ python scripts/sync_shared_html.py
 rm -rf .vercel/output
 mkdir -p .vercel/output/static
 cp -r css js index.html paper.html 404.html .vercel/output/static/
+[ -f robots.txt ] && cp robots.txt .vercel/output/static/
+[ -f sitemap.xml ] && cp sitemap.xml .vercel/output/static/
 [ -d assets ] && cp -r assets .vercel/output/static/
 [ -d data ] && cp -r data .vercel/output/static/
 [ -d figures ] && cp -r figures .vercel/output/static/

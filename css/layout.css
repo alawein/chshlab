@@ -28,7 +28,7 @@ main {
 /* Section label (mono tag above heading) */
 .section-label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-faint);
