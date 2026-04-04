@@ -174,22 +174,20 @@
   <!-- WebGL INTERFERENCE PATTERN -->
   <section class="interference-section" aria-hidden="true">
     <canvas id="interferenceCanvas" class="interference-canvas" aria-label="Animated two-slit interference pattern visualization"></canvas>
-    <div class="interference-overlay">
-      <p class="interference-label">Simulated interference &mdash; phase shifts reveal the selection artifact</p>
-    </div>
+    <div class="interference-overlay"></div>
     <div class="interference-fallback" aria-hidden="true"></div>
   </section>
 
-  <section class="evidence-strip section" aria-labelledby="evidenceTitle">
+  <section class="evidence-strip" aria-labelledby="evidenceTitle">
     <div class="container">
-      <p class="section-label reveal">Argument in 60 Seconds</p>
-      <h2 class="section-heading reveal" id="evidenceTitle">Three Numbers Decide the Case</h2>
-      <p class="evidence-strip__summary reveal">
+      <p class="section-label">Argument in 60 Seconds</p>
+      <h2 class="section-heading" id="evidenceTitle">Three Numbers Decide the Case</h2>
+      <p class="evidence-strip__summary">
         A classical model stays at <strong class="key-stat">S = 2.001</strong> without selection, jumps to
         <strong class="key-stat key-stat--danger">S = 3.716</strong> under post-selection, and makes the reported
         <strong class="key-stat">S = 2.275</strong> non-diagnostic at vanishing effective acceptance.
       </p>
-      <div class="evidence-strip__grid reveal" role="list">
+      <div class="evidence-strip__grid" role="list">
         <article class="evidence-card evidence-card--muted" role="listitem">
           <span class="evidence-card__label">Wang et al. (2025)</span>
           <strong class="evidence-card__value">2.275 &plusmn; 0.057</strong>
@@ -206,7 +204,7 @@
           <p class="evidence-card__note">Same source, biased acceptance. The artifact exceeds the quantum limit.</p>
         </article>
       </div>
-      <div class="conclusion-links reveal">
+      <div class="conclusion-links">
         <a href="#proof" class="conclusion-link conclusion-link--primary evidence-link">See the Comparison Table &rarr;</a>
         <a href="paper.html#results" class="conclusion-link">Open the Formal Results</a>
       </div>

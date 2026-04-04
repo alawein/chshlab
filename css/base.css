@@ -115,7 +115,7 @@ a:hover { text-decoration: underline; }
 }
 .katex-display { overflow-x: auto; padding: var(--space-2) 0; }
 
-hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-6) 0; }
+hr { border: none; border-top: 1px solid var(--rule); margin: var(--space-4) 0; }
 
 /* ── Starfield canvas ── */
 #starfield {

@@ -19,7 +19,7 @@ main {
 
 /* Section baseline */
 .section {
-  padding-block: var(--space-6);
+  padding-block: var(--space-4);
   position: relative;
   z-index: 10;
   scroll-margin-top: 76px;
@@ -40,7 +40,7 @@ main {
 
 /* ── BEAT SECTIONS ── */
 .beat {
-  padding-block: var(--space-6);
+  padding-block: var(--space-5);
   position: relative;
   z-index: 10;
   scroll-margin-top: 76px;
