@@ -33,8 +33,8 @@ body::before {
   pointer-events: none;
   z-index: 0;
   opacity: 0.32;
-  animation: grainShift 0.2s steps(3) infinite;
-  will-change: transform;
+  animation: grainShift 0.4s steps(3) infinite;
+  will-change: auto;
 }
 
 /* Textile weave overlay — low-frequency directional linen */

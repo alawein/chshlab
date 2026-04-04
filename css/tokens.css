@@ -20,14 +20,14 @@
 
   --text:         #EAE6DA;
   --text-muted:   #9A9485;
-  --text-faint:   #5C5A55;
-  --text-subtle:  #7A756B;
+  --text-faint:   #848079;
+  --text-subtle:  #8F8A80;
 
   --amber:        #C9A94D;
   --amber-dim:    #6B5820;
   --blue:         #4FA3D4;
   --blue-dim:     #1E3F54;
-  --crimson:      #C94040;
+  --crimson:      #E05050;
   --crimson-dim:  #4A1010;
   --green:        #6B8F71;
   --green-dim:    #263429;
@@ -57,4 +57,8 @@
   --wide-width:    1100px;
 
   --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  --dur-fast: 0.15s;
+  --dur-normal: 0.3s;
+  --dur-slow: 0.5s;
 }

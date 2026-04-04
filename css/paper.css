@@ -32,7 +32,7 @@
   --text: #e2e8f0;
   --text-muted: #94a3b8;
   --text-subtle: #7c8da3;
-  --text-faint: #64748b;
+  --text-faint: #7089a0;
   --amber: #c9a94d;
   --amber-dim: #4a3f20;
   --blue: #60a5fa;
@@ -185,7 +185,7 @@
   font-size: clamp(2.15rem, 4vw, 3.4rem);
   line-height: 1.08;
   margin-bottom: var(--space-3);
-  max-width: 14ch;
+  max-width: 20ch;
   color: var(--text);
   text-shadow: none;
 }
@@ -741,34 +741,6 @@
 
 .highlight-mark.visible {
   background-size: 100% 100%;
-}
-
-/* ── AMBIENT TOGGLE ── */
-.ambient-toggle {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(148, 163, 184, 0.15);
-  background: rgba(22, 25, 33, 0.80);
-  backdrop-filter: blur(12px);
-  color: var(--text-faint, #64748b);
-  font-size: 16px;
-  cursor: pointer;
-  z-index: 100;
-  transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
-}
-
-.ambient-toggle:hover {
-  color: var(--paper-link, #60a5fa);
-  border-color: rgba(96, 165, 250, 0.3);
-}
-
-.ambient-toggle.active {
-  color: var(--paper-link, #60a5fa);
-  box-shadow: 0 0 12px rgba(96, 165, 250, 0.2);
 }
 
 /* ── SCROLL REVEAL (paper page) ── */
