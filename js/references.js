@@ -1,6 +1,8 @@
 // chshlab/js/references.js
 // Canonical bibliography for the homepage. Mirrors the current paper.html reference list.
 
+import { copyText } from './animation-config.js';
+
 export const REFS = [
   {
     key: 'bell1964',
@@ -216,6 +218,20 @@ export function initReferences() {
     link.rel = 'noopener noreferrer';
     link.textContent = ref.href;
     li.appendChild(link);
+
+    const citeBtn = document.createElement('button');
+    citeBtn.className = 'demo-export-btn ref-cite-btn';
+    citeBtn.textContent = 'Cite';
+    citeBtn.title = 'Copy APA citation';
+    citeBtn.addEventListener('click', () => {
+      const apa = ref.authors + ' (' + ref.year + '). ' + ref.title + '. ' + ref.journal + ', ' + ref.details + '. ' + ref.href;
+      copyText(apa).then(
+        () => { citeBtn.textContent = 'Copied'; setTimeout(() => { citeBtn.textContent = 'Cite'; }, 1400); },
+        () => { citeBtn.textContent = 'Failed'; setTimeout(() => { citeBtn.textContent = 'Cite'; }, 1400); }
+      );
+    });
+    li.appendChild(document.createTextNode(' '));
+    li.appendChild(citeBtn);
 
     list.appendChild(li);
   });

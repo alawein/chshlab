@@ -68,9 +68,10 @@ describe('initDemoExport', () => {
     initDemoExport();
 
     const buttons = panel.querySelectorAll('.demo-export-btn');
-    expect(buttons.length).toBe(2);
+    expect(buttons.length).toBe(3);
     expect(buttons[0].textContent).toBe('Export JSON');
     expect(buttons[1].textContent).toBe('Copy Link');
+    expect(buttons[2].textContent).toBe('Share');
   });
 
   it('Export JSON button triggers a download', () => {

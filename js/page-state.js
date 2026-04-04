@@ -98,8 +98,24 @@ export function initDemoExport() {
       })();
     });
 
+    const shareButton = document.createElement('a');
+    shareButton.className = 'demo-export-btn';
+    shareButton.textContent = 'Share';
+    shareButton.target = '_blank';
+    shareButton.rel = 'noopener noreferrer';
+    shareButton.addEventListener('click', (e) => {
+      const params = new URLSearchParams();
+      params.set('fig', panel.id);
+      panel.querySelectorAll('input[type="range"]').forEach((slider) => {
+        params.set(slider.id, slider.value);
+      });
+      const permalink = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+      shareButton.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(permalink)}`;
+    });
+
     wrap.appendChild(exportButton);
     wrap.appendChild(linkButton);
+    wrap.appendChild(shareButton);
     controls.appendChild(wrap);
   });
 }

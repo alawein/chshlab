@@ -512,6 +512,19 @@ input[type="range"]::-moz-range-thumb:active {
   line-height: 1.6;
 }
 
+.ref-cite-btn {
+  vertical-align: middle;
+  font-size: 9px;
+  padding: 1px 6px;
+  margin-left: 4px;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+
+.reference-item:hover .ref-cite-btn {
+  opacity: 1;
+}
+
 /* ── AMBIENT MUSIC TOGGLE ── */
 .ambient-toggle {
   position: fixed;

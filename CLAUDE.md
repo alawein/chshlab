@@ -70,11 +70,13 @@ Vercel remote builds are broken — always deploy prebuilt:
 
 ```bash
 bash build.sh
-python -c "import json,pathlib; pathlib.Path('.vercel/output/config.json').write_text(json.dumps({'version':3,'routes':[{'src':'/paper.html','headers':{'Location':'/paper'},'status':308},{'src':'/index.html','headers':{'Location':'/'},'status':308},{'src':'/assets/(.*)','headers':{'Cache-Control':'public, max-age=31536000, immutable'},'continue':True},{'src':'/(.*)','headers':{'X-Content-Type-Options':'nosniff','X-Frame-Options':'DENY','Referrer-Policy':'strict-origin-when-cross-origin'},'continue':True},{'handle':'filesystem'},{'src':'/(.*)','dest':'/404.html','status':404}]}))"
+python -c "import json,pathlib; pathlib.Path('.vercel/output/config.json').write_text(json.dumps({'version':3,'routes':[{'src':'/paper.html','headers':{'Location':'/paper'},'status':308},{'src':'/index.html','headers':{'Location':'/'},'status':308},{'src':'^/(paper)?$','headers':{'Cache-Control':'public, max-age=0, must-revalidate'},'continue':True},{'src':'/assets/(.*)','headers':{'Cache-Control':'public, max-age=31536000, immutable'},'continue':True},{'src':'/(.*)','headers':{'X-Content-Type-Options':'nosniff','X-Frame-Options':'DENY','Referrer-Policy':'strict-origin-when-cross-origin'},'continue':True},{'handle':'filesystem'},{'src':'/(.*)','dest':'/404.html','status':404}]}))"
 vercel deploy --prebuilt --prod
 ```
 
-The Python step is required because `build.sh` generates a `config.json` that uses `cleanUrls`/`redirects`/`headers` — those fields are ignored by the Build Output API v3 which only understands `routes`. A PreToolUse hook also blocks direct edits to `build.sh` writing to `.vercel/output/`.
+The Python step is required because `build.sh` generates a `config.json` that uses `cleanUrls`/`redirects`/`headers` — those fields are ignored by the Build Output API v3 which only understands `routes`. The `^/(paper)?$` route ensures HTML pages are never browser-cached (must-revalidate), while `/assets/` gets immutable long-term caching. A PreToolUse hook also blocks direct edits to `build.sh` writing to `.vercel/output/`.
+
+Domain redirects are configured at the Vercel project level (not in routes): `www.chshlab.online` and `chshlab.vercel.app` both 308-redirect to `chshlab.online`.
 
 ## Publication Figures
 
