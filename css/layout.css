@@ -19,7 +19,7 @@ main {
 
 /* Section baseline */
 .section {
-  padding-block: var(--space-8);
+  padding-block: var(--space-6);
   position: relative;
   z-index: 10;
   scroll-margin-top: 76px;
@@ -40,7 +40,7 @@ main {
 
 /* ── BEAT SECTIONS ── */
 .beat {
-  padding-block: var(--space-8);
+  padding-block: var(--space-6);
   position: relative;
   z-index: 10;
   scroll-margin-top: 76px;
@@ -104,8 +104,8 @@ main {
 
 /* ── EVIDENCE STRIP ── */
 .evidence-strip {
-  padding-top: var(--space-5);
-  padding-bottom: var(--space-6);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-5);
 }
 
 .evidence-strip__summary {

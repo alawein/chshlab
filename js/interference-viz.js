@@ -37,7 +37,7 @@ export function initInterference() {
       float d2 = distance(uv, s2);
 
       // Phase difference creates interference
-      float phase = (d1 - d2) * (30.0 + u_scroll * 20.0);
+      float phase = (d1 - d2) * (18.0 + u_scroll * 10.0);
       float wave = cos(phase + u_time * 0.5);
 
       // Intensity with envelope
@@ -50,8 +50,13 @@ export function initInterference() {
       vec3 gold = vec3(0.788, 0.663, 0.302);     // #c9a94d
       vec3 bg = vec3(0.086, 0.098, 0.129);       // #161921
 
-      vec3 color = mix(bg, mix(blue, gold, intensity), intensity * 0.7);
-      color = mix(color, crimson * 0.3, (1.0 - intensity) * 0.15 * envelope);
+      // Primary: blue fringes on dark background
+      vec3 fringe = mix(blue * 0.8, blue, intensity);
+      // Subtle crimson in the interference nulls
+      vec3 color = mix(bg, fringe, intensity * 0.5 * envelope);
+      color += crimson * 0.08 * (1.0 - intensity) * envelope;
+      // Only the faintest gold highlight at absolute peaks
+      color += gold * 0.04 * pow(intensity, 4.0) * envelope;
 
       // Subtle noise grain
       float noise = fract(sin(dot(uv * u_time, vec2(12.9898, 78.233))) * 43758.5453);

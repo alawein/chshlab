@@ -1470,7 +1470,7 @@ input[type="range"]::-moz-range-thumb:active {
 
 /* ── PAPER EXCERPT ── */
 .paper-excerpt-section {
-  padding: var(--space-7) 0;
+  padding: var(--space-4) 0;
 }
 
 .paper-excerpt {
@@ -1588,7 +1588,7 @@ input[type="range"]::-moz-range-thumb:active {
 .interference-section {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -1596,7 +1596,9 @@ input[type="range"]::-moz-range-thumb:active {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 40%, rgba(14, 15, 20, 0.6) 100%);
+  background:
+    linear-gradient(to bottom, rgba(14, 15, 20, 0.8) 0%, transparent 20%, transparent 80%, rgba(14, 15, 20, 0.8) 100%),
+    radial-gradient(ellipse at center, transparent 40%, rgba(14, 15, 20, 0.6) 100%);
   pointer-events: none;
 }
 
