@@ -1,5 +1,10 @@
 /* chshlab/css/layout.css */
 
+/* Gentle scroll snap between beat sections */
+main {
+  scroll-snap-type: y proximity;
+}
+
 /* Container system */
 .container {
   width: 100%;

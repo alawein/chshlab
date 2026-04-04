@@ -5,6 +5,7 @@
 html {
   font-size: 18px;
   color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -85,8 +86,14 @@ a { color: var(--blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 ::selection {
-  background: rgba(201, 64, 64, 0.3);
-  color: #fff7ec;
+  background: rgba(96, 165, 250, 0.25);
+  color: #e2e8f0;
+}
+
+/* Global focus-visible baseline */
+:focus-visible {
+  outline: 2px solid var(--blue, #60a5fa);
+  outline-offset: 3px;
 }
 
 /* Visually hidden but accessible to screen readers */
