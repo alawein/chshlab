@@ -1470,46 +1470,36 @@ input[type="range"]::-moz-range-thumb:active {
 
 /* ── PAPER EXCERPT ── */
 .paper-excerpt-section {
-  padding: var(--space-3) 0;
+  padding: var(--space-2) 0 var(--space-3) 0;
 }
 
 .paper-excerpt {
   max-width: 700px;
   margin: 0 auto;
-  perspective: 1200px;
 }
 
 .paper-excerpt__page {
-  background: #faf8f4;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow:
-    4px 4px 20px rgba(0, 0, 0, 0.15),
-    12px 12px 30px rgba(0, 0, 0, 0.08),
-    inset 0 0 60px rgba(0, 0, 0, 0.03),
-    inset 0 -2px 8px rgba(0, 0, 0, 0.02);
+  background: rgba(22, 25, 33, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
   padding: 48px 56px 48px 80px;
   position: relative;
-  transform: rotateY(-2deg) rotateX(1deg);
-  transition: transform 0.6s ease;
+  transition: border-color 0.3s ease;
   font-family: 'EB Garamond', 'Georgia', serif;
-  color: #1a1a1a;
+  color: var(--text, #e2e8f0);
   line-height: 1.75;
   font-size: 1.05rem;
 }
 
 .paper-excerpt__page:hover {
-  transform: rotateY(0) rotateX(0);
+  border-color: rgba(148, 163, 184, 0.18);
 }
 
-/* Left margin line like a legal pad */
+/* Left margin line — removed for dark theme */
 .paper-excerpt__page::before {
-  content: '';
-  position: absolute;
-  left: 68px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: rgba(220, 80, 80, 0.25);
+  display: none;
 }
 
 .paper-excerpt__margin {
@@ -1523,7 +1513,8 @@ input[type="range"]::-moz-range-thumb:active {
   font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(220, 80, 80, 0.5);
+  color: var(--blue, #60a5fa);
+  opacity: 0.5;
 }
 
 .paper-excerpt__text {
@@ -1538,9 +1529,9 @@ input[type="range"]::-moz-range-thumb:active {
 .redmark {
   background-image: linear-gradient(
     to right,
-    rgba(220, 60, 60, 0.22) 0%,
-    rgba(248, 80, 80, 0.18) 40%,
-    rgba(220, 60, 60, 0.25) 100%
+    rgba(248, 100, 100, 0.25) 0%,
+    rgba(248, 100, 100, 0.20) 40%,
+    rgba(248, 100, 100, 0.28) 100%
   );
   background-repeat: no-repeat;
   background-size: 0% 85%;
@@ -1556,11 +1547,7 @@ input[type="range"]::-moz-range-thumb:active {
 
 @media (prefers-reduced-motion: reduce) {
   .paper-excerpt__page {
-    transform: none;
     transition: none;
-  }
-  .paper-excerpt__page:hover {
-    transform: none;
   }
   .redmark {
     transition: none;
@@ -1571,11 +1558,7 @@ input[type="range"]::-moz-range-thumb:active {
 @media (max-width: 600px) {
   .paper-excerpt__page {
     padding: 32px 24px 32px 48px;
-    transform: none;
     font-size: 0.95rem;
-  }
-  .paper-excerpt__page::before {
-    left: 36px;
   }
   .paper-excerpt__margin {
     left: 4px;

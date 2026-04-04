@@ -11,7 +11,7 @@ export function initScroll() {
   if (prefersReducedMotion) {
     // Show everything immediately — no animations
     revealImmediately(document.querySelectorAll('.reveal'));
-    document.querySelectorAll('.section-rule').forEach(r => { r.style.transform = 'scaleX(1)'; });
+    document.querySelectorAll('.section-rule').forEach(r => { r.style.opacity = '0.25'; });
 
     // Still register nav scroll toggle (visual, a11y-neutral)
     ScrollTrigger.create({
@@ -35,7 +35,7 @@ export function initScroll() {
   // ── SECTION DIVIDERS ──
   document.querySelectorAll('.section-rule').forEach(rule => {
     gsap.to(rule, {
-      scaleX: 1,
+      opacity: 0.25,
       duration: 1,
       ease: 'power2.out',
       scrollTrigger: {

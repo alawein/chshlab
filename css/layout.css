@@ -40,7 +40,7 @@ main {
 
 /* ── BEAT SECTIONS ── */
 .beat {
-  padding-block: var(--space-5);
+  padding-block: var(--space-4);
   position: relative;
   z-index: 10;
   scroll-margin-top: 76px;
@@ -105,7 +105,7 @@ main {
 /* ── EVIDENCE STRIP ── */
 .evidence-strip {
   padding-top: var(--space-3);
-  padding-bottom: var(--space-5);
+  padding-bottom: var(--space-3);
 }
 
 .evidence-strip__summary {
@@ -428,15 +428,14 @@ main {
   .demo-panel-inner { grid-template-columns: 1fr 1fr; align-items: start; }
 }
 
-/* ── SECTION RULE (animated divider) ── */
+/* ── SECTION RULE (elegant gradient divider) ── */
 .section-rule {
   border: none;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--rule-color, var(--amber)), transparent);
-  max-width: var(--content-width);
-  margin: 0 auto;
-  transform: scaleX(0);
-  transform-origin: center;
+  background: linear-gradient(90deg, transparent, var(--rule-color, var(--blue, #60a5fa)), transparent);
+  opacity: 0;
+  max-width: 80px;
+  margin: var(--space-3) auto;
 }
 
 /* Section-themed divider colors */

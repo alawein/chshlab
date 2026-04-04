@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await safeImport('./fig-event-stream.js', 'initEventStream');
   await safeImport('./demo-postselect.js', 'initPostSelectDemo');
   await safeImport('./demo-chsh.js', 'initAngleDemo');
-  await safeImport('./interference-viz.js', 'initInterference');
+  // await safeImport('./interference-viz.js', 'initInterference');
   await safeImport('./sonification.js', 'initSonification');
   await safeImport('./references.js', 'initReferences');
 
