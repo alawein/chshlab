@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1929"/>
+      <stop offset="100%" stop-color="#000"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFB703"/>
+      <stop offset="100%" stop-color="#219EBC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg-grad)"/>
+  <rect x="0" y="580" width="1200" height="4" fill="url(#accent)" opacity="0.8"/>
+  <g transform="translate(80, 200)">
+    <path d="M50 0 L90 30 L90 70 L50 100 L10 70 L10 30 Z" fill="none" stroke="url(#accent)" stroke-width="4" opacity="0.6"/>
+    <path d="M50 20 L70 35 L70 55 L50 70 L30 55 L30 35 Z" fill="url(#accent)" opacity="0.2"/>
+    <path d="M50 20 L70 35 L50 50 L30 35 Z" fill="url(#accent)"/>
+  </g>
+  <text x="200" y="260" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="700" fill="#FFFFFF">CHSH Lab</text>
+  <text x="200" y="300" font-family="system-ui, -apple-system, sans-serif" font-size="20" fill="#999999">alawein.ai</text>
+</svg>

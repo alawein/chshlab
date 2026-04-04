@@ -23,3 +23,24 @@ arxiv/*.toc
 arxiv/*.fls
 arxiv/*.fdb_latexmk
 arxiv/*.synctex.gz
+
+# === Build artifacts & caches (workspace standard) ===
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.benchmarks/
+.next/
+.swc/
+.turbo/
+dist/
+*.tsbuildinfo
+.vercel/
+.cache/
+playwright-report/
+test-results/
+coverage/
+htmlcov/
+.coverage
+*.log
