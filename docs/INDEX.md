@@ -16,6 +16,7 @@ sla: on-change
 - [INNOVATION_UPGRADE_NOTES.md](INNOVATION_UPGRADE_NOTES.md)
 - [PERFORMANCE_BUDGET.md](PERFORMANCE_BUDGET.md)
 - [PLAN.md](PLAN.md)
+- [POLISH_LOOP.md](POLISH_LOOP.md)
 - [README.md](README.md)
 - [migration_changelog.md](migration_changelog.md)
 

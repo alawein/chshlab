@@ -3,6 +3,7 @@
 debug.log
 __pycache__/
 output/
+.claude/polish-state.json
 tmp/
 tmp_*
 .playwright-cli/

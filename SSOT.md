@@ -39,6 +39,12 @@ Before governance creation on 2026-03-21:
 - test: `n/a`
 - build: `pass` via `bash build.sh`
 
+Current quality gates (added 2026-04-06 onward):
+
+- vitest: `pass` via `npm test -- --run` (14 files / 142 tests, JS/DOM/demo math)
+- polish loop: `pass` via `python scripts/verify_paper.py` (read-only verifier;
+  see [docs/POLISH_LOOP.md](docs/POLISH_LOOP.md))
+
 ## Canonical Layout
 
 ```text

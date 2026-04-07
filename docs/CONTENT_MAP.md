@@ -84,3 +84,23 @@ When revising content, verify these invariants:
 - When mentioning `~10^-18`, describe it as effective acceptance or post-selection probability, or explicitly as a CHSH benchmark proxy for the retained-event rate.
 - The paper point remains `p_lo = 0.10`, `S_sel = 26/7 ~= 3.714`, and Monte Carlo `S = 3.716` at `70.0%` acceptance.
 - `paper.html` and `arxiv/main.tex` keep the same title block, figure count, bibliography, and conclusion.
+
+## Automated drift watcher
+
+The `polish-loop` (`scripts/verify_paper.py`, see [POLISH_LOOP.md](POLISH_LOOP.md))
+automates the bibliography and headline-number invariants on this list. It reads
+the same canonical sources without ever editing them; findings surface as
+`polish-suggested` GitHub issues. Watched files:
+
+- `paper.html`
+- `arxiv/main.tex`
+- `notebooks/chshlab-simulations.ipynb`
+- `js/references.js`
+- `docs/ACADEMIC_FACTCHECK.md`
+- `docs/CONTENT_MAP.md` (this file)
+- `scripts/generate_publication_figures.py`
+
+The polish loop **never** writes to any of these in v0.1; it is a read-only
+observer. See `docs/POLISH_LOOP.md` for v0.2 write-mode design (deferred
+until the v0.1 false-positive rate is verified at zero over a one-week
+observation window).
