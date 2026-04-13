@@ -9,6 +9,6 @@
   "devDependencies": {
     "vitest": "^3.1.4",
     "jsdom": "^26.1.0",
-    "@vitest/coverage-v8": "^3.1.4"
+    "@vitest/coverage-v8": "^4.1.4"
   }
 }
