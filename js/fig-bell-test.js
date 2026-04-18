@@ -3,6 +3,7 @@
 // Beat 2 visualization. Canvas2D with requestAnimationFrame + object pooling.
 
 import { prefersReducedMotion } from './animation-config.js';
+import { eQuantum, chshS } from './quantum/chsh.js';
 
 export function initBellTest() {
   const canvas = document.getElementById('bellTestCanvas');
@@ -23,8 +24,9 @@ export function initBellTest() {
   // Measurement angles (radians)
   const angles = { a: 0, ap: Math.PI/2, b: Math.PI/4, bp: 3*Math.PI/4 };
 
-  // Quantum correlation
-  function eQ(thetaA, thetaB) { return -Math.cos(thetaA - thetaB); }
+  // Quantum correlation — re-exported from quantum/chsh.js under the local
+  // `eQ` name to keep existing call sites readable.
+  const eQ = eQuantum;
 
   // Layout
   let W, H, dpr;
@@ -105,7 +107,7 @@ export function initBellTest() {
 
   function computeS() {
     const E = tally.n.map((n, i) => n > 0 ? tally.sum[i] / n : 0);
-    return Math.abs(E[0] - E[1] + E[2] + E[3]);
+    return chshS(E[0], E[1], E[2], E[3]);
   }
 
   // Animation loop
