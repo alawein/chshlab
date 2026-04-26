@@ -3,14 +3,7 @@
 // Beat 6 visualization. Four detector arms on unit circle, correlation arcs.
 
 import { emitState, prefersReducedMotion } from './animation-config.js';
-
-function eQuantum(a, b) { return -Math.cos(a - b); }
-
-function eClassical(a, b) {
-  let diff = Math.abs(a - b) % Math.PI;
-  if (diff > Math.PI / 2) diff = Math.PI - diff;
-  return -(2 / Math.PI) * (Math.PI / 2 - diff);
-}
+import { eQuantum, eClassical, chshS } from './quantum/chsh.js';
 
 export function initAngleDemo() {
   const canvas = document.getElementById('chshCanvas');
@@ -59,19 +52,20 @@ export function initAngleDemo() {
     if (valLabels.b)  valLabels.b.textContent  = sliders.b.value;
     if (valLabels.bp) valLabels.bp.textContent = sliders.bp.value;
 
-    // Quantum CHSH
-    const eAB  = eQuantum(a, b);
-    const eABp = eQuantum(a, bp);
-    const eApB = eQuantum(ap, b);
-    const eApBp= eQuantum(ap, bp);
-    const sq = Math.abs(eAB - eABp + eApB + eApBp);
+    // Quantum CHSH (named locals are reused below for correlation-arc drawing)
+    const eAB   = eQuantum(a, b);
+    const eABp  = eQuantum(a, bp);
+    const eApB  = eQuantum(ap, b);
+    const eApBp = eQuantum(ap, bp);
+    const sq = chshS(eAB, eABp, eApB, eApBp);
 
     // Classical CHSH
-    const cAB  = eClassical(a, b);
-    const cABp = eClassical(a, bp);
-    const cApB = eClassical(ap, b);
-    const cApBp= eClassical(ap, bp);
-    const sc = Math.abs(cAB - cABp + cApB + cApBp);
+    const sc = chshS(
+      eClassical(a, b),
+      eClassical(a, bp),
+      eClassical(ap, b),
+      eClassical(ap, bp),
+    );
 
     if (readoutC) readoutC.textContent = sc.toFixed(3);
     if (readoutQ) readoutQ.textContent = sq.toFixed(3);
