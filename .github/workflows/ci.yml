@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - 'LICENSE'
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
+      - '.github/ISSUE_TEMPLATE/**'
+      - 'LICENSE'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: build + vitest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install npm deps
+        run: npm ci
+
+      - name: Run Vitest suite
+        run: npm test
+
+      - name: Build static site via build.sh
+        run: bash build.sh
+
+      - name: Verify build output
+        run: |
+          test -d .vercel/output/static
+          test -f .vercel/output/config.json
+          test -f .vercel/output/static/index.html
+          echo "build artifact count: $(find .vercel/output/static -type f | wc -l)"
