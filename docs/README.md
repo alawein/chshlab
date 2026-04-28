@@ -1,10 +1,3 @@
----
-type: derived
-source: docs/INDEX.md
-sync: manual
-sla: manual
----
-
 # CHSH Lab Documentation
 
 Use this directory as the entrypoint for project planning, evidence mapping, performance constraints, and design history.

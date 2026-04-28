@@ -1,13 +1,3 @@
----
-type: canonical
-source: none
-sync: none
-sla: none
-authority: canonical
-last-verified: 2026-03-27
-audience: [ai-agents, contributors]
----
-
 # CHSH Lab
 
 CHSH Lab is a static website that presents an interactive rebuttal to claims of Bell inequality violation without entanglement. The repo ships two public pages:
