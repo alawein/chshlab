@@ -5,6 +5,14 @@ CHSH Lab is a static website that presents an interactive rebuttal to claims of 
 - `index.html` for the narrative and browser-side demos
 - `paper.html` for the formal paper artifact and print-friendly reference view
 
+## Public value
+
+CHSH Lab is a research-communication portfolio candidate: it pairs an
+interactive browser explanation with a formal paper surface and reproducible
+figure/notebook tooling. Public polish should emphasize provenance,
+fact-checking, regenerated figures, and a clean distinction between narrative
+demo code and formal claims.
+
 ## Repo Layout
 
 - `assets/figures/` generated figures used across the site
@@ -60,6 +68,13 @@ python scripts/generate_figures.py
 ```
 
 It writes figure assets into `assets/figures/`. The script expects the Python scientific stack used in the file itself, including `numpy` and `matplotlib`.
+
+## Research boundaries
+
+Keep generated figures, executed notebooks, and paper artifacts traceable to
+their source scripts. Prompt and agent collateral under `docs/meta/ai/` is
+non-runtime material and should be reviewed before being treated as public
+research provenance.
 
 ## Quality Gates
 
