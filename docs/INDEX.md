@@ -28,8 +28,6 @@ sla: on-change
 
 - [README.md](meta/ai/README.md)
 - [REPO-SWEEP-PROMPT.md](meta/ai/REPO-SWEEP-PROMPT.md)
-- [claude-code-guide.jsx](meta/ai/claude-code-guide.jsx)
-- [claude-code-superprompt.jsx](meta/ai/claude-code-superprompt.jsx)
 
 ## superpowers/
 

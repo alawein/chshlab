@@ -103,8 +103,6 @@ chshlab/
       README.md
       ai/
         README.md
-        claude-code-guide.jsx
-        claude-code-superprompt.jsx
         REPO-SWEEP-PROMPT.md
     superpowers/
 ```

@@ -9,6 +9,6 @@ sla: manual
 
 This folder stores non-runtime prompt and agent collateral that informs repository audits and workflow experiments.
 
-- `claude-code-guide.jsx` captures the reference guidance used by the prompt pack.
-- `claude-code-superprompt.jsx` contains the higher-level repo sweep prompt that references the guide.
 - `REPO-SWEEP-PROMPT.md` stores the Markdown variant of the repository cleanup prompt.
+
+The Claude Code companion JSX assets (`claude-code-guide.jsx`, `claude-code-superprompt.jsx`) were consolidated to the workspace canonical home `alawein/.codex/skills/claude-code/` per the L6 master roadmap Phase 3 (2026-05-09).
