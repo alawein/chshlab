@@ -28,7 +28,7 @@ audience: [ai-agents, contributors]
 - Shared static HTML partial sync in `partials/` via `scripts/sync_shared_html.py`
 - Python utility script for figure generation: `scripts/generate_figures.py`
 
-No package manifest, no test runner, no linter config, and no typechecker config are currently present in this repository.
+As of 2026-03-21 baseline: no package manifest, no test runner, no linter config, no typechecker. Package manifest and vitest were added 2026-04-06 (see current quality gates below).
 
 ## Quality Gate Baseline
 
