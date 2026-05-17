@@ -26,6 +26,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ### Changed
 
+- CI: scoped the CodeQL `analyze` step to `upload: never` so the security
+  scan still runs as a gate on this private repo (which has no GitHub
+  Advanced Security) without failing on an unavailable SARIF upload.
 - Renamed paper title to `Is S > 2 Enough Without Entanglement? A
   Reproducible Rebuttal of Wang et al. (2025)` to disambiguate from
   Wharton & Price arXiv:2508.13431. Updated `index.html`, `paper.html`,

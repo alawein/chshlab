@@ -28,3 +28,9 @@ jobs:
           queries: security-extended,security-and-quality
 
       - uses: github/codeql-action/analyze@9e0d7b8d25671d64c341c19c0152d693099fb5ba # v4.35.5
+        with:
+          # chshlab is a private repo without GitHub Advanced Security, so the
+          # code-scanning SARIF upload endpoint is unavailable. Run the analysis
+          # as a CI gate (queries still fail the job on real errors) but skip the
+          # upload that would otherwise fail with "Code scanning is not enabled".
+          upload: never
