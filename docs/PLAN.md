@@ -11,7 +11,7 @@ sla: none
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a world-class static site on GitHub Pages that showcases the CHSH/Bell inequality rebuttal with interactive math demos and rigorous academic presentation.
+**Goal:** Build a polished static site on GitHub Pages that showcases the CHSH/Bell inequality rebuttal with interactive math demos and rigorous academic presentation.
 
 **Architecture:** Single-page scroll experience with five major narrative sections, three interactive JS demos computed in real time with no backend, and a design system built on CSS custom properties. All assets co-located in `chshlab/`.
 
@@ -147,7 +147,7 @@ index.html
 |----------|--------|-----------|
 | Framework | None (vanilla) | Static GitHub Pages, no build step required, maintainable |
 | Math rendering | KaTeX (CDN) | Faster than MathJax, sufficient for display+inline math |
-| Animation | GSAP 3 + ScrollTrigger (CDN) | Best-in-class scroll animations; free for non-commercial |
+| Animation | GSAP 3 + ScrollTrigger (CDN) | Strong scroll animations; free for non-commercial |
 | Fonts | Google Fonts | Zero dependency, self-hosted subset optional |
 | CSS architecture | Custom properties + BEM-lite | No Sass needed at this scale |
 | Canvas for demos | HTML5 Canvas 2D | Native, zero-dep, sufficient for correlation circle diagram |
