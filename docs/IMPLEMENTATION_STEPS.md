@@ -11,7 +11,7 @@ sla: none
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a world-class static CHSH showcase site in three phases: MVP (Day 0), Polish (Day 1), Enhancements (Day 2).
+**Goal:** Build a polished static CHSH showcase site in three phases: MVP (Day 0), Polish (Day 1), Enhancements (Day 2).
 
 **Architecture:** Vanilla HTML5 + CSS custom properties + ES modules + KaTeX + GSAP. No build step. All assets self-contained in `chshlab/`.
 
