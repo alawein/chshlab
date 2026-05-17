@@ -3,7 +3,7 @@
 Status:      active
 Category:    research
 Owner:       alawein
-Visibility:  public
+Visibility:  private
 Purpose:     Quantum foundations education site for CHSH and Bell inequality experiments.
 Next action: continue
 
