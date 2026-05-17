@@ -1,5 +1,12 @@
 # CHSH Lab
 
+Status:      active
+Category:    research
+Owner:       alawein
+Visibility:  public
+Purpose:     Quantum foundations education site for CHSH and Bell inequality experiments.
+Next action: continue
+
 CHSH Lab is a static website that presents an interactive rebuttal to claims of Bell inequality violation without entanglement. The repo ships two public pages:
 
 - `index.html` for the narrative and browser-side demos
