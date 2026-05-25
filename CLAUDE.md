@@ -5,11 +5,11 @@ sync: none
 sla: none
 authority: canonical
 audience: [ai-agents, contributors]
-last_updated: 2026-04-15
-last-verified: 2026-04-15
+last_updated: 2026-05-24
+last-verified: 2026-05-24
 ---
 
-# CLAUDE.md — CHSH Lab
+# CLAUDE.md: CHSH Lab
 
 ## Workspace identity
 
