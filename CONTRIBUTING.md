@@ -5,19 +5,10 @@ sync: propagated
 sla: none
 ---
 
-<!-- Token legend:
-     AUTO-SUBSTITUTED by sync-contributing.sh (derived from git remote):
-       chshlab = GitHub slug used as heading (e.g. "bolts", "handshake-hai")
-       chshlab      = GitHub slug used in URLs  (e.g. "bolts", "handshake-hai")
-     MANUALLY FILLED in Plan 2 per-repo pass:
-       {INSTALL_COMMAND}  = e.g. "npm ci" or "uv pip install -e ."
-       {TEST_COMMAND}     = e.g. "npm test" or "pytest"
-       {VALIDATE_COMMAND} = e.g. "npm run lint && npm test" or "ruff check . && pytest"
--->
-
 # Contributing to chshlab
 
-<!-- REPO-SPECIFIC: one-line context about what this repo is -->
+CHSH Lab is a static two-page site: an interactive CHSH / Bell-inequality rebuttal on `index.html`
+and a formal paper surface on `paper.html`.
 
 This project follows the [alawein org contributing standards](https://github.com/alawein/alawein/blob/main/CONTRIBUTING.md).
 
@@ -26,29 +17,29 @@ This project follows the [alawein org contributing standards](https://github.com
 ```bash
 git clone https://github.com/alawein/chshlab.git
 cd chshlab
-{INSTALL_COMMAND}
+npm ci
 ```
 
 ## Development Workflow
 
 1. Branch off `main` using prefix: `feat/`, `fix/`, `docs/`, `chore/`, `test/`
-2. Make your changes — keep PRs focused on a single concern
-3. Run `{TEST_COMMAND}` to validate your changes before committing
-4. Commit using [Conventional Commits](https://www.conventionalcommits.org/) — `type(scope): subject`
+2. Make your changes and keep PRs focused on a single concern
+3. Run `npm test` to validate your changes before committing
+4. Commit using [Conventional Commits](https://www.conventionalcommits.org/), as `type(scope): subject`
 5. Open a Pull Request to `main`
 
 ## Code Standards
 
-<!-- REPO-SPECIFIC: 2-4 bullets about this repo's conventions -->
-- Follow existing patterns in the codebase
-- Run linting and type checks before committing
-- Write tests for new functionality
+- Keep the site static and two-page: `index.html` for the narrative, `paper.html` for the paper
+- Use safe DOM APIs and browser ES modules only; no backend, analytics, or framework runtime
+- Run `npm test` and `bash build.sh` before committing; add tests for new behavior
+- Regenerate figures through `scripts/`; do not hand-edit published figure artifacts
 
 ## Pull Request Checklist
 
 - [ ] CI passes (no failing checks)
 - [ ] Tests added or updated for new functionality
-- [ ] `{VALIDATE_COMMAND}` passes
+- [ ] `npm test && bash build.sh` passes
 - [ ] `CHANGELOG.md` updated under `[Unreleased]`
 - [ ] No breaking changes without a version bump plan
 
