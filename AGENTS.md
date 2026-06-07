@@ -9,7 +9,7 @@ last_updated: 2026-04-15
 last-verified: 2026-04-15
 ---
 
-# AGENTS — CHSH Lab
+# AGENTS: CHSH Lab
 
 ## Workspace identity
 
