@@ -66,16 +66,16 @@ Targets and audit checklist for CHSH Lab deployments.
 
 ## Pre-Deploy Audit Checklist
 
-1. [ ] **No console errors** on load — open DevTools console, reload, check
-2. [ ] **JS payload** — run `wc -c js/*.js` and verify total < 40 KB
-3. [ ] **Figure sizes** — run `ls -la assets/figures/` and verify each < 150 KB
+1. [ ] **No console errors** on load , open DevTools console, reload, check
+2. [ ] **JS payload** : run `wc -c js/*.js` and verify total < 40 KB
+3. [ ] **Figure sizes** , run `ls -la assets/figures/` and verify each < 150 KB
 4. [ ] **Lighthouse Performance** >= 90 on mobile (Chrome DevTools)
-5. [ ] **CLS (Cumulative Layout Shift)** < 0.1 — check via Lighthouse or Web Vitals
+5. [ ] **CLS (Cumulative Layout Shift)** < 0.1 , check via Lighthouse or Web Vitals
 6. [ ] **FCP (First Contentful Paint)** < 1.5s on 4G (simulated)
-7. [ ] **60 fps animations** — enable FPS meter in Chrome DevTools, scroll through all sections
-8. [ ] **`prefers-reduced-motion`** — enable in OS settings, verify all animations skip to final state
-9. [ ] **No horizontal overflow** on 375px viewport — resize browser or use DevTools device toolbar
-10. [ ] **Lazy images** — verify `loading="lazy"` present on all figure images in source
+7. [ ] **60 fps animations** , enable FPS meter in Chrome DevTools, scroll through all sections
+8. [ ] **`prefers-reduced-motion`** , enable in OS settings, verify all animations skip to final state
+9. [ ] **No horizontal overflow** on 375px viewport , resize browser or use DevTools device toolbar
+10. [ ] **Lazy images** : verify `loading="lazy"` present on all figure images in source
 
 ---
 

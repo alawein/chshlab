@@ -5,7 +5,7 @@ sync: manual
 sla: on-change
 ---
 
-# Index — chshlab
+# Index :  chshlab
 
 > Maintained manually until a docs index generator is added to the repo.
 
