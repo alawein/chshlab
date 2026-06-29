@@ -14,7 +14,7 @@ GitHub issues. **v0.1 is read-only**: it never edits, never commits, and
 never opens PRs. Findings are filed as `polish-suggested` issues for the
 operator to review and act on by hand.
 
-The loop is invoked via Claude Code's `loop` skill — local to your
+The loop is invoked via Claude Code's `loop` skill , local to your
 terminal, zero infrastructure, stops when the terminal closes.
 
 ## How to start the loop
@@ -26,7 +26,7 @@ In a terminal at the repo root:
 ```
 
 This runs the `/polish-paper` slash command every 15 minutes for as long
-as the terminal stays open. Each iteration is bounded — at most one
+as the terminal stays open. Each iteration is bounded , at most one
 verifier run, one report read, and N GitHub issue creations.
 
 To stop the loop, run `/loop stop` or close the terminal.
@@ -61,7 +61,7 @@ Hardcodes the canonical headline values from the v1.3 paper (taken from
 | Wang efficiency exponent | `1e-18` | `10^{-18}`, `10<sup>−18</sup>`, `1e-18` |
 
 Each fact has a list of files that **must** contain at least one of the
-printed forms. A missing form is a `warn` issue, not an `error` —
+printed forms. A missing form is a `warn` issue, not an `error` ,
 because legitimate revisions might drop a citation.
 
 It also enforces hard physical bounds with regex on context-tagged
@@ -71,7 +71,7 @@ expressions:
   (Bell). Violations are `error`.
 - Any `S_QM ≤ X` or `S_QM = X` statement: `X` must satisfy
   `X ≤ 2√2 ≈ 2.828` (Tsirelson). Violations are `error`.
-- `S_sel` is **deliberately exempt** from upper bounds — the paper's
+- `S_sel` is **deliberately exempt** from upper bounds , the paper's
   whole result is that `S_sel = 26/7 ≈ 3.714 > 2√2`, so flagging this
   would defeat the purpose.
 
@@ -98,10 +98,10 @@ to the other two files.
 
 Each run writes:
 
-- `output/polish/report-<UTC-timestamp>.json` — full structured report
-- `output/polish/report-latest.json` — symlink-style copy of the latest
-- `output/polish/report-latest.md` — human-readable markdown
-- `.claude/polish-state.json` — fingerprint cache (gitignored)
+- `output/polish/report-<UTC-timestamp>.json` , full structured report
+- `output/polish/report-latest.json` , symlink-style copy of the latest
+- `output/polish/report-latest.md` , human-readable markdown
+- `.claude/polish-state.json` , fingerprint cache (gitignored)
 
 `output/polish/` is in `.gitignore`. `.claude/polish-state.json` is also
 gitignored.
@@ -110,7 +110,7 @@ gitignored.
 
 | Code | Meaning |
 |---|---|
-| 0 | Clean — no issues |
+| 0 | Clean , no issues |
 | 1 | At least one issue |
 | 2 | A verifier itself crashed (counts as `polish-bug`, not `polish-suggested`) |
 
@@ -124,7 +124,7 @@ loop. The verifier ignores it (along with `output/polish/`,
 in `scripts/verifiers/_common.py`.
 
 The `drift-detection.sh` hourly hook only watches
-`CLAUDE.md`/`AGENTS.md`/`GUIDELINES.md` against `_pkos` templates — it
+`CLAUDE.md`/`AGENTS.md`/`GUIDELINES.md` against `_pkos` templates , it
 has zero overlap with the polish loop's watch set.
 
 ## Running the verifier directly
@@ -152,7 +152,7 @@ python tests/verifiers/test_numbers.py
 python tests/verifiers/test_citations.py
 ```
 
-These are intentionally lightweight — no pytest dependency, just `assert`
+These are intentionally lightweight , no pytest dependency, just `assert`
 statements and `__main__` runners. The vitest suite in `tests/` covers
 the JS demos, navigation, and references; the polish-loop self-tests
 cover the Python verifiers.
@@ -188,7 +188,7 @@ v0.2 control flow is:
 7. If all green: cherry-pick the commit back to `main`, remove worktree
 8. If anything red: `git worktree remove --force`, file an issue instead
 9. After commit: sleep 60s, then `gh run list --limit 1 --json conclusion`
-   — if `docs-doctrine.yml` failed on the push, auto-revert the commit
+ , if `docs-doctrine.yml` failed on the push, auto-revert the commit
    and file an issue
 10. STOP
 
@@ -215,7 +215,7 @@ vs "postselection" terminology (rhetorical choice, not a typo).
 
 | Verifier | Why it matters | Why it's deferred |
 |---|---|---|
-| `bounds.py` (split from `numbers.py`) | Cleaner separation of presence vs bound checks | Not needed yet — the bound check is simple enough to live inside `numbers.py` |
+| `bounds.py` (split from `numbers.py`) | Cleaner separation of presence vs bound checks | Not needed yet , the bound check is simple enough to live inside `numbers.py` |
 | `sign_conventions.py` | CHSH `S = ±E ± E ± E ± E` sign agreement across files | Needs symbolic extraction; sign errors are the most embarrassing class of Bell-paper bug |
 | `measurement_settings.py` | `{a, a', b, b'}` consistency between paper and notebook | Notebook variable extraction needed |
 | `cross_refs.py` | Dangling proposition/figure/equation labels | Adds more LaTeX label parsing |

@@ -5,7 +5,7 @@ sync: none
 sla: none
 ---
 
-# CHSH Lab — Implementation Steps
+# CHSH Lab :  Implementation Steps
 
 > Historical implementation checklist from the initial site launch. For the current `v1.3` publication workflow and figure/source-of-truth mapping, use [FIGURE_PROVENANCE.md](FIGURE_PROVENANCE.md), [CONTENT_MAP.md](CONTENT_MAP.md), and [ACADEMIC_FACTCHECK.md](ACADEMIC_FACTCHECK.md).
 
@@ -132,7 +132,7 @@ body {
   position: relative;
 }
 
-/* Noise texture: pure CSS SVG data URI — no user input */
+/* Noise texture: pure CSS SVG data URI : no user input */
 body::before {
   content: '';
   position: fixed;
@@ -281,8 +281,8 @@ Key patterns:
 - `.rebuttal-card`: surface background, 3px left amber border, tag/claim/critique/evidence/implication slots
 - `.hotspot`: absolute position, pulse animation via `@keyframes pulse`
 - `.figure-card img`: `filter: invert(0.88) hue-rotate(180deg) saturate(0.85)` for dark theme adaptation
-- `.reveal`: `opacity: 0; transform: translateY(20px)` — GSAP animates to final state
-- `.no-js .reveal`: `opacity: 1; transform: none` — fallback if JS unavailable
+- `.reveal`: `opacity: 0; transform: translateY(20px)` , GSAP animates to final state
+- `.no-js .reveal`: `opacity: 1; transform: none` , fallback if JS unavailable
 
 Write the full component CSS following patterns detailed in PLAN.md §Component Map.
 
@@ -303,21 +303,21 @@ git commit -m "feat: add layout and component CSS"
 - Create: `chshlab/index.html`
 
 Structure (7 sections):
-1. `<nav>` — sticky logo + links
-2. `#hero` — framing question, three bound badges, scroll cue
-3. `#paper` — annotated schematic + citation card
-4. `#rebuttal` — 3 rebuttal cards with claim/critique/evidence/implication
-5. `#demos` — tab container for 3 demo panels
-6. `#proofs` — 3 theorem cards with `<details>` proof collapse
-7. `#figures` — 5 figure cards
-8. `#references` — ordered citation list
-9. `<footer>` — minimal source link
+1. `<nav>` , sticky logo + links
+2. `#hero` , framing question, three bound badges, scroll cue
+3. `#paper` , annotated schematic + citation card
+4. `#rebuttal` , 3 rebuttal cards with claim/critique/evidence/implication
+5. `#demos` , tab container for 3 demo panels
+6. `#proofs` , 3 theorem cards with `<details>` proof collapse
+7. `#figures` , 5 figure cards
+8. `#references` , ordered citation list
+9. `<footer>` , minimal source link
 
 Math formula elements use pattern:
 ```html
 <span class="math-display" data-latex="S \leq 2"></span>
 ```
-KaTeX renders these via `main.js` on page load. All math is in the `data-latex` attribute — never in user-editable content.
+KaTeX renders these via `main.js` on page load. All math is in the `data-latex` attribute , never in user-editable content.
 
 CDN script tags (defer order):
 1. KaTeX CSS (link)
@@ -342,7 +342,7 @@ git commit -m "feat: add full index.html with all sections, KaTeX/GSAP CDN"
 
 ---
 
-## Chunk 3: JavaScript — Core + Demos
+## Chunk 3: JavaScript :  Core + Demos
 
 ### Task 4: main.js + scroll.js + annotations.js
 
@@ -431,13 +431,13 @@ export function initScroll() {
 
 - [ ] **Step 3: Write `js/annotations.js`**
 
-All hotspot data is from trusted constants — no user input involved.
+All hotspot data is from trusted constants , no user input involved.
 
 ```js
 // chshlab/js/annotations.js
 const HOTSPOTS = [
   { id: 'A', x: 52, y: 18, tooltip: 'Detection efficiency not reported. At η < 82.8%, S > 2 is classically achievable.' },
-  { id: 'B', x: 28, y: 62, tooltip: 'Post-selection on coincident detection events only — introduces outcome-dependent bias.' },
+ { id: 'B', x: 28, y: 62, tooltip: 'Post-selection on coincident detection events only , introduces outcome-dependent bias.' },
   { id: 'C', x: 72, y: 62, tooltip: 'Fair sampling assumption unjustified at very low efficiency.' },
   { id: 'D', x: 50, y: 85, tooltip: 'CHSH S claimed without acceptance-rate diagnostics or η-corrected LHV bound.' },
 ];
@@ -461,7 +461,7 @@ export function initAnnotations() {
     spot.style.left = h.x + '%';
     spot.style.top  = h.y + '%';
 
-    // textContent only — no HTML injection
+ // textContent only , no HTML injection
     label.textContent   = h.id;
     tooltip.textContent = h.tooltip;
 
@@ -483,7 +483,7 @@ git commit -m "feat: main entrypoint, GSAP scroll reveals, paper hotspot annotat
 
 ---
 
-### Task 5: Demo 1 — Angle Slider CHSH
+### Task 5: Demo 1 :  Angle Slider CHSH
 
 **Files:**
 - Create: `chshlab/js/demo-chsh.js`
@@ -612,14 +612,14 @@ git commit -m "feat: angle slider CHSH demo with live S computation and canvas d
 
 ---
 
-### Task 6: Demo 2 — Efficiency Threshold
+### Task 6: Demo 2 :  Efficiency Threshold
 
 **Files:**
 - Create: `chshlab/js/demo-efficiency.js`
 
 - [ ] **Step 1: Write `js/demo-efficiency.js`**
 
-Builds SVG entirely via `createElementNS` — no innerHTML with external data.
+Builds SVG entirely via `createElementNS` , no innerHTML with external data.
 
 ```js
 // chshlab/js/demo-efficiency.js
@@ -731,7 +731,7 @@ git commit -m "feat: efficiency threshold SVG chart with programmatic DOM constr
 
 ---
 
-### Task 7: Demo 3 — Post-Selection Simulator
+### Task 7: Demo 3 :  Post-Selection Simulator
 
 **Files:**
 - Create: `chshlab/js/demo-postselect.js`
@@ -863,9 +863,9 @@ git commit -m "feat: post-selection bias simulator with bar gauge"
 
 Open browser. If figures have harsh white halos or look inverted incorrectly, adjust in `css/components.css`:
 ```css
-/* Option A — matplotlib white-background PNGs: */
+/* Option A : matplotlib white-background PNGs: */
 filter: invert(0.88) hue-rotate(180deg) saturate(0.85);
-/* Option B — transparent background: */
+/* Option B : transparent background: */
 filter: brightness(0.9) saturate(0.85);
 ```
 Pick whichever looks correct after visual inspection.
@@ -887,7 +887,7 @@ git commit -m "fix: figure filter, mobile layout polish"
 
 - [ ] **Step 1: Verify every math formula renders**
 
-Check each `.math-display` in browser dev tools — no `[KaTeX parse error]` in console.
+Check each `.math-display` in browser dev tools , no `[KaTeX parse error]` in console.
 
 Expected formulas:
 - `S \leq 2`
@@ -960,7 +960,7 @@ if (titleEl) {
 }
 ```
 
-Note: this uses `textContent` and `createTextNode` only — no innerHTML.
+Note: this uses `textContent` and `createTextNode` only , no innerHTML.
 
 - [ ] **Step 2: Commit**
 
@@ -986,4 +986,4 @@ git commit -m "feat: word-by-word hero title stagger animation using safe DOM me
 | No console errors on page load | Dev tools |
 | GitHub Pages: all assets load over HTTPS | Live URL |
 | `.nojekyll` present (prevents Jekyll) | File check |
-| All JS uses textContent / createElement — no innerHTML with user data | Code review |
+| All JS uses textContent / createElement , no innerHTML with user data | Code review |

@@ -5,7 +5,7 @@ sync: none
 sla: none
 ---
 
-# CHSH Lab — Site Architecture Plan
+# CHSH Lab :  Site Architecture Plan
 
 > Historical planning document from the pre-`v1.3` site buildout. For current publication truth, use [FIGURE_PROVENANCE.md](FIGURE_PROVENANCE.md), [CONTENT_MAP.md](CONTENT_MAP.md), and the current publication surfaces in [paper.html](../paper.html) and [arxiv/main.tex](../arxiv/main.tex).
 
@@ -21,7 +21,7 @@ sla: none
 
 ## Design System: "Academic Monograph"
 
-Dark charcoal background (not pure black), editorial red-thread annotation style, typewritten/serif typography pairing. Evokes annotated academic paper + physics lab — authority without sterility.
+Dark charcoal background (not pure black), editorial red-thread annotation style, typewritten/serif typography pairing. Evokes annotated academic paper + physics lab , authority without sterility.
 
 ### Color Tokens
 | Token | Value | Role |
@@ -45,7 +45,7 @@ Dark charcoal background (not pure black), editorial red-thread annotation style
 | Section headings | Cormorant Garant | 500 | 40–52px |
 | Body | EB Garamond | 400 | 18px / 1.75 |
 | Labels / UI | JetBrains Mono | 400–500 | 11–13px |
-| Math display | KaTeX (auto) | — | 1.15em |
+| Math display | KaTeX (auto) | n/a | 1.15em |
 
 ### Layer System
 ```
@@ -64,16 +64,16 @@ z-index: 100  GSAP scroll pin containers
 ```
 index.html
 │
-├── #hero          — Full-viewport intro: title, framing question, scroll cue
-├── #paper         — Paper showcase: annotated preview, citation card, PDF link
-├── #rebuttal      — Narrative: 3 claim/critique/evidence/implication cards
-├── #demos         — Interactive section: 3 demos with tabs
-│   ├── #demo-angle      — Angle slider → live CHSH S
-│   ├── #demo-efficiency — Efficiency threshold sweep
-│   └── #demo-postselect — Post-selection bias simulator
-├── #proofs        — Theorem cards: 3 theorems with collapsible math
-├── #figures       — Figure gallery: fig1–fig5 with captions
-└── #references    — Citation list, links, source repo badge
+├── #hero , Full-viewport intro: title, framing question, scroll cue
+├── #paper , Paper showcase: annotated preview, citation card, PDF link
+├── #rebuttal , Narrative: 3 claim/critique/evidence/implication cards
+├── #demos , Interactive section: 3 demos with tabs
+│ ├── #demo-angle , Angle slider → live CHSH S
+│ ├── #demo-efficiency , Efficiency threshold sweep
+│ └── #demo-postselect , Post-selection bias simulator
+├── #proofs , Theorem cards: 3 theorems with collapsible math
+├── #figures , Figure gallery: fig1–fig5 with captions
+└── #references , Citation list, links, source repo badge
 ```
 
 ---
@@ -132,9 +132,9 @@ index.html
 | Figure 3 (post-selection) | `../meatheadphysicist/projects/bell-inequality/figures/rendered/fig3_postselection_mechanism.png` | Copy to `assets/figures/` |
 | Figure 4 (schematic) | `../meatheadphysicist/projects/bell-inequality/figures/rendered/fig4_bell_test_schematic.png` | Copy to `assets/figures/` |
 | Figure 5 (timeline) | `../meatheadphysicist/projects/bell-inequality/figures/rendered/fig5_timeline.png` | Copy to `assets/figures/` |
-| Demo math (angle correlation) | Computed in JS — formula: `E(a,b) = -cos(a-b)` | Quantum singlet formula |
-| Demo math (classical correlation) | Computed in JS — formula: `E_classical(a,b) = -(2/π)(a-b)` | Piecewise linear LHV approximation |
-| Demo math (efficiency threshold) | Computed in JS — formula: `S_LHV_max(η) = 4/η - 2`, threshold at `η_c = 2/(1+√2)` | From appendix |
+| Demo math (angle correlation) | Computed in JS , formula: `E(a,b) = -cos(a-b)` | Quantum singlet formula |
+| Demo math (classical correlation) | Computed in JS , formula: `E_classical(a,b) = -(2/π)(a-b)` | Piecewise linear LHV approximation |
+| Demo math (efficiency threshold) | Computed in JS , formula: `S_LHV_max(η) = 4/η - 2`, threshold at `η_c = 2/(1+√2)` | From appendix |
 | CSV data (efficiency sweep) | `../meatheadphysicist/projects/bell-inequality/analysis/results/chsh_vs_efficiency.csv` | Optional: import for demo-efficiency |
 | Notebook figures | `../meatheadphysicist/projects/bell-inequality/notebooks/*.png` | Supplementary gallery |
 | Paper citation | BibTeX in `paperNotes.bib` | Extract Wang et al. (2025) + Bell (1964) |
@@ -201,4 +201,4 @@ chshlab/
 | **GSAP ScrollTrigger pinning on mobile**: Demo pin can break on iOS Safari | Medium | Medium | Disable pin on `(max-width: 768px)`, fall back to static demo layout |
 | **Math correctness**: JS-computed demos must exactly match paper formulas | Critical | Low | Unit-test each formula against known values: `E(π/4) = -cos(π/4) = -0.707`, `S_optimal = 2√2 ≈ 2.828` |
 | **GitHub Pages path**: If `chshlab/` is not the repo root, base paths may break | Medium | High | Add `<base href="/chshlab/">` or use root-relative paths with repo name prefix; document in deploy instructions |
-| **No backend constraint**: Demo computations must be purely client-side | — | — | All demos use analytical formulas; no fetch calls needed |
+| **No backend constraint**: Demo computations must be purely client-side | n/a | n/a | All demos use analytical formulas; no fetch calls needed |
