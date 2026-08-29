@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "CHSH Lab: Bell inequality experiments and rebuttal"
+abstract: >
+  CHSH Lab is a static website presenting an interactive rebuttal to claims
+  of Bell inequality violation without entanglement, with browser-side CHSH
+  statistics demos and a formal paper view.
+authors:
+  - family-names: "Alawein"
+    given-names: "Meshal"
+    email: "contact@meshal.ai"
+repository-code: "https://github.com/alawein/chshlab"
+keywords:
+  - "CHSH inequality"
+  - "Bell inequality"
+  - "quantum foundations"
+  - "entanglement"
+  - "physics education"
+  - "interactive rebuttal"
+license: MIT
+version: "0.1.0"
+date-released: "2026-08-28"
