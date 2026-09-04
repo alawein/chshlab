@@ -5,6 +5,7 @@ Category:    lab
 Owner:       alawein
 Visibility:  public
 Purpose:     Quantum foundations education site for CHSH and Bell inequality experiments.
+Next action: continue
 
 ## Abstract
 
