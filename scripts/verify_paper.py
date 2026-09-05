@@ -1,21 +1,16 @@
 #!/usr/bin/env python3
-"""verify_paper.py — orchestrator for the chshlab polish-loop verifiers.
+"""verify_paper.py — orchestrator for CHSH Lab paper-consistency verifiers.
 
 Reads the watched files, runs each enabled verifier module, and emits a
-JSON + Markdown report under ``output/polish/``. Exit codes:
+JSON + Markdown report under ``output/verification/``. Exit codes:
 
   0 — clean (no issues found)
   1 — at least one issue found
-  2 — a verifier itself crashed (counts as ``polish-bug`` not ``polish-suggested``)
+  2 — a verifier itself crashed
 
-The fingerprint short-circuit (``--use-cache``) hashes the watched-file
-contents against ``.claude/polish-state.json`` and exits in <1s without
-running any verifier if nothing has changed AND the last run was clean.
-That makes the loop nearly free when idle.
-
-v0.1: pure observer. Does not edit files, does not commit. The
-``.claude/commands/polish-paper.md`` slash command consumes this report
-and (in v0.1) only files GitHub issues — never edits.
+The optional fingerprint cache records the last clean verification locally
+under generated output. This checker is read-only: it never edits source files
+or creates remote issues.
 """
 
 from __future__ import annotations
@@ -47,7 +42,7 @@ ENABLED_VERIFIERS: tuple[str, ...] = (
     "verifiers.citations",
 )
 
-# Files whose mtime/contents trigger a polish iteration. Anything not in this
+# Files whose contents trigger a verification run. Anything not in this
 # set is ignored by the fingerprint short-circuit.
 WATCHED_FILES: tuple[str, ...] = (
     "paper.html",
@@ -59,8 +54,8 @@ WATCHED_FILES: tuple[str, ...] = (
     "scripts/generate_publication_figures.py",
 )
 
-OUTPUT_DIR = REPO_ROOT / "output" / "polish"
-STATE_FILE = REPO_ROOT / ".claude" / "polish-state.json"
+OUTPUT_DIR = REPO_ROOT / "output" / "verification"
+STATE_FILE = OUTPUT_DIR / "state.json"
 
 
 # === Orchestration ===
@@ -82,7 +77,7 @@ def run_verifier(module_name: str) -> VerifierResult:
 
 
 def write_report(results: list[VerifierResult]) -> tuple[Path, Path]:
-    """Emit the JSON and Markdown reports under output/polish/. Returns paths."""
+    """Emit the JSON and Markdown reports under output/verification/. Returns paths."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     ts_utc = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
 
@@ -119,7 +114,7 @@ def _totals(results: list[VerifierResult]) -> dict:
 
 def _render_markdown(payload: dict) -> str:
     lines: list[str] = []
-    lines.append("# Polish report")
+    lines.append("# Paper verification report")
     lines.append("")
     lines.append(f"_Generated: {payload['generated_at_utc']}_")
     lines.append("")
@@ -208,7 +203,7 @@ def main(argv: Iterable[str] | None = None) -> int:
     if args.use_cache and state.get("fingerprint") == fingerprint and state.get("last_clean"):
         if not args.quiet:
             print(
-                f"polish: cached clean ({fingerprint[:12]}); skipping. "
+                f"verification: cached clean ({fingerprint[:12]}); skipping. "
                 f"Last run {state.get('last_run_at')}."
             )
         return 0
@@ -223,9 +218,9 @@ def main(argv: Iterable[str] | None = None) -> int:
     issues_total = sum(len(r.issues) for r in results)
 
     if not args.quiet:
-        print(f"polish: report written to {md_path.relative_to(REPO_ROOT)}")
+        print(f"verification: report written to {md_path.relative_to(REPO_ROOT)}")
         print(
-            f"polish: {len(results)} verifier(s), "
+            f"verification: {len(results)} verifier(s), "
             f"{sum(1 for r in results if not r.ok)} crashed, "
             f"{issues_total} issue(s)"
         )

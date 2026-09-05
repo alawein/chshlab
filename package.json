@@ -4,11 +4,17 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:verifiers": "python -m unittest discover -s tests -t . -v"
   },
   "devDependencies": {
     "vitest": "^4.1.8",
     "jsdom": "^29.1.1",
     "@vitest/coverage-v8": "^4.1.8"
+  },
+  "overrides": {
+    "undici": "7.29.0",
+    "nanoid": "3.3.18",
+    "postcss": "8.5.23"
   }
 }
