@@ -8,7 +8,7 @@
     "test:verifiers": "python -m unittest discover -s tests -t . -v"
   },
   "devDependencies": {
-    "vitest": "^4.1.8",
+    "vitest": "^4.1.11",
     "jsdom": "^29.1.1",
     "@vitest/coverage-v8": "^4.1.8"
   },
