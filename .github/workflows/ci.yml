@@ -41,6 +41,12 @@ jobs:
       - name: Run Vitest suite
         run: npm test
 
+      - name: Run Python verifier tests
+        run: npm run test:verifiers
+
+      - name: Verify paper consistency
+        run: python scripts/verify_paper.py
+
       - name: Build static site via build.sh
         run: bash build.sh
 

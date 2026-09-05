@@ -15,19 +15,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ### Added
 
-- Continuous polish loop v0.1 (read-only observer). New verifier modules
+- Paper consistency verification v0.1 (read-only observer). New verifier modules
   under `scripts/verifiers/` (`numbers`, `citations`) plus orchestrator
-  `scripts/verify_paper.py`, slash command `.claude/commands/polish-paper.md`,
-  operator doc `docs/POLISH_LOOP.md`, and self-tests
+  `scripts/verify_paper.py` and self-tests
   `tests/verifiers/test_*.py`. Surfaces drift between `paper.html`,
   `arxiv/main.tex`, `js/references.js`, and `docs/ACADEMIC_FACTCHECK.md`
-  as `polish-suggested` GitHub issues; never edits or commits in v0.1.
-  Runs as `/loop 15m /polish-paper` from a local terminal.
+  as a local report; never edits or commits source files in v0.1.
 
 ### Changed
 
 - CI: scoped the CodeQL `analyze` step to `upload: never` so the security
-  scan still runs as a gate on this private repo (which has no GitHub
+  scan runs as a gate for this public repository (which has GitHub
   Advanced Security) without failing on an unavailable SARIF upload.
 - Renamed paper title to `Is S > 2 Enough Without Entanglement? A
   Reproducible Rebuttal of Wang et al. (2025)` to disambiguate from

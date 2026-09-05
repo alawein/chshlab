@@ -2,25 +2,33 @@
 type: canonical
 source: none
 sla: on-change
-last_updated: "2026-06-06"
-audience: [ai-agents, contributors]
+last_updated: "2026-09-05"
+audience: [maintainers, contributors]
 ---
 
 # Technical Debt Ledger
 
-The accumulated cost of deliberate shortcuts. The goal is not zero debt, it is
-zero untracked debt. Anything recorded here was a conscious choice with a known
-fix. Add entries with `/debt-log`. Remove an entry when the debt is paid (note it
-in the PR).
+This ledger records deliberate, unresolved tradeoffs that affect the public
+project. Its purpose is to keep debt visible, scoped, and reviewable rather
+than to require zero debt.
 
-<!-- New entries are appended below, newest first. Format:
+## Maintenance rule
 
-### <short title>
+Add an entry when a change intentionally defers a durable improvement. Remove
+an entry only when the follow-up is complete, and reference the resolving pull
+request in the removal commit.
+
+## Entry format
+
+### Short title
+
 - **Date:** YYYY-MM-DD
-- **Where:** <file/module/path>
-- **What:** the shortcut and why the proper fix was not done
-- **Risk if left:** what degrades over time
-- **Suggested fix:** the path to doing it right
-- **Owner:** <from CODEOWNERS or repo-framework ownership>
+- **Where:** file, component, or workflow
+- **What:** the deferred work and the reason for deferral
+- **Risk if left:** the expected maintenance or user impact
+- **Suggested fix:** a bounded corrective action
+- **Owner:** a maintainer responsible for review
 
--->
+## Current entries
+
+No tracked technical-debt entries.
