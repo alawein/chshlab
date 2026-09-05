@@ -10,7 +10,7 @@
   "devDependencies": {
     "vitest": "^4.1.8",
     "jsdom": "^29.1.1",
-    "@vitest/coverage-v8": "^4.1.8"
+    "@vitest/coverage-v8": "^4.1.11"
   },
   "overrides": {
     "undici": "7.29.0",
