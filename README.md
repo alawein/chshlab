@@ -33,7 +33,7 @@ experiment; it presents the rebuttal's argument and code as static demos.
 
 - Static file server for local preview (no backend runtime)
 - Python 3.12 with NumPy and Matplotlib for `scripts/generate_figures.py`
-- Node.js for `npm test` (vitest DOM and module checks)
+- Node.js `22.22.2` or later compatible major (`^22.22.2 || ^24.15.0 || >=26.0.0`) for `npm test` (vitest DOM and module checks; required by jsdom 30)
 - Playwright for `scripts/run_visual_audit.py` screenshot matrix
 
 ## Reproducibility
