@@ -25,6 +25,9 @@ experiment; it presents the rebuttal's argument and code as static demos.
 - Verification date: 2026-08-28
 - Scope: static HTML/CSS/JS site, figure pipeline, vitest checks, research docs
 - Live: https://chshlab.online
+- Release identity: development revision; the live site tracks `main`, not the historical v1.3 tag.
+- Paper status: repository-hosted submission draft; no archival preprint identifier is claimed.
+- Notebook status: the source notebook is included, but no hosted Colab launch target is currently provided.
 
 ## Runtime requirements
 
