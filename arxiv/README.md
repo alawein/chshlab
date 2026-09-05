@@ -5,13 +5,13 @@ sync: manual
 sla: manual
 ---
 
-# arXiv submission notes
+# Paper manuscript notes
 
-This folder contains the source-checked arXiv draft that mirrors the canonical `paper.html` argument in TeX form.
+This folder contains the source-checked manuscript draft that mirrors the canonical `paper.html` argument in TeX form.
 
 ## Contents
 
-- `main.tex` - current arXiv manuscript
+- `main.tex` - current manuscript
 - `figures/fig1_bounds.png`
 - `figures/fig2_efficiency.png`
 - `figures/fig3_postselection_curve.png`
@@ -41,4 +41,4 @@ pdflatex main.tex
 
 ## Upload surface
 
-For arXiv, include `main.tex` and the four canonical `fig*.png` files from `arxiv/figures/`.
+For a submission package, include `main.tex` and the four canonical `fig*.png` files from `arxiv/figures/`.

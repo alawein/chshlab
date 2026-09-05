@@ -1,4 +1,4 @@
-"""Shared types and helpers for the polish-loop verifiers.
+"""Shared types and helpers for paper-consistency verifiers.
 
 The Issue dataclass and helpers here are deliberately tiny — every
 verifier module imports from here so the orchestrator can produce a
@@ -14,13 +14,9 @@ from pathlib import Path
 from typing import Iterable, List, Sequence
 
 
-# Anti-recursion: paths the loop must NEVER read or watch.
-# observability-log.sh appends a row to session-log.md after every commit;
-# watching it would create an infinite trigger loop.
+# Generated and dependency paths excluded from verification inputs.
 POLISH_IGNORE: frozenset[str] = frozenset({
-    "docs/operations/session-log.md",
-    "output/polish/",
-    ".claude/polish-state.json",
+    "output/verification/",
     "CHANGELOG.md",
     "coverage/",
     "node_modules/",

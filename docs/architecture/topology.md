@@ -36,13 +36,11 @@ chshlab/
 | `partials/` + `scripts/sync_shared_html.py` | Keep shared head/style aligned across pages |
 | `assets/figures/` | Offline-generated figures; regen via `scripts/generate_figures.py` |
 | `scripts/` | Build (`build.sh` caller), figure regen, Playwright audit matrix |
-| `docs/meta/ai/` | Non-runtime prompt collateral; review before treating as provenance |
 
 ## Rules
 
 - No server-side runtime; CDN math (KaTeX) is the only external browser dependency.
 - Regenerate figures from documented scripts before citing numerical visuals.
-- `docs/meta/ai/` is agent collateral, not public research SSOT.
 
 ## Related docs
 
