@@ -9,12 +9,15 @@
   },
   "devDependencies": {
     "vitest": "^4.1.11",
-    "jsdom": "^29.1.1",
+    "jsdom": "^30.0.1",
     "@vitest/coverage-v8": "^4.1.11"
   },
   "overrides": {
     "undici": "7.29.0",
     "nanoid": "3.3.18",
     "postcss": "8.5.23"
+  },
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
   }
 }
